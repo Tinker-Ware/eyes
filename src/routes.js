@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
-import ProvisionPage from './components/ProvisionPage';
+import ServiceForm from './components/ServiceForm';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={ProvisionPage} />
+    <IndexRoute component={ServiceForm} />
   </Route>
 );
