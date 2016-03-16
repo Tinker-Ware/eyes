@@ -375,30 +375,6 @@ input[type="submit"] {
   border-radius: 0;
 }
 
-/* Automation Software */
-.puppet{
-    background: url('../img/automation_icons.png') -300px 0;
-}
-
-.ansible{
-    background: url('../img/automation_icons.png') -0px 0;
-}
-
-.chef{
-    background: url('../img/automation_icons.png') -150px 0;
-}
-
-.puppet, .ansible, .chef{
-    filter: blur(1px) grayscale(90%);
-    -webkit-filter: blur(1px) grayscale(90%);
-    -moz-filter: blur(1px) grayscale(90%);
-    -o-filter: blur(1px) grayscale(90%);
-    -ms-filter: blur(1px) grayscale(90%);
-    width: 150px;
-    height: 150px;
-    border: 0;
-}
-
 /* Selection Tables */
 .selection-table {
   border: solid 1px #DDDDDD;
@@ -649,4 +625,67 @@ input[type="submit"] {
     -moz-filter: none;
     -o-filter: none;
     -ms-filter: none;
+}
+
+/* Automation Software */
+.puppet{
+    background: url('../img/automation_icons.png') -300px 0;
+}
+
+.ansible{
+    background: url('../img/automation_icons.png') -0px 0;
+}
+
+.chef{
+    background: url('../img/automation_icons.png') -150px 0;
+}
+
+.puppet, .ansible, .chef{
+    filter: blur(1px) grayscale(90%);
+    -webkit-filter: blur(1px) grayscale(90%);
+    -moz-filter: blur(1px) grayscale(90%);
+    -o-filter: blur(1px) grayscale(90%);
+    -ms-filter: blur(1px) grayscale(90%);
+    width: 150px;
+    height: 150px;
+    border: 0;
+}
+
+/* Server Provider */
+.amazon_web_services {
+  background: url(../img/serverprovider_icons.png) 0 0;
+}
+
+.digital_ocean {
+  background: url(../img/serverprovider_icons.png) -220px 0;
+}
+
+.google_cloud {
+  background: url(../img/serverprovider_icons.png) -110px 0;
+}
+
+.none {
+  background: url(../img/serverprovider_icons.png) -330px 0;
+}
+
+.amazon_web_services, .digital_ocean, .google_cloud, .none {
+  filter: blur(1px) grayscale(90%);
+  filter: blur(1px) grayscale(90%);
+  -webkit-filter: blur(1px) grayscale(90%);
+  -moz-filter: blur(1px) grayscale(90%);
+  -o-filter: blur(1px) grayscale(90%);
+  -ms-filter: blur(1px) grayscale(90%);
+  width: 110px;
+  height: 110px;
+  border: 0;
+}
+
+.selection-table:hover .price {
+  .amazon_web_services, .digital_ocean, .google_cloud, .none {
+    filter: none;
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    -ms-filter: none;
+  }
 }
