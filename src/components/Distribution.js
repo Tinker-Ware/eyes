@@ -11,8 +11,8 @@ const Distribution = () => {
             <li className="bullet-item">Ubuntu</li>
             <li className="description">
               Version
-                <select>
-                  <option value="15.04 x64" selected="selected">15.04 x64</option>
+                <select value="15.04 x64">
+                  <option value="15.04 x64">15.04 x64</option>
                   <option value="15.04 x32">15.04 x32</option>
                   <option value="14.04 x64">14.04 x64</option>
                   <option value="14.04 x32">14.04 x32</option>
@@ -28,8 +28,8 @@ const Distribution = () => {
             <li className="bullet-item">FreeBSD</li>
             <li className="description">
               Version
-                <select>
-                  <option value="10.01" selected="selected">10.01</option>
+                <select value="10.01">
+                  <option value="10.01">10.01</option>
                 </select>
             </li>
           </ul>
@@ -40,8 +40,8 @@ const Distribution = () => {
             <li className="bullet-item">Fedora</li>
             <li className="description">
               Version
-                <select>
-                  <option value="22 x64" selected="selected">22 x64</option>
+                <select value="22 x64">
+                  <option value="22 x64">22 x64</option>
                   <option value="21 x64">21 x64</option>
                 </select>
             </li>
@@ -53,8 +53,8 @@ const Distribution = () => {
             <li className="bullet-item">Debian</li>
             <li className="description">
               Version
-                <select>
-                  <option value="8.1 x64" selected="selected">8.1 x64</option>
+                <select value="8.1 x64">
+                  <option value="8.1 x64">8.1 x64</option>
                   <option value="8.1 x32">8.1 x32</option>
                   <option value="7.0 x64">7.0 x64</option>
                   <option value="7.0 x32">7.0 x32</option>
@@ -70,8 +70,8 @@ const Distribution = () => {
           <li className="bullet-item">CoreOS</li>
           <li className="description">
             Version
-              <select>
-                <option value="758.1.0 (alpha)" selected="selected">758.1.0 (alpha)</option>
+              <select value="758.1.0 (alpha)">
+                <option value="758.1.0 (alpha)">758.1.0 (alpha)</option>
                 <option value="723.3.0 (stable)">723.3.0 (stable)</option>
                 <option value="723.3.0 (beta)">723.3.0 (beta)</option>
               </select>
@@ -84,8 +84,8 @@ const Distribution = () => {
           <li className="bullet-item">CentOS</li>
           <li className="description">
             Version
-              <select>
-                <option value="7 x64" selected="selected">7 x64</option>
+              <select value="7 x64">
+                <option value="7 x64">7 x64</option>
                 <option value="6.7 x64">6.7 x64</option>
                 <option value="6.7 x32">6.7 x32</option>
                 <option value="5.10 x64">5.10 x64</option>

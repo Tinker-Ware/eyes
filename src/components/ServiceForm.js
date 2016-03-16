@@ -4,6 +4,7 @@ import ProjectName from './ProjectName';
 import AutomationSoftware from './AutomationSoftware';
 import ServerProvider from './ServerProvider';
 import Distribution from './Distribution';
+import Application from './Application';
 
 const ServiceForm = () => {
     return (
@@ -14,6 +15,7 @@ const ServiceForm = () => {
             <AutomationSoftware />
             <ServerProvider />
             <Distribution />
+            <Application />
         </div>
       </div>
     );
