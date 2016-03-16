@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import ProjectName from './ProjectName';
 import AutomationSoftware from './AutomationSoftware';
 import ServerProvider from './ServerProvider';
+import Distribution from './Distribution';
 
 const ServiceForm = () => {
     return (
@@ -12,6 +13,7 @@ const ServiceForm = () => {
             <ProjectName />
             <AutomationSoftware />
             <ServerProvider />
+            <Distribution />
         </div>
       </div>
     );
