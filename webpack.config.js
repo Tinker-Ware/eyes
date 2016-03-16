@@ -40,7 +40,7 @@ const getEntry = function (env) {
   const entry = [];
 
   if (env === developmentEnvironment ) { // only want hot reloading when in dev.
-    entry.push('webpack-hot-middleware/client');
+    entry.push('webpack-hot-middleware/client?reload=true');
   }
 
   entry.push('./src/index');
@@ -49,13 +49,14 @@ const getEntry = function (env) {
 };
 
 const getLoaders = function (env) {
-  const loaders = [{ test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint'] }];
+  const loaders = [{ test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint'] },
+                   { test: /\.(jpe?g|png|gif|svg|woff|ttf|eot)$/i, loaders: ['file']}];
 
   if (env === productionEnvironment ) {
     // generate separate physical stylesheet for production build using ExtractTextPlugin. This provides separate caching and avoids a flash of unstyled content on load.
-    loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")});
+    loaders.push({test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css!sass")});
   } else {
-    loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']});
+    loaders.push({test: /(\.css|\.scss)$/, loaders: ['style', 'css', 'sass']});
   }
 
   return loaders;
