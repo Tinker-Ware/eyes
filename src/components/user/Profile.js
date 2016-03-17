@@ -8,7 +8,7 @@ const Profile = () => {
         <img src="http://lorempixel.com/g/200/200/" />
         <h3>Username</h3>
         <div>
-          <ul>
+          <ul className="user-info">
             <li>
               <span>email@host.com</span>
             </li>
