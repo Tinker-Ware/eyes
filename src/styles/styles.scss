@@ -298,6 +298,16 @@ input {
   }
 }
 
+input {
+  &[type="text"]:focus, &[type="password"]:focus, &[type="date"]:focus, &[type="datetime"]:focus, &[type="datetime-local"]:focus, &[type="month"]:focus, &[type="week"]:focus, &[type="email"]:focus, &[type="number"]:focus, &[type="search"]:focus, &[type="tel"]:focus, &[type="time"]:focus, &[type="url"]:focus, &[type="color"]:focus {
+    border-color: #009688;
+  }
+}
+
+textarea:focus {
+  border-color: #009688;
+}
+
 textarea.radius {
   border-radius: 3px;
 }
@@ -597,6 +607,7 @@ input[type="submit"] {
 
 .selection-table{
     cursor:pointer;
+    margin: 1em;
 }
 
 .selection-table{
@@ -728,6 +739,125 @@ input[type="submit"] {
 
 .selection-table:hover .price {
   .Ubuntu, .FreeBSD, .Fedora, .Debian, .CoreOS, .CentOS {
+    filter: none;
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    -ms-filter: none;
+  }
+}
+
+/* Application Provider */
+.freeBSDAMP {
+  background: url(../img/applications_icons.png) -530px 0;
+}
+
+.LAMP {
+  background: url(../img/applications_icons.png) -796px 0;
+}
+
+.LEMP {
+  background: url(../img/applications_icons.png) -862px 0;
+}
+
+.MEAN {
+  background: url(../img/applications_icons.png) -994px 0;
+}
+
+.Joomla {
+  background: url(../img/applications_icons.png) -728px 0;
+}
+
+.Drone {
+  background: url(../img/applications_icons.png) -332px 0;
+}
+
+.Ghost {
+  background: url(../img/applications_icons.png) -596px 0;
+}
+
+.Rails {
+  background: url(../img/applications_icons.png) -1522px 0;
+}
+
+.Drupal {
+  background: url(../img/applications_icons.png) -398px 0;
+}
+
+.MongoDB {
+  background: url(../img/applications_icons.png) -1126px 0;
+}
+
+.Node {
+  background: url(../img/applications_icons.png) -1258px 0;
+}
+
+.Cassandra {
+  background: url(../ipmg/aplications_icons.png) 0 0;
+}
+
+.Stack {
+  background: url(../img/applications_icons.png) -464px 0;
+}
+
+.Django {
+  background: url(../img/applications_icons.png) -134px 0;
+}
+
+.Docker {
+  background: url(../img/applications_icons.png) -200px 0;
+}
+
+.Magento {
+  background: url(../img/applications_icons.png) -928px 0;
+}
+
+.GitLab {
+  background: url(../img/applications_icons.png) -662px 0;
+}
+
+.MumbleServer {
+  background: url(../img/applications_icons.png) -1192px 0;
+}
+
+.MediaWiki {
+  background: url(../img/applications_icons.png) -1060px 0;
+}
+
+.WordPress {
+  background: url(../img/applications_icons.png) -1588px 0;
+}
+
+.OwnCloud {
+  background: url(../img/applications_icons.png) -1324px 0;
+}
+
+.Dokku {
+  background: url(../img/applications_icons.png) -266px 0;
+}
+
+.PHPMyAdmin {
+  background: url(../img/applications_icons.png) -1390px 0;
+}
+
+.Redmine {
+  background: url(../img/applications_icons.png) -1456px 0;
+}
+
+.freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine {
+  filter: blur(1px) grayscale(90%);
+  -webkit-filter: blur(1px) grayscale(90%);
+  -moz-filter: blur(1px) grayscale(90%);
+  -o-filter: blur(1px) grayscale(90%);
+  -ms-filter: blur(1px) grayscale(90%);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin-right: 10px;
+}
+
+.selection-table:hover .bullet-item {
+  .freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine {
     filter: none;
     -webkit-filter: none;
     -moz-filter: none;
