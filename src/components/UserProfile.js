@@ -5,10 +5,14 @@ import UserSidebar from "./user/UserSidebar";
 
 const UserProfile = (props) => {
     return (
-        <div>
-          <AccountSidebar />
-          <UserSidebar />
-          {props.children}
+        <div className="row">
+          <div className="large-3 columns">
+            <AccountSidebar />
+            <UserSidebar />
+          </div>
+          <div className="large-9 columns">
+            {props.children}
+          </div>
         </div>
     );
 };
