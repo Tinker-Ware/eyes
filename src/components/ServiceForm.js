@@ -5,6 +5,7 @@ import AutomationSoftware from './AutomationSoftware';
 import ServerProvider from './ServerProvider';
 import Distribution from './Distribution';
 import Application from './Application';
+import Package from './Package';
 
 const ServiceForm = () => {
     return (
@@ -16,6 +17,7 @@ const ServiceForm = () => {
             <ServerProvider />
             <Distribution />
             <Application />
+            <Package />
         </div>
       </div>
     );

@@ -793,7 +793,7 @@ input[type="submit"] {
 }
 
 .Cassandra {
-  background: url(../ipmg/aplications_icons.png) 0 0;
+  background: url(../img/applications_icons.png) 0 0;
 }
 
 .Stack {
@@ -858,6 +858,49 @@ input[type="submit"] {
 
 .selection-table:hover .bullet-item {
   .freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine {
+    filter: none;
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    -ms-filter: none;
+  }
+}
+
+/* Package */
+.Sinatra {
+  background: url(../img/package_icons.png) -344px -2px;
+}
+
+.Ruby {
+  background: url(../img/package_icons.png) -306px -2px;
+}
+
+.Haskell {
+  background: url(../img/package_icons.png) -192px -2px;
+}
+
+.Emacs {
+  background: url(../img/package_icons.png) -116px -2px;
+}
+
+.VIM {
+  background: url(../img/package_icons.png) -458px -2px;
+}
+
+.Sinatra, .Ruby, .Haskell, .Emacs, .VIM {
+  filter: blur(1px) grayscale(90%);
+  -webkit-filter: blur(1px) grayscale(90%);
+  -moz-filter: blur(1px) grayscale(90%);
+  -o-filter: blur(1px) grayscale(90%);
+  -ms-filter: blur(1px) grayscale(90%);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin-right: 10px;
+}
+
+.selection-table:hover .bullet-item {
+  .Sinatra, .Ruby, .Haskell, .Emacs, .VIM {
     filter: none;
     -webkit-filter: none;
     -moz-filter: none;
