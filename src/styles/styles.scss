@@ -909,6 +909,15 @@ input[type="submit"] {
   }
 }
 
+/* SSHKeys */
+#show_ssh_key, #hide_ssh_key {
+  color: #009688;
+}
+
+#ssh_key_content_value {
+  margin-bottom: 1em;
+}
+
 /* Nav styles */
 nav {
   ul{
