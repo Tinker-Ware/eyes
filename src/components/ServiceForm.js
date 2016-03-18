@@ -6,6 +6,7 @@ import ServerProvider from './ServerProvider';
 import Distribution from './Distribution';
 import Application from './Application';
 import Package from './Package';
+import SSHKeys from './SSHKeys';
 
 const ServiceForm = () => {
     return (
@@ -18,6 +19,7 @@ const ServiceForm = () => {
             <Distribution />
             <Application />
             <Package />
+            <SSHKeys />
         </div>
       </div>
     );
