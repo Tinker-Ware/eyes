@@ -7,6 +7,7 @@ import Distribution from './Distribution';
 import Application from './Application';
 import Package from './Package';
 import SSHKeys from './SSHKeys';
+import CreateService from './CreateService';
 
 const ServiceForm = () => {
     return (
@@ -20,6 +21,7 @@ const ServiceForm = () => {
             <Application />
             <Package />
             <SSHKeys />
+            <CreateService />
         </div>
       </div>
     );
