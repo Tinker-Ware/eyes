@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import Services from './Services';
 
 const Profile = () => {
     return (
@@ -23,6 +24,7 @@ const Profile = () => {
             </li>
           </ul>
         </div>
+        <Services />
       </div>
     );
 };
