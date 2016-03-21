@@ -8,11 +8,12 @@ import Application from './Application';
 import Package from './Package';
 import SSHKeys from './SSHKeys';
 import CreateService from './CreateService';
+import ServiceSummary from './ServiceSummary';
 
 const ServiceForm = () => {
     return (
       <div className="row">
-        <div className="large-12 columns">
+        <div className="large-10 columns">
             <h1><i className="step fi-clipboard-notes"></i> Create a Service</h1>
             <ProjectName />
             <AutomationSoftware />
@@ -22,6 +23,9 @@ const ServiceForm = () => {
             <Package />
             <SSHKeys />
             <CreateService />
+        </div>
+        <div className="large-2 columns hide-for-small-only hide-for-medium-only">
+            <ServiceSummary />
         </div>
       </div>
     );
