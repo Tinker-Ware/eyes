@@ -934,3 +934,110 @@ nav {
 .user-info {
   list-style-type: none;
 }
+
+/* Magellan */
+[data-magellan-expedition], [data-magellan-expedition-clone] {
+  background: #FFFFFF;
+  min-width: 100%;
+  padding: 10px;
+  z-index: 50;
+}
+
+[data-magellan-expedition] .sub-nav, [data-magellan-expedition-clone] .sub-nav, [data-magellan-expedition] .sub-nav dd, [data-magellan-expedition-clone] .sub-nav dd {
+  margin-bottom: 0;
+}
+
+[data-magellan-expedition] .sub-nav a, [data-magellan-expedition-clone] .sub-nav a {
+  line-height: 1.8em;
+}
+
+.sub-nav {
+  dt, dd, li {
+    margin-left: 0;
+  }
+  padding-top: 1.25rem;
+  dt.active a, dd.active a, li.active a {
+    padding: 0.5875rem 0.7rem;
+  }
+}
+
+[data-magellan-expedition] .sub-nav a, [data-magellan-expedition-clone] .sub-nav a {
+  line-height: 3.2em;
+}
+
+@media only screen and (min-width: 40.0625em) {
+  .tooltip {
+    > .nub {
+      border-color: transparent transparent #333333 transparent;
+      top: -10px;
+    }
+    &.tip-top > .nub {
+      border-color: #333333 transparent transparent transparent;
+      bottom: -10px;
+      top: auto;
+    }
+    &.tip-left, &.tip-right {
+      float: none !important;
+    }
+    &.tip-left > .nub {
+      border-color: transparent transparent transparent #333333;
+      left: auto;
+      margin-top: -5px;
+      right: -10px;
+      top: 50%;
+    }
+    &.tip-right > .nub {
+      border-color: transparent #333333 transparent transparent;
+      left: -10px;
+      margin-top: -5px;
+      right: auto;
+      top: 50%;
+    }
+  }
+}
+
+.sub-nav {
+  display: block;
+  margin: -0.25rem 0 1.125rem;
+  overflow: hidden;
+  padding-top: 0.25rem;
+  width: auto;
+  dt {
+    text-transform: uppercase;
+    color: #999999;
+    float: left;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: normal;
+    margin-left: 1rem;
+    margin-bottom: 0;
+  }
+  dd, li {
+    color: #999999;
+    float: left;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: normal;
+    margin-left: 1rem;
+    margin-bottom: 0;
+  }
+  dt a, dd a, li a {
+    color: #999999;
+    padding: 0.1875rem 1rem;
+    text-decoration: none;
+  }
+  dt a:hover, dd a:hover, li a:hover {
+    color: #737373;
+  }
+  dt.active a, dd.active a, li.active a {
+    border-radius: 3px;
+    background: #009688;
+    color: #FFFFFF;
+    cursor: default;
+    font-weight: normal;
+    padding: 0.1875rem 1rem;
+  }
+  dt.active a:hover, dd.active a:hover, li.active a:hover {
+    background: #008175;
+  }
+}
