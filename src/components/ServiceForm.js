@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import ProjectName from './ProjectName';
-import AutomationSoftware from './AutomationSoftware';
-import ServerProvider from './ServerProvider';
-import Distribution from './Distribution';
-import Application from './Application';
-import Package from './Package';
-import SSHKeys from './SSHKeys';
-import CreateService from './CreateService';
-import ServiceSummary from './ServiceSummary';
+import Application from './serviceForm/Application';
+import AutomationSoftware from './serviceForm/AutomationSoftware';
+import CreateService from './serviceForm/CreateService';
+import Distribution from './serviceForm/Distribution';
+import Package from './serviceForm/Package';
+import ProjectName from './serviceForm/ProjectName';
+import ServerProvider from './serviceForm/ServerProvider';
+import ServiceSummary from './serviceForm/ServiceSummary';
+import SSHKeys from './serviceForm/SSHKeys';
 
 const ServiceForm = () => {
     return (
