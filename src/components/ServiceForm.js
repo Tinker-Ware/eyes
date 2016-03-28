@@ -1,14 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Application from './serviceForm/Application';
-import AutomationSoftware from './serviceForm/AutomationSoftware';
 import CreateService from './serviceForm/CreateService';
-import Distribution from './serviceForm/Distribution';
-import Package from './serviceForm/Package';
+import GithubService from './serviceForm/GithubService';
 import ProjectName from './serviceForm/ProjectName';
-import ServerProvider from './serviceForm/ServerProvider';
 import ServiceSummary from './serviceForm/ServiceSummary';
-import SSHKeys from './serviceForm/SSHKeys';
 
 const ServiceForm = () => {
     return (
@@ -26,6 +22,7 @@ const ServiceForm = () => {
             <div className="large-10 columns">
                 <h1><i className="step fi-clipboard-notes"></i> Create a Service</h1>
                 <ProjectName />
+                <GithubService />
                 <Application />
                 <CreateService />
             </div>
