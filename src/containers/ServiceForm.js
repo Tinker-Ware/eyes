@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/ProvisionActions';
+import * as actions from '../actions/ServiceFormActions';
 import Application from '../components/serviceForm/Application';
 import CreateService from '../components/serviceForm/CreateService';
 import GithubService from '../components/serviceForm/GithubService';
