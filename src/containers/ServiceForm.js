@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Application from './serviceForm/Application';
-import CreateService from './serviceForm/CreateService';
-import GithubService from './serviceForm/GithubService';
-import ProjectName from './serviceForm/ProjectName';
-import ServiceSummary from './serviceForm/ServiceSummary';
+import Application from '../components/serviceForm/Application';
+import CreateService from '../components/serviceForm/CreateService';
+import GithubService from '../components/serviceForm/GithubService';
+import ProjectName from '../components/serviceForm/ProjectName';
+import ServiceSummary from '../components/serviceForm/ServiceSummary';
 
 const ServiceForm = () => {
     return (
