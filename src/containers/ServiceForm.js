@@ -12,7 +12,7 @@ class ServiceForm extends Component {
     
     static propTypes = {
       actions: PropTypes.object.isRequired,
-      appState: PropTypes.object.isRequired
+      projectNameAppState: PropTypes.object.isRequired
     };
   
     render() {
@@ -30,7 +30,9 @@ class ServiceForm extends Component {
               <div className="row">
                 <div className="large-10 columns">
                     <h1><i className="step fi-clipboard-notes"></i> Create a Service</h1>
-                    <ProjectName />
+                    <ProjectName 
+                      projectNameAppState={this.props.projectNameAppState}
+                      setProjectName={this.props.actions.setProjectName} />
                     <GithubService />
                     <Application />
                     <CreateService />
@@ -55,7 +57,7 @@ class ServiceForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    appState: state.projectNameAppState
+    projectNameAppState: state.projectNameAppState
   };
 }
 

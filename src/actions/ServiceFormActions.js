@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
 
-export function setName(settings, value) {
-  return { type: types.SET_NAME, settings, value };
+export function setProjectName(value) {
+  return { type: types.SET_PROJECT_NAME, value };
 }
