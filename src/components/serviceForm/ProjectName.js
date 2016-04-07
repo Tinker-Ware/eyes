@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {
     
-    const ProjectNameKeypress = function (e){
+    const ProjectNameKeypress = (e) => {
         setProjectName(e.target.value);
     };
     
