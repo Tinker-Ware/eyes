@@ -12,7 +12,8 @@ class ServiceForm extends Component {
     
     static propTypes = {
       actions: PropTypes.object.isRequired,
-      projectNameAppState: PropTypes.object.isRequired
+      projectNameAppState: PropTypes.object.isRequired,
+      applicationAppState: PropTypes.object.isRequired
     };
   
     render() {
@@ -34,7 +35,9 @@ class ServiceForm extends Component {
                       projectNameAppState={this.props.projectNameAppState}
                       setProjectName={this.props.actions.setProjectName} />
                     <GithubService />
-                    <Application />
+                    <Application 
+                      applicationAppState={this.props.applicationAppState}
+                      setApplication={this.props.actions.setApplication} />
                     <CreateService />
                 </div>
                 <div className="large-2 columns hide-for-small-only hide-for-medium-only">
@@ -57,7 +60,8 @@ class ServiceForm extends Component {
 
 function mapStateToProps(state) {
   return {
-    projectNameAppState: state.projectNameAppState
+    projectNameAppState: state.projectNameAppState,
+    applicationAppState: state.applicationAppState
   };
 }
 
