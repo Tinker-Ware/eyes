@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ServiceFormActions';
-import Application from '../components/serviceForm/Application';
-import CreateService from '../components/serviceForm/CreateService';
-import GithubService from '../components/serviceForm/GithubService';
-import ProjectName from '../components/serviceForm/ProjectName';
-import ServiceSummary from '../components/serviceForm/ServiceSummary';
+import Application from '../components/provisionerForm/Application';
+import CreateService from '../components/provisionerForm/CreateService';
+import GithubService from '../components/provisionerForm/GithubService';
+import ProjectName from '../components/provisionerForm/ProjectName';
+import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 
 class ServiceForm extends Component {
     
