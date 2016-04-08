@@ -5,6 +5,10 @@ const initialState = Map();
 
 export default function repositoryName(state = initialState, action) {
   switch (action.type) {
+    case types.SET_GITHUB_USER_NAME:
+    {
+      return state.set('user_name', action.value);
+    }
     case types.SET_REPOSITORY_NAME:
     {
       return state.set('repository_name', action.value);
