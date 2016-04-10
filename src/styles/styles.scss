@@ -662,6 +662,27 @@ input[type="submit"] {
     border: 0;
 }
 
+/* Connect Service */
+.GitHub {
+  background: url(../img/services_icons.png) -34px 0px;
+}
+
+.DigitalOcean {
+  background: url(../img/services_icons.png) 0px 0px;
+}
+
+.GitHub, .DigitalOcean {
+  filter: blur(1px) grayscale(90%);
+  -webkit-filter: blur(1px) grayscale(90%);
+  -moz-filter: blur(1px) grayscale(90%);
+  -o-filter: blur(1px) grayscale(90%);
+  -ms-filter: blur(1px) grayscale(90%);
+  width: 34px;
+  height: 34px;
+  border: 0;
+  margin-right: 10px;
+}
+
 /* Server Provider */
 .amazon_web_services {
   background: url(../img/serverprovider_icons.png) 0 0;

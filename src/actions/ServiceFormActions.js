@@ -7,3 +7,7 @@ export function setProjectName(value) {
 export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }
+
+export function setRepositoryName(value) {
+  return { type: types.SET_REPOSITORY_NAME, value };
+}

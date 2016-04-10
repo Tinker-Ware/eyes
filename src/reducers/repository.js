@@ -3,7 +3,7 @@ import {Map} from 'immutable';
 
 const initialState = Map();
 
-export default function repositoryName(state = initialState, action) {
+export default function repository(state = initialState, action) {
   switch (action.type) {
     case types.SET_GITHUB_USER_NAME:
     {

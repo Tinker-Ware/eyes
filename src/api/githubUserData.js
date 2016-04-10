@@ -2,8 +2,8 @@ module.exports = {
 	githubUser: 
 	[
 		{
-			username: 'cory-house', 
-			token: 'Cory'
+			username: 'ileonelperea', 
+			token: 'e72e16c7e42f292c6912e7710c838347ae178b4a'
 		}
 	]
 };

@@ -13,7 +13,8 @@ class ServiceForm extends Component {
     static propTypes = {
       actions: PropTypes.object.isRequired,
       projectNameAppState: PropTypes.object.isRequired,
-      applicationAppState: PropTypes.object.isRequired
+      applicationAppState: PropTypes.object.isRequired,
+      repositoryAppState: PropTypes.object.isRequired
     };
   
     render() {
@@ -34,7 +35,9 @@ class ServiceForm extends Component {
                     <ProjectName 
                       projectNameAppState={this.props.projectNameAppState}
                       setProjectName={this.props.actions.setProjectName} />
-                    <GithubService />
+                    <GithubService 
+                      repositoryAppState={this.props.repositoryAppState}
+                      setRepositoryName={this.props.actions.setRepositoryName}/>
                     <Application 
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication} />
@@ -61,7 +64,8 @@ class ServiceForm extends Component {
 function mapStateToProps(state) {
   return {
     projectNameAppState: state.projectNameAppState,
-    applicationAppState: state.applicationAppState
+    applicationAppState: state.applicationAppState,
+    repositoryAppState: state.repositoryAppState
   };
 }
 

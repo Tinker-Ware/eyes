@@ -12,30 +12,30 @@ const Application = ( {setApplication, applicationAppState} ) => {
     return (
         <div className="row" data-magellan-destination="aplications" id="aplications" data-equalizer>
         <h2><i className="step fi-social-dropbox"></i> Select Aplication</h2>
-        <ApplicationItem identifier="freeBSDAMP" handleChange={handleClick} name="FreeBSD AMP"/>
-        <ApplicationItem identifier="LAMP" handleChange={handleClick} name="LAMP"/>
-        <ApplicationItem identifier="LEMP" handleChange={handleClick} name="LEMP"/>
-        <ApplicationItem identifier="Joomla" handleChange={handleClick} name="Joomla"/>
-        <ApplicationItem identifier="Drone" handleChange={handleClick} name="Drone"/>
-        <ApplicationItem identifier="Ghost" handleChange={handleClick} name="Ghost"/>
-        <ApplicationItem identifier="Rails" handleChange={handleClick} name="Rails"/>
-        <ApplicationItem identifier="Drupal" handleChange={handleClick} name="Drupal"/>
-        <ApplicationItem identifier="MongoDB" handleChange={handleClick} name="MongoDB"/>
-        <ApplicationItem identifier="Node" handleChange={handleClick} name="Node"/>
-        <ApplicationItem identifier="Cassandra" handleChange={handleClick} name="Cassandra"/>
-        <ApplicationItem identifier="Stack" handleChange={handleClick} name="Stack"/>
-        <ApplicationItem identifier="Django" handleChange={handleClick} name="Django"/>
-        <ApplicationItem identifier="Docker" handleChange={handleClick} name="Docker"/>
-        <ApplicationItem identifier="Magento" handleChange={handleClick} name="Magento"/>
-        <ApplicationItem identifier="GitLab" handleChange={handleClick} name="GitLab"/>
-        <ApplicationItem identifier="MumbleServer" handleChange={handleClick} name="MumbleServer"/>
-        <ApplicationItem identifier="MediaWiki" handleChange={handleClick} name="MediaWiki"/>
-        <ApplicationItem identifier="WordPress" handleChange={handleClick} name="WordPress"/>
-        <ApplicationItem identifier="OwnCloud" handleChange={handleClick} name="OwnCloud"/>
-        <ApplicationItem identifier="Dokku" handleChange={handleClick} name="Dokku"/>
-        <ApplicationItem identifier="PHPMyAdmin" handleChange={handleClick} name="PHPMyAdmin"/>
-        <ApplicationItem identifier="freeBSDAMP" handleChange={handleClick} name="freeBSDAMP"/>
-        <ApplicationItem identifier="Redmine" handleChange={handleClick} end="true" name="Redmine"/>
+        <ApplicationItem identifier="freeBSDAMP" handleClick={handleClick} name="FreeBSD AMP"/>
+        <ApplicationItem identifier="LAMP" handleClick={handleClick} name="LAMP"/>
+        <ApplicationItem identifier="LEMP" handleClick={handleClick} name="LEMP"/>
+        <ApplicationItem identifier="Joomla" handleClick={handleClick} name="Joomla"/>
+        <ApplicationItem identifier="Drone" handleClick={handleClick} name="Drone"/>
+        <ApplicationItem identifier="Ghost" handleClick={handleClick} name="Ghost"/>
+        <ApplicationItem identifier="Rails" handleClick={handleClick} name="Rails"/>
+        <ApplicationItem identifier="Drupal" handleClick={handleClick} name="Drupal"/>
+        <ApplicationItem identifier="MongoDB" handleClick={handleClick} name="MongoDB"/>
+        <ApplicationItem identifier="Node" handleClick={handleClick} name="Node"/>
+        <ApplicationItem identifier="Cassandra" handleClick={handleClick} name="Cassandra"/>
+        <ApplicationItem identifier="Stack" handleClick={handleClick} name="Stack"/>
+        <ApplicationItem identifier="Django" handleClick={handleClick} name="Django"/>
+        <ApplicationItem identifier="Docker" handleClick={handleClick} name="Docker"/>
+        <ApplicationItem identifier="Magento" handleClick={handleClick} name="Magento"/>
+        <ApplicationItem identifier="GitLab" handleClick={handleClick} name="GitLab"/>
+        <ApplicationItem identifier="MumbleServer" handleClick={handleClick} name="MumbleServer"/>
+        <ApplicationItem identifier="MediaWiki" handleClick={handleClick} name="MediaWiki"/>
+        <ApplicationItem identifier="WordPress" handleClick={handleClick} name="WordPress"/>
+        <ApplicationItem identifier="OwnCloud" handleClick={handleClick} name="OwnCloud"/>
+        <ApplicationItem identifier="Dokku" handleClick={handleClick} name="Dokku"/>
+        <ApplicationItem identifier="PHPMyAdmin" handleClick={handleClick} name="PHPMyAdmin"/>
+        <ApplicationItem identifier="freeBSDAMP" handleClick={handleClick} name="freeBSDAMP"/>
+        <ApplicationItem identifier="Redmine" handleClick={handleClick} end="true" name="Redmine"/>
       </div>
     );
 };

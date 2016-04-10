@@ -1,22 +1,17 @@
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
-var githubUsers = require('./githubUserData').githubUsers;
-var _ = require('lodash');
+const githubUser = require('./githubUserData').githubUser;
+const _ = require('lodash');
 
-var _clone = function(item) {
+const _clone = function(item) {
 	return JSON.parse(JSON.stringify(item));
 };
 
-var githubUserApi = {
-	getAllUsers: function() {
-		return _clone(githubUsers); 
-	},
-
-	getUserByUsername: function(username) {
-		var githubUser = _.find(githubUsers, {username: username});
-		return _clone(githubUser);
-	},
+const githubUserApi = {
+	getGithubUser: function() {
+		return _clone(githubUser); 
+	}
 
 };
 
