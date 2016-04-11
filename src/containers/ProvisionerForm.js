@@ -2,20 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ServiceFormActions';
-import Application from '../components/serviceForm/Application';
-import CreateService from '../components/serviceForm/CreateService';
-import GithubService from '../components/serviceForm/GithubService';
-import ProjectName from '../components/serviceForm/ProjectName';
-import ServiceSummary from '../components/serviceForm/ServiceSummary';
+import Application from '../components/provisionerForm/Application';
+import CreateService from '../components/provisionerForm/CreateService';
+import GithubService from '../components/provisionerForm/GithubService';
+import ProjectName from '../components/provisionerForm/ProjectName';
+import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 
 class ServiceForm extends Component {
-    
-    static propTypes = {
-      actions: PropTypes.object.isRequired,
-      projectNameAppState: PropTypes.object.isRequired,
-      applicationAppState: PropTypes.object.isRequired
-    };
-  
     render() {
         return (
           <div className="row">
@@ -34,7 +27,9 @@ class ServiceForm extends Component {
                     <ProjectName 
                       projectNameAppState={this.props.projectNameAppState}
                       setProjectName={this.props.actions.setProjectName} />
-                    <GithubService />
+                    <GithubService 
+                      repositoryAppState={this.props.repositoryAppState}
+                      setGitHubUserName={this.props.actions.setGitHubUserName}/>
                     <Application 
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication} />
@@ -58,10 +53,18 @@ class ServiceForm extends Component {
     }
 }
 
+ServiceForm.propTypes = {
+  actions: PropTypes.object.isRequired,
+  projectNameAppState: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
+  repositoryAppState: PropTypes.object.isRequired
+};
+
 function mapStateToProps(state) {
   return {
     projectNameAppState: state.projectNameAppState,
-    applicationAppState: state.applicationAppState
+    applicationAppState: state.applicationAppState,
+    repositoryAppState: state.repositoryAppState
   };
 }
 

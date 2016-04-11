@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import applicationAppState from './application';
 import projectNameAppState from './projectName';
-import repositoryNameAppState from './repositoryName';
+import repositoryAppState from './repository';
 
 const rootReducer = combineReducers({
   applicationAppState,
   projectNameAppState,
-  repositoryNameAppState
+  repositoryAppState
 });
 
 export default rootReducer;

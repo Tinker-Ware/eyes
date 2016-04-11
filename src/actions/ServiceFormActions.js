@@ -7,3 +7,7 @@ export function setProjectName(value) {
 export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }
+
+export function setGitHubUserName(value) {
+  return { type: types.SET_GITHUB_USER_NAME, value };
+}
