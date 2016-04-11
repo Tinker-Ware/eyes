@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import {Map} from 'immutable';
 
-const initialState = Map();
+const initialState = Map({user_name:""});
 
 export default function repository(state = initialState, action) {
   switch (action.type) {

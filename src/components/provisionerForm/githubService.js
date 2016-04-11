@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 const UserApi = require("../../api/githubUserApi");
 
-const GithubService = ( {repositoryAppState, setRepositoryName} ) => {
+const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
     const handleClick = (e) => {
-        setRepositoryName(UserApi.getGithubUser()[0].username);
+        setGitHubUserName(UserApi.getGithubUser()[0].username);
     };
     return (
         <div className="row" data-magellan-destination="connect-service" id="connect-service">
@@ -24,7 +24,7 @@ const GithubService = ( {repositoryAppState, setRepositoryName} ) => {
 };
 
 GithubService.propTypes = {
-    setRepositoryName: PropTypes.func.isRequired,
+    setGitHubUserName: PropTypes.func.isRequired,
     repositoryAppState: PropTypes.object.isRequired
 };
 

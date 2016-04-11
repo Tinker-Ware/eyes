@@ -8,6 +8,6 @@ export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }
 
-export function setRepositoryName(value) {
-  return { type: types.SET_REPOSITORY_NAME, value };
+export function setGitHubUserName(value) {
+  return { type: types.SET_GITHUB_USER_NAME, value };
 }

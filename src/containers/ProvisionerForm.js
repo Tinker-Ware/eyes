@@ -9,14 +9,6 @@ import ProjectName from '../components/provisionerForm/ProjectName';
 import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 
 class ServiceForm extends Component {
-    
-    static propTypes = {
-      actions: PropTypes.object.isRequired,
-      projectNameAppState: PropTypes.object.isRequired,
-      applicationAppState: PropTypes.object.isRequired,
-      repositoryAppState: PropTypes.object.isRequired
-    };
-  
     render() {
         return (
           <div className="row">
@@ -37,7 +29,7 @@ class ServiceForm extends Component {
                       setProjectName={this.props.actions.setProjectName} />
                     <GithubService 
                       repositoryAppState={this.props.repositoryAppState}
-                      setRepositoryName={this.props.actions.setRepositoryName}/>
+                      setGitHubUserName={this.props.actions.setGitHubUserName}/>
                     <Application 
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication} />
@@ -60,6 +52,13 @@ class ServiceForm extends Component {
         );
     }
 }
+
+ServiceForm.propTypes = {
+  actions: PropTypes.object.isRequired,
+  projectNameAppState: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
+  repositoryAppState: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {
