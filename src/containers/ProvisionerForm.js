@@ -36,7 +36,9 @@ class ServiceForm extends Component {
                     <CreateService />
                 </div>
                 <div className="large-2 columns hide-for-small-only hide-for-medium-only">
-                    <ServiceSummary />
+                    <ServiceSummary 
+                      projectNameAppState={this.props.projectNameAppState}
+                      applicationAppState={this.props.applicationAppState}/>
                 </div>
               </div>
               <div className="row">

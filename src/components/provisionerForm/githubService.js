@@ -4,7 +4,11 @@ const UserApi = require("../../api/githubUserApi");
 
 const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
     const handleClick = (e) => {
-        setGitHubUserName(UserApi.getGithubUser()[0].username);
+        if(e.target.text != "Log out"){
+            setGitHubUserName(UserApi.getGithubUser()[0].username);
+        }else{
+            setGitHubUserName('');
+        }
     };
     return (
         <div className="row" data-magellan-destination="connect-service" id="connect-service">
@@ -13,8 +17,12 @@ const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
             <ul className="selection-table" data-name="GitHub" data-type="connect-service" data-id="0">
               <li className="bullet-item">
                 <img className="GitHub" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
-                <span id="githubUser">GitHub</span>
-                <a href="#" onClick={handleClick} data-type="github" className="button radius btn-connect">Connect</a>
+                <span id="githubUser">
+                    {(repositoryAppState.get('user_name')) ? 'Logged as ' + repositoryAppState.get('user_name'):''}
+                </span>
+                <a href="#" onClick={handleClick} data-type="github" className="button radius btn-connect">
+                    {(repositoryAppState.get('user_name')) ? 'Log out':'Log in with Github'}
+                </a>
                 <a href="#" data-type="github" className="button success radius btn-config hide"><i className="step fi-widget"></i></a>
               </li>
             </ul>
