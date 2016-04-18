@@ -15,6 +15,20 @@ const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
     const handleGithubRepos = () => {
         
     };
+    const content = (repositoryAppState.get('user_name')) ? githubUserReposApi.getAllUserRepos().map((value, index) => 
+        <div className="large-12 medium-12 small-12 columns" key={index}>
+            <div className="switch">
+                <input className="switch-input" id={index} type="radio" name="exampleSwitch" />
+                <label className="switch-paddle" htmlFor={index}>
+                    <span className="show-for-sr">{value.name}</span>
+                    <span className="switch-active" aria-hidden="true">Yes</span>
+                    <span className="switch-inactive" aria-hidden="true">No</span>
+                </label>
+            </div>
+            <div className="switch-description">
+                <span>{value.name}</span>
+            </div>
+        </div> ) : '';
     return (
         <div className="row" data-magellan-destination="connect-service" id="connect-service">
           <h2><i className="step fi-share"></i> Connect Service(s)</h2>
@@ -31,20 +45,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
                 <a href="#" onClick={handleGithubRepos} data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i></a>
                 <h3 id="firstModalTitle">Your Repositories.</h3>
                 <div className="row">
-                    { githubUserReposApi.getAllUserRepos().map((value, index) => 
-                        <div className="large-12 medium-12 small-12 columns" key={index}>
-                            <div className="switch">
-                                <input className="switch-input" id={index} type="radio" name="exampleSwitch" />
-                                <label className="switch-paddle" htmlFor={index}>
-                                    <span className="show-for-sr">{value.name}</span>
-                                    <span className="switch-active" aria-hidden="true">Yes</span>
-                                    <span className="switch-inactive" aria-hidden="true">No</span>
-                                </label>
-                            </div>
-                            <div className="switch-description">
-                                <span>{value.name}</span>
-                            </div>
-                        </div> )}
+                    {content}
                 </div>
               </li>
             </ul>
