@@ -1657,7 +1657,11 @@ input[type="submit"] {
   background: url(../img/applications_icons.png) -1456px 0;
 }
 
-.freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine {
+.application_none{
+    background: url(../img/applications_icons.png) -1655px 0;
+}
+
+.freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine, .application_none {
   filter: blur(1px) grayscale(90%);
   -webkit-filter: blur(1px) grayscale(90%);
   -moz-filter: blur(1px) grayscale(90%);
@@ -1670,7 +1674,7 @@ input[type="submit"] {
 }
 
 .selection-table:hover .bullet-item {
-  .freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine {
+  .freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine, .application_none {
     filter: none;
     -webkit-filter: none;
     -moz-filter: none;
