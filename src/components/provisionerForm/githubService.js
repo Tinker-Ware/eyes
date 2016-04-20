@@ -31,7 +31,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
                 <a href="#" onClick={handleGithubRepos} data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i></a>
                 <h3 id="firstModalTitle">Your Repositories.</h3>
                 <div className="row">
-                    { githubUserReposApi.getAllUserRepos().map((value, index) => 
+                    {githubUserReposApi.getAllUserRepos().map((value, index) => 
                         <div className="large-12 medium-12 small-12 columns" key={index}>
                             <div className="switch">
                                 <input className="switch-input" id={index} type="radio" name="exampleSwitch" />
