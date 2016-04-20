@@ -4,29 +4,30 @@ import { Link } from 'react-router';
 const githubUserApi = require("../../api/githubUserApi");
 const githubUserReposApi = require("../../api/githubUserReposApi");
 
-const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
+const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubRepositoryName} ) => {
     const handleGithubLogin = (e) => {
         if(e.target.text != "Log out"){
             setGitHubUserName(githubUserApi.getGithubUser()[0].username);
         }else{
             setGitHubUserName('');
+            setGitHubRepositoryName('');
         }
     };
-    const handleGithubRepos = () => {
-        
+    const handleGithubRepos = (e) => {
+        setGitHubRepositoryName(e.target.parentNode.id);
     };
     const content = (repositoryAppState.get('user_name')) ? githubUserReposApi.getAllUserRepos().map((value, index) => 
         <div className="large-12 medium-12 small-12 columns" key={index}>
-            <div className="switch">
-                <input className="switch-input" id={index} type="radio" name="exampleSwitch" />
+            <div className="switch" id={value.fullName}>
+                <input className="switch-input" onClick={handleGithubRepos} id={index} type="radio" name="repositorySwitch" />
                 <label className="switch-paddle" htmlFor={index}>
-                    <span className="show-for-sr">{value.name}</span>
+                    <span className="show-for-sr">{value.fullName}</span>
                     <span className="switch-active" aria-hidden="true">Yes</span>
                     <span className="switch-inactive" aria-hidden="true">No</span>
                 </label>
             </div>
             <div className="switch-description">
-                <span>{value.name}</span>
+                <span>{value.fullName}</span>
             </div>
         </div> ) : '';
     return (
@@ -56,6 +57,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName} ) => {
 
 GithubService.propTypes = {
     setGitHubUserName: PropTypes.func.isRequired,
+    setGitHubRepositoryName: PropTypes.func.isRequired,
     repositoryAppState: PropTypes.object.isRequired
 };
 
