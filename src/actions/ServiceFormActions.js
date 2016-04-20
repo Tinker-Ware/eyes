@@ -11,3 +11,7 @@ export function setApplication(value) {
 export function setGitHubUserName(value) {
   return { type: types.SET_GITHUB_USER_NAME, value };
 }
+
+export function setGitHubRepositoryName(value) {
+  return { type: types.SET_REPOSITORY_NAME, value };
+}
