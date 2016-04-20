@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CreateService from './CreateService';
 
-const ServiceSummary = ( {projectNameAppState, applicationAppState} ) => {
+const ServiceSummary = ( {projectNameAppState, repositoryAppState, applicationAppState} ) => {
     return (
         <div className="row sidebar">
         <h3><i className="step fi-clipboard-notes"></i> Your Service</h3>
@@ -14,13 +14,17 @@ const ServiceSummary = ( {projectNameAppState, applicationAppState} ) => {
         <p id="label-aplications">
             {(applicationAppState.get('application_name')) ? applicationAppState.get('application_name'):'none'}
         </p>
-        <CreateService />
+        <CreateService 
+            projectNameAppState={projectNameAppState}
+            repositoryAppState={repositoryAppState}
+            applicationAppState={applicationAppState}/>
       </div>
     );
 };
 
 ServiceSummary.propTypes = {
     projectNameAppState: PropTypes.object.isRequired,
+    repositoryAppState: PropTypes.object.isRequired,
     applicationAppState: PropTypes.object.isRequired
 };
 

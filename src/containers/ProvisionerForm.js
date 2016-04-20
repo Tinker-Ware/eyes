@@ -34,11 +34,15 @@ class ServiceForm extends Component {
                     <Application 
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication} />
-                    <CreateService />
+                    <CreateService 
+                      projectNameAppState={this.props.projectNameAppState}
+                      repositoryAppState={this.props.repositoryAppState}
+                      applicationAppState={this.props.applicationAppState}/>
                 </div>
                 <div className="large-2 columns hide-for-small-only hide-for-medium-only">
                     <ServiceSummary 
                       projectNameAppState={this.props.projectNameAppState}
+                      repositoryAppState={this.props.repositoryAppState}
                       applicationAppState={this.props.applicationAppState}/>
                 </div>
               </div>
