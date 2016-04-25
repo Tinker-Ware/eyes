@@ -11,7 +11,7 @@ const Application = ( {setApplication, applicationAppState} ) => {
     };
     return (
         <div className="row" data-magellan-destination="aplications" id="aplications" data-equalizer>
-        <h2><i className="step fi-social-dropbox"></i> Select Aplication</h2>
+        <h2><i className="step fi-social-dropbox"></i> Select Application</h2>
         <ApplicationItem identifier="freeBSDAMP" handleClick={handleApplicationClick} name="FreeBSD AMP"/>
         <ApplicationItem identifier="LAMP" handleClick={handleApplicationClick} name="LAMP"/>
         <ApplicationItem identifier="LEMP" handleClick={handleApplicationClick} name="LEMP"/>
