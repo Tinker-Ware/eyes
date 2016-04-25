@@ -36,7 +36,7 @@ const Application = ( {setApplication, applicationAppState} ) => {
         <ApplicationItem identifier="PHPMyAdmin" handleClick={handleApplicationClick} name="PHPMyAdmin"/>
         <ApplicationItem identifier="freeBSDAMP" handleClick={handleApplicationClick} name="freeBSDAMP"/>
         <ApplicationItem identifier="Redmine" handleClick={handleApplicationClick} end="true" name="Redmine"/>
-        <ApplicationItem identifier="application_none" handleClick={handleApplicationClick} end="true" name="None"/>
+        <ApplicationItem identifier="none" handleClick={handleApplicationClick} end="true" name="None"/>
       </div>
     );
 };
