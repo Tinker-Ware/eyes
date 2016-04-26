@@ -16,8 +16,8 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
     const handleGithubRepos = (e) => {
         setGitHubRepositoryName(e.target.parentNode.id);
     };
-    const optionsRepositoryList = (repositoryAppState.get('user_name')) ? <a href="#" data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i> Show/Hide Repositories</a> : '';
-    const repositoryList = (repositoryAppState.get('user_name')) ? githubUserReposApi.getAllUserRepos().map((value, index) => 
+    const optionsRepositoryList = (repositoryAppState.get('github_user_name')) ? <a href="#" data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i> Show/Hide Repositories</a> : '';
+    const repositoryList = (repositoryAppState.get('github_user_name')) ? githubUserReposApi.getAllUserRepos().map((value, index) => 
         <div className="large-12 medium-12 small-12 columns" key={index}>
             <div className="switch" id={value.fullName}>
                 <input className="switch-input" onClick={handleGithubRepos} id={index} type="radio" name="repositorySwitch" />
@@ -39,10 +39,10 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
               <li className="bullet-item">
                 <img className="GitHub" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
                 <span id="githubUser">
-                    {(repositoryAppState.get('user_name')) ? 'Logged as ' + repositoryAppState.get('user_name'):''}
+                    {(repositoryAppState.get('github_user_name')) ? 'Logged as ' + repositoryAppState.get('github_user_name'):''}
                 </span>
                 <a href="#" onClick={handleGithubLogin} data-type="github" className="button radius btn-connect">
-                    {(repositoryAppState.get('user_name')) ? 'Log out':'Log in with Github'}
+                    {(repositoryAppState.get('github_user_name')) ? 'Log out':'Log in with Github'}
                 </a>
                 {optionsRepositoryList}
                 <h3 id="firstModalTitle">Your Repositories.</h3>
