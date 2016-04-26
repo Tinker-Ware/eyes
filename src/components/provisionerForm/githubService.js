@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const githubUserApi = require("../../api/githubUserApi");
 const githubUserReposApi = require("../../api/githubUserReposApi");
 
-const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubRepositoryName} ) => {
+const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubRepositoryName, setGithubConfigurationEnable} ) => {
     const handleGithubLogin = (e) => {
         if(e.target.text != "Log out"){
             setGitHubUserName(githubUserApi.getGithubUser()[0].username);
@@ -16,9 +16,12 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
     const handleGithubRepos = (e) => {
         setGitHubRepositoryName(e.target.parentNode.id);
     };
-    const optionsRepositoryList = (repositoryAppState.get('github_user_name')) ? <a href="#" data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i> Show/Hide Repositories</a> : '';
+    const handleGithubConfigurationEnable = (e) => {
+      repositoryAppState.get('github_configuration_enable') ? setGithubConfigurationEnable(false) : setGithubConfigurationEnable(true);
+    };
+    const optionsRepositoryList = (repositoryAppState.get('github_user_name')) ? <a href="#" onClick={handleGithubConfigurationEnable} data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i> {repositoryAppState.get('github_configuration_enable')? 'Hide Your Repositories': 'Show Your Repositories'}</a> : '';
     const repositoryList = (repositoryAppState.get('github_user_name')) ? githubUserReposApi.getAllUserRepos().map((value, index) => 
-        <div className="large-12 medium-12 small-12 columns" key={index}>
+        <div className={repositoryAppState.get('github_configuration_enable')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"} key={index}>
             <div className="switch" id={value.fullName}>
                 <input className="switch-input" onClick={handleGithubRepos} id={index} type="radio" name="repositorySwitch" />
                 <label className="switch-paddle" htmlFor={index}>
@@ -45,7 +48,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
                     {(repositoryAppState.get('github_user_name')) ? 'Log out':'Log in with Github'}
                 </a>
                 {optionsRepositoryList}
-                <h3 id="firstModalTitle">Your Repositories.</h3>
+                {repositoryAppState.get('github_configuration_enable') && (repositoryAppState.get('github_user_name')) ? <h3 id="firstModalTitle">Your Repositories.</h3> : ''}
                 <div className="row">
                     {repositoryList}
                 </div>
@@ -59,6 +62,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
 GithubService.propTypes = {
     setGitHubUserName: PropTypes.func.isRequired,
     setGitHubRepositoryName: PropTypes.func.isRequired,
+    setGithubConfigurationEnable: PropTypes.func.isRequired,
     repositoryAppState: PropTypes.object.isRequired
 };
 
