@@ -22,4 +22,13 @@ describe('reducer', () => {
       github_user_name: 'ileonelperea'
     }));
   });
+  it('handles SET_GITHUB_CONFIGURATION_ENABLE', () => {
+    const initialState = Map();
+    const action = {type: 'SET_GITHUB_CONFIGURATION_ENABLE', value: true};
+    const nextState = repository(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+      github_configuration_enable: true
+    }))
+  });
 });
