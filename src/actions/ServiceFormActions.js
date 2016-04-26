@@ -13,5 +13,9 @@ export function setGitHubUserName(value) {
 }
 
 export function setGitHubRepositoryName(value) {
-  return { type: types.SET_REPOSITORY_NAME, value };
+  return { type: types.SET_GITHUB_REPOSITORY_NAME, value };
+}
+
+export function setGithubConfigurationEnable(value){
+  return { type: types.SET_GITHUB_CONFIGURATION_ENABLE, value };
 }

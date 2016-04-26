@@ -30,7 +30,8 @@ class ServiceForm extends Component {
                     <GithubService 
                       repositoryAppState={this.props.repositoryAppState}
                       setGitHubUserName={this.props.actions.setGitHubUserName}
-                      setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}/>
+                      setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
+                      setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/>
                     <Application 
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication} />
