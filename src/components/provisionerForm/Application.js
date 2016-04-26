@@ -12,31 +12,30 @@ const Application = ( {setApplication, applicationAppState} ) => {
     return (
         <div className="row" data-magellan-destination="aplications" id="aplications" data-equalizer>
         <h2><i className="step fi-social-dropbox"></i> Select Application</h2>
-        <ApplicationItem identifier="freeBSDAMP" handleClick={handleApplicationClick} name="FreeBSD AMP"/>
-        <ApplicationItem identifier="LAMP" handleClick={handleApplicationClick} name="LAMP"/>
-        <ApplicationItem identifier="LEMP" handleClick={handleApplicationClick} name="LEMP"/>
-        <ApplicationItem identifier="Joomla" handleClick={handleApplicationClick} name="Joomla"/>
-        <ApplicationItem identifier="Drone" handleClick={handleApplicationClick} name="Drone"/>
-        <ApplicationItem identifier="Ghost" handleClick={handleApplicationClick} name="Ghost"/>
-        <ApplicationItem identifier="Rails" handleClick={handleApplicationClick} name="Rails"/>
-        <ApplicationItem identifier="Drupal" handleClick={handleApplicationClick} name="Drupal"/>
-        <ApplicationItem identifier="MongoDB" handleClick={handleApplicationClick} name="MongoDB"/>
-        <ApplicationItem identifier="Node" handleClick={handleApplicationClick} name="Node"/>
-        <ApplicationItem identifier="Cassandra" handleClick={handleApplicationClick} name="Cassandra"/>
-        <ApplicationItem identifier="Stack" handleClick={handleApplicationClick} name="Stack"/>
-        <ApplicationItem identifier="Django" handleClick={handleApplicationClick} name="Django"/>
-        <ApplicationItem identifier="Docker" handleClick={handleApplicationClick} name="Docker"/>
-        <ApplicationItem identifier="Magento" handleClick={handleApplicationClick} name="Magento"/>
-        <ApplicationItem identifier="GitLab" handleClick={handleApplicationClick} name="GitLab"/>
-        <ApplicationItem identifier="MumbleServer" handleClick={handleApplicationClick} name="MumbleServer"/>
-        <ApplicationItem identifier="MediaWiki" handleClick={handleApplicationClick} name="MediaWiki"/>
-        <ApplicationItem identifier="WordPress" handleClick={handleApplicationClick} name="WordPress"/>
-        <ApplicationItem identifier="OwnCloud" handleClick={handleApplicationClick} name="OwnCloud"/>
-        <ApplicationItem identifier="Dokku" handleClick={handleApplicationClick} name="Dokku"/>
-        <ApplicationItem identifier="PHPMyAdmin" handleClick={handleApplicationClick} name="PHPMyAdmin"/>
-        <ApplicationItem identifier="freeBSDAMP" handleClick={handleApplicationClick} name="freeBSDAMP"/>
-        <ApplicationItem identifier="Redmine" handleClick={handleApplicationClick} end="true" name="Redmine"/>
-        <ApplicationItem identifier="none" handleClick={handleApplicationClick} end="true" name="None"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="freeBSDAMP" handleClick={handleApplicationClick} name="FreeBSD AMP"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="LAMP" handleClick={handleApplicationClick} name="LAMP"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="LEMP" handleClick={handleApplicationClick} name="LEMP"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Joomla" handleClick={handleApplicationClick} name="Joomla"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Drone" handleClick={handleApplicationClick} name="Drone"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Ghost" handleClick={handleApplicationClick} name="Ghost"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Rails" handleClick={handleApplicationClick} name="Rails"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Drupal" handleClick={handleApplicationClick} name="Drupal"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="MongoDB" handleClick={handleApplicationClick} name="MongoDB"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Node" handleClick={handleApplicationClick} name="Node"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Cassandra" handleClick={handleApplicationClick} name="Cassandra"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Stack" handleClick={handleApplicationClick} name="Stack"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Django" handleClick={handleApplicationClick} name="Django"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Docker" handleClick={handleApplicationClick} name="Docker"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Magento" handleClick={handleApplicationClick} name="Magento"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="GitLab" handleClick={handleApplicationClick} name="GitLab"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="MumbleServer" handleClick={handleApplicationClick} name="MumbleServer"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="MediaWiki" handleClick={handleApplicationClick} name="MediaWiki"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="WordPress" handleClick={handleApplicationClick} name="WordPress"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="OwnCloud" handleClick={handleApplicationClick} name="OwnCloud"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Dokku" handleClick={handleApplicationClick} name="Dokku"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="PHPMyAdmin" handleClick={handleApplicationClick} name="PHPMyAdmin"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="Redmine" handleClick={handleApplicationClick} end="true" name="Redmine"/>
+        <ApplicationItem applicationAppState={applicationAppState} identifier="none" handleClick={handleApplicationClick} end="true" name="None"/>
       </div>
     );
 };
