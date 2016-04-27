@@ -1,5 +1,5 @@
 module.exports = {
-	provisionFormOptions: 
+	provision_form_options: 
 	[
 		{
 			services: [
@@ -7,10 +7,10 @@ module.exports = {
 					identifier: 'github'
 				}
 			],
-			automationSoftwares: [
+			automation_softwares: [
 				'ansible'
 			],
-			serverProviders: [
+			server_providers: [
 				'digitalOcean'
 			],
 			distributions: [

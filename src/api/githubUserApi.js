@@ -1,7 +1,7 @@
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
-const githubUser = require('./githubUserData').githubUser;
+const github_user = require('./githubUserData').github_user;
 const _ = require('lodash');
 
 const _clone = function(item) {
@@ -10,9 +10,8 @@ const _clone = function(item) {
 
 const githubUserApi = {
 	getGithubUser: function() {
-		return _clone(githubUser); 
+		return _clone(github_user); 
 	}
-
 };
 
 module.exports = githubUserApi;

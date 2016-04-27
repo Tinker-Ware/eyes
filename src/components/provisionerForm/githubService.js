@@ -7,7 +7,7 @@ const githubUserReposApi = require("../../api/githubUserReposApi");
 const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubRepositoryName, setGithubConfigurationEnable} ) => {
     const handleGithubLogin = (e) => {
         if(e.target.text != "Log out"){
-            setGitHubUserName(githubUserApi.getGithubUser()[0].username);
+            setGitHubUserName(githubUserApi.getGithubUser()[0].user_name);
         }else{
             setGitHubUserName('');
             setGitHubRepositoryName('');
@@ -22,16 +22,16 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
     const optionsRepositoryList = (repositoryAppState.get('github_user_name')) ? <a href="#" onClick={handleGithubConfigurationEnable} data-type="github" className="button success radius btn-config"><i className="step fi-widget"></i> {repositoryAppState.get('github_configuration_enable')? 'Hide Your Repositories': 'Show Your Repositories'}</a> : '';
     const repositoryList = (repositoryAppState.get('github_user_name')) ? githubUserReposApi.getAllUserRepos().map((value, index) => 
         <div className={repositoryAppState.get('github_configuration_enable')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"} key={index}>
-            <div className="switch" id={value.fullName}>
+            <div className="switch" id={value.full_name}>
                 <input className="switch-input" onClick={handleGithubRepos} id={index} type="radio" name="repositorySwitch" />
                 <label className="switch-paddle" htmlFor={index}>
-                    <span className="show-for-sr">{value.fullName}</span>
+                    <span className="show-for-sr">{value.full_name}</span>
                     <span className="switch-active" aria-hidden="true">Yes</span>
                     <span className="switch-inactive" aria-hidden="true">No</span>
                 </label>
             </div>
             <div className="switch-description">
-                <span>{value.fullName}</span>
+                <span>{value.full_name}</span>
             </div>
         </div> ) : '';
     return (

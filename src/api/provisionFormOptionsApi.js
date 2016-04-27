@@ -1,7 +1,7 @@
 "use strict";
 
 //This file is mocking a web API by hitting hard coded data.
-const provisionFormOptions = require('./provisionFormOptionsData').provisionFormOptions;
+const provision_form_options = require('./provisionFormOptionsData').provision_form_options;
 const _ = require('lodash');
 
 const _clone = function(item) {
@@ -10,7 +10,7 @@ const _clone = function(item) {
 
 const provisionFormOptionsApi = {
 	getProvisionFormOptions: function() {
-		return _clone(provisionFormOptions); 
+		return _clone(provision_form_options); 
 	}
 
 };

@@ -29,16 +29,16 @@ class ServiceForm extends Component {
                     <ProjectName 
                       projectNameAppState={this.props.projectNameAppState}
                       setProjectName={this.props.actions.setProjectName} />
-                    {provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) => (value.identifier == 'github') ?
+                    {(provisionFormOptionsApi.getProvisionFormOptions()[0])? provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) => (value.identifier == 'github') ?
                       <GithubService 
                         repositoryAppState={this.props.repositoryAppState}
                         setGitHubUserName={this.props.actions.setGitHubUserName}
                         setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
                         setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/> : ''
                       
-                    )}
+                    ):''}
                     <Application 
-                      applicationsOptions={provisionFormOptionsApi.getProvisionFormOptions()[0].applications}
+                      applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0])?provisionFormOptionsApi.getProvisionFormOptions()[0].applications:''}
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication}/>
                     <CreateService 
