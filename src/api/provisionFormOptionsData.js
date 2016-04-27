@@ -7,16 +7,16 @@ module.exports = {
 					identifier: 'github'
 				}
 			],
-			automation_softwares: [
+			automation_software: [
 				'ansible'
 			],
-			server_providers: [
+			server_provider: [
 				'digitalOcean'
 			],
-			distributions: [
+			distribution: [
 				'debian'
 			],
-			applications: [
+			application: [
 				{
 					identifier: 'Ghost',
 					name: 'Ghost'

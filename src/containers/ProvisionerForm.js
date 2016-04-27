@@ -38,7 +38,7 @@ class ServiceForm extends Component {
                       
                     ):''}
                     <Application 
-                      applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0])?provisionFormOptionsApi.getProvisionFormOptions()[0].applications:''}
+                      applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0])?provisionFormOptionsApi.getProvisionFormOptions()[0].application:''}
                       applicationAppState={this.props.applicationAppState}
                       setApplication={this.props.actions.setApplication}/>
                     <CreateService 
