@@ -8,6 +8,8 @@ import GithubService from '../components/provisionerForm/GithubService';
 import ProjectName from '../components/provisionerForm/ProjectName';
 import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 
+const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
+
 class ServiceForm extends Component {
     render() {
         return (
@@ -27,14 +29,18 @@ class ServiceForm extends Component {
                     <ProjectName 
                       projectNameAppState={this.props.projectNameAppState}
                       setProjectName={this.props.actions.setProjectName} />
-                    <GithubService 
-                      repositoryAppState={this.props.repositoryAppState}
-                      setGitHubUserName={this.props.actions.setGitHubUserName}
-                      setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
-                      setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/>
+                    {(provisionFormOptionsApi.getProvisionFormOptions()[0])? provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) => (value.identifier == 'github') ?
+                      <GithubService 
+                        repositoryAppState={this.props.repositoryAppState}
+                        setGitHubUserName={this.props.actions.setGitHubUserName}
+                        setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
+                        setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/> : ''
+                      
+                    ):''}
                     <Application 
+                      applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0])?provisionFormOptionsApi.getProvisionFormOptions()[0].application:''}
                       applicationAppState={this.props.applicationAppState}
-                      setApplication={this.props.actions.setApplication} />
+                      setApplication={this.props.actions.setApplication}/>
                     <CreateService 
                       projectNameAppState={this.props.projectNameAppState}
                       repositoryAppState={this.props.repositoryAppState}
