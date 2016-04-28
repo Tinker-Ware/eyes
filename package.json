@@ -1,6 +1,6 @@
 {
   "name": "tinkerware-provisioner",
-  "version": "3.0.0",
+  "version": "0.1.0",
   "description": "Tinkerware provisioner form for create a new service",
   "scripts": {
     "start-message": "babel-node tools/startMessage.js",
