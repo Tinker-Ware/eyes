@@ -27,7 +27,7 @@
     "immutable": "3.7.6",
     "object-assign": "4.0.1",
     "npm-run-all": "1.6.0",
-    "react": "15.0.0",
+    "react": "^15.0.0",
     "react-dom": "15.0.0",
     "react-redux": "4.4.0",
     "react-router": "2.0.0",
