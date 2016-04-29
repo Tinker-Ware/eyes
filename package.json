@@ -21,7 +21,6 @@
   "license": "MIT",
   "dependencies": {
     "chai-immutable": "1.5.4",
-    "connect-history-api-fallback": "1.2.0",
     "estraverse-fb": "1.3.1",
     "immutable": "3.7.6",
     "object-assign": "4.0.1",
@@ -32,6 +31,7 @@
     "redux": "3.4.0"
   },
   "devDependencies": {
+    "connect-history-api-fallback": "1.2.0",
     "babel-cli": "6.7.5",
     "babel-core": "6.7.6",
     "babel-eslint": "6.0.2",
