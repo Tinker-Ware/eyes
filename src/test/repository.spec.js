@@ -29,6 +29,6 @@ describe('reducer', () => {
     
     expect(nextState).to.equal(fromJS({
       github_configuration_enable: true
-    }))
+    }));
   });
 });

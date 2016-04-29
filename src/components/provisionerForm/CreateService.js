@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const CreateService = ( {projectNameAppState, repositoryAppState, applicationAppState} ) => {
-    const btnCreateService = repositoryAppState.get('user_name') && 
-                    repositoryAppState.get('repository_name') &&
+    const btnCreateService = repositoryAppState.get('github_user_name') && 
+                    repositoryAppState.get('github_repository_name') &&
                     projectNameAppState.get('project_name') && 
                     applicationAppState.get('application_name') ? 
                     <a href="javascript:void(0);" id="btn-create_service" className="button radius expanded"><i className="step fi-power"></i> Create Service</a> : 
