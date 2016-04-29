@@ -31,6 +31,7 @@ export class ServiceForm extends Component {
                       setProjectName={this.props.actions.setProjectName} />
                     {(provisionFormOptionsApi.getProvisionFormOptions()[0])? provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) => (value.identifier == 'github') ?
                       <GithubService 
+                        key = {value.identifier}
                         repositoryAppState={this.props.repositoryAppState}
                         setGitHubUserName={this.props.actions.setGitHubUserName}
                         setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
