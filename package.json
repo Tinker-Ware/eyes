@@ -1,5 +1,5 @@
 {
-  "name": "tinkerware-provisioner",
+  "name": "provisioner website",
   "version": "0.1.0",
   "description": "Tinkerware provisioner form for create a new service",
   "scripts": {
