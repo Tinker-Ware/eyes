@@ -27,7 +27,7 @@ export default {
   ],
   module: {
     loaders: [
-      {test: /(\.js|\.jsx)$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
+      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel']},
       {test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file']},
       {
         test: /(\.css|\.scss)$/,
@@ -35,8 +35,5 @@ export default {
         loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")
       }
     ]
-  },
-  resolve: {
-    extensions: ["", ".js", ".jsx"]
   }
-}
+};
