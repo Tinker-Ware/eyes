@@ -10,7 +10,7 @@ import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
-class ServiceForm extends Component {
+export class ServiceForm extends Component {
     render() {
         return (
           <div className="row">
