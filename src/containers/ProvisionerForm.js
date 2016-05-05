@@ -11,61 +11,78 @@ import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
-    render() {
-        return (
+  render() {
+    return (
+      <div className="row">
+        <div data-magellan-expedition="fixed">
           <div className="row">
-              <div data-magellan-expedition="fixed">
-                <div className="row">
-                  <dl className="sub-nav">
-                    <dd data-magellan-arrival="project-configuration" className="active"><a href="#project-configuration"><i className="step fi-wrench"></i> Project Configuration</a></dd>
-                    <dd data-magellan-arrival="connect-service"><a href="#connect-service"><i className="step fi-share"></i> Connect Service</a></dd>
-                    <dd data-magellan-arrival="aplications"><a href="#aplications"><i className="step fi-social-dropbox"></i> Aplications</a></dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="row">
-                <div className="large-10 columns">
-                    <h1><i className="step fi-clipboard-notes"></i> Create a Service</h1>
-                    <ProjectName 
-                      projectNameAppState={this.props.projectNameAppState}
-                      setProjectName={this.props.actions.setProjectName} />
-                    {(provisionFormOptionsApi.getProvisionFormOptions()[0])? provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) => (value.identifier == 'github') ?
-                      <GithubService 
-                        key = {value.identifier}
-                        repositoryAppState={this.props.repositoryAppState}
-                        setGitHubUserName={this.props.actions.setGitHubUserName}
-                        setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
-                        setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/> : ''
-                      
-                    ):''}
-                    <Application 
-                      applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0])?provisionFormOptionsApi.getProvisionFormOptions()[0].application:''}
-                      applicationAppState={this.props.applicationAppState}
-                      setApplication={this.props.actions.setApplication}/>
-                    <CreateService 
-                      projectNameAppState={this.props.projectNameAppState}
-                      repositoryAppState={this.props.repositoryAppState}
-                      applicationAppState={this.props.applicationAppState}/>
-                </div>
-                <div className="large-2 columns hide-for-small-only hide-for-medium-only">
-                    <ServiceSummary 
-                      projectNameAppState={this.props.projectNameAppState}
-                      repositoryAppState={this.props.repositoryAppState}
-                      applicationAppState={this.props.applicationAppState}/>
-                </div>
-              </div>
-              <div className="row">
-                  <footer>
-                    <div className="row">
-                      <div className="large-12 large-centered medium-12 medium-centered small-12 small-centered columns">
-                        <p className="copyright">© 2015, Inc. All rights reserved.</p>
-                      </div>
-                    </div>
-                  </footer>
-              </div>
+            <dl className="sub-nav">
+              <dd
+                data-magellan-arrival="project-configuration"
+                className="active">
+                <a href="#project-configuration">
+                  <i className="step fi-wrench"></i>
+                   Project Configuration</a>
+              </dd>
+              <dd data-magellan-arrival="connect-service">
+                <a href="#connect-service">
+                  <i className="step fi-share"></i>
+                   Connect Service</a>
+              </dd>
+              <dd data-magellan-arrival="aplications">
+                <a href="#aplications"><i className="step fi-social-dropbox"></i>
+                 Aplications</a>
+              </dd>
+            </dl>
           </div>
-        );
-    }
+        </div>
+        <div className="row">
+          <div className="large-10 columns">
+            <h1><i className="step fi-clipboard-notes"></i>
+              Create a Service
+            </h1>
+            <ProjectName 
+              projectNameAppState={this.props.projectNameAppState}
+              setProjectName={this.props.actions.setProjectName} />
+            {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?       
+              provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) =>   
+                (value.identifier == 'github') ?
+                  <GithubService 
+                    key = {value.identifier}
+                    repositoryAppState={this.props.repositoryAppState}
+                    setGitHubUserName={this.props.actions.setGitHubUserName}
+                    setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
+                    setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/> : ''
+                ):''}
+            <Application
+              applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 
+                provisionFormOptionsApi.getProvisionFormOptions()[0].application : ''}
+              applicationAppState={this.props.applicationAppState}
+              setApplication={this.props.actions.setApplication}/>
+            <CreateService
+              projectNameAppState={this.props.projectNameAppState}
+              repositoryAppState={this.props.repositoryAppState}
+              applicationAppState={this.props.applicationAppState}/>
+          </div>
+          <div className="large-2 columns hide-for-small-only hide-for-medium-only">
+            <ServiceSummary
+              projectNameAppState={this.props.projectNameAppState}
+              repositoryAppState={this.props.repositoryAppState}
+              applicationAppState={this.props.applicationAppState}/>
+          </div>
+        </div>
+        <div className="row">
+          <footer>
+            <div className="row">
+              <div className="large-12 large-centered medium-12 medium-centered small-12 small-centered columns">
+                <p className="copyright">© 2015, Inc. All rights reserved.</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    );
+  }
 }
 
 ServiceForm.propTypes = {

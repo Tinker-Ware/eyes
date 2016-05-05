@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import applicationAppState from './application';
 import projectNameAppState from './projectName';
 import repositoryAppState from './repository';
