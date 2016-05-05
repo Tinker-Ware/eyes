@@ -9,6 +9,7 @@ import configureStore from './store/configureStore';
 import './styles/foundation.css';
 import './styles/styles.scss';
 import './icons/foundation-icons.css';
+require('./favicon.ico');
 
 const store = configureStore();
 
