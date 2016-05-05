@@ -24,6 +24,10 @@ module.exports = {
 				{
 					identifier: 'GitLab',
 					name: 'GitLab'
+				},
+    {
+					identifier: 'none',
+					name: 'None'
 				}
 			],
 			packages: [
