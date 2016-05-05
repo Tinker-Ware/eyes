@@ -1,5 +1,5 @@
 import {Map, fromJS} from 'immutable';
-import { expect } from 'chai';
+import {expect} from 'chai';
 
 import serverProvider from '../reducers/serverProvider';
 
