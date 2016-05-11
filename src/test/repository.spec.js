@@ -4,31 +4,37 @@ import {expect} from 'chai';
 import repository from '../reducers/repository';
 
 describe('reducer', () => {
-  it('handles SET_GITHUB_REPOSITORY_NAME', () => {
+  it('handles SET_REPOSITORY', () => {
     const initialState = Map();
-    const action = {type: 'SET_GITHUB_REPOSITORY_NAME', value: 'website'};
+    const action = {type: 'SET_REPOSITORY', value: {
+      provider: 'github',
+      name: 'landingpage'
+    }};
     const nextState = repository(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      github_repository_name: 'website'
+      repository: {
+        provider: 'github',
+        name: 'landingpage'
+      }
     }));
   });
-  it('handles SET_GITHUB_USER_NAME', () => {
+  it('handles SET_INTEGRACION', () => {
     const initialState = Map();
-    const action = {type: 'SET_GITHUB_USER_NAME', value: 'ileonelperea'};
+    const action = {type: 'SET_INTEGRACION', value: 'e72e16c7e42f292c6912e7710c838347ae178b4a'};
     const nextState = repository(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      github_user_name: 'ileonelperea'
+      integracion: 'e72e16c7e42f292c6912e7710c838347ae178b4a'
     }));
   });
-  it('handles SET_GITHUB_CONFIGURATION_ENABLE', () => {
+  it('handles SET_SHOW_REPOSITORIES', () => {
     const initialState = Map();
-    const action = {type: 'SET_GITHUB_CONFIGURATION_ENABLE', value: true};
+    const action = {type: 'SET_SHOW_REPOSITORIES', value: true};
     const nextState = repository(initialState, action);
     
     expect(nextState).to.equal(fromJS({
-      github_configuration_enable: true
+      show_repositories: true
     }));
   });
 });

@@ -50,9 +50,9 @@ export class ServiceForm extends Component {
                   <GithubService 
                     key = {value.identifier}
                     repositoryAppState={this.props.repositoryAppState}
-                    setGitHubUserName={this.props.actions.setGitHubUserName}
-                    setGitHubRepositoryName={this.props.actions.setGitHubRepositoryName}
-                    setGithubConfigurationEnable={this.props.actions.setGithubConfigurationEnable}/> : ''
+                    setRepository={this.props.actions.setRepository}
+                    setIntegracion={this.props.actions.setIntegracion}
+                    setShowRepositories={this.props.actions.setShowRepositories}/> : ''
                 ):''}
             <Application
               applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 

@@ -4,39 +4,47 @@ import {Link} from 'react-router';
 const githubUserApi = require("../../api/githubUserApi");
 const githubUserReposApi = require("../../api/githubUserReposApi");
 
-const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubRepositoryName, setGithubConfigurationEnable} ) => {
+const GithubService = ( {repositoryAppState, setRepository, setIntegracion, setShowRepositories} ) => {
   const handleGithubLogin = (e) => {
     if(e.target.text != "Log out"){
-      setGitHubUserName(githubUserApi.getGithubUser()[0].user_name);
+      setIntegracion(githubUserApi.getGithubUser()[0].token);
+      setShowRepositories(true);
     }else{
-      setGitHubUserName('');
-      setGitHubRepositoryName('');
+      setIntegracion('');
+      setRepository({
+        provider: '',
+        name: ''
+      });
+      setShowRepositories(false);
     }
   };
   const handleGithubRepos = (e) => {
-    setGitHubRepositoryName(e.target.parentNode.id);
+    setRepository({
+      provider: "github",
+      name: e.target.parentNode.id
+    });
   };
   const handleGithubConfigurationEnable = (e) => {
-    repositoryAppState.get('github_configuration_enable') ? setGithubConfigurationEnable(false) : setGithubConfigurationEnable(true);
+    repositoryAppState.get('show_repositories') ? setShowRepositories(false) : setShowRepositories(true);
   };
   const optionsRepositoryList = 
-    (repositoryAppState.get('github_user_name')) ? 
+    (repositoryAppState.get('integracion')) ? 
       <a
         href="#"
         onClick={handleGithubConfigurationEnable}
         className="button success radius btn-config">
           <i className="step fi-widget"></i>
-           {repositoryAppState.get('github_configuration_enable') ?
+           {repositoryAppState.get('show_repositories') ?
              'Hide Your Repositories' : 'Show Your Repositories'}</a> : '';
   const repositoryList =
-    (repositoryAppState.get('github_user_name')) ?
+    (repositoryAppState.get('integracion')) ?
       githubUserReposApi.getAllUserRepos().map((value, index) => 
         <div
-          className={repositoryAppState.get('github_configuration_enable')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
+          className={repositoryAppState.get('show_repositories')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
           key={index}>
             <div
               className="switch"
-              id={value.full_name}>
+              id={value.name}>
                 <input
                   className="switch-input"
                   onClick={handleGithubRepos}
@@ -46,7 +54,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
                 <label
                   className="switch-paddle"
                   htmlFor={index}>
-                    <span className="show-for-sr">{value.full_name}</span>
+                    <span className="show-for-sr">{value.name}</span>
                     <span
                       className="switch-active"
                       aria-hidden="true">Yes</span>
@@ -56,7 +64,7 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
                 </label>
             </div>
             <div className="switch-description">
-                <span>{value.full_name}</span>
+                <span>{value.name}</span>
             </div>
         </div> ) : '';
   return (
@@ -70,23 +78,19 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
       <div className="large-12 medium-12 small-12 columns">
         <ul className="selection-table">
           <li className="bullet-item">
-            <img
-              className="GitHub"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
-            <span id="githubUser">
-              {(repositoryAppState.get('github_user_name')) ? 
-                'Logged as ' + repositoryAppState.get('github_user_name') : ''}
-            </span>
             <a
               href="#"
               onClick={handleGithubLogin}
               className="button radius btn-connect">
-                {(repositoryAppState.get('github_user_name')) ? 
+                <img
+                  className="GitHub"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+                {(repositoryAppState.get('integracion')) ? 
                   'Log out' : 'Log in with Github'}
             </a>
             {optionsRepositoryList}
-            {repositoryAppState.get('github_configuration_enable') && (repositoryAppState.get('github_user_name')) ? 
-              <h3 id="firstModalTitle">Your Repositories.</h3> : ''}
+            {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integracion')) ? 
+              <h5 id="firstModalTitle">Select a repository.</h5> : ''}
             <div className="row">
                 {repositoryList}
             </div>
@@ -98,9 +102,9 @@ const GithubService = ( {repositoryAppState, setGitHubUserName, setGitHubReposit
 };
 
 GithubService.propTypes = {
-  setGitHubUserName: PropTypes.func.isRequired,
-  setGitHubRepositoryName: PropTypes.func.isRequired,
-  setGithubConfigurationEnable: PropTypes.func.isRequired,
+  setRepository: PropTypes.func.isRequired,
+  setIntegracion: PropTypes.func.isRequired,
+  setShowRepositories: PropTypes.func.isRequired,
   repositoryAppState: PropTypes.object.isRequired
 };
 

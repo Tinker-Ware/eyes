@@ -1,21 +1,21 @@
 import * as types from '../constants/ActionTypes';
 import {Map} from 'immutable';
 
-const initialState = Map({github_user_name:"", github_repository_name:"", github_configuration_enable:true});
+const initialState = Map({repository:"", show_repositories:true});
 
 export default function repository(state = initialState, action) {
   switch (action.type) {
-    case types.SET_GITHUB_USER_NAME:
+    case types.SET_REPOSITORY:
     {
-      return state.set('github_user_name', action.value);
+      return state.set('repository', Map(action.value));
     }
-    case types.SET_GITHUB_REPOSITORY_NAME:
+    case types.SET_INTEGRACION:
     {
-      return state.set('github_repository_name', action.value);
+      return state.set('integracion', action.value);
     }
-    case types.SET_GITHUB_CONFIGURATION_ENABLE:
+    case types.SET_SHOW_REPOSITORIES:
     {
-      return state.set('github_configuration_enable', action.value);
+      return state.set('show_repositories', action.value);
     }
     default:
       return state;
