@@ -820,6 +820,7 @@ input:checked + label > .switch-inactive {
     line-height: 2rem;
   }
 }
+
 /* We use this to get basic styling on all basic form elements */
 
 input {
@@ -1853,4 +1854,9 @@ nav {
   dt.active a:hover, dd.active a:hover, li.active a:hover {
     background: #008175;
   }
+}
+
+/* Selection Tables */
+.sub-nav dd[class=user-login]{
+  float: right;
 }
