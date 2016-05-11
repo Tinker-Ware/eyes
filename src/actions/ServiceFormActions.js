@@ -8,14 +8,14 @@ export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }
 
-export function setGitHubUserName(value) {
-  return { type: types.SET_GITHUB_USER_NAME, value };
+export function setRepository(value) {
+  return { type: types.SET_REPOSITORY, value };
 }
 
-export function setGitHubRepositoryName(value) {
-  return { type: types.SET_GITHUB_REPOSITORY_NAME, value };
+export function setIntegracion(value){
+  return { type: types.SET_INTEGRACION, value };
 }
 
-export function setGithubConfigurationEnable(value){
-  return { type: types.SET_GITHUB_CONFIGURATION_ENABLE, value };
+export function setShowRepositories(value){
+  return { type: types.SET_SHOW_REPOSITORIES, value };
 }

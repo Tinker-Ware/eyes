@@ -1459,16 +1459,7 @@ input[type="submit"] {
   background: url(../img/services_icons.png) -34px 0px;
 }
 
-.DigitalOcean {
-  background: url(../img/services_icons.png) 0px 0px;
-}
-
-.GitHub, .DigitalOcean {
-  filter: blur(1px) grayscale(90%);
-  -webkit-filter: blur(1px) grayscale(90%);
-  -moz-filter: blur(1px) grayscale(90%);
-  -o-filter: blur(1px) grayscale(90%);
-  -ms-filter: blur(1px) grayscale(90%);
+.GitHub{
   width: 34px;
   height: 34px;
   border: 0;
@@ -1735,7 +1726,12 @@ input[type="submit"] {
   margin-bottom: 1em;
 }
 
-/* Button create new service */
+/* Buttons*/
+.button.success{
+  height: 60px;
+  line-height: 32px;
+}
+
 #btn-create_service {
   margin-top: 4em;
 }
