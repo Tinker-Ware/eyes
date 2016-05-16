@@ -1260,6 +1260,7 @@ h6 {
     font-size: 1rem; } }
 
 a {
+  border-bottom: 1px solid #bbb;
   color: #2199e8;
   text-decoration: none;
   line-height: inherit;

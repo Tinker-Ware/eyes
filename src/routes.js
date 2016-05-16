@@ -4,6 +4,7 @@ import App from './components/App';
 import Profile from './components/user/Profile';
 import ProvisionerForm from './containers/ProvisionerForm';
 import UserProfile from './components/UserProfile';
+import Login from './components/Login';
 
 export default (
   <Route
@@ -15,6 +16,9 @@ export default (
         component={UserProfile}>
         <IndexRoute component={Profile} />
       </Route>
+      <Route
+        path="/login"
+        component={Login} />
   </Route>
 
 );
