@@ -5,6 +5,7 @@ import Profile from './components/user/Profile';
 import ProvisionerForm from './containers/ProvisionerForm';
 import UserProfile from './components/UserProfile';
 import Login from './components/Login';
+import Signup from './components/Signup';
 
 export default (
   <Route
@@ -19,6 +20,9 @@ export default (
       <Route
         path="/login"
         component={Login} />
+      <Route
+        path="/signup"
+        component={Signup} />
   </Route>
 
 );

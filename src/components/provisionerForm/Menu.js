@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import {Link, IndexLink} from 'react-router';
 
 const Menu = () => {
   const handleApplicationClick = (e) => {
@@ -22,8 +23,8 @@ const Menu = () => {
              Aplications</a>
           </dd>
           <dd className="user-login">
-            <a href="#aplications"><i className="step fi-torso"></i>
-             Log in</a>
+            <Link to="/login"><i className="step fi-torso"></i>
+             Log in</Link>
           </dd>
         </dl>
       </div>
