@@ -5,6 +5,7 @@ import * as actions from '../actions/ServiceFormActions';
 import Application from '../components/provisionerForm/Application';
 import CreateService from '../components/provisionerForm/CreateService';
 import GithubService from '../components/provisionerForm/GithubService';
+import Menu from '../components/provisionerForm/Menu';
 import ProjectName from '../components/provisionerForm/ProjectName';
 import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 
@@ -14,30 +15,7 @@ export class ServiceForm extends Component {
   render() {
     return (
       <div className="row">
-        <div data-magellan-expedition="fixed">
-          <div className="row">
-            <dl className="sub-nav">
-              <dd className="active">
-                <a href="#project-configuration">
-                  <i className="step fi-wrench"></i>
-                   Project Configuration</a>
-              </dd>
-              <dd>
-                <a href="#connect-service">
-                  <i className="step fi-share"></i>
-                   Connect Service</a>
-              </dd>
-              <dd>
-                <a href="#aplications"><i className="step fi-social-dropbox"></i>
-                 Aplications</a>
-              </dd>
-              <dd className="user-login">
-                <a href="#aplications"><i className="step fi-torso"></i>
-                 Log in</a>
-              </dd>
-            </dl>
-          </div>
-        </div>
+        <Menu />
         <div className="row">
           <div className="large-10 columns">
             <h1><i className="step fi-clipboard-notes"></i>
