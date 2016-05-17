@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link, IndexLink} from 'react-router';
 
-const Login = () => {
+const Signup = () => {
   return (
     <div className="row">
-      <h2 className="text-center">Log In</h2>
+      <h2 className="text-center">Sign Up</h2>
       <form>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
@@ -23,12 +23,12 @@ const Login = () => {
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center"><Link to="#">Forgot password?</Link></p>
+            <p className="text-center">By signin up, yopu agree to the <Link to="#">Terms of Service</Link></p>
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center">Do not have an account? <Link to="signup">Sign Up</Link></p>
+            <p className="text-center">Already have an account? <Link to="login">Log In</Link></p>
           </div>
         </div>
       </form>
@@ -36,4 +36,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

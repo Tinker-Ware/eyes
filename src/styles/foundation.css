@@ -1183,7 +1183,9 @@ th,
 td {
   margin: 0;
   padding: 0; }
-
+form a{
+  border-bottom: 1px solid #bbb;
+}
 p {
   font-size: inherit;
   line-height: 1.6;
@@ -1260,7 +1262,6 @@ h6 {
     font-size: 1rem; } }
 
 a {
-  border-bottom: 1px solid #bbb;
   color: #2199e8;
   text-decoration: none;
   line-height: inherit;
