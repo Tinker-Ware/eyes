@@ -31,7 +31,7 @@ const Login = () => {
       </form>
       <div className="row">
         <div className="large-6 large-centered medium-6 columns">
-          <p className="text-center">Don't have an account? <Link to="signup">Sign Up</Link></p>
+          <p className="text-center">Do not have an account? <Link to="signup">Sign Up</Link></p>
         </div>
       </div>
     </div>
