@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ServiceFormActions';
 import Application from '../components/provisionerForm/Application';
 import CreateService from '../components/provisionerForm/CreateService';
+import DigitalOceanService from '../components/provisionerForm/DigitalOceanService';
 import GithubService from '../components/provisionerForm/GithubService';
 import Menu from '../components/provisionerForm/Menu';
 import ProjectName from '../components/provisionerForm/ProjectName';
@@ -24,16 +25,23 @@ export class ServiceForm extends Component {
             <ProjectName 
               projectNameAppState={this.props.projectNameAppState}
               setProjectName={this.props.actions.setProjectName} />
-            {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?       
-              provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) =>   
-                (value.identifier == 'github') ?
-                  <GithubService 
-                    key = {value.identifier}
-                    repositoryAppState={this.props.repositoryAppState}
-                    setRepository={this.props.actions.setRepository}
-                    setIntegracion={this.props.actions.setIntegracion}
-                    setShowRepositories={this.props.actions.setShowRepositories}/> : ''
-                ):''}
+            <div className="row">
+              <h2>
+                <i className="step fi-share"></i>
+                 Connect Service(s)
+              </h2>
+              {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?       
+                provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) =>   
+                  (value.identifier == 'github') ?
+                    <GithubService 
+                      key = {value.identifier}
+                      repositoryAppState={this.props.repositoryAppState}
+                      setRepository={this.props.actions.setRepository}
+                      setIntegracion={this.props.actions.setIntegracion}
+                      setShowRepositories={this.props.actions.setShowRepositories}/> : ''
+                  ):''}
+              <DigitalOceanService />
+            </div>
             <Application
               applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 
                 provisionFormOptionsApi.getProvisionFormOptions()[0].application : ''}

@@ -68,35 +68,27 @@ const GithubService = ( {repositoryAppState, setRepository, setIntegracion, setS
             </div>
         </div> ) : '';
   return (
-    <div
-      className="row"
-      id="connect-service">
-      <h2>
-        <i className="step fi-share"></i>
-         Connect Service(s)
-      </h2>
-      <div className="large-12 medium-12 small-12 columns">
-        <ul className="selection-table">
-          <li className="bullet-item">
-            <a
-              href="#"
-              onClick={handleGithubLogin}
-              className="button radius btn-connect">
-                <img
-                  className="GitHub"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
-                {(repositoryAppState.get('integracion')) ? 
-                  'Log out' : 'Log in with Github'}
-            </a>
-            {optionsRepositoryList}
-            {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integracion')) ? 
-              <h5 id="firstModalTitle">Select a repository.</h5> : ''}
-            <div className="row">
-                {repositoryList}
-            </div>
-          </li>
-        </ul>
-      </div>
+    <div className="large-6 medium-6 small-12 columns">
+      <ul className="selection-table">
+        <li className="bullet-item">
+          <a
+            href="#"
+            onClick={handleGithubLogin}
+            className="button radius btn-connect">
+              <img
+                className="GitHub"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+              {(repositoryAppState.get('integracion')) ? 
+                'Log out' : 'Log in with Github'}
+          </a>
+          {optionsRepositoryList}
+          {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integracion')) ? 
+            <h5 id="firstModalTitle">Select a repository.</h5> : ''}
+          <div className="row">
+              {repositoryList}
+          </div>
+        </li>
+      </ul>
     </div>
   );
 };
