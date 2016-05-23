@@ -1460,7 +1460,13 @@ input[type="submit"] {
   background: url(../img/services_icons.png) -34px 0px;
 }
 
-.GitHub{
+.DigitalOcean{
+  background: url(../img/services_icons.png) 0px 0px;
+  -webkit-filter: saturate(10);
+  filter: saturate(10);
+}
+
+.GitHub, .DigitalOcean{
   width: 34px;
   height: 34px;
   border: 0;
