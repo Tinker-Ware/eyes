@@ -18,7 +18,7 @@ const SSHKeys = () => {
           href="javascript:void(0);"
           id="show_ssh_key">+ Add SSH Key</a>
         </p>
-        <div className="ssh_key_content hide">
+        <div className="ssh_key_content">
           <div className="large-offset-9 large-3 medium-9">
             <p className="right">
               <a
