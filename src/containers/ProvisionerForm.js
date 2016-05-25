@@ -9,6 +9,7 @@ import GithubService from '../components/provisionerForm/GithubService';
 import Menu from '../components/provisionerForm/Menu';
 import ProjectName from '../components/provisionerForm/ProjectName';
 import ServiceSummary from '../components/provisionerForm/ServiceSummary';
+import SSHKeys from '../components/provisionerForm/SSHKeys';
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
@@ -51,6 +52,7 @@ export class ServiceForm extends Component {
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
               applicationAppState={this.props.applicationAppState}/>
+            <SSHKeys />            
           </div>
           <div className="large-2 columns hide-for-small-only hide-for-medium-only">
             <ServiceSummary
