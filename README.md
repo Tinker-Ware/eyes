@@ -1,5 +1,9 @@
 # Tinkerware Provision Webpage
 
+[![build status](https://img.shields.io/travis/Tinker-Ware/provisioning-webpage.svg?style=flat-square)](https://travis-ci.org/Tinker-Ware/provisioning-webpage)
+[![Dependency Status](https://david-dm.org/Tinker-Ware/provisioning-webpage.svg?style=flat-square)](https://david-dm.org/Tinker-Ware/provisioning-webpage)
+[![Coverage Status](https://coveralls.io/repos/github/Tinker-Ware/provisioning-webpage/badge.svg?branch=master)](https://coveralls.io/github/Tinker-Ware/provisioning-webpage?branch=master)
+
 ### Can you explain the folder structure?
 ```
 .
