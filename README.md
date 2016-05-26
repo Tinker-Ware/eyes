@@ -1,6 +1,7 @@
 # Tinkerware Provision Webpage
 
-[![build status](https://img.shields.io/travis/Tinker-Ware/provisioning-webpage.svg?style=flat-square)](https://travis-ci.org/Tinker-Ware/provisioning-webpage)
+[![Build status: Linux](https://img.shields.io/travis/Tinker-Ware/provisioning-webpage.svg?style=flat-square)](https://travis-ci.org/Tinker-Ware/provisioning-webpage)
+[![Build status: Windows](https://ci.appveyor.com/api/projects/status/llcqixmnfsax5w4l?svg=true)](https://ci.appveyor.com/project/iLeonelPerea/provisioning-webpage/branch/master)
 [![Dependency Status](https://david-dm.org/Tinker-Ware/provisioning-webpage.svg?style=flat-square)](https://david-dm.org/Tinker-Ware/provisioning-webpage)
 [![Coverage Status](https://coveralls.io/repos/github/Tinker-Ware/provisioning-webpage/badge.svg?branch=master)](https://coveralls.io/github/Tinker-Ware/provisioning-webpage?branch=master)
 
