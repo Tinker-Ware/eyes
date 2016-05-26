@@ -1,3 +1,5 @@
-import colors from 'colors'; // eslint-disable-line no-unused-vars
+import {chalkSuccess} from './chalkConfig';
 
-console.log('Starting app in dev mode...'.green); // eslint-disable-line no-console
+/* eslint-disable no-console */
+
+console.log(chalkSuccess('Starting app in dev mode...'));
