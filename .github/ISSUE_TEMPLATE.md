@@ -1,9 +1,18 @@
-Node version:
+**expected behavior:**
 
-npm version:
+-
+-
 
-Operating system:
+**actual behavior:**
 
-Command line used:
+-
 
-Steps to reproduce:
+**node version:**
+
+-
+-
+
+**specifications like the version of the project, operating system, or hardware:**
+
+-
+-
