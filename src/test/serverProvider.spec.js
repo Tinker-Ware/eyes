@@ -6,11 +6,17 @@ import serverProvider from '../reducers/serverProvider';
 describe('reducer', () => {
   it('handles SET_SERVER_PROVIDER', () => {
     const initialState = Map();
-    const action = {type: 'SET_SERVER_PROVIDER', value: 'digital_ocean'};
+    const action = {type: 'SET_SERVER_PROVIDER', value: {
+      name: 'digital_ocean',
+      token: '77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3'
+    }};
     const nextState = serverProvider(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      server_provider: 'digital_ocean'
+      server_provider: {
+        name: 'digital_ocean',
+        token: '77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3'
+      }
     }));
   });
 });

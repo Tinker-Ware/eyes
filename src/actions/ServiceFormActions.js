@@ -4,6 +4,10 @@ export function setProjectName(value) {
   return { type: types.SET_PROJECT_NAME, value };
 }
 
+export function setServerProvider(value) {
+  return { type: types.SET_SERVER_PROVIDER, value };
+}
+
 export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }

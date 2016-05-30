@@ -41,7 +41,9 @@ export class ServiceForm extends Component {
                       setIntegracion={this.props.actions.setIntegracion}
                       setShowRepositories={this.props.actions.setShowRepositories}/> : ''
                   ):''}
-              <DigitalOceanService />
+              <DigitalOceanService
+                serverProviderAppState={this.props.serverProviderAppState}
+                setServerProvider={this.props.actions.setServerProvider} />
             </div>
             <Application
               applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 
@@ -77,6 +79,7 @@ export class ServiceForm extends Component {
 
 ServiceForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  serverProviderAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired
@@ -84,6 +87,7 @@ ServiceForm.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    serverProviderAppState: state.serverProviderAppState,
     projectNameAppState: state.projectNameAppState,
     applicationAppState: state.applicationAppState,
     repositoryAppState: state.repositoryAppState
