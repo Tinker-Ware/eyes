@@ -80,12 +80,28 @@
 |webpack-hot-middleware| Use to integrate Webpack's hot reloading support with Browser-sync |
 |yargs| Easily parse command-line arguments |
 
+##Clone submodules
+
+The `--recursive` flag should do all the work if you used it while cloning this
+repo. If not, try this:
+
+`git submodule update --init --recursive`
+
+That will clone all the necessary submodules.
+
+If things don't go the way you were expecting, check if you've done this
+already:
+
+`git submodule update --recursive`
+
+That will update the submodules to make sure you're using the most recent HEAD
+
 ##Initial Machine Setup
  1. **Install [Node 4.0.0 or greater](https://nodejs.org)** - (5.0 or greater is recommended for optimal build performance). Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm).
  2. **Install [Git](https://git-scm.com/downloads)**. 
  3. **Install [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) and [Redux Dev Tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)** in Chrome. (Optional, but helpful. The latter offers time-travel debugging.)
  4. run `npm install` to install all the dependences.
- 
+
 ##Usage
 
 Webpack serves your app in memory when you run `npm start`. No physical files are written. However, the web root is /src, so you can reference files under /src in index.html. When the app is built using `npm run build`, physical files are written to /dist and the app is served from /dist.
@@ -104,3 +120,10 @@ When you run `npm run build`:
 
 ### I'm getting an error when running npm install: Failed to locate "CL.exe"
 On Windows, you need to install extra dependencies for browser-sync to build and install successfully. Follow the getting started steps above to assure you have the necessary dependencies on your machine.
+
+##Author Information
+
+This role is provided by the [Tinkerware](http://tinkerware.io) project
+under a **The MIT** Licence.
+
+Feel free to open a Pull Request if you see anything that you think could be improved.
