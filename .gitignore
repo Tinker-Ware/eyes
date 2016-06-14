@@ -28,6 +28,7 @@ node_modules
 
 #api submodules
 api
+api/tinkerware-blueprint
 
 #dist folder
 dist
