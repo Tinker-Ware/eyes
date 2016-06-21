@@ -11,6 +11,8 @@ import ProjectName from '../components/provisionerForm/ProjectName';
 import ServiceSummary from '../components/provisionerForm/ServiceSummary';
 import SSHKeys from '../components/provisionerForm/SSHKeys';
 
+import { requestGithubAccess } from '../middleware/actions/MiddlewareActions';
+
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
@@ -39,6 +41,7 @@ export class ServiceForm extends Component {
                       repositoryAppState={this.props.repositoryAppState}
                       setRepository={this.props.actions.setRepository}
                       setIntegracion={this.props.actions.setIntegracion}
+                      requestGithubAccess={this.props.actions.requestGithubAccess}
                       setShowRepositories={this.props.actions.setShowRepositories}/> : ''
                   ):''}
               <DigitalOceanService

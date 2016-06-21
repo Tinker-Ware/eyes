@@ -4,8 +4,9 @@ import {Link} from 'react-router';
 const githubUserApi = require("../../api/githubUserApi");
 const githubUserReposApi = require("../../api/githubUserReposApi");
 
-const GithubService = ( {repositoryAppState, setRepository, setIntegracion, setShowRepositories} ) => {
+const GithubService = ( {repositoryAppState, setRepository, setIntegracion, requestGithubAccess, setShowRepositories} ) => {
   const handleGithubLogin = (e) => {
+      requestGithubAccess();
     if(e.target.text != "Log out"){
       setIntegracion(githubUserApi.getGithubUser()[0].token);
       setShowRepositories(true);
@@ -97,6 +98,7 @@ GithubService.propTypes = {
   setRepository: PropTypes.func.isRequired,
   setIntegracion: PropTypes.func.isRequired,
   setShowRepositories: PropTypes.func.isRequired,
+  requestGithubAccess: PropTypes.func.isRequired,
   repositoryAppState: PropTypes.object.isRequired
 };
 

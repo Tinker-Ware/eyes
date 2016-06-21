@@ -10,3 +10,4 @@ export const SET_PACKAGE = 'SET_PACKAGE';
 export const DELETE_PACKAGE = 'DELETE_PACKAGE';
 export const ADD_SSH_KEY = 'ADD_SSH_KEY';
 export const DELETE_SSH_KEY = 'DELETE_SSH_KEY';
+export const REQUEST_GITHUB_ACCESS = 'REQUEST_GITHUB_ACCESS';

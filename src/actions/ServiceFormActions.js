@@ -23,3 +23,7 @@ export function setIntegracion(value){
 export function setShowRepositories(value){
   return { type: types.SET_SHOW_REPOSITORIES, value };
 }
+
+export function requestGithubAccess() {
+  return { type: types.REQUEST_GITHUB_ACCESS };
+}
