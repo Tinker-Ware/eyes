@@ -1,7 +1,8 @@
-import * as types from '../constants/ActionsTypes';
+import * as types from '../../constants/ActionTypes';
 
-export function requestGithubAccess(){
+export function receiveRepository(repository){
   return {
-    type: types.REQUEST_GITHUB_ACCESS
+    type: types.SET_INTEGRACION,
+    value: repository
   };
 }

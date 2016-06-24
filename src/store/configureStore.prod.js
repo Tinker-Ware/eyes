@@ -8,7 +8,7 @@ export default function configureStore(initialState) {
   
   const store = createStore(rootReducer, applyMiddleware(sagaMiddleware), initialState);
   
-  sagaMiddleware.run(getGithubAccess);
+  sagaMiddleware.run(root);
   
   return store;
 }

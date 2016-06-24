@@ -6,9 +6,9 @@ const githubUserReposApi = require("../../api/githubUserReposApi");
 
 const GithubService = ( {repositoryAppState, setRepository, setIntegracion, requestGithubAccess, setShowRepositories} ) => {
   const handleGithubLogin = (e) => {
-      requestGithubAccess();
     if(e.target.text != "Log out"){
-      setIntegracion(githubUserApi.getGithubUser()[0].token);
+      requestGithubAccess();
+      //setIntegracion(githubUserApi.getGithubUser()[0].token);
       setShowRepositories(true);
     }else{
       setIntegracion('');
