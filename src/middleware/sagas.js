@@ -26,7 +26,7 @@ function doRequest(url, options){
     .catch(error => error);  
 }
 
-function* getGithubAccess() {
+function* getRepositoryAccess() {
   const userAccessToken = yield call(
     doRequest, 'http://localhost:3100/api/v1/repository/gh_callback',
     {
@@ -34,8 +34,13 @@ function* getGithubAccess() {
       mode: 'cors'
     });
   yield put(actions.receiveRepository(userAccessToken.user.access_token));
+  yield call(getRepositories);
+  yield put(actions.showRepositories(true));
+}
+
+function* getRepository(repositoryName) {
   const userRepo = yield call(
-    doRequest, 'http://localhost:3100/api/v1/repository/github/tinkerware/ghost-blog-site',
+    doRequest, 'http://localhost:3100/api/v1/repository/github/tinkerware/'+repositoryName,
     {
       method: 'GET',
       headers: {
@@ -46,6 +51,20 @@ function* getGithubAccess() {
     });
 }
 
+function* getRepositories() {
+  const userRepos = yield call(
+    doRequest, 'http://localhost:3100/api/v1/repository/github/tinkerware/repos',
+    {
+      method: 'GET',
+      headers: {
+        'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
+        'provider-token': '77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3'
+      },
+      mode: 'cors'
+    });
+  yield put(actions.receiveRepositories(userRepos));
+}
+
 export default function* root() {
-  yield* takeLatest(types.REQUEST_GITHUB_ACCESS, getGithubAccess);
+  yield* takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess);
 }

@@ -12,6 +12,10 @@ export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }
 
+export function setRepositories(value) {
+  return { type: types.SET_REPOSITORIES, value };
+}
+
 export function setRepository(value) {
   return { type: types.SET_REPOSITORY, value };
 }
@@ -24,6 +28,6 @@ export function setShowRepositories(value){
   return { type: types.SET_SHOW_REPOSITORIES, value };
 }
 
-export function requestGithubAccess() {
+export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
 }

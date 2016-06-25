@@ -6,3 +6,17 @@ export function receiveRepository(repository){
     value: repository
   };
 }
+
+export function showRepositories(enable){
+  return{
+    type: types.SET_SHOW_REPOSITORIES,
+    value: enable
+  }
+}
+
+export function receiveRepositories(repositories){
+  return{
+    type: types.SET_REPOSITORIES,
+    value: repositories
+  }
+}

@@ -4,12 +4,28 @@ import {expect} from 'chai';
 import repository from '../reducers/repository';
 
 describe('reducer', () => {
+  it('handles SET_REPOSITORIES', () => {
+    const initialState = Map();
+    const action = {type: 'SET_REPOSITORIES', value: fromJS({
+        provider: 'github',
+        repos: ['ghost-blog-site', 'infrastructure', 'provisioning-webpage']
+      })
+    };
+    const nextState = repository(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      repositories: {
+        provider: 'github',
+        repos: ['ghost-blog-site', 'infrastructure', 'provisioning-webpage']
+      }
+    }));
+  });
   it('handles SET_REPOSITORY', () => {
     const initialState = Map();
-    const action = {type: 'SET_REPOSITORY', value: {
+    const action = {type: 'SET_REPOSITORY', value: fromJS({
       provider: 'github',
       name: 'landingpage'
-    }};
+    })};
     const nextState = repository(initialState, action);
 
     expect(nextState).to.equal(fromJS({
