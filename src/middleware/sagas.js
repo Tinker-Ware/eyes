@@ -18,7 +18,7 @@ function parseJSON(response) {
   return response.json();
 }
 
-function doRequest(url, options){
+export function doRequest(url, options){
   return fetch(url, options)
     .then(checkStatus)
     .then(response => response.json())
@@ -26,7 +26,7 @@ function doRequest(url, options){
     .catch(error => error);  
 }
 
-function* getRepositoryAccess() {
+export function* getRepositoryAccess() {
   const userAccessToken = yield call(
     doRequest, 'http://localhost:3100/api/v1/repository/gh_callback',
     {
