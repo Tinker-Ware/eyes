@@ -5,9 +5,13 @@ const initialState = Map({repository:"", show_repositories:true});
 
 export default function repository(state = initialState, action) {
   switch (action.type) {
+    case types.SET_REPOSITORIES:
+    {
+      return state.set('repositories', action.value);
+    }
     case types.SET_REPOSITORY:
     {
-      return state.set('repository', Map(action.value));
+      return state.set('repository', action.value);
     }
     case types.SET_INTEGRACION:
     {

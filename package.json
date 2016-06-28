@@ -15,7 +15,7 @@
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm run clean-dist && npm run build:html && npm run lint",
     "build": "babel-node tools/build.js && npm run open:dist",
-    "mock-server": "node_modules/drakov/drakov -f \"api/tinkerware-blueprint/*.apib\" \"api/tinkerware-blueprint/\" -p 3100",
+    "mock-server": "node_modules/drakov/drakov -f \"api/tinkerware-blueprint/*.apib\" \"api/tinkerware-blueprint/\" -p 3100 --autoOptions --header authorization --header provider-token",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:cover": "babel-node $(npm bin)/isparta cover --root src --report html node_modules/mocha/bin/_mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:cover:travis": "babel-node ./node_modules/.bin/isparta cover --root src --report lcovonly node_modules/mocha/bin/_mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -32,7 +32,9 @@
     "react-dom": "15.0.2",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
-    "redux": "3.5.2"
+    "redux": "3.5.2",
+    "redux-saga": "0.10.5",
+    "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.8.0",
@@ -40,9 +42,11 @@
     "babel-eslint": "6.0.2",
     "babel-loader": "6.2.4",
     "babel-plugin-react-display-name": "2.0.0",
-    "babel-preset-es2015": "6.6.0",
+    "babel-polyfill": "6.9.1",
+    "babel-preset-es2015": "6.9.0",
     "babel-preset-react": "6.5.0",
     "babel-preset-react-hmre": "1.1.1",
+    "babel-preset-stage-0": "6.5.0",
     "babel-preset-stage-1": "6.5.0",
     "babel-register": "6.8.0",
     "browser-sync": "2.12.5",

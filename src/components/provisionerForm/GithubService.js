@@ -1,14 +1,11 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const githubUserApi = require("../../api/githubUserApi");
-const githubUserReposApi = require("../../api/githubUserReposApi");
-
-const GithubService = ( {repositoryAppState, setRepository, setIntegracion, setShowRepositories} ) => {
+const GithubService = ( {repositoryAppState, setRepository, setIntegracion, requestRepositoryAccess, setShowRepositories} ) => {
   const handleGithubLogin = (e) => {
     if(e.target.text != "Log out"){
-      setIntegracion(githubUserApi.getGithubUser()[0].token);
-      setShowRepositories(true);
+      requestRepositoryAccess();
+      
     }else{
       setIntegracion('');
       setRepository({
@@ -25,7 +22,7 @@ const GithubService = ( {repositoryAppState, setRepository, setIntegracion, setS
     });
   };
   const handleGithubConfigurationEnable = (e) => {
-    repositoryAppState.get('show_repositories') ? setShowRepositories(false) : setShowRepositories(true);
+    repositoryAppState.get('show_repositories') ? setShowRepositories(false) : (repositoryAppState.get('integracion')) ? setShowRepositories(true) : '';
   };
   const optionsRepositoryList = 
     (repositoryAppState.get('integracion')) ? 
@@ -37,8 +34,8 @@ const GithubService = ( {repositoryAppState, setRepository, setIntegracion, setS
            {repositoryAppState.get('show_repositories') ?
              'Hide Your Repositories' : 'Show Your Repositories'}</a> : '';
   const repositoryList =
-    (repositoryAppState.get('integracion')) ?
-      githubUserReposApi.getAllUserRepos().map((value, index) => 
+    (repositoryAppState.get('integracion')) && repositoryAppState.get('repositories') ?
+      repositoryAppState.get('repositories').repositories.map((value, index) => 
         <div
           className={repositoryAppState.get('show_repositories')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
           key={index}>
@@ -97,6 +94,7 @@ GithubService.propTypes = {
   setRepository: PropTypes.func.isRequired,
   setIntegracion: PropTypes.func.isRequired,
   setShowRepositories: PropTypes.func.isRequired,
+  requestRepositoryAccess: PropTypes.func.isRequired,
   repositoryAppState: PropTypes.object.isRequired
 };
 
