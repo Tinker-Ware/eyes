@@ -13,4 +13,12 @@ describe('reducer', () => {
       automation_software: 'ansible'
     }));
   });
+  it('handles DEFAULT', () => {
+    const initialState = Map();
+    const action = {type: ''};
+    const nextState = automationSoftware(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+    }));
+  });
 });

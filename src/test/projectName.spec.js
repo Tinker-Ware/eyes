@@ -13,4 +13,12 @@ describe('reducer', () => {
       project_name: 'tinkerware.web'
     }));
   });
+  it('handles DEFAULT', () => {
+    const initialState = Map();
+    const action = {type: ''};
+    const nextState = projectName(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+    }));
+  });
 });

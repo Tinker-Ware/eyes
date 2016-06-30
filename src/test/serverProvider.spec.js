@@ -19,4 +19,12 @@ describe('reducer', () => {
       }
     }));
   });
+  it('handles DEFAULT', () => {
+    const initialState = Map();
+    const action = {type: ''};
+    const nextState = serverProvider(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+    }));
+  });
 });
