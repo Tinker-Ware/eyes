@@ -34,9 +34,12 @@ export function* getRepositoryAccess() {
       mode: 'cors'
     });
   yield put(actions.receiveRepository(userAccessToken.user.access_token));
-  yield call(getRepositories);
+  const userRepos = yield call(getRepositories);
+  yield put(actions.receiveRepositories(userRepos));
   yield put(actions.showRepositories(true));
 }
+
+
 
 function* getRepository(repositoryName) {
   const userRepo = yield call(
@@ -51,8 +54,8 @@ function* getRepository(repositoryName) {
     });
 }
 
-function* getRepositories() {
-  const userRepos = yield call(
+export function* getRepositories() {
+  return yield call(
     doRequest, 'http://localhost:3100/api/v1/repository/github/tinkerware/repos',
     {
       method: 'GET',
@@ -62,7 +65,6 @@ function* getRepositories() {
       },
       mode: 'cors'
     });
-  yield put(actions.receiveRepositories(userRepos));
 }
 
 export default function* root() {
