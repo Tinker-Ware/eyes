@@ -53,4 +53,12 @@ describe('reducer', () => {
       show_repositories: true
     }));
   });
+  it('handles DEFAULT', () => {
+    const initialState = Map();
+    const action = {type: ''};
+    const nextState = repository(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+    }));
+  });
 });

@@ -13,4 +13,12 @@ describe('reducer', () => {
       application_name: 'ghost'
     }));
   });
+  it('handles DEFAULT', () => {
+    const initialState = Map();
+    const action = {type: ''};
+    const nextState = application(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+    }));
+  });
 });
