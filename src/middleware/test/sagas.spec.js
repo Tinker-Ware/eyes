@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import "babel-polyfill"
+import "babel-polyfill";
 import {expect} from 'chai';
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects'; 
@@ -15,7 +15,7 @@ describe('sagas middleware', () => {
         "username": "tinkerware",
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"
       }
-    }
+    };
     const userRepos = {
       "repositories":
       [
@@ -50,7 +50,7 @@ describe('sagas middleware', () => {
           "ssh_url": "git@github.com/Tinker-Ware/provisioning-webpage.git"
         }
       ]
-    }
+    };
     
     expect(generator.next().value).to.deep.equal(
       call(doRequest,"http://localhost:3100/api/v1/repository/gh_callback",
