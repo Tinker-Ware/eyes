@@ -31,3 +31,15 @@ export function setShowRepositories(value){
 export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
 }
+
+export function setSSHKey() {
+  return { type: types.SET_SSH_KEY };
+}
+
+export function enableSSHKey() {
+  return { type: types.ENABLE_SSH_KEY };
+}
+
+export function deleteSSHKey() {
+  return { type: types.DELETE_SSH_KEY };
+}
