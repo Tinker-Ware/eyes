@@ -122,4 +122,13 @@ describe('reducer', () => {
       }]
     }));
   });
+  
+  it('handles DEFAULT', () => {
+    const initialState = Map();
+    const action = {type: ''};
+    const nextState = sshKeys(initialState, action);
+    
+    expect(nextState).to.equal(fromJS({
+    }));
+  });
 });
