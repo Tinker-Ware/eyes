@@ -21,18 +21,18 @@ export default function sshKeys(state = initialState, action) {
     }
     case types.SET_SSH_KEY:
     {
-      return state.set('ssh_keys', action.sshKeys.toSet().union(fromJS([{id: getId(action.sshKeys.toJS()), title: action.value.get('sshKey').get('title'), content:action.value.get('sshKey').get('content'), enable: true}]).toSet()).toList());
+      return state.set('ssh_keys', action.value.get('sshKeys').toSet().union(fromJS([{id: getId(action.value.get('sshKeys').toJS()), title: action.value.get('sshKey').get('title'), content:action.value.get('sshKey').get('content'), enable: true}]).toSet()).toList());
     }
     case types.ENABLE_SSH_KEY:
     {
-      return state.set('ssh_keys', action.sshKeys.map(value => 
+      return state.set('ssh_keys', action.value.get('sshKeys').map(value => 
         value.get('id') === action.value.get('id') ?
           value.set('enable', !value.get('enable')) : value
       ));
     }
     case types.DELETE_SSH_KEY:
     {
-      return state.set('ssh_keys', action.sshKeys.filter(value => 
+      return state.set('ssh_keys', action.value.get('sshKeys').filter(value => 
         value.get('id') !== action.value.get('id')
       ));
     }

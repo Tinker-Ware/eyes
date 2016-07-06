@@ -5,12 +5,23 @@ import {Map, fromJS} from 'immutable';
 const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, setSSHKeyTitle, setSSHKeyContent, sshKeysAppState} ) => {
 
   const AddSSHKeyKeypress = (e) => {
-    
+    console.log("inicial "+sshKeysAppState.get('ssh_keys'));
+    setSSHKey(
+      fromJS({
+        sshKeys: [],
+        sshKey: {
+          id: 1, 
+          title: sshKeysAppState.get('ssh_keys_title'),
+          content: sshKeysAppState.get('ssh_keys_content')
+        }
+      })
+    );
+    console.log("final "+sshKeysAppState.get('ssh_keys'));
   };
   
   const AddSSHKeyTitle = (e) => {
     setSSHKeyTitle(fromJS({
-      content: e.target.value
+      title: e.target.value
     }));
   };
   

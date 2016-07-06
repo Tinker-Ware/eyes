@@ -8,10 +8,8 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {
       type: 'SET_SSH_KEY',
-      sshKeys: fromJS(
-        [])
-      ,
       value: fromJS({
+        sshKeys: [],
         sshKey: {
           id: 1, 
           title: "title", 
@@ -32,18 +30,17 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {
       type: 'SET_SSH_KEY',
-      sshKeys: fromJS(
-        [{
-          id: 0, 
-          title: "title", 
-          content:"value",
-          enable: false
-        }])
-      ,
       value: fromJS({
+        sshKeys:
+          [{
+            id: 0,
+            title: "title",
+            content:"value",
+            enable: false
+          }],
         sshKey: {
-          id: 1, 
-          title: "title", 
+          id: 1,
+          title: "title",
           content:"value"
         }
       })
@@ -93,21 +90,20 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {
       type: 'ENABLE_SSH_KEY',
-      sshKeys: fromJS(
-        [{
-          id: 0,
-          title: "title", 
-          content:"value",
-          enable: true
-        },
-        {
-          id: 1,
-          title: "title", 
-          content:"value",
-          enable: true
-        }])
-      ,
       value: fromJS({
+        sshKeys:
+          [{
+            id: 0,
+            title: "title", 
+            content:"value",
+            enable: true
+          },
+          {
+            id: 1,
+            title: "title", 
+            content:"value",
+            enable: true
+          }],
         id: 0
       })
     };
@@ -126,21 +122,20 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {
       type: 'DELETE_SSH_KEY',
-      sshKeys: fromJS(
-        [{
-          id: 0, 
-          title: "title", 
-          content:"value",
-          enable: true
-        },
-        {
-          id: 1, 
-          title: "title", 
-          content:"value",
-          enable: true
-        }])
-      ,
       value: fromJS({
+        sshKeys:
+          [{
+            id: 0,
+            title: "title",
+            content:"value",
+            enable: true
+          },
+          {
+            id: 1,
+            title: "title",
+            content:"value",
+            enable: true
+          }],
         id: 1
       })
     };
