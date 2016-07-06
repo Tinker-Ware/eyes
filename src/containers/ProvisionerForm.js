@@ -55,7 +55,13 @@ export class ServiceForm extends Component {
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
               applicationAppState={this.props.applicationAppState}/>
-            <SSHKeys />            
+            <SSHKeys
+              deleteSSHKey={this.props.actions.deleteSSHKey}
+              enableSSHKey={this.props.actions.enableSSHKey}
+              setSSHKey={this.props.actions.setSSHKey}
+              setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
+              setSSHKeyContent={this.props.actions.setSSHKeyContent}
+              sshKeysAppState={this.props.sshKeysAppState}/>
           </div>
           <div className="large-2 columns hide-for-small-only hide-for-medium-only">
             <ServiceSummary
@@ -83,7 +89,8 @@ ServiceForm.propTypes = {
   serverProviderAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
-  repositoryAppState: PropTypes.object.isRequired
+  repositoryAppState: PropTypes.object.isRequired,
+  sshKeysAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -91,7 +98,8 @@ function mapStateToProps(state) {
     serverProviderAppState: state.serverProviderAppState,
     projectNameAppState: state.projectNameAppState,
     applicationAppState: state.applicationAppState,
-    repositoryAppState: state.repositoryAppState
+    repositoryAppState: state.repositoryAppState,
+    sshKeysAppState: state.sshKeysAppState
   };
 }
 

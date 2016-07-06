@@ -1,10 +1,23 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {Map, fromJS} from 'immutable';
 
-const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, sshKeysAppState} ) => {
+const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, setSSHKeyTitle, setSSHKeyContent, sshKeysAppState} ) => {
 
   const AddSSHKeyKeypress = (e) => {
-    //setSSHKey(e.target.value);
+    
+  };
+  
+  const AddSSHKeyTitle = (e) => {
+    setSSHKeyTitle(fromJS({
+      content: e.target.value
+    }));
+  };
+  
+  const AddSSHKeyContent = (e) => {
+    setSSHKeyContent(fromJS({
+      content: e.target.value
+    }));
   };
   
   return (
@@ -40,6 +53,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, sshKeysAppState} ) => 
                     id="ssh_key_content_value"
                     cols="50"
                     rows="5"
+                    onChange={AddSSHKeyContent}
                     placeholder="SSH Key Content"></textarea>
                 </label>
                 <div 
@@ -55,10 +69,10 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, sshKeysAppState} ) => 
                   <div className="small-9 columns">
                     <label className="error">
                       <input 
-                        type="text" 
+                        type="text"
                         id="ssh_key_content_title" 
                         maxLength="10"
-                        ref="title"
+                        onChange={AddSSHKeyTitle}
                         placeholder="Title" />
                     </label>
                     <div 
@@ -89,6 +103,8 @@ SSHKeys.propTypes = {
   deleteSSHKey: PropTypes.func.isRequired,
   enableSSHKey: PropTypes.func.isRequired,
   setSSHKey: PropTypes.func.isRequired,
+  setSSHKeyTitle: PropTypes.func.isRequired,
+  setSSHKeyContent: PropTypes.func.isRequired,
   sshKeysAppState: PropTypes.object.isRequired
 };
 
