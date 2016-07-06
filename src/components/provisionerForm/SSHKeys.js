@@ -1,7 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const SSHKeys = () => {
+const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, sshKeysAppState} ) => {
+
+  const AddSSHKeyKeypress = (e) => {
+    //setSSHKey(e.target.value);
+  };
+  
   return (
     <div
       className="row"
@@ -10,7 +15,7 @@ const SSHKeys = () => {
     <h2>
       <i className="step fi-key"></i>
        Add SSH Keys
-     </h2>
+    </h2>
     <div id="ssh_keys">
     </div>
       <div className="large-12 medium-12 small-12 columns end">
@@ -52,7 +57,8 @@ const SSHKeys = () => {
                       <input 
                         type="text" 
                         id="ssh_key_content_title" 
-                        maxLength="10" 
+                        maxLength="10"
+                        ref="title"
                         placeholder="Title" />
                     </label>
                     <div 
@@ -64,6 +70,7 @@ const SSHKeys = () => {
                   <div className="small-3 columns">
                     <a 
                       href="javascript:void(0);" 
+                      onClick={AddSSHKeyKeypress}
                       id="save_ssh_key" 
                       className="button postfix">Add SSH Key</a>
                   </div>
@@ -76,6 +83,13 @@ const SSHKeys = () => {
       </div>
     </div>
   );
+};
+
+SSHKeys.propTypes = {
+  deleteSSHKey: PropTypes.func.isRequired,
+  enableSSHKey: PropTypes.func.isRequired,
+  setSSHKey: PropTypes.func.isRequired,
+  sshKeysAppState: PropTypes.object.isRequired
 };
 
 export default SSHKeys;

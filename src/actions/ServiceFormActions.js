@@ -32,14 +32,22 @@ export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
 }
 
-export function setSSHKey() {
-  return { type: types.SET_SSH_KEY };
+export function setSSHKey(value) {
+  return { type: types.SET_SSH_KEY, value };
 }
 
-export function enableSSHKey() {
-  return { type: types.ENABLE_SSH_KEY };
+export function setSSHKeyTitle(value) {
+  return { type: types.SET_SSH_KEY_TITLE, value };
 }
 
-export function deleteSSHKey() {
-  return { type: types.DELETE_SSH_KEY };
+export function setSSHKeyContent(value) {
+  return { type: types.SET_SSH_KEY_CONTENT, value };
+}
+
+export function enableSSHKey(value) {
+  return { type: types.ENABLE_SSH_KEY, value };
+}
+
+export function deleteSSHKey(value) {
+  return { type: types.DELETE_SSH_KEY, value };
 }
