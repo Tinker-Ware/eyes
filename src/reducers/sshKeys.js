@@ -30,6 +30,10 @@ export default function sshKeys(state = initialState, action) {
           value.set('enable', !value.get('enable')) : value
       ));
     }
+    case types.SHOW_SSH_KEY:
+    {
+      return state.set('show_ssh_key', fromJS(action.value.get('show_ssh_key')));
+    }
     case types.DELETE_SSH_KEY:
     {
       return state.set('ssh_keys', action.value.get('sshKeys').filter(value => 

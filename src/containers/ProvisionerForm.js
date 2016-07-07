@@ -51,17 +51,18 @@ export class ServiceForm extends Component {
                 provisionFormOptionsApi.getProvisionFormOptions()[0].application : ''}
               applicationAppState={this.props.applicationAppState}
               setApplication={this.props.actions.setApplication}/>
-            <CreateService
-              projectNameAppState={this.props.projectNameAppState}
-              repositoryAppState={this.props.repositoryAppState}
-              applicationAppState={this.props.applicationAppState}/>
             <SSHKeys
               deleteSSHKey={this.props.actions.deleteSSHKey}
               enableSSHKey={this.props.actions.enableSSHKey}
+              showSSHKey={this.props.actions.showSSHKey}
               setSSHKey={this.props.actions.setSSHKey}
               setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
               setSSHKeyContent={this.props.actions.setSSHKeyContent}
               sshKeysAppState={this.props.sshKeysAppState}/>
+            <CreateService
+              projectNameAppState={this.props.projectNameAppState}
+              repositoryAppState={this.props.repositoryAppState}
+              applicationAppState={this.props.applicationAppState}/>
           </div>
           <div className="large-2 columns hide-for-small-only hide-for-medium-only">
             <ServiceSummary
