@@ -1,7 +1,36 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {Map, fromJS} from 'immutable';
 
-const SSHKeys = () => {
+const SSHKeys = ( {deleteSSHKey, enableSSHKey, setSSHKey, setSSHKeyTitle, setSSHKeyContent, sshKeysAppState} ) => {
+
+  const AddSSHKeyKeypress = (e) => {
+    console.log("inicial "+sshKeysAppState.get('ssh_keys'));
+    setSSHKey(
+      fromJS({
+        sshKeys: [],
+        sshKey: {
+          id: 1, 
+          title: sshKeysAppState.get('ssh_keys_title'),
+          content: sshKeysAppState.get('ssh_keys_content')
+        }
+      })
+    );
+    console.log("final "+sshKeysAppState.get('ssh_keys'));
+  };
+  
+  const AddSSHKeyTitle = (e) => {
+    setSSHKeyTitle(fromJS({
+      title: e.target.value
+    }));
+  };
+  
+  const AddSSHKeyContent = (e) => {
+    setSSHKeyContent(fromJS({
+      content: e.target.value
+    }));
+  };
+  
   return (
     <div
       className="row"
@@ -10,7 +39,7 @@ const SSHKeys = () => {
     <h2>
       <i className="step fi-key"></i>
        Add SSH Keys
-     </h2>
+    </h2>
     <div id="ssh_keys">
     </div>
       <div className="large-12 medium-12 small-12 columns end">
@@ -35,6 +64,7 @@ const SSHKeys = () => {
                     id="ssh_key_content_value"
                     cols="50"
                     rows="5"
+                    onChange={AddSSHKeyContent}
                     placeholder="SSH Key Content"></textarea>
                 </label>
                 <div 
@@ -50,9 +80,10 @@ const SSHKeys = () => {
                   <div className="small-9 columns">
                     <label className="error">
                       <input 
-                        type="text" 
+                        type="text"
                         id="ssh_key_content_title" 
-                        maxLength="10" 
+                        maxLength="10"
+                        onChange={AddSSHKeyTitle}
                         placeholder="Title" />
                     </label>
                     <div 
@@ -64,6 +95,7 @@ const SSHKeys = () => {
                   <div className="small-3 columns">
                     <a 
                       href="javascript:void(0);" 
+                      onClick={AddSSHKeyKeypress}
                       id="save_ssh_key" 
                       className="button postfix">Add SSH Key</a>
                   </div>
@@ -76,6 +108,15 @@ const SSHKeys = () => {
       </div>
     </div>
   );
+};
+
+SSHKeys.propTypes = {
+  deleteSSHKey: PropTypes.func.isRequired,
+  enableSSHKey: PropTypes.func.isRequired,
+  setSSHKey: PropTypes.func.isRequired,
+  setSSHKeyTitle: PropTypes.func.isRequired,
+  setSSHKeyContent: PropTypes.func.isRequired,
+  sshKeysAppState: PropTypes.object.isRequired
 };
 
 export default SSHKeys;
