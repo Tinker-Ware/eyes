@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 const SSHKeysItem = ( props ) => {
   return (
     <div className={props.end ? 'large-3 medium-6 small-12 columns end' : 'large-3 medium-6 small-12 columns columns'}>
-      <ul className={props.isActive ? 'selection-table active' : 'selection-table'} key={props.key}>
+      <ul className={props.isActive ? 'selection-table active' : 'selection-table'} key={props.identifier}>
         <li
           className="bullet-item"
           onClick={props.handleClick}>
@@ -17,6 +17,7 @@ const SSHKeysItem = ( props ) => {
 SSHKeysItem.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool,
+  identifier: PropTypes.number,
   value: PropTypes.string.isRequired,
   end: PropTypes.string
 };

@@ -8,7 +8,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
     
   };
   
-  const AddSSHKeyKeypress = (e) => {
+  const StoreSSHKeyKeypress = (e) => {
     if(sshKeysAppState.get('ssh_keys_title') && sshKeysAppState.get('ssh_keys_content')){
       setSSHKey(
         fromJS({
@@ -29,7 +29,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
     }
   };
   
-  const ShowSSHKeyKeypress = (e) => {
+  const ShowSSHKeyButtonKeypress = (e) => {
     showSSHKey(
       fromJS({
         show_ssh_key: !sshKeysAppState.get('show_ssh_key')
@@ -37,44 +37,45 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
     );
   };
   
-  const AddSSHKeyTitle = (e) => {
+  const SSHKeyTitleKeypress = (e) => {
     setSSHKeyTitle(fromJS({
       title: e.target.value
     }));
   };
   
-  const AddSSHKeyContent = (e) => {
+  const SSHKeyContentKeypress = (e) => {
     setSSHKeyContent(fromJS({
       content: e.target.value
     }));
   };
   
-  const AddedSSHKeys = 
+  const PrintSSHKeys = 
     (sshKeysAppState.get('ssh_keys')) ?
       sshKeysAppState.get('ssh_keys').map((value, index) => 
         <SSHKeysItem
           handleClick={handleSSHKeyClick}
+          identifier={index}
           key={index}
           value={value.get('title')}
           isActive={value.get('enable')?true:false}
           end={(index == sshKeysAppState.get('ssh_keys').size - 1) ? "end" : ""}
         />) : "";
   
-  const AddSHHKey = 
+  const AddSHHKeyButton = 
     !(sshKeysAppState.get('show_ssh_key')) ?
       <a
         href="javascript:void(0);"
-        onClick={ShowSSHKeyKeypress}
+        onClick={ShowSSHKeyButtonKeypress}
         id="show_ssh_key">+ Add SSH Key</a> : "";
       
-  const ShowSSHKey =
+  const SSHKeyForm =
     (sshKeysAppState.get('show_ssh_key')) ?
       <div className="ssh_key_content">
         <div className="large-offset-9 large-3 medium-9">
           <p className="right">
             <a
               href="javascript:void(0);"
-              onClick={ShowSSHKeyKeypress}
+              onClick={ShowSSHKeyButtonKeypress}
               id="hide_ssh_key">
               Close</a>
           </p>
@@ -88,7 +89,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                   cols="50"
                   rows="5"
                   value={sshKeysAppState.get('ssh_keys_content')?sshKeysAppState.get('ssh_keys_content'):''}
-                  onChange={AddSSHKeyContent}
+                  onChange={SSHKeyContentKeypress}
                   placeholder="SSH Key Content"></textarea>
               </label>
               <div 
@@ -108,7 +109,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                       id="ssh_key_content_title" 
                       maxLength="10"
                       value={sshKeysAppState.get('ssh_keys_title')?sshKeysAppState.get('ssh_keys_title'):''}
-                      onChange={AddSSHKeyTitle}
+                      onChange={SSHKeyTitleKeypress}
                       placeholder="Title" />
                   </label>
                   <div 
@@ -120,7 +121,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                 <div className="small-3 columns">
                   <a 
                     href="javascript:void(0);" 
-                    onClick={AddSSHKeyKeypress}
+                    onClick={StoreSSHKeyKeypress}
                     id="save_ssh_key" 
                     className="button postfix">Add SSH Key</a>
                 </div>
@@ -140,10 +141,10 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
         <i className="step fi-key"></i>
          Add SSH Keys
       </h2>
-    {AddedSSHKeys}
+    {PrintSSHKeys}
     <div className="large-12 medium-12 small-12 columns end">
-      <p>{AddSHHKey}</p>
-      {ShowSSHKey}
+      <p>{AddSHHKeyButton}</p>
+      {SSHKeyForm}
     </div>
     </div>
   );
