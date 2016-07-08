@@ -95,7 +95,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
               <div 
                 className="hide" 
                 id="ssh_key_content_value_error">
-                <small className="error hide">SSH Key Content can't be blank</small>
+                <small className="error hide">SSH Key Content can not be blank</small>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                   <div 
                     className="hide" 
                     id="ssh_key_content_title_error">
-                    <small className="error">SSH Key Title can't be blank</small>
+                    <small className="error">SSH Key Title can not be blank</small>
                   </div>
                 </div>
                 <div className="small-3 columns">
