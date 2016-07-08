@@ -71,6 +71,21 @@ describe('reducer', () => {
     }));
   });
   
+  it('handles SHOW_SSH_KEYS_TITLE', () => {
+    const initialState = Map();
+    const action = {
+      type: 'SHOW_SSH_KEY',
+      value: fromJS({
+        show_ssh_key: true
+      })
+    };
+    const nextState = sshKeys(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      show_ssh_key: true
+    }));
+  });
+  
   it('handles SET_SSH_KEYS_CONTENT', () => {
     const initialState = Map();
     const action = {

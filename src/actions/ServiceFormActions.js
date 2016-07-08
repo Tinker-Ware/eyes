@@ -44,6 +44,10 @@ export function setSSHKeyContent(value) {
   return { type: types.SET_SSH_KEY_CONTENT, value };
 }
 
+export function showSSHKey(value) {
+  return { type: types.SHOW_SSH_KEY, value };
+}
+
 export function enableSSHKey(value) {
   return { type: types.ENABLE_SSH_KEY, value };
 }
