@@ -1,9 +1,13 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {Map, fromJS} from 'immutable';
+import SSHKeysItem from './SSHKeysItem';
 
 const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyTitle, setSSHKeyContent, sshKeysAppState} ) => {
-
+  const handleSSHKeyClick = (e) => {
+    
+  };
+  
   const AddSSHKeyKeypress = (e) => {
     if(sshKeysAppState.get('ssh_keys_title') && sshKeysAppState.get('ssh_keys_content')){
       setSSHKey(
@@ -48,12 +52,13 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   const AddedSSHKeys = 
     (sshKeysAppState.get('ssh_keys')) ?
       sshKeysAppState.get('ssh_keys').map((value, index) => 
-        <div className="large-3 medium-6 small-12 columns" key={index}>
-          <ul className="selection-table">
-            <li className="bullet-item">{value.get('title')}</li>
-          </ul>
-        </div>
-      ) : "";
+        <SSHKeysItem
+          handleClick={handleSSHKeyClick}
+          key={index}
+          value={value.get('title')}
+          isActive={value.get('enable')?true:false}
+          end={(index == sshKeysAppState.get('ssh_keys').size - 1) ? "end" : ""}
+        />) : "";
   
   const AddSHHKey = 
     !(sshKeysAppState.get('show_ssh_key')) ?
@@ -82,7 +87,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                   id="ssh_key_content_value"
                   cols="50"
                   rows="5"
-                  value={sshKeysAppState.get('ssh_keys_content')}
+                  value={sshKeysAppState.get('ssh_keys_content')?sshKeysAppState.get('ssh_keys_content'):''}
                   onChange={AddSSHKeyContent}
                   placeholder="SSH Key Content"></textarea>
               </label>
@@ -102,7 +107,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                       type="text"
                       id="ssh_key_content_title" 
                       maxLength="10"
-                      value={sshKeysAppState.get('ssh_keys_title')}
+                      value={sshKeysAppState.get('ssh_keys_title')?sshKeysAppState.get('ssh_keys_title'):''}
                       onChange={AddSSHKeyTitle}
                       placeholder="Title" />
                   </label>
