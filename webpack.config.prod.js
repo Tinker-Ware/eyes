@@ -4,11 +4,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production'),
-  __DEV__: false
-};
-
 export default {
   debug: true,
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
@@ -28,7 +23,10 @@ export default {
     new webpack.optimize.OccurenceOrderPlugin(),
 
     // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
-    new webpack.DefinePlugin(GLOBALS),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      __DEV__: false
+    }),
 
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
