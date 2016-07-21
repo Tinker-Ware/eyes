@@ -2,7 +2,11 @@
   "name": "provisioner-website",
   "version": "0.1.0",
   "description": "Tinkerware provisioner form for create a new service",
+  "engines": {
+    "npm": ">=3"
+  },
   "scripts": {
+    "preinstall": "node tools/nodeVersionCheck.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist",
     "start": "npm-run-all --parallel test:watch open:src lint:watch",
