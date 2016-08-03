@@ -26,8 +26,17 @@ browserSync({
       historyApiFallback(),
       webpackDevMiddleware(bundler, {
         publicPath: config.output.publicPath, // Dev middleware can't access config, so we provide publicPath
-        stats: { colors: true }, // pretty colored output
-        noInfo: true // Set to false to display a list of each file that is being bundled.
+        noInfo: false // Suppress noisy webpack output so only errors are displayed to the console
+        quiet: true,
+        stats: {
+          assets: false,
+          colors: true,
+          version: false,
+          hash: false,
+          timings: false,
+          chunks: false,
+          chunkModules: false
+        },
         // for other settings see
         // http://webpack.github.io/docs/webpack-dev-middleware.html
       }),
