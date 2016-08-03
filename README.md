@@ -4,7 +4,6 @@
 [![Build status: Windows](https://ci.appveyor.com/api/projects/status/llcqixmnfsax5w4l?svg=true)](https://ci.appveyor.com/project/iLeonelPerea/provisioning-webpage/branch/master)
 [![Dependency Status](https://david-dm.org/Tinker-Ware/provisioning-webpage.svg?style=flat-square)](https://david-dm.org/Tinker-Ware/provisioning-webpage)
 [![Coverage Status](https://coveralls.io/repos/github/Tinker-Ware/provisioning-webpage/badge.svg?branch=master)](https://coveralls.io/github/Tinker-Ware/provisioning-webpage?branch=master)
-[![Code Climate](https://codeclimate.com/github/Tinker-Ware/provisioning-webpage/badges/gpa.svg)](https://codeclimate.com/github/Tinker-Ware/provisioning-webpage)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
