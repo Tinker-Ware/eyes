@@ -3,6 +3,7 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
 export default {
   debug: true,
@@ -70,8 +71,9 @@ export default {
       {
         test: /(\.css|\.scss)$/,
         include: path.join(__dirname, 'src'),
-        loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
+        loader: ExtractTextPlugin.extract('css?sourceMap!postcss!sass?sourceMap')
       }
     ]
-  }
+  },
+  postcss: ()=> [autoprefixer]
 };
