@@ -2,12 +2,19 @@
   "presets": [
     "es2015",
     "react",
-    "stage-0"
+    "stage-0",
+    "stage-1"
   ],
   "env": {
     "development": {
       "presets": [
         "react-hmre"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-remove-prop-types"
       ]
     }
   }
