@@ -23,7 +23,7 @@ const ServiceSummary = ( {projectNameAppState, repositoryAppState, applicationAp
       <p id="label-aplications">
         {(applicationAppState.get('application_name')) ? applicationAppState.get('application_name'):'none'}
       </p>
-      <CreateService 
+      <CreateService
         projectNameAppState={projectNameAppState}
         repositoryAppState={repositoryAppState}
         applicationAppState={applicationAppState}/>

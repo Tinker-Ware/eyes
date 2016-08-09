@@ -40,6 +40,7 @@ export class ServiceForm extends Component {
                       setRepository={this.props.actions.setRepository}
                       setIntegracion={this.props.actions.setIntegracion}
                       requestRepositoryAccess={this.props.actions.requestRepositoryAccess}
+                      requestUserRepositories={this.props.actions.requestUserRepositories}
                       setShowRepositories={this.props.actions.setShowRepositories}/> : ''
                   ):''}
               <DigitalOceanService

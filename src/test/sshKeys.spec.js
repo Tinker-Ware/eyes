@@ -1,6 +1,5 @@
-import {Map, fromJS} from 'immutable';
-import {expect} from 'chai';
-
+import { Map, fromJS } from 'immutable';
+import { expect } from 'chai';
 import sshKeys from '../reducers/sshKeys';
 
 describe('reducer', () => {
@@ -39,7 +38,7 @@ describe('reducer', () => {
             enable: false
           }],
         sshKey: {
-          id: 1,
+          id: 0,
           title: "title",
           content:"value"
         }

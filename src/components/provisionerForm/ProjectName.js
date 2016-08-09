@@ -1,10 +1,13 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import { fromJS } from 'immutable';
 
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {
 
   const ProjectNameKeypress = (e) => {
-    setProjectName(e.target.value);
+    setProjectName(fromJS({
+      name: e.target.value
+    }));
   };
     
   return (

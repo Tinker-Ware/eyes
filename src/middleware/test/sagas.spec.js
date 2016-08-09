@@ -3,14 +3,35 @@ import "babel-polyfill";
 import {expect} from 'chai';
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects'; 
+import { fromJS } from 'immutable';
 import * as actions from '../actions/MiddlewareActions';
-import { doRequest, getRepositoryAccess, getRepositories } from '../sagas';
+import { doRequest, getRepositoryAccess, getUserRepositories, doRequestGetRepositoryAccess, doRequestGetRepositories } from '../sagas';
 
 describe('sagas middleware', () => {
   it('handles GET_REPOSITORY_ACCESS', () => {
     const generator = getRepositoryAccess();
+    const userAccess = {
+      user: {
+        "id": 1,
+        "username": "tinkerware",
+        "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"
+      }
+    };
+    
+    expect(generator.next().value).to.deep.equal(
+      call(doRequestGetRepositoryAccess)
+    );
+    
+    expect(generator.next(userAccess).value).to.deep.equal(
+      put(actions.receiveRepository(fromJS({
+          integration: userAccess.user
+        })))
+    );
+  });
+  
+  it('handles GET_USER_REPOSITORIES', () => {
     const userAccessToken = {
-      "user": {
+      user: {
         "id": 1,
         "username": "tinkerware",
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"
@@ -52,28 +73,21 @@ describe('sagas middleware', () => {
       ]
     };
     
-    expect(generator.next().value).to.deep.equal(
-      call(doRequest,"http://localhost:3100/api/v1/repository/gh_callback",
-      {
-        method: 'GET',
-        mode: 'cors'
+    const generator = getUserRepositories({
+      'value': fromJS({
+        'userName': userAccessToken.user.username,
+        'accessToken': userAccessToken.user.access_token
       })
-    );
-    
-    expect(generator.next(userAccessToken).value).to.deep.equal(
-      put(actions.receiveRepository("77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"))
-    );
+    });
     
     expect(generator.next().value).to.deep.equal(
-      call(getRepositories)
+      call(doRequestGetRepositories, userAccessToken.user.username, userAccessToken.user.access_token)
     );
-    
+
     expect(generator.next(userRepos).value).to.deep.equal(
-      put(actions.receiveRepositories(userRepos))
-    );
-    
-    expect(generator.next().value).to.deep.equal(
-      put(actions.showRepositories(true))
+      put(actions.receiveRepositories(fromJS({
+        repositories: userRepos.repositories
+      })))
     );
   });
 });

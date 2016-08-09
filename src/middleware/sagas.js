@@ -1,6 +1,7 @@
-import 'whatwg-fetch';
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
+import { fromJS } from 'immutable';
+import 'whatwg-fetch';
 import * as actions from './actions/MiddlewareActions';
 import * as types from '../constants/ActionTypes';
 
@@ -17,31 +18,45 @@ export function doRequest(url, options){
 }
 
 export function* getRepositoryAccess() {
-  const userAccessToken = yield call(
+  const userAccess = yield call(doRequestGetRepositoryAccess);
+  yield put(actions.receiveRepository(fromJS({
+      integration: userAccess.user
+    }))
+  );
+}
+
+export function* getUserRepositories(user) {
+  const userRepos = yield call(doRequestGetRepositories, user.value.get('userName'), user.value.get('accessToken'));
+  yield put(actions.receiveRepositories(fromJS({
+    repositories: userRepos.repositories
+  })));
+}
+
+export function* doRequestGetRepositoryAccess() {
+  return yield call(
     doRequest, 'http://localhost:3100/api/v1/repository/gh_callback',
     {
       method: 'GET',
       mode: 'cors'
     });
-  yield put(actions.receiveRepository(userAccessToken.user.access_token));
-  const userRepos = yield call(getRepositories);
-  yield put(actions.receiveRepositories(userRepos));
-  yield put(actions.showRepositories(true));
 }
 
-export function* getRepositories() {
+export function* doRequestGetRepositories(username, accessToken) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/repository/github/tinkerware/repos',
+    doRequest, 'http://localhost:3100/api/v1/repository/github/'+ username +'/repos',
     {
       method: 'GET',
       headers: {
         'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
-        'provider-token': '77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3'
+        'provider-token': accessToken
       },
       mode: 'cors'
     });
 }
 
 export default function* root() {
-  yield* takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess);
+  yield[
+    takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
+    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories)
+  ];
 }

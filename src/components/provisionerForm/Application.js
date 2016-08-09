@@ -1,13 +1,18 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { fromJS } from 'immutable';
 import ApplicationItem from './ApplicationItem';
 
 const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
   const handleApplicationClick = (e) => {
     if( e.target.nodeName.toLowerCase()=="span" || e.target.nodeName.toLowerCase()=="img" )
-      setApplication(e.target.parentNode.id);
+      setApplication(fromJS({
+        application: e.target.parentNode.id
+      }));
     else
-      setApplication(e.target.id);
+      setApplication(fromJS({
+        application: e.target.id
+      }));
   };
   return (
     <div className="row">
@@ -17,12 +22,12 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
       </h2>
       {applicationsOptions.map((value, index) => 
         <ApplicationItem
-          applicationAppState={applicationAppState}
+          activeApplication={applicationAppState.get('application_name')}
           key={value.identifier}
           identifier={value.identifier}
           handleClick={handleApplicationClick}
           name={value.name}
-          end={(index == applicationsOptions.length - 1) ? "end" : ""} />)}
+          end={(index == applicationsOptions.length - 1) ? true : false} />)}
     </div>
   );
 };
