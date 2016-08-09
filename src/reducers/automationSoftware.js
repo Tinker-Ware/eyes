@@ -1,7 +1,9 @@
 import * as types from '../constants/ActionTypes';
-import {Map} from 'immutable';
+import { Map } from 'immutable';
 
-const initialState = Map();
+const initialState = Map({
+  automation_software: ""
+});
 
 export default function automationSoftware(state = initialState, action) {
   switch (action.type) {

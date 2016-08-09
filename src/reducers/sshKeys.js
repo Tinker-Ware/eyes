@@ -1,7 +1,12 @@
 import * as types from '../constants/ActionTypes';
-import {Map, fromJS} from 'immutable';
+import { Map, fromJS } from 'immutable';
 
-const initialState = Map({ssh_keys:""});
+const initialState = Map({
+  show_ssh_key: false,
+  ssh_keys_content: "",
+  ssh_keys_title: "",
+  ssh_keys: ""
+});
 
 function getId(sshkey) {
   return sshkey.reduce((prev, current) => {
@@ -13,15 +18,19 @@ export default function sshKeys(state = initialState, action) {
   switch (action.type) {
     case types.SET_SSH_KEY_TITLE:
     {
-      return state.set('ssh_keys_title', fromJS(action.value.get('title')));
+      return state.set('ssh_keys_title', action.value.get('title'));
     }
     case types.SET_SSH_KEY_CONTENT:
     {
-      return state.set('ssh_keys_content', fromJS(action.value.get('content')));
+      return state.set('ssh_keys_content', action.value.get('content'));
     }
     case types.SET_SSH_KEY:
     {
-      return state.set('ssh_keys', action.value.get('sshKeys').toSet().union(fromJS([{id: getId(action.value.get('sshKeys').toJS()), title: action.value.get('sshKey').get('title'), content:action.value.get('sshKey').get('content'), enable: true}]).toSet()).toList());
+      return state.set('ssh_keys', 
+        action.value.get('sshKeys').toSet().union(fromJS(
+          [{id: getId(action.value.get('sshKeys').toJS()), title: action.value.get('sshKey').get('title'), content:action.value.get('sshKey').get('content'), enable: true}]
+        ).toSet()).toList()
+      );
     }
     case types.ENABLE_SSH_KEY:
     {
@@ -32,7 +41,7 @@ export default function sshKeys(state = initialState, action) {
     }
     case types.SHOW_SSH_KEY:
     {
-      return state.set('show_ssh_key', fromJS(action.value.get('show_ssh_key')));
+      return state.set('show_ssh_key', action.value.get('show_ssh_key'));
     }
     case types.DELETE_SSH_KEY:
     {

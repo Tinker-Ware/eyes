@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 const CreateService = ( {projectNameAppState, repositoryAppState, applicationAppState} ) => {
   const btnCreateService = 
-    repositoryAppState.get('github_user_name') && 
-    repositoryAppState.get('github_repository_name') &&
+    repositoryAppState.get('integration') && 
+    repositoryAppState.get('repository') &&
     projectNameAppState.get('project_name') && 
     applicationAppState.get('application_name') ? 
       <a

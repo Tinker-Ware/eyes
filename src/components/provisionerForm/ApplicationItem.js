@@ -1,15 +1,15 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 
-const ApplicationItem = ( props ) => {
+const ApplicationItem = ( { activeApplication, identifier, handleClick, name, end } ) => {
   return (
-    <div className={props.end ? 'large-4 medium-6 small-12 columns end' : 'large-4 medium-6 small-12 columns'}>
-      <ul className={props.applicationAppState.get('application_name') == props.identifier ? 'selection-table active' : 'selection-table'}>
+    <div className={end ? 'large-4 medium-6 small-12 columns end' : 'large-4 medium-6 small-12 columns'}>
+      <ul className={activeApplication == identifier ? 'selection-table active' : 'selection-table'}>
         <li
           className="bullet-item"
-          id={props.identifier}
-          onClick={props.handleClick}>
-          <img className={props.identifier} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
-          <span>{props.name}</span>
+          id={identifier}
+          onClick={handleClick}>
+          <img className={identifier} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+          <span>{name}</span>
         </li>
       </ul>
     </div>
@@ -17,11 +17,11 @@ const ApplicationItem = ( props ) => {
 };
 
 ApplicationItem.propTypes = {
-  applicationAppState: PropTypes.object.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  activeApplication: PropTypes.string.isRequired,
   identifier: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  end: PropTypes.string
+  end: PropTypes.bool.isRequired
 };
 
 export default ApplicationItem;

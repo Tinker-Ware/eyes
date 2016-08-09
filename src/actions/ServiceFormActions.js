@@ -21,7 +21,7 @@ export function setRepository(value) {
 }
 
 export function setIntegracion(value){
-  return { type: types.SET_INTEGRACION, value };
+  return { type: types.SET_INTEGRATION, value };
 }
 
 export function setShowRepositories(value){
@@ -30,6 +30,10 @@ export function setShowRepositories(value){
 
 export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
+}
+
+export function requestUserRepositories(value) {
+  return { type: types.REQUEST_GITHUB_REPOSITORIES, value };
 }
 
 export function setSSHKey(value) {
