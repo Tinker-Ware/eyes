@@ -5,14 +5,14 @@ import 'whatwg-fetch';
 import * as actions from './actions/MiddlewareActions';
 import * as types from '../constants/ActionTypes';
 
-export function doRequest(url, options){
+export const doRequest = (url, options) => {
   return fetch(url, options)
     .then(function(response) {
       if (response.status >= 200 && response.status < 300) {  
         return Promise.resolve(response.json());
       } else {  
         return Promise.reject(new Error(response.statusText));
-      } 
+      }
     })
     .catch(error => error);  
 }

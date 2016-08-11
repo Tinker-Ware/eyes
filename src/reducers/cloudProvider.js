@@ -9,12 +9,6 @@ const initialState = Map({
   cloud_provider_ssh_keys: ""
 });
 
-function getId(sshkey) {
-  return sshkey.reduce((prev, current) => {
-    return Math.max(current.id, prev);
-  }, -1) + 1;
-}
-
 export default function cloudProvider(state = initialState, action) {
   switch (action.type) {
     case types.CLEAR_CLOUD_PROVIDER_SSH_KEYS:

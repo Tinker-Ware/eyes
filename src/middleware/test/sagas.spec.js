@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import "babel-polyfill";
 import {expect} from 'chai';
 import { takeLatest } from 'redux-saga';
