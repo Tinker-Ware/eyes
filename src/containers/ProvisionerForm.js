@@ -58,6 +58,7 @@ export class ServiceForm extends Component {
               deleteSSHKey={this.props.actions.deleteSSHKey}
               enableSSHKey={this.props.actions.enableSSHKey}
               showSSHKey={this.props.actions.showSSHKey}
+              requestPostCloudProviderSSHKey={this.props.actions.requestPostCloudProviderSSHKey}
               setSSHKey={this.props.actions.setSSHKey}
               setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
               setSSHKeyContent={this.props.actions.setSSHKeyContent}

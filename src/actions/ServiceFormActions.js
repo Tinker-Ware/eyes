@@ -36,6 +36,10 @@ export function requestCloudProviderAccess() {
   return { type: types.REQUEST_CLOUD_PROVIDER_ACCESS };
 }
 
+export function requestPostCloudProviderSSHKey(value) {
+  return { type: types.REQUEST_POST_CLOUD_PROVIDER_KEY, value };
+}
+
 export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
 }

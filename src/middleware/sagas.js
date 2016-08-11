@@ -15,7 +15,7 @@ export const doRequest = (url, options) => {
       }
     })
     .catch(error => error);  
-}
+};
 
 export function* doRequestGetCloudProviderAccess() {
   return yield call(
@@ -61,6 +61,24 @@ export function* doRequestGetRepositoryAccess() {
     });
 }
 
+export function* doRequestPostCloudProviderKey(accessToken, key) {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/cloud/keys',
+    {
+      method: 'POST',
+      headers: {
+        'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
+        'provider-token': accessToken,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'key': key
+      }),
+      mode: 'cors'
+    });
+}
+
 export function* getCloudProviderAccess() {
   const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess);
   yield put(actions.setCloudProviderAccess(fromJS({
@@ -96,11 +114,20 @@ export function* getUserRepositories(userAccess) {
   })));
 }
 
+export function* postCloudProviderKey(cloudProviderKeys) {
+  const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('sshKey'));
+  yield put(actions.setCloudProviderSshKeys(fromJS({
+    sshKeys: cloudProviderKeys.value.get('sshKeys').toJS(),
+    sshKey: [cloudProviderKey.key]
+  })));
+}
+
 export default function* root() {
   yield[
     takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
     takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
-    takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys)
+    takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
+    takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey)
   ];
 }
