@@ -17,26 +17,24 @@ export function doRequest(url, options){
     .catch(error => error);  
 }
 
-export function* getRepositoryAccess() {
-  const userAccess = yield call(doRequestGetRepositoryAccess);
-  yield put(actions.receiveRepository(fromJS({
-      integration: userAccess.user
-    }))
-  );
-}
-
-export function* getUserRepositories(user) {
-  const userRepos = yield call(doRequestGetRepositories, user.value.get('userName'), user.value.get('accessToken'));
-  yield put(actions.receiveRepositories(fromJS({
-    repositories: userRepos.repositories
-  })));
-}
-
-export function* doRequestGetRepositoryAccess() {
+export function* doRequestGetCloudProviderAccess() {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/repository/gh_callback',
+    doRequest, 'http://localhost:3100/api/v1/cloud/do_callback',
     {
       method: 'GET',
+      mode: 'cors'
+    });
+}
+
+export function* doRequestGetCloudProviderKeys(accessToken) {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/cloud/keys',
+    {
+      method: 'GET',
+      headers: {
+        'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
+        'provider-token': accessToken
+      },
       mode: 'cors'
     });
 }
@@ -54,9 +52,55 @@ export function* doRequestGetRepositories(username, accessToken) {
     });
 }
 
+export function* doRequestGetRepositoryAccess() {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/repository/gh_callback',
+    {
+      method: 'GET',
+      mode: 'cors'
+    });
+}
+
+export function* getCloudProviderAccess() {
+  const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess);
+  yield put(actions.setCloudProviderAccess(fromJS({
+      cloud_provider: cloudProviderAccess.cloud_provider
+    }))
+  );
+  yield put(actions.requestCloudProviderSSHKeys(fromJS({
+      'access_token': cloudProviderAccess.cloud_provider.access_token
+    }
+  )));
+}
+
+export function* getCloudProviderKeys(userAccess) {
+  const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('access_token'));
+  yield put(actions.setCloudProviderSshKeys(fromJS({
+    sshKeys: [],
+    sshKey: cloudProviderKeys.keys
+  })));
+}
+
+export function* getRepositoryAccess() {
+  const userAccess = yield call(doRequestGetRepositoryAccess);
+  yield put(actions.receiveRepository(fromJS({
+      integration: userAccess.user
+    }))
+  );
+}
+
+export function* getUserRepositories(userAccess) {
+  const userRepos = yield call(doRequestGetRepositories, userAccess.value.get('userName'), userAccess.value.get('accessToken'));
+  yield put(actions.receiveRepositories(fromJS({
+    repositories: userRepos.repositories
+  })));
+}
+
 export default function* root() {
   yield[
     takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
-    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories)
+    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
+    takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
+    takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys)
   ];
 }

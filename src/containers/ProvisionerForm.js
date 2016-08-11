@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ServiceFormActions';
 import Application from '../components/provisionerForm/Application';
 import CreateService from '../components/provisionerForm/CreateService';
-import DigitalOceanService from '../components/provisionerForm/DigitalOceanService';
+import CloudProvider from '../components/provisionerForm/CloudProvider';
 import GithubService from '../components/provisionerForm/GithubService';
 import Menu from '../components/provisionerForm/Menu';
 import ProjectName from '../components/provisionerForm/ProjectName';
@@ -43,9 +43,11 @@ export class ServiceForm extends Component {
                       requestUserRepositories={this.props.actions.requestUserRepositories}
                       setShowRepositories={this.props.actions.setShowRepositories}/> : ''
                   ):''}
-              <DigitalOceanService
-                serverProviderAppState={this.props.serverProviderAppState}
-                setServerProvider={this.props.actions.setServerProvider} />
+              <CloudProvider
+                clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
+                cloudProviderAppState={this.props.cloudProviderAppState}
+                requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
+                setCloudProvider={this.props.actions.setCloudProvider} />
             </div>
             <Application
               applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 
@@ -59,7 +61,7 @@ export class ServiceForm extends Component {
               setSSHKey={this.props.actions.setSSHKey}
               setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
               setSSHKeyContent={this.props.actions.setSSHKeyContent}
-              sshKeysAppState={this.props.sshKeysAppState}/>
+              cloudProviderAppState={this.props.cloudProviderAppState}/>
             <CreateService
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
@@ -88,20 +90,18 @@ export class ServiceForm extends Component {
 
 ServiceForm.propTypes = {
   actions: PropTypes.object.isRequired,
-  serverProviderAppState: PropTypes.object.isRequired,
+  cloudProviderAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
-  repositoryAppState: PropTypes.object.isRequired,
-  sshKeysAppState: PropTypes.object.isRequired
+  repositoryAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    serverProviderAppState: state.serverProviderAppState,
+    cloudProviderAppState: state.cloudProviderAppState,
     projectNameAppState: state.projectNameAppState,
     applicationAppState: state.applicationAppState,
-    repositoryAppState: state.repositoryAppState,
-    sshKeysAppState: state.sshKeysAppState
+    repositoryAppState: state.repositoryAppState
   };
 }
 
