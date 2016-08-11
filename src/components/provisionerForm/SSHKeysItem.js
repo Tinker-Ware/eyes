@@ -16,11 +16,11 @@ const SSHKeysItem = ( {end, isActive, id, handleClick, value} ) => {
 
 SSHKeysItem.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isActive: PropTypes.bool,
-  identifier: PropTypes.number,
-  id: PropTypes.number,
+  isActive: PropTypes.bool.isRequired,
+  identifier: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
-  end: PropTypes.string
+  end: PropTypes.string.isRequired
 };
 
 export default SSHKeysItem;
