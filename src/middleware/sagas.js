@@ -117,8 +117,8 @@ export function* getUserRepositories(userAccess) {
 export function* postCloudProviderKey(cloudProviderKeys) {
   const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('sshKey'));
   yield put(actions.setCloudProviderSshKeys(fromJS({
-    sshKeys: cloudProviderKeys.value.get('sshKeys').toJS(),
-    sshKey: [cloudProviderKey.key]
+    'sshKeys': cloudProviderKeys.value.get('sshKeys'),
+    'sshKey': [cloudProviderKey.key]
   })));
 }
 

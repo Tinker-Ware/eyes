@@ -78,7 +78,7 @@ describe('sagas middleware', () => {
         }
       }
     };
-    const newCloudProviderKey = {
+    const cloudProviderKey = {
       "key": {
         "id": 2,
         "name": "My key",
@@ -87,41 +87,38 @@ describe('sagas middleware', () => {
         "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
       }
     };
-    const CloudProviderKeys = fromJS({
-      "sshKeys": [{
-        "id": 1,
-        "name": "My little key",
-        "provider": "digital_ocean",
-        "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
-        "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
-      }]
-    });
+    
+    const cloudProviderKeys = {
+        "sshKeys": [
+          {
+            "id": 1,
+            "name": "My little key",
+            "provider": "digital_ocean",
+            "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
+          }
+        ]
+      };
     
     const generator = postCloudProviderKey({
       'value': fromJS({
         'access_token': userAccess.cloud_provider.access_token,
-        'sshKey': newCloudProviderKey.key
+        'sshKeys': cloudProviderKeys.sshKeys,
+        'sshKey': cloudProviderKey.key
       })
     });
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestPostCloudProviderKey, fromJS(userAccess.cloud_provider.access_token), fromJS(newCloudProviderKey.key))
+      call(doRequestPostCloudProviderKey, fromJS(userAccess.cloud_provider.access_token), fromJS(cloudProviderKey.key))
     );
     
-    expect(generator.next(CloudProviderKeys.get('sshKeys')).value).to.deep.equal(
+    expect(generator.next(cloudProviderKey).value).to.deep.equal(
       put(actions.setCloudProviderSshKeys(fromJS(
-        // sshKeys: CloudProviderKeys.keys,
-        // sshKey: newCloudProviderKey.key
-      )))
+      {
+        'sshKeys': cloudProviderKeys.sshKeys,
+        'sshKey': [cloudProviderKey.key]
+      })))
     );
-    
-    // export function* postCloudProviderKey(cloudProviderKeys) {
-    //   const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('sshKey'));
-    //   yield put(actions.setCloudProviderSshKeys(fromJS({
-    //     sshKeys: cloudProviderKeys.value.get('sshKeys').toJS(),
-    //     sshKey: [cloudProviderKey.key]
-    //   })));
-    // }
   });
   
   it('handles SET_USER_REPOSITORIES', () => {
