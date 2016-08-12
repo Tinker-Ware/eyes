@@ -13,3 +13,24 @@ export function receiveRepositories(repositories){
     value: repositories
   };
 }
+
+export function setCloudProviderAccess(cloudProviderAccess){
+  return{
+    type: types.SET_CLOUD_PROVIDER,
+    value: cloudProviderAccess
+  };
+}
+
+export function setCloudProviderSshKeys(cloudProviderSshKeys){
+  return{
+    type: types.SET_CLOUD_PROVIDER_SSH_KEY,
+    value: cloudProviderSshKeys
+  };
+}
+
+export function requestCloudProviderSSHKeys(cloudProviderAccess){
+  return{
+    type: types.REQUEST_CLOUD_PROVIDER_KEYS,
+    value: cloudProviderAccess
+  };
+}

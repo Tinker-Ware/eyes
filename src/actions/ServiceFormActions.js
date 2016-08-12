@@ -1,11 +1,15 @@
 import * as types from '../constants/ActionTypes';
 
+export function clearCloudProviderSSHKeys(value) {
+  return { type: types.CLEAR_CLOUD_PROVIDER_SSH_KEYS, value };
+}
+
 export function setProjectName(value) {
   return { type: types.SET_PROJECT_NAME, value };
 }
 
-export function setServerProvider(value) {
-  return { type: types.SET_SERVER_PROVIDER, value };
+export function setCloudProvider(value) {
+  return { type: types.SET_CLOUD_PROVIDER, value };
 }
 
 export function setApplication(value) {
@@ -28,6 +32,14 @@ export function setShowRepositories(value){
   return { type: types.SET_SHOW_REPOSITORIES, value };
 }
 
+export function requestCloudProviderAccess() {
+  return { type: types.REQUEST_CLOUD_PROVIDER_ACCESS };
+}
+
+export function requestPostCloudProviderSSHKey(value) {
+  return { type: types.REQUEST_POST_CLOUD_PROVIDER_KEY, value };
+}
+
 export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
 }
@@ -37,25 +49,25 @@ export function requestUserRepositories(value) {
 }
 
 export function setSSHKey(value) {
-  return { type: types.SET_SSH_KEY, value };
+  return { type: types.SET_CLOUD_PROVIDER_SSH_KEY, value };
 }
 
 export function setSSHKeyTitle(value) {
-  return { type: types.SET_SSH_KEY_TITLE, value };
+  return { type: types.SET_CLOUD_PROVIDER_SSH_KEY_NAME, value };
 }
 
 export function setSSHKeyContent(value) {
-  return { type: types.SET_SSH_KEY_CONTENT, value };
+  return { type: types.SET_CLOUD_PROVIDER_SSH_KEY_PUBLIC_KEY, value };
 }
 
 export function showSSHKey(value) {
-  return { type: types.SHOW_SSH_KEY, value };
+  return { type: types.SHOW_CLOUD_PROVIDER_SSH_KEY, value };
 }
 
 export function enableSSHKey(value) {
-  return { type: types.ENABLE_SSH_KEY, value };
+  return { type: types.ENABLE_CLOUD_PROVIDER_SSH_KEY, value };
 }
 
 export function deleteSSHKey(value) {
-  return { type: types.DELETE_SSH_KEY, value };
+  return { type: types.DELETE_CLOUD_PROVIDER_SSH_KEY, value };
 }

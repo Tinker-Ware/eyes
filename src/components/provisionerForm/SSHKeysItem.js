@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 
-const SSHKeysItem = ( props ) => {
+const SSHKeysItem = ( {end, isActive, id, handleClick, value} ) => {
   return (
-    <div className={props.end ? 'large-3 medium-6 small-12 columns end' : 'large-3 medium-6 small-12 columns columns'}>
-      <ul className={props.isActive ? 'selection-table active' : 'selection-table'} key={props.identifier}>
+    <div className={end ? 'large-3 medium-6 small-12 columns end' : 'large-3 medium-6 small-12 columns columns'}>
+      <ul className={isActive ? 'selection-table active' : 'selection-table'} id={id}>
         <li
           className="bullet-item"
-          onClick={props.handleClick}>
-          {props.value}
+          onClick={handleClick}>
+          {value}
         </li>
       </ul>
     </div>
@@ -16,10 +16,11 @@ const SSHKeysItem = ( props ) => {
 
 SSHKeysItem.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isActive: PropTypes.bool,
-  identifier: PropTypes.number,
+  isActive: PropTypes.bool.isRequired,
+  identifier: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
-  end: PropTypes.string
+  end: PropTypes.string.isRequired
 };
 
 export default SSHKeysItem;

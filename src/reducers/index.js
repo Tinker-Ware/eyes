@@ -1,17 +1,15 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import serverProviderAppState from './serverProvider';
+import cloudProviderAppState from './cloudProvider';
 import applicationAppState from './application';
 import projectNameAppState from './projectName';
 import repositoryAppState from './repository';
-import sshKeysAppState from './sshKeys';
 
 const rootReducer = combineReducers({
-  serverProviderAppState,
+  cloudProviderAppState,
   applicationAppState,
   projectNameAppState,
   repositoryAppState,
-  sshKeysAppState,
   routing: routerReducer
 });
 
