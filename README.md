@@ -7,6 +7,8 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Tinker-Ware/provisioning-webpage.svg)](http://isitmaintained.com/project/Tinker-Ware/provisioning-webpage "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/Tinker-Ware/provisioning-webpage.svg)](http://isitmaintained.com/project/Tinker-Ware/provisioning-webpage "Percentage of issues still open")
 
 ##Clone submodules
 

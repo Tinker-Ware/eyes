@@ -32,8 +32,16 @@ export function setShowRepositories(value){
   return { type: types.SET_SHOW_REPOSITORIES, value };
 }
 
-export function requestCloudProviderAccess() {
-  return { type: types.REQUEST_CLOUD_PROVIDER_ACCESS };
+export function setUser(value){
+  return { type: types.SET_USER, value };
+}
+
+export function setUserInfo(value){
+  return { type: types.SET_USER_INFORMATION, value };
+}
+
+export function requestCloudProviderAccess(value) {
+  return { type: types.REQUEST_CLOUD_PROVIDER_ACCESS, value };
 }
 
 export function requestPostCloudProviderSSHKey(value) {

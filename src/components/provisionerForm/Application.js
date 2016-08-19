@@ -5,6 +5,7 @@ import ApplicationItem from './ApplicationItem';
 
 const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
   const handleApplicationClick = (e) => {
+    e.preventDefault();
     if( e.target.nodeName.toLowerCase()=="span" || e.target.nodeName.toLowerCase()=="img" )
       setApplication(fromJS({
         application: e.target.parentNode.id

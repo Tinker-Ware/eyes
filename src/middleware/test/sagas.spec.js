@@ -4,7 +4,7 @@ import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects'; 
 import { fromJS } from 'immutable';
 import * as actions from '../actions/MiddlewareActions';
-import { doRequest, doRequestGetCloudProviderAccess, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserRepositories, postCloudProviderKey } from '../sagas';
+import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser } from '../sagas';
 
 describe('sagas middleware', () => {
   
@@ -63,7 +63,7 @@ describe('sagas middleware', () => {
     );
   });
   
-  it('handles POST_CLOUD_PROVIDER_SSH_KEY', () => {
+  it('handles GET_CLOUD_PROVIDER_SSH_KEYS', () => {
     const userAccess = {
       'cloud_provider': {
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",
@@ -78,50 +78,62 @@ describe('sagas middleware', () => {
         }
       }
     };
-    const cloudProviderKey = {
-      "key": {
-        "id": 2,
-        "name": "My key",
-        "provider": "digital_ocean",
-        "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
-        "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
-      }
+    const cloudProviderKeys = {
+      "keys": [
+        {
+          "id": 1,
+          "name": "My little key",
+          "provider": "digital_ocean",
+          "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
+          "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
+        }
+      ]
     };
     
-    const cloudProviderKeys = {
-        "sshKeys": [
-          {
-            "id": 1,
-            "name": "My little key",
-            "provider": "digital_ocean",
-            "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
-            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
-          }
-        ]
-      };
-    
-    const generator = postCloudProviderKey({
+    const generator = getCloudProviderKeys({
       'value': fromJS({
-        'access_token': userAccess.cloud_provider.access_token,
-        'sshKeys': cloudProviderKeys.sshKeys,
-        'sshKey': cloudProviderKey.key
+        'access_token': userAccess.cloud_provider.access_token
       })
     });
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestPostCloudProviderKey, fromJS(userAccess.cloud_provider.access_token), fromJS(cloudProviderKey.key))
+      call(doRequestGetCloudProviderKeys, userAccess.cloud_provider.access_token)
     );
-    
-    expect(generator.next(cloudProviderKey).value).to.deep.equal(
-      put(actions.setCloudProviderSshKeys(fromJS(
-      {
-        'sshKeys': cloudProviderKeys.sshKeys,
-        'sshKey': [cloudProviderKey.key]
+
+    expect(generator.next(cloudProviderKeys).value).to.deep.equal(
+      put(actions.setCloudProviderSshKeys(fromJS({
+        sshKeys: [],
+        sshKey: cloudProviderKeys.keys
       })))
     );
   });
   
-  it('handles SET_USER_REPOSITORIES', () => {
+  it('handles GET_USER_SESION', () => {
+    const userAccess = {
+      "user_sesion": {
+        'email': 'some@email.com',
+        "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
+      }
+    };
+    
+    const generator = getUserSesion({
+      'value': fromJS({
+        "user_sesion": userAccess.user_sesion
+      })
+    });
+    
+    expect(generator.next().value).to.deep.equal(
+      call(doRequestGetUserSesion, fromJS(userAccess.user_sesion))
+    );
+    
+    expect(generator.next(userAccess).value).to.deep.equal(
+      put(actions.setUserSesion(fromJS({
+        user_sesion: userAccess.user_sesion
+      })))
+    );
+  });
+  
+  it('handles GET_USER_REPOSITORIES', () => {
     const userAccess = {
       user: {
         "id": 1,
@@ -183,7 +195,7 @@ describe('sagas middleware', () => {
     );
   });
   
-  it('handles SET_CLOUD_PROVIDER_SSH_KEYS', () => {
+  it('handles POST_CLOUD_PROVIDER_SSH_KEY', () => {
     const userAccess = {
       'cloud_provider': {
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",
@@ -198,33 +210,83 @@ describe('sagas middleware', () => {
         }
       }
     };
-    const cloudProviderKeys = {
-      "keys": [
-        {
-          "id": 1,
-          "name": "My little key",
-          "provider": "digital_ocean",
-          "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
-          "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
-        }
-      ]
+    const cloudProviderKey = {
+      "key": {
+        "id": 2,
+        "name": "My key",
+        "provider": "digital_ocean",
+        "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
+        "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
+      }
     };
     
-    const generator = getCloudProviderKeys({
+    const cloudProviderKeys = {
+        "sshKeys": [
+          {
+            "id": 1,
+            "name": "My little key",
+            "provider": "digital_ocean",
+            "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
+          }
+        ]
+      };
+    
+    const generator = postCloudProviderKey({
       'value': fromJS({
-        'access_token': userAccess.cloud_provider.access_token
+        'access_token': userAccess.cloud_provider.access_token,
+        'sshKeys': cloudProviderKeys.sshKeys,
+        'sshKey': cloudProviderKey.key
       })
     });
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetCloudProviderKeys, userAccess.cloud_provider.access_token)
+      call(doRequestPostCloudProviderKey, fromJS(userAccess.cloud_provider.access_token), fromJS(cloudProviderKey.key))
     );
-
-    expect(generator.next(cloudProviderKeys).value).to.deep.equal(
-      put(actions.setCloudProviderSshKeys(fromJS({
-        sshKeys: [],
-        sshKey: cloudProviderKeys.keys
+    
+    expect(generator.next(cloudProviderKey).value).to.deep.equal(
+      put(actions.setCloudProviderSshKeys(fromJS(
+      {
+        'sshKeys': cloudProviderKeys.sshKeys,
+        'sshKey': [cloudProviderKey.key]
       })))
     );
   });
+  
+  it('handles POST_USER', () => {
+    const user = {
+      'user_signup': {
+        'email': 'some@email.com',
+        'password': 'somepassword'
+      }
+    };
+    
+    const userAccess = {
+      'user_sesion': {
+        'email': 'some@email.com',
+        'token': 'GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu'
+      }
+    };
+    
+    const generator = postUser({
+      'value': fromJS({
+        'user_signup': {
+          'email': user.user_signup.email,
+          'password': user.user_signup.password
+        }
+      })
+    });
+    
+    expect(generator.next().value).to.deep.equal(
+      call(doRequestPostUser, fromJS(user.user_signup))
+    );
+    
+    expect(generator.next(user).value).to.deep.equal(
+      put(actions.setUser(fromJS(
+      {
+        'user_sesion': user.user_sesion
+      })))
+    );
+  });
+  
 });

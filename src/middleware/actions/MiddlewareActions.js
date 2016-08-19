@@ -34,3 +34,17 @@ export function requestCloudProviderSSHKeys(cloudProviderAccess){
     value: cloudProviderAccess
   };
 }
+
+export function setUser(user){
+  return{
+    type: types.SET_USER_SESION,
+    value: user
+  };
+}
+
+export function setUserSesion(userSesion){
+  return{
+    type: types.SET_USER_SESION,
+    value: userSesion
+  };
+}

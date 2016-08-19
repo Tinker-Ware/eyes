@@ -1,9 +1,10 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import { fromJS } from 'immutable';
 
-const GithubService = ( {repositoryAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
+const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
   const handleGithubLogin = (e) => {
+    e.preventDefault();
     if(e.target.text != "Log out"){
       requestRepositoryAccess();
     }else{
@@ -19,6 +20,7 @@ const GithubService = ( {repositoryAppState, setRepository, setIntegracion, requ
     }
   };
   const handleGithubRepos = (e) => {
+    e.preventDefault();
     setRepository(fromJS({
       repository: {
         provider: "github",
@@ -27,6 +29,7 @@ const GithubService = ( {repositoryAppState, setRepository, setIntegracion, requ
     }));
   };
   const handleGithubConfigurationEnable = (e) => {
+    e.preventDefault();
     if (!repositoryAppState.get('show_repositories')){
       setShowRepositories(fromJS({
         show: true
@@ -114,7 +117,8 @@ GithubService.propTypes = {
   setShowRepositories: PropTypes.func.isRequired,
   requestRepositoryAccess: PropTypes.func.isRequired,
   requestUserRepositories: PropTypes.func.isRequired,
-  repositoryAppState: PropTypes.object.isRequired
+  repositoryAppState: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 export default GithubService;

@@ -61,6 +61,25 @@ export function* doRequestGetRepositoryAccess() {
     });
 }
 
+export function* doRequestGetUserSesion(userSesion) {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/users/login',
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'user_sesion': {
+          'email': userSesion.toJS().email,
+          'password': userSesion.toJS().password
+        }
+      }),
+      mode: 'cors'
+    });
+}
+
 export function* doRequestPostCloudProviderKey(accessToken, key) {
   return yield call(
     doRequest, 'http://localhost:3100/api/v1/cloud/keys',
@@ -74,6 +93,25 @@ export function* doRequestPostCloudProviderKey(accessToken, key) {
       },
       body: JSON.stringify({
         'key': key
+      }),
+      mode: 'cors'
+    });
+}
+
+export function* doRequestPostUser(userSignup) {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/users',
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'user': {
+          "email": userSignup.toJS().email,
+          "password": userSignup.toJS().password,
+        }
       }),
       mode: 'cors'
     });
@@ -107,6 +145,14 @@ export function* getRepositoryAccess() {
   );
 }
 
+export function* getUserSesion(userLogin) {
+  const userSesion = yield call(doRequestGetUserSesion, userLogin.value.get('user_sesion'));
+  yield put(actions.setUserSesion(fromJS({
+      user_sesion: userSesion.user_sesion
+    }))
+  );
+}
+
 export function* getUserRepositories(userAccess) {
   const userRepos = yield call(doRequestGetRepositories, userAccess.value.get('userName'), userAccess.value.get('accessToken'));
   yield put(actions.receiveRepositories(fromJS({
@@ -122,12 +168,21 @@ export function* postCloudProviderKey(cloudProviderKeys) {
   })));
 }
 
+export function* postUser(user) {
+  const userSignup = yield call(doRequestPostUser, user.value.get('user_signup'));
+  yield put(actions.setUser(fromJS({
+    'user_sesion': userSignup.user_sesion,
+  })));
+}
+
 export default function* root() {
   yield[
     takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
     takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
-    takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey)
+    takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
+    takeLatest(types.REQUEST_POST_USER, postUser),
+    takeLatest(types.REQUEST_USER_SESION, getUserSesion)
   ];
 }

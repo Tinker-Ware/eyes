@@ -5,6 +5,7 @@ import { fromJS } from 'immutable';
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {
 
   const ProjectNameKeypress = (e) => {
+    e.preventDefault();
     setProjectName(fromJS({
       name: e.target.value
     }));
