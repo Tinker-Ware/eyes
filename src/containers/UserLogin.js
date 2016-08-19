@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 import * as actions from '../actions/userActions';
 import Login from "../components/userAuth/Login";
 
-export class UserAuth extends Component {
+export class UserLogin extends Component {
   componentWillMount() {
     if (this.props.userAppState.get('user_sesion'))
       browserHistory.push('/');
@@ -35,7 +35,7 @@ export class UserAuth extends Component {
   }
 }
 
-UserAuth.propTypes = {
+UserLogin.propTypes = {
   actions: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
@@ -55,4 +55,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserAuth);
+)(UserLogin);

@@ -6,7 +6,6 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
   const handleDigitalOceanLogin = (e) => {
     e.preventDefault();
     if(e.target.text != "Log out"){
-      debugger;
       requestCloudProviderAccess(fromJS({
         provider_token: userAppState.get('user_sesion').toJS().token
       }));

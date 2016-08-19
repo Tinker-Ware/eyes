@@ -4,7 +4,7 @@ import App from './components/App';
 import Profile from './components/user/Profile';
 import ProvisionerForm from './containers/ProvisionerForm';
 import UserProfile from './containers/UserProfile';
-import UserAuth from './containers/UserAuth';
+import UserLogin from './containers/UserLogin';
 import Signup from './components/userAuth/Signup';
 
 export default (
@@ -19,7 +19,7 @@ export default (
     </Route>
     <Route
       path="/login"
-      component={UserAuth} />
+      component={UserLogin} />
     <Route
       path="/registrations/new"
       component={Signup} />
