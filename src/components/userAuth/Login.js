@@ -15,15 +15,6 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
       })) : '';
   };
   
-  if (userAppState.get('user_sesion')) {
-    setUserSesionEmail(fromJS({
-      "user_sesion_email": ''
-    }));
-    setUserSesionPassword(fromJS({
-      "user_sesion_password": ''
-    }));
-  }
-  
   const handleUserSesionEmail = (e) => {
     e.preventDefault();
     setUserSesionEmail(fromJS({
