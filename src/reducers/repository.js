@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionTypes';
+import { SET_REPOSITORIES, SET_REPOSITORY, SET_INTEGRATION, SET_SHOW_REPOSITORIES } from '../constants/ActionTypes';
 import { Map, fromJS } from 'immutable';
 
 const initialState = Map({
@@ -10,19 +10,19 @@ const initialState = Map({
 
 export default function repository(state = initialState, action) {
   switch (action.type) {
-    case types.SET_REPOSITORIES:
+    case SET_REPOSITORIES:
     {
       return state.set('repositories', action.value.get('repositories'));
     }
-    case types.SET_REPOSITORY:
+    case SET_REPOSITORY:
     {
       return state.set('repository', action.value.get('repository'));
     }
-    case types.SET_INTEGRATION:
+    case SET_INTEGRATION:
     {
       return state.set('integration', action.value.get('integration'));
     }
-    case types.SET_SHOW_REPOSITORIES:
+    case SET_SHOW_REPOSITORIES:
     {
       return state.set('show_repositories', action.value.get('show'));
     }

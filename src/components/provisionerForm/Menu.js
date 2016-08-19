@@ -3,6 +3,7 @@ import {Link, IndexLink} from 'react-router';
 
 const Menu = () => {
   const handleApplicationClick = (e) => {
+    e.preventDefault();
   };
   return (
     <div data-magellan-expedition="fixed">

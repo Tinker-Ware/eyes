@@ -41,12 +41,14 @@ export class ServiceForm extends Component {
                       setIntegracion={this.props.actions.setIntegracion}
                       requestRepositoryAccess={this.props.actions.requestRepositoryAccess}
                       requestUserRepositories={this.props.actions.requestUserRepositories}
-                      setShowRepositories={this.props.actions.setShowRepositories}/> : ''
+                      setShowRepositories={this.props.actions.setShowRepositories}
+                      userAppState={this.props.userAppState} /> : ''
                   ):''}
               <CloudProvider
                 clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                 cloudProviderAppState={this.props.cloudProviderAppState}
                 requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
+                userAppState={this.props.userAppState}
                 setCloudProvider={this.props.actions.setCloudProvider} />
             </div>
             <Application
@@ -94,7 +96,8 @@ ServiceForm.propTypes = {
   cloudProviderAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
-  repositoryAppState: PropTypes.object.isRequired
+  repositoryAppState: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -102,7 +105,8 @@ function mapStateToProps(state) {
     cloudProviderAppState: state.cloudProviderAppState,
     projectNameAppState: state.projectNameAppState,
     applicationAppState: state.applicationAppState,
-    repositoryAppState: state.repositoryAppState
+    repositoryAppState: state.repositoryAppState,
+    userAppState: state.repositoryAppState
   };
 }
 

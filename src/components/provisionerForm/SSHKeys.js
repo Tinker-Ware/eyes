@@ -5,6 +5,7 @@ import SSHKeysItem from './SSHKeysItem';
 
 const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState} ) => {
   const handleSSHKeyClick = (e) => {
+    e.preventDefault();
     enableSSHKey(fromJS({
       sshKeys: cloudProviderAppState.get('cloud_provider_ssh_keys'),
       id: parseInt(e.target.parentNode.id)
@@ -12,6 +13,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   };
   
   const StoreSSHKeyKeypress = (e) => {
+    e.preventDefault();
     if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
       requestPostCloudProviderSSHKey(fromJS({
         'access_token': cloudProviderAppState.get('cloud_provider').toJS().access_token,
@@ -33,6 +35,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   };
   
   const ShowSSHKeyButtonKeypress = (e) => {
+    e.preventDefault();
     showSSHKey(
       fromJS({
         show_cloud_provider_ssh_key: !cloudProviderAppState.get('show_cloud_provider_ssh_key')
@@ -41,12 +44,14 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   };
   
   const SSHKeyTitleKeypress = (e) => {
+    e.preventDefault();
     setSSHKeyTitle(fromJS({
       name: e.target.value
     }));
   };
   
   const SSHKeyContentKeypress = (e) => {
+    e.preventDefault();
     setSSHKeyContent(fromJS({
       public_key: e.target.value
     }));

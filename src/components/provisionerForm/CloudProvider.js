@@ -2,10 +2,14 @@ import {fromJS} from 'immutable';
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, requestCloudProviderAccess, setCloudProvider} ) => {
+const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {
   const handleDigitalOceanLogin = (e) => {
+    e.preventDefault();
     if(e.target.text != "Log out"){
-      requestCloudProviderAccess();
+      debugger;
+      requestCloudProviderAccess(fromJS({
+        provider_token: userAppState.get('user_sesion').toJS().token
+      }));
     }else{
       setCloudProvider(fromJS({
         cloud_provider: ''
@@ -37,6 +41,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, reque
 CloudProvider.propTypes = {
   clearCloudProviderSSHKeys: PropTypes.func.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired,
   requestCloudProviderAccess: PropTypes.func.isRequired,
   setCloudProvider: PropTypes.func.isRequired
 };

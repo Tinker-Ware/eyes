@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import cloudProviderAppState from './cloudProvider';
 import applicationAppState from './application';
+import cloudProviderAppState from './cloudProvider';
 import projectNameAppState from './projectName';
 import repositoryAppState from './repository';
+import userAppState from './user';
 
 const rootReducer = combineReducers({
-  cloudProviderAppState,
   applicationAppState,
+  cloudProviderAppState,
   projectNameAppState,
   repositoryAppState,
+  userAppState,
   routing: routerReducer
 });
 
