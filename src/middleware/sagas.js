@@ -72,8 +72,8 @@ export function* doRequestGetUserSesion(userSesion) {
       },
       body: JSON.stringify({
         'user_sesion': {
-          'email': userSesion.toJS().user_sesion_email,
-          'password': userSesion.toJS().user_sesion_password
+          'email': userSesion.toJS().email,
+          'password': userSesion.toJS().password
         }
       }),
       mode: 'cors'
@@ -93,6 +93,25 @@ export function* doRequestPostCloudProviderKey(accessToken, key) {
       },
       body: JSON.stringify({
         'key': key
+      }),
+      mode: 'cors'
+    });
+}
+
+export function* doRequestPostUser(userSignup) {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/users',
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'user': {
+          "email": userSignup.toJS().email,
+          "password": userSignup.toJS().password,
+        }
       }),
       mode: 'cors'
     });
@@ -149,6 +168,13 @@ export function* postCloudProviderKey(cloudProviderKeys) {
   })));
 }
 
+export function* postUser(user) {
+  const userSignup = yield call(doRequestPostUser, user.value.get('user_signup'));
+  yield put(actions.setUser(fromJS({
+    'user_sesion': userSignup.user_sesion,
+  })));
+}
+
 export default function* root() {
   yield[
     takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
@@ -156,6 +182,7 @@ export default function* root() {
     takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
+    takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)
   ];
 }

@@ -9,8 +9,8 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
     !userAppState.get('user_sesion') ? 
       requestGetUserSesion(fromJS({
         "user_sesion": {
-          "user_sesion_email": userAppState.get('user_sesion_email'),
-          "user_sesion_password": userAppState.get('user_sesion_password')
+          "email": userAppState.get('user_sesion_email'),
+          "password": userAppState.get('user_sesion_password')
         }
       })) : '';
   };

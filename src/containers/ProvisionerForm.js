@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ServiceFormActions';
 import Application from '../components/provisionerForm/Application';
@@ -14,10 +15,14 @@ import SSHKeys from '../components/provisionerForm/SSHKeys';
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
+  componentWillMount() {
+    if (!this.props.userAppState.get('user_sesion'))
+      browserHistory.push('/login');
+  }
   render() {
     return (
       <div className="row">
-        <Menu />
+        <Menu userAppState={this.props.userAppState} />
         <div className="row">
           <div className="large-10 columns">
             <h1><i className="step fi-clipboard-notes"></i>
@@ -106,7 +111,7 @@ function mapStateToProps(state) {
     projectNameAppState: state.projectNameAppState,
     applicationAppState: state.applicationAppState,
     repositoryAppState: state.repositoryAppState,
-    userAppState: state.repositoryAppState
+    userAppState: state.userAppState
   };
 }
 

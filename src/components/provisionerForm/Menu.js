@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {Link, IndexLink} from 'react-router';
 
-const Menu = () => {
-  const handleApplicationClick = (e) => {
-    e.preventDefault();
-  };
+const Menu = ( { userAppState } ) => {
+  console.log(userAppState.get('user_sesion')?userAppState.get('user_sesion'):'');
   return (
     <div data-magellan-expedition="fixed">
       <div className="row">
@@ -24,13 +22,17 @@ const Menu = () => {
              Aplications</a>
           </dd>
           <dd className="user-login">
-            <Link to="/login"><i className="step fi-torso"></i>
-             Log in</Link>
+            <Link to="/user"><i className="step fi-torso"></i> 
+              &nbsp;Logged as {userAppState.get('user_sesion')?userAppState.get('user_sesion').toJS().email:''}</Link>
           </dd>
         </dl>
       </div>
     </div>
   );
+};
+
+Menu.propTypes = {
+  userAppState: PropTypes.object.isRequired
 };
 
 export default Menu;

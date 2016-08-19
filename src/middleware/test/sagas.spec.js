@@ -4,7 +4,7 @@ import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects'; 
 import { fromJS } from 'immutable';
 import * as actions from '../actions/MiddlewareActions';
-import { doRequest, doRequestGetCloudProviderAccess, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey } from '../sagas';
+import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser } from '../sagas';
 
 describe('sagas middleware', () => {
   
@@ -111,7 +111,7 @@ describe('sagas middleware', () => {
   it('handles GET_USER_SESION', () => {
     const userAccess = {
       "user_sesion": {
-        "username": "iLeonelRoberto",
+        'email': 'some@email.com',
         "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
     };
@@ -249,6 +249,42 @@ describe('sagas middleware', () => {
       {
         'sshKeys': cloudProviderKeys.sshKeys,
         'sshKey': [cloudProviderKey.key]
+      })))
+    );
+  });
+  
+  it('handles POST_USER', () => {
+    const user = {
+      'user_signup': {
+        'email': 'some@email.com',
+        'password': 'somepassword'
+      }
+    };
+    
+    const userAccess = {
+      'user_sesion': {
+        'email': 'some@email.com',
+        'token': 'GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu'
+      }
+    };
+    
+    const generator = postUser({
+      'value': fromJS({
+        'user_signup': {
+          'email': user.user_signup.email,
+          'password': user.user_signup.password
+        }
+      })
+    });
+    
+    expect(generator.next().value).to.deep.equal(
+      call(doRequestPostUser, fromJS(user.user_signup))
+    );
+    
+    expect(generator.next(user).value).to.deep.equal(
+      put(actions.setUser(fromJS(
+      {
+        'user_sesion': user.user_sesion
       })))
     );
   });

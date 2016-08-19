@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { fromJS } from 'immutable';
 import * as actions from '../actions/userActions';
-import Login from "../components/userAuth/Login";
+import Signup from '../components/userAuth/Signup';
 
-export class UserLogin extends Component {
+export class UserSignup extends Component {
   componentWillMount() {
     if (this.props.userAppState.get('user_sesion'))
       browserHistory.push('/');
@@ -25,8 +25,8 @@ export class UserLogin extends Component {
   render() {
     return (
       <div className="row">
-        <Login
-          requestGetUserSesion={this.props.actions.requestGetUserSesion}
+        <Signup
+          requestPostUser={this.props.actions.requestPostUser}
           setUserSesionEmail={this.props.actions.setUserSesionEmail}
           setUserSesionPassword={this.props.actions.setUserSesionPassword}
           userAppState={this.props.userAppState} />
@@ -35,7 +35,7 @@ export class UserLogin extends Component {
   }
 }
 
-UserLogin.propTypes = {
+UserSignup.propTypes = {
   actions: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
@@ -55,4 +55,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserLogin);
+)(UserSignup);
