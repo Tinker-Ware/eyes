@@ -17,7 +17,7 @@ export default function user(state = initialState, action) {
     }
     case SET_USER_SESION:
     {
-      return state.set('user_sesion', action.value.get('user_sesion'));
+      return state.set('user_session', action.value.get('user_session'));
     }
     case SET_USER_SESION_EMAIL:
     {

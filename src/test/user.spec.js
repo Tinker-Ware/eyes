@@ -53,7 +53,7 @@ describe('reducer', () => {
   it('handles SET_USER_SESION', () => {
     const initialState = Map();
     const action = {type: 'SET_USER_SESION', value: fromJS({
-        "user_sesion": {
+        "user_session": {
           "username": "iLeonelRoberto",
           "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
         }
@@ -62,7 +62,7 @@ describe('reducer', () => {
     const nextState = user(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      "user_sesion": {
+      "user_session": {
         "username": "iLeonelRoberto",
         "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }

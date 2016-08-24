@@ -26,13 +26,13 @@ export function* doRequestGetCloudProviderAccess() {
     });
 }
 
-export function* doRequestGetCloudProviderKeys(accessToken) {
+export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
   return yield call(
     doRequest, 'http://localhost:3100/api/v1/cloud/keys',
     {
       method: 'GET',
       headers: {
-        'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
+        'authorization': 'Bearer ' + authorization,
         'provider-token': accessToken
       },
       mode: 'cors'
@@ -71,7 +71,7 @@ export function* doRequestGetUserSesion(userSesion) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'user_sesion': {
+        'user': {
           'email': userSesion.toJS().email,
           'password': userSesion.toJS().password
         }
@@ -80,13 +80,13 @@ export function* doRequestGetUserSesion(userSesion) {
     });
 }
 
-export function* doRequestPostCloudProviderKey(accessToken, key) {
+export function* doRequestPostCloudProviderKey(accessToken, authorization, key) {
   return yield call(
     doRequest, 'http://localhost:3100/api/v1/cloud/keys',
     {
       method: 'POST',
       headers: {
-        'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
+        'authorization': 'Bearer ' + authorization,
         'provider-token': accessToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -117,20 +117,21 @@ export function* doRequestPostUser(userSignup) {
     });
 }
 
-export function* getCloudProviderAccess() {
+export function* getCloudProviderAccess(userAccess) {
   const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess);
   yield put(actions.setCloudProviderAccess(fromJS({
       cloud_provider: cloudProviderAccess.cloud_provider
     }))
   );
   yield put(actions.requestCloudProviderSSHKeys(fromJS({
-      'access_token': cloudProviderAccess.cloud_provider.access_token
+      'access_token': cloudProviderAccess.cloud_provider.access_token,
+      'authorization': userAccess.value.get('authorization')
     }
   )));
 }
 
 export function* getCloudProviderKeys(userAccess) {
-  const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('access_token'));
+  const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('access_token'), userAccess.value.get('authorization'));
   yield put(actions.setCloudProviderSshKeys(fromJS({
     sshKeys: [],
     sshKey: cloudProviderKeys.keys
@@ -146,9 +147,9 @@ export function* getRepositoryAccess() {
 }
 
 export function* getUserSesion(userLogin) {
-  const userSesion = yield call(doRequestGetUserSesion, userLogin.value.get('user_sesion'));
+  const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
   yield put(actions.setUserSesion(fromJS({
-      user_sesion: userSesion.user_sesion
+      user_session: userSession.user_session
     }))
   );
 }
@@ -161,7 +162,7 @@ export function* getUserRepositories(userAccess) {
 }
 
 export function* postCloudProviderKey(cloudProviderKeys) {
-  const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('sshKey'));
+  const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('authorization'), cloudProviderKeys.value.get('sshKey'));
   yield put(actions.setCloudProviderSshKeys(fromJS({
     'sshKeys': cloudProviderKeys.value.get('sshKeys'),
     'sshKey': [cloudProviderKey.key]
@@ -171,7 +172,7 @@ export function* postCloudProviderKey(cloudProviderKeys) {
 export function* postUser(user) {
   const userSignup = yield call(doRequestPostUser, user.value.get('user_signup'));
   yield put(actions.setUser(fromJS({
-    'user_sesion': userSignup.user_sesion,
+    'user_sesion': userSignup.user_session,
   })));
 }
 

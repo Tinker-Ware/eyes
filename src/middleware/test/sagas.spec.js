@@ -9,7 +9,6 @@ import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doReques
 describe('sagas middleware', () => {
   
   it('handles GET_CLOUD_PROVIDER_ACCESS', () => {
-    const generator = getCloudProviderAccess();
     const cloudProviderAccess = {
       cloud_provider: {
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",
@@ -25,6 +24,20 @@ describe('sagas middleware', () => {
       }
     };
     
+    const userSession = {
+      "user_session": {
+        "email": "some@email.com",
+        "token": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf"
+      }
+    };
+    
+    const generator = getCloudProviderAccess({
+      value: 
+      fromJS({
+        "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf"
+       })
+     });
+    
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetCloudProviderAccess)
     );
@@ -37,7 +50,8 @@ describe('sagas middleware', () => {
     
     expect(generator.next(cloudProviderAccess.access_token).value).to.deep.equal(
       put(actions.requestCloudProviderSSHKeys(fromJS({
-          access_token: cloudProviderAccess.cloud_provider.access_token
+          access_token: cloudProviderAccess.cloud_provider.access_token,
+          authorization: userSession.user_session.token
         })))
     );
   });
@@ -90,14 +104,17 @@ describe('sagas middleware', () => {
       ]
     };
     
+    const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
+   
     const generator = getCloudProviderKeys({
       'value': fromJS({
-        'access_token': userAccess.cloud_provider.access_token
+        'access_token': userAccess.cloud_provider.access_token,
+        'authorization': authorization
       })
     });
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetCloudProviderKeys, userAccess.cloud_provider.access_token)
+      call(doRequestGetCloudProviderKeys, userAccess.cloud_provider.access_token, authorization)
     );
 
     expect(generator.next(cloudProviderKeys).value).to.deep.equal(
@@ -110,7 +127,7 @@ describe('sagas middleware', () => {
   
   it('handles GET_USER_SESION', () => {
     const userAccess = {
-      "user_sesion": {
+      "user_session": {
         'email': 'some@email.com',
         "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
@@ -118,17 +135,17 @@ describe('sagas middleware', () => {
     
     const generator = getUserSesion({
       'value': fromJS({
-        "user_sesion": userAccess.user_sesion
+        "user_session": userAccess.user_session
       })
     });
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetUserSesion, fromJS(userAccess.user_sesion))
+      call(doRequestGetUserSesion, fromJS(userAccess.user_session))
     );
     
     expect(generator.next(userAccess).value).to.deep.equal(
       put(actions.setUserSesion(fromJS({
-        user_sesion: userAccess.user_sesion
+        user_session: userAccess.user_session
       })))
     );
   });
@@ -231,9 +248,12 @@ describe('sagas middleware', () => {
           }
         ]
       };
+      
+    const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
     
     const generator = postCloudProviderKey({
       'value': fromJS({
+        'authorization': authorization,
         'access_token': userAccess.cloud_provider.access_token,
         'sshKeys': cloudProviderKeys.sshKeys,
         'sshKey': cloudProviderKey.key
@@ -241,7 +261,7 @@ describe('sagas middleware', () => {
     });
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestPostCloudProviderKey, fromJS(userAccess.cloud_provider.access_token), fromJS(cloudProviderKey.key))
+      call(doRequestPostCloudProviderKey, userAccess.cloud_provider.access_token, authorization,  fromJS(cloudProviderKey.key))
     );
     
     expect(generator.next(cloudProviderKey).value).to.deep.equal(
