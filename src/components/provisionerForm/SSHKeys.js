@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {Map, fromJS} from 'immutable';
 import SSHKeysItem from './SSHKeysItem';
 
-const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState} ) => {
+const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState, userAppState} ) => {
   const handleSSHKeyClick = (e) => {
     e.preventDefault();
     enableSSHKey(fromJS({
@@ -16,6 +16,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
     e.preventDefault();
     if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
       requestPostCloudProviderSSHKey(fromJS({
+        'authorization': userAppState.get('user_session').toJS().token,
         'access_token': cloudProviderAppState.get('cloud_provider').toJS().access_token,
         'sshKeys': cloudProviderAppState.get('cloud_provider_ssh_keys'),
         'sshKey': {
@@ -24,7 +25,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
         }
       }));
       // async call to cloudprovider api
-      ShowSSHKeyButtonKeypress();
+      ShowSSHKeyButtonKeypress(e);
       setSSHKeyTitle(fromJS({
         name: ''
       }));
@@ -168,6 +169,7 @@ SSHKeys.propTypes = {
   setSSHKeyTitle: PropTypes.func.isRequired,
   setSSHKeyContent: PropTypes.func.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 export default SSHKeys;

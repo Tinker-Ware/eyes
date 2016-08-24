@@ -8,11 +8,11 @@ import Signup from '../components/userAuth/Signup';
 
 export class UserSignup extends Component {
   componentWillMount() {
-    if (this.props.userAppState.get('user_sesion'))
+    if (this.props.userAppState.get('user_session'))
       browserHistory.push('/');
   }
   componentDidUpdate() {
-    if (this.props.userAppState.get('user_sesion')) {
+    if (this.props.userAppState.get('user_session')) {
       this.props.actions.setUserSesionEmail(fromJS({
         "user_sesion_email": ''
       }));

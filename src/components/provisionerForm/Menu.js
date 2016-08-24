@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import {Link, IndexLink} from 'react-router';
 
 const Menu = ( { userAppState } ) => {
-  console.log(userAppState.get('user_sesion')?userAppState.get('user_sesion'):'');
   return (
     <div data-magellan-expedition="fixed">
       <div className="row">
@@ -23,7 +22,7 @@ const Menu = ( { userAppState } ) => {
           </dd>
           <dd className="user-login">
             <Link to="/user"><i className="step fi-torso"></i> 
-              &nbsp;Logged as {userAppState.get('user_sesion')?userAppState.get('user_sesion').toJS().email:''}</Link>
+              &nbsp;Logged as {userAppState.get('user_session')?userAppState.get('user_session').toJS().email:''}</Link>
           </dd>
         </dl>
       </div>

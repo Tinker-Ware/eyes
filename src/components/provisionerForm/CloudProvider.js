@@ -7,7 +7,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
     e.preventDefault();
     if(e.target.text != "Log out"){
       requestCloudProviderAccess(fromJS({
-        provider_token: userAppState.get('user_sesion').toJS().token
+        authorization: userAppState.get('user_session').toJS().token
       }));
     }else{
       setCloudProvider(fromJS({

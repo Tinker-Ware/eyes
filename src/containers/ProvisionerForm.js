@@ -16,7 +16,7 @@ const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
   componentWillMount() {
-    if (!this.props.userAppState.get('user_sesion'))
+    if (!this.props.userAppState.get('user_session'))
       browserHistory.push('/login');
   }
   render() {
@@ -53,8 +53,8 @@ export class ServiceForm extends Component {
                 clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                 cloudProviderAppState={this.props.cloudProviderAppState}
                 requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
-                userAppState={this.props.userAppState}
-                setCloudProvider={this.props.actions.setCloudProvider} />
+                setCloudProvider={this.props.actions.setCloudProvider}
+                userAppState={this.props.userAppState} />
             </div>
             <Application
               applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 
@@ -69,7 +69,8 @@ export class ServiceForm extends Component {
               setSSHKey={this.props.actions.setSSHKey}
               setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
               setSSHKeyContent={this.props.actions.setSSHKeyContent}
-              cloudProviderAppState={this.props.cloudProviderAppState}/>
+              cloudProviderAppState={this.props.cloudProviderAppState}
+              userAppState={this.props.userAppState} />
             <CreateService
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
