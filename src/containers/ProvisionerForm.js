@@ -72,15 +72,21 @@ export class ServiceForm extends Component {
               cloudProviderAppState={this.props.cloudProviderAppState}
               userAppState={this.props.userAppState} />
             <CreateService
+              cloudProviderAppState={this.props.cloudProviderAppState}
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
-              applicationAppState={this.props.applicationAppState}/>
+              applicationAppState={this.props.applicationAppState}
+              userAppState={this.props.userAppState}
+              requestPostUserProject={this.props.actions.requestPostUserProject} />
           </div>
           <div className="large-2 columns hide-for-small-only hide-for-medium-only">
             <ServiceSummary
+              cloudProviderAppState={this.props.cloudProviderAppState}
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
-              applicationAppState={this.props.applicationAppState}/>
+              applicationAppState={this.props.applicationAppState}
+              userAppState={this.props.userAppState}
+              requestPostUserProject={this.props.actions.requestPostUserProject} />
           </div>
         </div>
         <div className="row">

@@ -13,8 +13,7 @@ export const doRequest = (url, options) => {
       } else {  
         return Promise.reject(new Error(response.statusText));
       }
-    })
-    .catch(error => error);  
+    });
 };
 
 export function* doRequestGetCloudProviderAccess() {
@@ -117,63 +116,126 @@ export function* doRequestPostUser(userSignup) {
     });
 }
 
+export function* doRequestPostUserProject(userProject, authorization) {
+  return yield call(
+    doRequest, 'http://localhost:3100/api/v1/project',
+    {
+      method: 'POST',
+      headers: {
+        'authorization': 'Bearer ' + authorization,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'project': userProject.toJS()
+      }),
+      mode: 'cors'
+    });
+}
+
 export function* getCloudProviderAccess(userAccess) {
-  const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess);
-  yield put(actions.setCloudProviderAccess(fromJS({
-      cloud_provider: cloudProviderAccess.cloud_provider
-    }))
-  );
-  yield put(actions.requestCloudProviderSSHKeys(fromJS({
-      'access_token': cloudProviderAccess.cloud_provider.access_token,
-      'authorization': userAccess.value.get('authorization')
-    }
-  )));
+  try {
+    const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess);
+    yield put(actions.setCloudProviderAccess(fromJS({
+        cloud_provider: cloudProviderAccess.cloud_provider
+      }))
+    );
+    yield put(actions.requestCloudProviderSSHKeys(fromJS({
+        'access_token': cloudProviderAccess.cloud_provider.access_token,
+        'authorization': userAccess.value.get('authorization')
+      }
+    )));
+  }
+  catch(error) {
+    console.log(error);
+  }
 }
 
 export function* getCloudProviderKeys(userAccess) {
-  const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('access_token'), userAccess.value.get('authorization'));
-  yield put(actions.setCloudProviderSshKeys(fromJS({
-    sshKeys: [],
-    sshKey: cloudProviderKeys.keys
-  })));
+  try {
+    const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('access_token'), userAccess.value.get('authorization'));
+    yield put(actions.setCloudProviderSshKeys(fromJS({
+      sshKeys: [],
+      sshKey: cloudProviderKeys.keys
+    })));
+  }
+  catch(error) {
+    console.log(error);
+  }
 }
 
 export function* getRepositoryAccess() {
-  const userAccess = yield call(doRequestGetRepositoryAccess);
-  yield put(actions.receiveRepository(fromJS({
-      integration: userAccess.user
-    }))
-  );
+  try {
+    const userAccess = yield call(doRequestGetRepositoryAccess);
+    yield put(actions.receiveRepository(fromJS({
+        integration: userAccess.user
+      }))
+    );
+  }
+  catch(error) {
+    console.log(error);
+  }
 }
 
 export function* getUserSesion(userLogin) {
-  const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
-  yield put(actions.setUserSesion(fromJS({
-      user_session: userSession.user_session
-    }))
-  );
+  try {
+    const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
+    yield put(actions.setUserSesion(fromJS({
+        user_session: userSession.user_session
+      }))
+    );
+  }
+  catch(error) {
+    console.log(error);
+  }
 }
 
 export function* getUserRepositories(userAccess) {
-  const userRepos = yield call(doRequestGetRepositories, userAccess.value.get('userName'), userAccess.value.get('accessToken'));
-  yield put(actions.receiveRepositories(fromJS({
-    repositories: userRepos.repositories
-  })));
+  try {
+    const userRepos = yield call(doRequestGetRepositories, userAccess.value.get('userName'), userAccess.value.get('accessToken'));
+    yield put(actions.receiveRepositories(fromJS({
+      repositories: userRepos.repositories
+    })));
+  }
+  catch(error) {
+    console.log(error);
+  }
 }
 
 export function* postCloudProviderKey(cloudProviderKeys) {
-  const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('authorization'), cloudProviderKeys.value.get('sshKey'));
-  yield put(actions.setCloudProviderSshKeys(fromJS({
-    'sshKeys': cloudProviderKeys.value.get('sshKeys'),
-    'sshKey': [cloudProviderKey.key]
-  })));
+  try {
+    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('authorization'), cloudProviderKeys.value.get('sshKey'));
+    yield put(actions.setCloudProviderSshKeys(fromJS({
+      'sshKeys': cloudProviderKeys.value.get('sshKeys'),
+      'sshKey': [cloudProviderKey.key]
+    })));
+  }
+  catch(error) {
+    console.log(error);
+  }
 }
 
 export function* postUser(user) {
-  const userSignup = yield call(doRequestPostUser, user.value.get('user_signup'));
-  yield put(actions.setUser(fromJS({
-    'user_sesion': userSignup.user_session,
-  })));
+  try {
+    const userSignup = yield call(doRequestPostUser, user.value.get('user_signup'));
+    yield put(actions.setUser(fromJS({
+      'user_sesion': userSignup.user_session,
+    })));
+  }
+  catch(error) {
+    console.log(error);
+  }
+}
+
+export function* postUserProject(project) {
+  try {
+    const userProject = yield call(doRequestPostUserProject, project.value.get('user_project'), project.value.get('authorization'));
+  }
+  catch(error) {
+    yield put(actions.requestPostUserProjectError(fromJS({
+      'error': error,
+    })));
+  }
 }
 
 export default function* root() {
@@ -184,6 +246,7 @@ export default function* root() {
     takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
     takeLatest(types.REQUEST_POST_USER, postUser),
-    takeLatest(types.REQUEST_USER_SESION, getUserSesion)
+    takeLatest(types.REQUEST_USER_SESION, getUserSesion),
+    takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject)
   ];
 }

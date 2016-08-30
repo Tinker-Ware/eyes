@@ -10,8 +10,8 @@ import rootReducer from '../reducers';
 export default function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
   
-  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware), initialState, compose(
-    // Add other middleware on this line...
+  const store = createStore(rootReducer, initialState, compose(
+    applyMiddleware(sagaMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : f => f //add support for Redux dev tools
     )
   );

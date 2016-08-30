@@ -48,6 +48,10 @@ export function requestPostCloudProviderSSHKey(value) {
   return { type: types.REQUEST_POST_CLOUD_PROVIDER_KEY, value };
 }
 
+export function requestPostUserProject(value) {
+  return { type: types.REQUEST_POST_USER_PROJECT, value };
+}
+
 export function requestRepositoryAccess() {
   return { type: types.REQUEST_GITHUB_ACCESS };
 }
