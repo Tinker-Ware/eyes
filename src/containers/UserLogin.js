@@ -25,7 +25,6 @@ export class UserLogin extends Component {
   render() {
     return (
       <div className="row">
-        {console.log(process.env.NODE_ENV)}
         <Login
           requestGetUserSesion={this.props.actions.requestGetUserSesion}
           setUserSesionEmail={this.props.actions.setUserSesionEmail}
