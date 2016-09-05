@@ -35,6 +35,13 @@ export function requestCloudProviderSSHKeys(cloudProviderAccess){
   };
 }
 
+// export function requestPostUserProjectError(error){
+//   return{
+//     type: types.REQUEST_POST_USER_PROJECT_FAILED,
+//     value: error
+//   };
+// }
+
 export function setUser(user){
   return{
     type: types.SET_USER_SESION,

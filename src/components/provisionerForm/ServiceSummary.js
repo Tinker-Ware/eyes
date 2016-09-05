@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import CreateService from './CreateService';
 
-const ServiceSummary = ( {projectNameAppState, repositoryAppState, applicationAppState} ) => {
+const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   return (
     <div className="row sidebar">
       <h3>
@@ -24,17 +24,23 @@ const ServiceSummary = ( {projectNameAppState, repositoryAppState, applicationAp
         {(applicationAppState.get('application_name')) ? applicationAppState.get('application_name'):'none'}
       </p>
       <CreateService
+        cloudProviderAppState={cloudProviderAppState}
         projectNameAppState={projectNameAppState}
         repositoryAppState={repositoryAppState}
-        applicationAppState={applicationAppState}/>
+        applicationAppState={applicationAppState}
+        userAppState={userAppState}
+        requestPostUserProject={requestPostUserProject} />
     </div>
   );
 };
 
 ServiceSummary.propTypes = {
-    projectNameAppState: PropTypes.object.isRequired,
-    repositoryAppState: PropTypes.object.isRequired,
-    applicationAppState: PropTypes.object.isRequired
+  cloudProviderAppState: PropTypes.object.isRequired,
+  projectNameAppState: PropTypes.object.isRequired,
+  repositoryAppState: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired,
+  requestPostUserProject: PropTypes.func.isRequired
 };
 
 export default ServiceSummary;
