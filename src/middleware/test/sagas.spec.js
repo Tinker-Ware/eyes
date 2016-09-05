@@ -1,5 +1,5 @@
 import "babel-polyfill";
-import {expect} from 'chai';
+import { expect } from 'chai';
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects'; 
 import { fromJS } from 'immutable';
@@ -38,6 +38,10 @@ describe('sagas middleware', () => {
        })
      });
     
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+     
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetCloudProviderAccess)
     );
@@ -65,6 +69,10 @@ describe('sagas middleware', () => {
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"
       }
     };
+    
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetRepositoryAccess)
@@ -113,6 +121,10 @@ describe('sagas middleware', () => {
       })
     });
     
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+    
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetCloudProviderKeys, userAccess.cloud_provider.access_token, authorization)
     );
@@ -138,6 +150,10 @@ describe('sagas middleware', () => {
         "user_session": userAccess.user_session
       })
     });
+    
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetUserSesion, fromJS(userAccess.user_session))
@@ -201,6 +217,10 @@ describe('sagas middleware', () => {
       })
     });
     
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+    
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetRepositories, userAccess.user.username, userAccess.user.access_token)
     );
@@ -260,6 +280,10 @@ describe('sagas middleware', () => {
       })
     });
     
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+    
     expect(generator.next().value).to.deep.equal(
       call(doRequestPostCloudProviderKey, userAccess.cloud_provider.access_token, authorization,  fromJS(cloudProviderKey.key))
     );
@@ -296,6 +320,10 @@ describe('sagas middleware', () => {
         }
       })
     });
+    
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
       call(doRequestPostUser, fromJS(user.user_signup))
@@ -339,6 +367,12 @@ describe('sagas middleware', () => {
       }
     };
     
+    const userAuthorization = {
+      'user_sesion': {
+        'token': 'qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf'
+      }
+    };
+    
     const generator = postUserProject({
       'value': fromJS({
         "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
@@ -364,9 +398,13 @@ describe('sagas middleware', () => {
       })
     });
     
+    const err = new ReferenceError('404');
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+    
     expect(generator.next().value).to.deep.equal(
-      call(doRequestPostUserProject, fromJS(userProject.project))
+      call(doRequestPostUserProject, fromJS(userProject.project), fromJS(userAuthorization.user_sesion.token))
     );
+    
   });
-  
 });

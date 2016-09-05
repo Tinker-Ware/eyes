@@ -4,13 +4,16 @@ import { fromJS } from 'immutable';
 import 'whatwg-fetch';
 import * as actions from './actions/MiddlewareActions';
 import * as types from '../constants/ActionTypes';
+import * as hosts from '../constants/Hosts';
+
+/* eslint-disable no-empty */
 
 export const doRequest = (url, options) => {
   return fetch(url, options)
     .then(function(response) {
-      if (response.status >= 200 && response.status < 300) {  
+      if (response.status >= 200 && response.status < 300) {
         return Promise.resolve(response.json());
-      } else {  
+      } else {
         return Promise.reject(new Error(response.statusText));
       }
     });
@@ -18,7 +21,7 @@ export const doRequest = (url, options) => {
 
 export function* doRequestGetCloudProviderAccess() {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/cloud/do_callback',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/cloud/do_callback',
     {
       method: 'GET',
       mode: 'cors'
@@ -27,7 +30,7 @@ export function* doRequestGetCloudProviderAccess() {
 
 export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/cloud/keys',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/cloud/keys',
     {
       method: 'GET',
       headers: {
@@ -40,7 +43,7 @@ export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
 
 export function* doRequestGetRepositories(username, accessToken) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/repository/github/'+ username +'/repos',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/repository/github/'+ username +'/repos',
     {
       method: 'GET',
       headers: {
@@ -53,7 +56,7 @@ export function* doRequestGetRepositories(username, accessToken) {
 
 export function* doRequestGetRepositoryAccess() {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/repository/gh_callback',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/repository/gh_callback',
     {
       method: 'GET',
       mode: 'cors'
@@ -62,7 +65,7 @@ export function* doRequestGetRepositoryAccess() {
 
 export function* doRequestGetUserSesion(userSesion) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/users/login',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/users/login',
     {
       method: 'POST',
       headers: {
@@ -81,7 +84,7 @@ export function* doRequestGetUserSesion(userSesion) {
 
 export function* doRequestPostCloudProviderKey(accessToken, authorization, key) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/cloud/keys',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/cloud/keys',
     {
       method: 'POST',
       headers: {
@@ -99,7 +102,7 @@ export function* doRequestPostCloudProviderKey(accessToken, authorization, key) 
 
 export function* doRequestPostUser(userSignup) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/users',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/users',
     {
       method: 'POST',
       headers: {
@@ -118,7 +121,7 @@ export function* doRequestPostUser(userSignup) {
 
 export function* doRequestPostUserProject(userProject, authorization) {
   return yield call(
-    doRequest, 'http://localhost:3100/api/v1/project',
+    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/project',
     {
       method: 'POST',
       headers: {
@@ -147,7 +150,6 @@ export function* getCloudProviderAccess(userAccess) {
     )));
   }
   catch(error) {
-    console.log(error);
   }
 }
 
@@ -160,7 +162,6 @@ export function* getCloudProviderKeys(userAccess) {
     })));
   }
   catch(error) {
-    console.log(error);
   }
 }
 
@@ -173,7 +174,6 @@ export function* getRepositoryAccess() {
     );
   }
   catch(error) {
-    console.log(error);
   }
 }
 
@@ -186,7 +186,6 @@ export function* getUserSesion(userLogin) {
     );
   }
   catch(error) {
-    console.log(error);
   }
 }
 
@@ -198,7 +197,6 @@ export function* getUserRepositories(userAccess) {
     })));
   }
   catch(error) {
-    console.log(error);
   }
 }
 
@@ -211,7 +209,6 @@ export function* postCloudProviderKey(cloudProviderKeys) {
     })));
   }
   catch(error) {
-    console.log(error);
   }
 }
 
@@ -223,18 +220,17 @@ export function* postUser(user) {
     })));
   }
   catch(error) {
-    console.log(error);
   }
 }
 
 export function* postUserProject(project) {
   try {
-    const userProject = yield call(doRequestPostUserProject, project.value.get('user_project'), project.value.get('authorization'));
+    yield call(doRequestPostUserProject, project.value.get('user_project'), project.value.get('authorization'));
   }
   catch(error) {
-    yield put(actions.requestPostUserProjectError(fromJS({
-      'error': error,
-    })));
+    // yield put(actions.requestPostUserProjectError(fromJS({
+    //   'error': error,
+    // })));
   }
 }
 

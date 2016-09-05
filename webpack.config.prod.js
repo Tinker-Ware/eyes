@@ -11,12 +11,12 @@ export default {
   debug: true,
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
-  entry: ['babel-polyfill', 'whatwg-fetch', './src/index'],
+  entry: ['babel-polyfill', 'whatwg-fetch', 'webpack-hot-middleware/client?reload=true', './src/index'],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: `${__dirname}/dist`,
     publicPath: '/',
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[hash].js'
   },
   plugins: [
     // Hash the files using MD5 so that their names change when the content changes.
@@ -31,6 +31,8 @@ export default {
       __DEV__: false
     }),
 
+    new webpack.HotModuleReplacementPlugin(),
+    
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
 
