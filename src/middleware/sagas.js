@@ -4,7 +4,6 @@ import { fromJS } from 'immutable';
 import 'whatwg-fetch';
 import * as actions from './actions/MiddlewareActions';
 import * as types from '../constants/ActionTypes';
-import * as hosts from '../constants/Hosts';
 
 /* eslint-disable no-empty */
 
@@ -21,7 +20,7 @@ export const doRequest = (url, options) => {
 
 export function* doRequestGetCloudProviderAccess() {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/cloud/do_callback',
+    doRequest, process.env.HOST + '/api/v1/cloud/do_callback',
     {
       method: 'GET',
       mode: 'cors'
@@ -30,7 +29,7 @@ export function* doRequestGetCloudProviderAccess() {
 
 export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/cloud/keys',
+    doRequest, process.env.HOST + '/api/v1/cloud/keys',
     {
       method: 'GET',
       headers: {
@@ -43,7 +42,7 @@ export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
 
 export function* doRequestGetRepositories(username, accessToken) {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/repository/github/'+ username +'/repos',
+    doRequest, process.env.HOST + '/api/v1/repository/github/'+ username +'/repos',
     {
       method: 'GET',
       headers: {
@@ -56,7 +55,7 @@ export function* doRequestGetRepositories(username, accessToken) {
 
 export function* doRequestGetRepositoryAccess() {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/repository/gh_callback',
+    doRequest, process.env.HOST + '/api/v1/repository/gh_callback',
     {
       method: 'GET',
       mode: 'cors'
@@ -65,7 +64,7 @@ export function* doRequestGetRepositoryAccess() {
 
 export function* doRequestGetUserSesion(userSesion) {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/users/login',
+    doRequest, process.env.HOST + '/api/v1/users/login',
     {
       method: 'POST',
       headers: {
@@ -84,7 +83,7 @@ export function* doRequestGetUserSesion(userSesion) {
 
 export function* doRequestPostCloudProviderKey(accessToken, authorization, key) {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/cloud/keys',
+    doRequest, process.env.HOST + '/api/v1/cloud/keys',
     {
       method: 'POST',
       headers: {
@@ -102,7 +101,7 @@ export function* doRequestPostCloudProviderKey(accessToken, authorization, key) 
 
 export function* doRequestPostUser(userSignup) {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/users',
+    doRequest, process.env.HOST + '/api/v1/users',
     {
       method: 'POST',
       headers: {
@@ -121,7 +120,7 @@ export function* doRequestPostUser(userSignup) {
 
 export function* doRequestPostUserProject(userProject, authorization) {
   return yield call(
-    doRequest, ((process.env.NODE_ENV == 'development')? hosts.DEVELOPMENT: (process.env.NODE_ENV == 'production')? hosts.PRODUCTION : '') +  '/api/v1/project',
+    doRequest, process.env.HOST + '/api/v1/project',
     {
       method: 'POST',
       headers: {

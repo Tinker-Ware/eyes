@@ -3,6 +3,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import * as hosts from './src/constants/Hosts';
 
 export default {
   resolve: {
@@ -28,6 +29,7 @@ export default {
     // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.HOST': JSON.stringify(hosts.PRODUCTION),
       __DEV__: false
     }),
 
