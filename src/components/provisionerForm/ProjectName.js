@@ -16,7 +16,7 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
       className="row"
       id="project-configuration">
       <h2>
-        <i className="step fi-italic"></i>
+        <i className="step fi-italic" />
          Project Name
       </h2>
       <div className="large-12 columns">

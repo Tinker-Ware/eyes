@@ -7,7 +7,7 @@ const ServerProvider = () => {
       className="row"
       id="server-provider">
       <h2>
-        <i className="step fi-cloud"></i> 
+        <i className="step fi-cloud" /> 
           Select Server Provider
         </h2>
       <div className="large-3 medium-6 small-6 columns">
@@ -15,7 +15,7 @@ const ServerProvider = () => {
           <li className="price">
             <img
               className="amazon_web_services small-image"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
             </li>
           <li className="bullet-item">Amazon Web Services</li>
         </ul>
@@ -25,7 +25,7 @@ const ServerProvider = () => {
           <li className="price">
             <img
               className="digital_ocean small-image"
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
             </li>
           <li className="bullet-item">Digital Ocean</li>
         </ul>
@@ -33,7 +33,7 @@ const ServerProvider = () => {
       <div className="large-3 medium-6 small-6 columns end">
         <ul className="selection-table">
           <li className="price">
-            <img className="google_cloud small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+            <img className="google_cloud small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           </li>
           <li className="bullet-item">Google Cloud</li>
         </ul>
@@ -41,7 +41,7 @@ const ServerProvider = () => {
       <div className="large-3 medium-6 small-6 columns end">
         <ul className="selection-table">
           <li className="price">
-            <img className="none small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+            <img className="none small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           </li>
           <li className="bullet-item">None</li>
         </ul>

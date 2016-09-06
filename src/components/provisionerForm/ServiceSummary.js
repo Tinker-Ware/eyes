@@ -6,18 +6,18 @@ const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repository
   return (
     <div className="row sidebar">
       <h3>
-        <i className="step fi-clipboard-notes"></i>
+        <i className="step fi-clipboard-notes" />
          Your Service
       </h3>
       <h4 className="color-green">
-        <i className="step fi-italic"></i> 
+        <i className="step fi-italic" /> 
          Project Name
       </h4>
       <p id="label-project-name">
         {(projectNameAppState.get('project_name')) ? projectNameAppState.get('project_name'):'none'}
       </p>
       <h4 className="color-green">
-        <i className="step fi-social-dropbox"></i>
+        <i className="step fi-social-dropbox" />
          Aplication
       </h4>
       <p id="label-aplications">
