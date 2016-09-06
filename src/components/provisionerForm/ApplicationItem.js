@@ -8,7 +8,7 @@ const ApplicationItem = ( { activeApplication, identifier, handleClick, name, en
           className="bullet-item"
           id={identifier}
           onClick={handleClick}>
-          <img className={identifier} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+          <img className={identifier} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/>
           <span>{name}</span>
         </li>
       </ul>

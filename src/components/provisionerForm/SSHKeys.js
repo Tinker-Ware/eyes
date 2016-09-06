@@ -97,7 +97,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                     rows="5"
                     value={cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')?cloudProviderAppState.get('cloud_provider_ssh_keys_public_key'):''}
                     onChange={SSHKeyContentKeypress}
-                    placeholder="SSH Key Content"></textarea>
+                    placeholder="SSH Key Content" />
                 </label>
                 <div 
                   className="hide" 
@@ -151,7 +151,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
       data-magellan-destination="ssh-keys" 
       id="ssh-keys">
       <h2>
-        <i className="step fi-key"></i>
+        <i className="step fi-key" />
          Add SSH Keys
       </h2>
     {PrintSSHKeys}

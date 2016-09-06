@@ -18,7 +18,7 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
   return (
     <div className="row">
       <h2>
-        <i className="step fi-social-dropbox"></i>
+        <i className="step fi-social-dropbox" />
          Select Application
       </h2>
       {applicationsOptions.map((value, index) => 

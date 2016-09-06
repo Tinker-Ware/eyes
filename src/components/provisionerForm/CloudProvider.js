@@ -27,7 +27,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
             href="#"
             onClick={handleDigitalOceanLogin}>
             <img
-              className="DigitalOcean" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></img>
+              className="DigitalOcean" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
             {(cloudProviderAppState.get('cloud_provider')) ? 
               'Log out' : 'Log in as with Digital Ocean'}
           </a>

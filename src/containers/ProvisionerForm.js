@@ -25,7 +25,7 @@ export class ServiceForm extends Component {
         <Menu userAppState={this.props.userAppState} />
         <div className="row">
           <div className="large-10 columns">
-            <h1><i className="step fi-clipboard-notes"></i>
+            <h1><i className="step fi-clipboard-notes" />
               Create a Service
             </h1>
             <ProjectName 
@@ -33,7 +33,7 @@ export class ServiceForm extends Component {
               setProjectName={this.props.actions.setProjectName} />
             <div className="row">
               <h2>
-                <i className="step fi-share"></i>
+                <i className="step fi-share" />
                  Connect Service(s)
               </h2>
               {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?       
