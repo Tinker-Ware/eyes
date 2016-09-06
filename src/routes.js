@@ -18,7 +18,7 @@ export default (
       <IndexRoute component={Profile} />
     </Route>
     <Route
-      path="/login"
+      path="login"
       component={UserLogin} />
     <Route
       path="/registrations/new"

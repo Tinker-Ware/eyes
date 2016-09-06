@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import * as hosts from './src/constants/Hosts';
 
 export default {
   resolve: {
@@ -25,6 +26,7 @@ export default {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'), // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
+      'process.env.HOST': JSON.stringify(hosts.DEVELOPMENT),
       __DEV__: true
     }),
     new webpack.HotModuleReplacementPlugin(),

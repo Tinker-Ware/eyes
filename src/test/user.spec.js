@@ -8,8 +8,6 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {type: 'SET_USER', value: fromJS({
       "user": {
-        "id": 1,
-        "name": "Leonel Roberto",
         "username": "iLeonelRoberto",
         "email": "some@email.com"
       }
@@ -19,8 +17,6 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(fromJS({
       "user": {
-        "id": 1,
-        "name": "Leonel Roberto",
         "username": "iLeonelRoberto",
         "email": "some@email.com"
       }
