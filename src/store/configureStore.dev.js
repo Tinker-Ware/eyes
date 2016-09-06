@@ -3,14 +3,16 @@
 // With Redux, the actual stores are in /reducers.
 
 import { createStore, applyMiddleware, compose } from 'redux';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import createSagaMiddleware from 'redux-saga';
 import root from '../middleware/sagas';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
+  const reduxImmutalbeMiddleware = reduxImmutableStateInvariant();
   
-  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware), initialState, compose(
+  const store = createStore(rootReducer, applyMiddleware(reduxImmutalbeMiddleware, sagaMiddleware), initialState, compose(
     // Add other middleware on this line...
     window.devToolsExtension ? window.devToolsExtension() : f => f //add support for Redux dev tools
     )
