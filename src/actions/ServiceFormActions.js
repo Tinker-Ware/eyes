@@ -36,6 +36,10 @@ export function setUser(value){
   return { type: types.SET_USER, value };
 }
 
+export function setUserSesion(value){
+  return { type: types.SET_USER_SESION, value };
+}
+
 export function setUserInfo(value){
   return { type: types.SET_USER_INFORMATION, value };
 }

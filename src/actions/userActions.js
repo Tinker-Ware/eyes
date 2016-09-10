@@ -17,7 +17,6 @@ export function setUserInformation(value){
 }
 
 export function setUserSesion(value){
-  debugger;
   return { type: SET_USER_SESION, value };
 }
 

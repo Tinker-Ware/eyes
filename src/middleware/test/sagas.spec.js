@@ -158,12 +158,6 @@ describe('sagas middleware', () => {
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetUserSesion, fromJS(userAccess.user_session))
     );
-    
-    expect(generator.next(userAccess).value).to.deep.equal(
-      put(actions.setUserSesion(fromJS({
-        user_session: userAccess.user_session
-      })))
-    );
   });
   
   it('handles GET_USER_REPOSITORIES', () => {

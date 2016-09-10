@@ -181,11 +181,6 @@ export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
     cookie.save('user_session', userSession.user_session);
-    cookie.load('user_session');
-    yield put(actions.setUserSesion(fromJS({
-        user_session: userSession.user_session
-      }))
-    );
   }
   catch(error) {
   }

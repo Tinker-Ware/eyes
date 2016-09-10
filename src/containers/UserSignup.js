@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { fromJS } from 'immutable';
+import cookie from 'react-cookie';
 import * as actions from '../actions/userActions';
 import Signup from '../components/userAuth/Signup';
 
