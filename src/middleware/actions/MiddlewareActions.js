@@ -49,9 +49,9 @@ export function setUser(user){
   };
 }
 
-export function setUserSesion(userSesion){
-  return{
-    type: types.SET_USER_SESION,
-    value: userSesion
-  };
-}
+// export function setUserSesion(userSesion){
+//   return{
+//     type: types.SET_USER_SESION,
+//     value: userSesion
+//   };
+// }
