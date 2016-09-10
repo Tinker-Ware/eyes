@@ -4,13 +4,13 @@ import React from 'react';
 import {render} from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import routes from './routes';
-import configureStore from './store/configureStore';
+import routes from '../routes/userProfile';
+import configureStore from '../store/configureStore';
 import { syncHistoryWithStore } from 'react-router-redux';
-import './styles/foundation.css';
-import './styles/styles.scss';
-import './icons/foundation-icons.css';
-require('./favicon.ico');
+import '../styles/foundation.css';
+import '../styles/styles.scss';
+import '../icons/foundation-icons.css';
+require('../favicon.ico');
 
 const store = configureStore();
 

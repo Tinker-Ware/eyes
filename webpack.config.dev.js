@@ -15,7 +15,7 @@ export default {
     'whatwg-fetch',
     './src/webpack-public-path',
     'webpack-hot-middleware/client?reload=true',
-    './src/index'
+    './src/apps/development'
   ],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
