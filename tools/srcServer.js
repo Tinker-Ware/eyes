@@ -40,10 +40,16 @@ browserSync({
         // for other settings see
         // http://webpack.github.io/docs/webpack-dev-middleware.html
       }),
-
+              
       webpackHotMiddleware(bundler) // bundler should be the same as above
     ]
   },
+  
+  // socket: {
+  //             path: "/browser-sync/socket.io",
+  //             clientPath: "/browser-sync",
+  //             namespace: "/browser-sync"
+  //         },
 
   // no need to watch '*.js' here, webpack will take care of it for us,
   // including full page reloads if HMR won't work

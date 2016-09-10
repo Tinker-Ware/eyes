@@ -332,7 +332,7 @@ describe('sagas middleware', () => {
     expect(generator.next(user).value).to.deep.equal(
       put(actions.setUser(fromJS(
       {
-        'user_sesion': user.user_sesion
+        'user_session': user.user_sesion
       })))
     );
   });

@@ -8,7 +8,7 @@ import Signup from '../components/userAuth/Signup';
 
 export class UserSignup extends Component {
   componentWillMount() {
-    if (this.props.userAppState.get('user_session'))
+    if (cookie.load('user_session'))
       browserHistory.push('/');
   }
   componentDidUpdate() {

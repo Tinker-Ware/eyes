@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
+import { fromJS } from 'immutable';
+import cookie from 'react-cookie';
 import * as actions from '../actions/ServiceFormActions';
+import * as userActions from '../actions/userActions';
 import Application from '../components/provisionerForm/Application';
 import CreateService from '../components/provisionerForm/CreateService';
 import CloudProvider from '../components/provisionerForm/CloudProvider';
@@ -16,8 +19,13 @@ const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
   componentWillMount() {
-    if (!this.props.userAppState.get('user_session'))
+    if (!cookie.load('user_session')){
       browserHistory.push('/login');
+    }else{
+      userActions.setUserSesion(fromJS({
+        'user_session': cookie.load('user_session')
+      }));
+    }
   }
   render() {
     return (
@@ -124,7 +132,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch)
   };
 }
 
