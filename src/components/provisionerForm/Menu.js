@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import {Link, IndexLink} from 'react-router';
 
 const Menu = ( { userAppState } ) => {
+  if(userAppState.get('user_session'))
+    console.log(userAppState.get('user_session').toJS());
   return (
     <div data-magellan-expedition="fixed">
       <div className="row">
@@ -21,7 +23,7 @@ const Menu = ( { userAppState } ) => {
              Aplications</a>
           </dd>
           <dd className="user-login">
-            <Link to="/user"><i className="step fi-torso" /> 
+            <Link to="/user"><i className="step fi-torso" />
               &nbsp;Logged as {userAppState.get('user_session')?userAppState.get('user_session').toJS().email:''}</Link>
           </dd>
         </dl>

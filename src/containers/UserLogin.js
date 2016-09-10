@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { fromJS } from 'immutable';
+import cookie from 'react-cookie';
 import * as actions from '../actions/userActions';
 import Login from "../components/userAuth/Login";
 
 export class UserLogin extends Component {
   componentWillMount() {
-    if (this.props.userAppState.get('user_session'))
+    if (cookie.load('user_session'))
       browserHistory.push('/');
   }
   componentDidUpdate() {
