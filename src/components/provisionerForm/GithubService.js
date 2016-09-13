@@ -5,8 +5,40 @@ import { fromJS } from 'immutable';
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
   const handleGithubLogin = (e) => {
     e.preventDefault();
+    
     if(e.target.text != "Log out"){
-      requestRepositoryAccess();
+      // Open a new window
+      const win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=e0b908187efc0692a83a&response_type=code&scope=user%3Aemail+repo&state=SGwLYRYSoB', 'name', 'height=600,width=450');
+      if (win) win.focus();
+
+      const pollTimer = window.setInterval(() => {
+        try {
+          if (!!win && win.location.href.indexOf('callback') !== -1) {
+            window.clearInterval(pollTimer);
+
+            // Get the URL hash with your token in it
+            const hash = win.location.search;
+            win.close();
+
+            // Parse the string hash and convert to object of keys and values
+            const result = hash.substring(1)
+              .split('&')
+              .map(i => i.split('='))
+              .reduce((prev, curr) => {
+                const next = { ...prev };
+                next[curr[0]] = curr[1];
+                return next;
+              }, {});
+                
+            // Calculate when the token expires and store in the result object
+            result.expires_at = Date.now() + parseInt(hash.expires_in, 10);
+
+            //  TODO: Persist result in sessionStorage here
+          }
+        } catch (err) {
+          // do something or nothing if window still not redirected after login
+        }
+      }, 100);  
     }else{
       setIntegracion(fromJS({
         integration: ''
