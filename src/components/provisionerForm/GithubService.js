@@ -7,13 +7,12 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
     e.preventDefault();
     
     if(e.target.text != "Log out"){
-      // Open a new window
-      const win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=e0b908187efc0692a83a&response_type=code&scope=user%3Aemail+repo&state=SGwLYRYSoB', 'name', 'height=600,width=450');
+      const win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=e0b908187efc0692a83a&response_type=code&scope=user%3Aemail+repo&state=SGwLYRYSoB', 'Github Oauth', 'height=600,width=450');
       if (win) win.focus();
 
       const pollTimer = window.setInterval(() => {
         try {
-          if (!!win && win.location.href.indexOf('callback') !== -1) {
+          if (!!win && win.location.href.indexOf('/callback') !== -1) {
             window.clearInterval(pollTimer);
 
             // Get the URL hash with your token in it
