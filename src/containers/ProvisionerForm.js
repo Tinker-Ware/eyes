@@ -17,10 +17,7 @@ import SSHKeys from '../components/provisionerForm/SSHKeys';
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
-  componentWillMount() {
-    if (!cookie.load('user_session'))
-      browserHistory.push('/login');
-  }
+    
   render() {
     if(!this.props.userAppState.get('user_session'))
       this.props.actions.setUserSesion(fromJS({

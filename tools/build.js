@@ -5,8 +5,9 @@
  
 import webpack from 'webpack';
 import provisionerFormConfig from '../webpack.config.provisionerForm.prod';
-import loginConfig from '../webpack.config.login.prod';
+import userLoginConfig from '../webpack.config.userLogin.prod';
 import userProfileConfig from '../webpack.config.userProfile.prod';
+import serviceOAuthConfig from '../webpack.config.serviceOAuth.prod';
 import {chalkError, chalkSuccess, chalkWarning, chalkProcessing} from './chalkConfig';
 
 process.env.NODE_ENV = 'production'; // this assures React is built in prod mode and that the Babel dev config doesn't apply.
@@ -35,7 +36,29 @@ webpack(provisionerFormConfig).run((error, stats) => {
   return 0;
 });
 
-webpack(loginConfig).run((error, stats) => {
+webpack(userLoginConfig).run((error, stats) => {
+   if (error) { // so a fatal error occurred. Stop here.
+     console.log(chalkError(error));
+      return 1;
+    }
+
+  const jsonStats = stats.toJson();
+
+  if (jsonStats.hasErrors) {
+    return jsonStats.errors.map(error => console.log(chalkError(error)));
+  }
+
+  if (jsonStats.hasWarnings) {
+    console.log(chalkWarning('Webpack generated the following warnings: '));
+    jsonStats.warnings.map(warning => console.log(chalkWarning(warning)));
+  }
+
+  console.log(`Webpack stats: ${stats}`); // eslint-disable-line no-console
+
+  return 0;
+});
+
+webpack(serviceOAuthConfig).run((error, stats) => {
    if (error) { // so a fatal error occurred. Stop here.
      console.log(chalkError(error));
       return 1;

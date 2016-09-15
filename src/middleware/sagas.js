@@ -180,7 +180,7 @@ export function* getRepositoryAccess() {
 export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
-    cookie.save('user_session', userSession.user_session);
+    cookie.save('user_session', userSession.user_session, { path: '/' });
   }
   catch(error) {
   }
@@ -212,7 +212,7 @@ export function* postCloudProviderKey(cloudProviderKeys) {
 export function* postUser(user) {
   try {
     const userSignup = yield call(doRequestPostUser, user.value.get('user_signup'));
-    cookie.save('user_session', userSignup.user_session);
+    cookie.save('user_session', userSignup.user_session, { path: '/' });
     yield put(actions.setUser(fromJS({
       'user_session': userSignup.user_session,
     })));

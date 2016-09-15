@@ -1,43 +1,21 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { fromJS } from 'immutable';
+import cookie from 'react-cookie';
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
+  // var timer = setInterval(function() {   
+	// 	if(cookie.load('github_oauth')) {
+	// 		clearInterval(timer);
+  //     // requestRepositoryAccess();
+	// 	}  
+  // }, 1000); 
   const handleGithubLogin = (e) => {
     e.preventDefault();
     
     if(e.target.text != "Log out"){
-      const win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=e0b908187efc0692a83a&response_type=code&scope=user%3Aemail+repo&state=SGwLYRYSoB', 'Github Oauth', 'height=600,width=450');
+      let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=e0b908187efc0692a83a&response_type=code&scope=user%3Aemail+repo&state=SGwLYRYSoB', 'Github Oauth', 'height=600,width=450');
       if (win) win.focus();
-
-      const pollTimer = window.setInterval(() => {
-        try {
-          if (!!win && win.location.href.indexOf('/callback') !== -1) {
-            window.clearInterval(pollTimer);
-
-            // Get the URL hash with your token in it
-            const hash = win.location.search;
-            win.close();
-
-            // Parse the string hash and convert to object of keys and values
-            const result = hash.substring(1)
-              .split('&')
-              .map(i => i.split('='))
-              .reduce((prev, curr) => {
-                const next = { ...prev };
-                next[curr[0]] = curr[1];
-                return next;
-              }, {});
-                
-            // Calculate when the token expires and store in the result object
-            result.expires_at = Date.now() + parseInt(hash.expires_in, 10);
-
-            //  TODO: Persist result in sessionStorage here
-          }
-        } catch (err) {
-          // do something or nothing if window still not redirected after login
-        }
-      }, 100);  
     }else{
       setIntegracion(fromJS({
         integration: ''
@@ -120,7 +98,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
     <div className="large-6 medium-6 small-12 columns">
       <ul className="selection-table">
         <li className="bullet-item">
-          <a
+          <Link
             href="#"
             onClick={handleGithubLogin}
             className="button radius btn-connect">
@@ -129,7 +107,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
               {(repositoryAppState.get('integration')) ? 
                 'Log out' : 'Log in with Github'}
-          </a>
+          </Link>
           {optionsRepositoryList}
           {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration')) ? 
             <h5 id="firstModalTitle">Select a repository.</h5> : ''}
