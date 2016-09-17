@@ -186,7 +186,6 @@ export function* getCloudProviderKeys(userAccess) {
 export function* getRepositoryAccess(userAccess) {
   try {
     const repositoryAccess = yield call(doRequestGetRepositoryAccess, userAccess.value.get('authorization'), userAccess.value.get('oauth_request'));
-    console.log(repositoryAccess.callback);
     yield put(actions.receiveRepositoryAccess(fromJS({
         integration: repositoryAccess.callback
       }))
