@@ -28,13 +28,6 @@ export function setCloudProviderSshKeys(cloudProviderSshKeys){
   };
 }
 
-export function requestCloudProviderSSHKeys(cloudProviderAccess){
-  return{
-    type: types.REQUEST_CLOUD_PROVIDER_KEYS,
-    value: cloudProviderAccess
-  };
-}
-
 // export function requestPostUserProjectError(error){
 //   return{
 //     type: types.REQUEST_POST_USER_PROJECT_FAILED,
