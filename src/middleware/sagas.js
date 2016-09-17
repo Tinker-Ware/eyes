@@ -19,11 +19,22 @@ export const doRequest = (url, options) => {
     });
 };
 
-export function* doRequestGetCloudProviderAccess() {
+export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
   return yield call(
-    doRequest, process.env.HOST + '/api/v1/cloud/do_callback',
+    doRequest, process.env.HOST + '/api/v1/cloud/digital_ocean/oauth',
     {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+        'authorization': 'Bearer ' + authorization,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'oauth_request': {
+          'user_id': userAccess.toJS().user_id,
+          'code': userAccess.toJS().code
+        }
+      }),
       mode: 'cors'
     });
 }
@@ -54,11 +65,23 @@ export function* doRequestGetRepositories(username, accessToken) {
     });
 }
 
-export function* doRequestGetRepositoryAccess() {
+export function* doRequestGetRepositoryAccess(authorization, userAccess) {
   return yield call(
-    doRequest, process.env.HOST + '/api/v1/repository/gh_callback',
+    doRequest, process.env.HOST + '/api/v1/repository/github/oauth',
     {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+        'authorization': 'Bearer ' + authorization,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'oauth_request': {
+          'user_id': userAccess.toJS().user_id,
+          'code': userAccess.toJS().code,
+          'state': userAccess.toJS().state
+        }
+      }),
       mode: 'cors'
     });
 }
@@ -138,16 +161,11 @@ export function* doRequestPostUserProject(userProject, authorization) {
 
 export function* getCloudProviderAccess(userAccess) {
   try {
-    const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess);
+    const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess, userAccess.value.get('authorization'), userAccess.value.get('oauth_request'));
     yield put(actions.setCloudProviderAccess(fromJS({
-        cloud_provider: cloudProviderAccess.cloud_provider
+        cloud_provider: cloudProviderAccess.callback
       }))
     );
-    yield put(actions.requestCloudProviderSSHKeys(fromJS({
-        'access_token': cloudProviderAccess.cloud_provider.access_token,
-        'authorization': userAccess.value.get('authorization')
-      }
-    )));
   }
   catch(error) {
   }
@@ -165,11 +183,12 @@ export function* getCloudProviderKeys(userAccess) {
   }
 }
 
-export function* getRepositoryAccess() {
+export function* getRepositoryAccess(userAccess) {
   try {
-    const userAccess = yield call(doRequestGetRepositoryAccess);
-    yield put(actions.receiveRepository(fromJS({
-        integration: userAccess.user
+    const repositoryAccess = yield call(doRequestGetRepositoryAccess, userAccess.value.get('authorization'), userAccess.value.get('oauth_request'));
+    console.log(repositoryAccess.callback);
+    yield put(actions.receiveRepositoryAccess(fromJS({
+        integration: repositoryAccess.callback
       }))
     );
   }

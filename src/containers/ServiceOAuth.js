@@ -15,7 +15,7 @@ export class ServiceOAuth extends Component {
         next[curr[0]] = curr[1];
         return next;
       }, {});
-    cookie.save(this.props.params.serviceName+'_oauth', true, { path: '/' });
+    cookie.save(this.props.params.serviceName+'_oauth', result, { path: '/' });
     window.close();
   }
   render() {

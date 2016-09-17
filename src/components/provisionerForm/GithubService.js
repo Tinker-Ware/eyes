@@ -4,17 +4,26 @@ import { fromJS } from 'immutable';
 import cookie from 'react-cookie';
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
-  // var timer = setInterval(function() {   
-	// 	if(cookie.load('github_oauth')) {
-	// 		clearInterval(timer);
-  //     // requestRepositoryAccess();
-	// 	}  
-  // }, 1000); 
+  if(userAppState.get('user_session'))
+    var timer = setInterval(function() {
+  		if(cookie.load('github_oauth')) {
+        requestRepositoryAccess(fromJS({
+          "authorization": userAppState.get('user_session').toJS().token,
+          "oauth_request": {
+            "user_id": userAppState.get('user_session').toJS().id,
+            "code": cookie.load('github_oauth').code,
+            "state": cookie.load('github_oauth').state
+          }
+        }));
+        cookie.remove('github_oauth');
+        clearInterval(timer);
+  		}
+    }, 1000);
   const handleGithubLogin = (e) => {
     e.preventDefault();
     
     if(e.target.text != "Log out"){
-      let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=e0b908187efc0692a83a&response_type=code&scope=user%3Aemail+repo&state=SGwLYRYSoB', 'Github Oauth', 'height=600,width=450');
+      let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=cfc461f8cf0dc4de566d&response_type=cod&state=github&scope=user%3Aemail+repo', 'Github Oauth', 'height=600,width=450');
       if (win) win.focus();
     }else{
       setIntegracion(fromJS({

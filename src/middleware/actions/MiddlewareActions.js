@@ -1,6 +1,6 @@
 import * as types from '../../constants/ActionTypes';
 
-export function receiveRepository(integration){
+export function receiveRepositoryAccess(integration){
   return {
     type: types.SET_INTEGRATION,
     value: integration
