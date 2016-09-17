@@ -1,12 +1,30 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { fromJS } from 'immutable';
+import cookie from 'react-cookie';
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
+  if(userAppState.get('user_session'))
+    var timer = setInterval(function() {
+  		if(cookie.load('github_oauth')) {
+        requestRepositoryAccess(fromJS({
+          "authorization": userAppState.get('user_session').toJS().token,
+          "oauth_request": {
+            "user_id": userAppState.get('user_session').toJS().id,
+            "code": cookie.load('github_oauth').code,
+            "state": cookie.load('github_oauth').state
+          }
+        }));
+        cookie.remove('github_oauth');
+        clearInterval(timer);
+  		}
+    }, 1000);
   const handleGithubLogin = (e) => {
     e.preventDefault();
+    
     if(e.target.text != "Log out"){
-      requestRepositoryAccess();
+      let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=cfc461f8cf0dc4de566d&response_type=cod&state=github&scope=user%3Aemail+repo', 'Github Oauth', 'height=600,width=450');
+      if (win) win.focus();
     }else{
       setIntegracion(fromJS({
         integration: ''
@@ -89,7 +107,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
     <div className="large-6 medium-6 small-12 columns">
       <ul className="selection-table">
         <li className="bullet-item">
-          <a
+          <Link
             href="#"
             onClick={handleGithubLogin}
             className="button radius btn-connect">
@@ -98,7 +116,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
               {(repositoryAppState.get('integration')) ? 
                 'Log out' : 'Log in with Github'}
-          </a>
+          </Link>
           {optionsRepositoryList}
           {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration')) ? 
             <h5 id="firstModalTitle">Select a repository.</h5> : ''}

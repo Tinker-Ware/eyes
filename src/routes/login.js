@@ -12,5 +12,6 @@ export default (
     <Route
       path="/registrations/new"
       component={UserSignup} />
+    <Route status={404} path="*" component={UserLogin} />
   </Route>
 );

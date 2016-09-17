@@ -8,33 +8,28 @@ import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doReques
 
 describe('sagas middleware', () => {
   
-  it('handles GET_CLOUD_PROVIDER_ACCESS', () => {
-    const cloudProviderAccess = {
-      cloud_provider: {
-        "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",
-        "token_type": "bearer",
-        "expires_in": "2592000",
-        "refresh_token": "00a3aae641658d",
-        "scope": "read write",
-        "info": {
-          "name": "Sammy the Shark",
-          "email":"sammy@digitalocean.com",
-          "uuid":"e028b1b918853eca7fba208a9d7e9d29a6e93c57"
-        }
+  it('handles REQUEST_CLOUD_PROVIDER_ACCESS', () => {
+    const userAccess = {
+      "oauth_request": {
+        "user_id": 1,
+        "code": "8d1ea094fc64181b88db"
       }
     };
     
-    const userSession = {
-      "user_session": {
-        "email": "some@email.com",
-        "token": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf"
+    const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
+    
+    const cloudProviderAccess = {
+      callback: {
+        "provider": "digitalocean",
+        "username": "ileonelperea"
       }
-    };
+    }
     
     const generator = getCloudProviderAccess({
       value: 
       fromJS({
-        "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf"
+        "authorization": authorization,
+        "oauth_request": userAccess.oauth_request
        })
      });
     
@@ -43,44 +38,53 @@ describe('sagas middleware', () => {
     expect(generatorError).to.throw(err);
      
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetCloudProviderAccess)
+      call(doRequestGetCloudProviderAccess, authorization, fromJS(userAccess.oauth_request))
     );
     
     expect(generator.next(cloudProviderAccess).value).to.deep.equal(
       put(actions.setCloudProviderAccess(fromJS({
-          cloud_provider: cloudProviderAccess.cloud_provider
-        })))
-    );
-    
-    expect(generator.next(cloudProviderAccess.access_token).value).to.deep.equal(
-      put(actions.requestCloudProviderSSHKeys(fromJS({
-          access_token: cloudProviderAccess.cloud_provider.access_token,
-          authorization: userSession.user_session.token
+          cloud_provider: cloudProviderAccess.callback
         })))
     );
   });
   
-  it('handles GET_REPOSITORY_ACCESS', () => {
-    const generator = getRepositoryAccess();
+  it('handles REQUEST_GITHUB_ACCESS', () => {
     const userAccess = {
-      user: {
-        "id": 1,
-        "username": "tinkerware",
-        "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"
+      "oauth_request": {
+        "user_id": 1,
+        "code": "8d1ea094fc64181b88db",
+        "state": "SGwLYRYSoB"
       }
     };
+    
+    const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
+    
+    const generator = getRepositoryAccess({
+      value: 
+      fromJS({
+        "authorization": authorization,
+        "oauth_request": userAccess.oauth_request
+       })
+     });
+    
+    const repositoryAccess = {
+      callback: {
+        "provider": "github",
+        "username": "iLeonelPerea"
+      }
+    }
     
     const err = new ReferenceError('404');
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetRepositoryAccess)
+      call(doRequestGetRepositoryAccess, authorization, fromJS(userAccess.oauth_request))
     );
     
-    expect(generator.next(userAccess).value).to.deep.equal(
-      put(actions.receiveRepository(fromJS({
-          integration: userAccess.user
+    expect(generator.next(repositoryAccess).value).to.deep.equal(
+      put(actions.receiveRepositoryAccess(fromJS({
+          integration: repositoryAccess.callback
         })))
     );
   });

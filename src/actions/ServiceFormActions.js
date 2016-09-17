@@ -56,8 +56,8 @@ export function requestPostUserProject(value) {
   return { type: types.REQUEST_POST_USER_PROJECT, value };
 }
 
-export function requestRepositoryAccess() {
-  return { type: types.REQUEST_GITHUB_ACCESS };
+export function requestRepositoryAccess(value) {
+  return { type: types.REQUEST_GITHUB_ACCESS, value };
 }
 
 export function requestUserRepositories(value) {

@@ -1,6 +1,6 @@
 import * as types from '../../constants/ActionTypes';
 
-export function receiveRepository(integration){
+export function receiveRepositoryAccess(integration){
   return {
     type: types.SET_INTEGRATION,
     value: integration
@@ -25,13 +25,6 @@ export function setCloudProviderSshKeys(cloudProviderSshKeys){
   return{
     type: types.SET_CLOUD_PROVIDER_SSH_KEY,
     value: cloudProviderSshKeys
-  };
-}
-
-export function requestCloudProviderSSHKeys(cloudProviderAccess){
-  return{
-    type: types.REQUEST_CLOUD_PROVIDER_KEYS,
-    value: cloudProviderAccess
   };
 }
 

@@ -9,5 +9,6 @@ export default (
     path="/"
     component={UserProfile}>
     <IndexRoute component={Profile} />
+    <Route status={404} path="*" component={Profile} />
   </Route>
 );
