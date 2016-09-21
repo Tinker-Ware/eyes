@@ -16,10 +16,14 @@ const bundler = webpack(config);
 // Run Browsersync and use middleware for Hot Module Replacement
 browserSync({
   port: 3000,
-  ui: false,
   ghostMode: false,
   logLevel: "silent",
   notify: false,
+  socket: {
+    path: '/browser-sync/socket.io',
+    clientPath: '/browser-sync',
+    namespace: '/browser-sync'
+  },
   server: {
     baseDir: 'src',
 
@@ -48,7 +52,5 @@ browserSync({
 
   // no need to watch '*.js' here, webpack will take care of it for us,
   // including full page reloads if HMR won't work
-  files: [
-    'src/*.html'
-  ]
+  "files": './src',
 });
