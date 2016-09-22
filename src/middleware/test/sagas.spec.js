@@ -23,7 +23,7 @@ describe('sagas middleware', () => {
         "provider": "digitalocean",
         "username": "ileonelperea"
       }
-    }
+    };
     
     const generator = getCloudProviderAccess({
       value: 
@@ -72,7 +72,7 @@ describe('sagas middleware', () => {
         "provider": "github",
         "username": "iLeonelPerea"
       }
-    }
+    };
     
     const err = new ReferenceError('404');
     const generatorError = function () { throw err; };

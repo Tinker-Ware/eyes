@@ -187,7 +187,7 @@ export function* getRepositoryAccess(userAccess) {
   try {
     const repositoryAccess = yield call(doRequestGetRepositoryAccess, userAccess.value.get('authorization'), userAccess.value.get('oauth_request'));
     yield put(actions.receiveRepositoryAccess(fromJS({
-        integration: repositoryAccess.callback
+        'integration': repositoryAccess.callback
       }))
     );
   }
@@ -199,6 +199,9 @@ export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
     cookie.save('user_session', userSession.user_session, { path: '/' });
+    yield put(actions.setUser(fromJS({
+      'user_session': userSession.user_session,
+    })));
   }
   catch(error) {
   }

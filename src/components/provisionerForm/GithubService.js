@@ -4,9 +4,10 @@ import { fromJS } from 'immutable';
 import cookie from 'react-cookie';
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
-  if(userAppState.get('user_session'))
-    var timer = setInterval(function() {
-  		if(cookie.load('github_oauth')) {
+  if(userAppState.get('user_session')){
+    let timer; 
+    timer = setInterval(function(){
+      if(cookie.load('github_oauth')){
         requestRepositoryAccess(fromJS({
           "authorization": userAppState.get('user_session').toJS().token,
           "oauth_request": {
@@ -17,11 +18,11 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
         }));
         cookie.remove('github_oauth');
         clearInterval(timer);
-  		}
+      }
     }, 1000);
+  }
   const handleGithubLogin = (e) => {
     e.preventDefault();
-    
     if(e.target.text != "Log out"){
       let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=cfc461f8cf0dc4de566d&response_type=cod&state=github&scope=user%3Aemail+repo', 'Github Oauth', 'height=600,width=450');
       if (win) win.focus();

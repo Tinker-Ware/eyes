@@ -4,9 +4,10 @@ import { fromJS } from 'immutable';
 import cookie from 'react-cookie';
 
 const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {
-  if(userAppState.get('user_session'))
-    var timer = setInterval(function() {
-  		if(cookie.load('digitalocean_oauth')) {
+  if(userAppState.get('user_session')){
+    let timer;
+    timer = setInterval(function(){
+      if(cookie.load('digitalocean_oauth')) {
         requestCloudProviderAccess(fromJS({
           "authorization": userAppState.get('user_session').toJS().token,
           "oauth_request": {
@@ -16,8 +17,9 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
         }));
         cookie.remove('digitalocean_oauth');
         clearInterval(timer);
-  		}  
+      }  
     }, 1000);
+  }
   const handleDigitalOceanLogin = (e) => {
     e.preventDefault();
     if(e.target.text != "Log out"){
