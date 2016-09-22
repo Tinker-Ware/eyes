@@ -191,7 +191,7 @@ export function* getRepositoryAccess(userAccess) {
       }))
     );
   }
-  catch(error) { 
+  catch(error) {
   }
 }
 

@@ -6,7 +6,7 @@ import cookie from 'react-cookie';
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
   if(userAppState.get('user_session')){
     let timer; 
-    var timer = setInterval(function(){
+    timer = setInterval(function(){
       if(cookie.load('github_oauth')){
         requestRepositoryAccess(fromJS({
           "authorization": userAppState.get('user_session').toJS().token,
