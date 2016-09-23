@@ -55,8 +55,8 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }));
       repositoryAppState.get('integration') && !repositoryAppState.get('repositories') ?
         requestUserRepositories(fromJS({
-          userName: repositoryAppState.get('integration').toJS().username,
-          accessToken: repositoryAppState.get('integration').toJS().access_token})) : 
+          "userName": repositoryAppState.get('integration').toJS().username,
+          "authorization": userAppState.get('user_session').toJS().token})) : 
         '';
     }else{
       setShowRepositories(fromJS({
@@ -101,7 +101,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
                 </label>
             </div>
             <div className="switch-description">
-                <span>{value.name}</span>
+                <span>{value.full_name}</span>
             </div>
         </div> ) : '';
   return (

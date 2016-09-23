@@ -48,47 +48,6 @@ describe('sagas middleware', () => {
     );
   });
   
-  it('handles REQUEST_GITHUB_ACCESS', () => {
-    const userAccess = {
-      "oauth_request": {
-        "user_id": 1,
-        "code": "8d1ea094fc64181b88db",
-        "state": "SGwLYRYSoB"
-      }
-    };
-    
-    const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
-    
-    const generator = getRepositoryAccess({
-      value: 
-      fromJS({
-        "authorization": authorization,
-        "oauth_request": userAccess.oauth_request
-       })
-     });
-    
-    const repositoryAccess = {
-      callback: {
-        "provider": "github",
-        "username": "iLeonelPerea"
-      }
-    };
-    
-    const err = new ReferenceError('404');
-    const generatorError = function () { throw err; };
-    expect(generatorError).to.throw(err);
-    
-    expect(generator.next().value).to.deep.equal(
-      call(doRequestGetRepositoryAccess, authorization, fromJS(userAccess.oauth_request))
-    );
-    
-    expect(generator.next(repositoryAccess).value).to.deep.equal(
-      put(actions.receiveRepositoryAccess(fromJS({
-          integration: repositoryAccess.callback
-        })))
-    );
-  });
-  
   it('handles GET_CLOUD_PROVIDER_SSH_KEYS', () => {
     const userAccess = {
       'cloud_provider': {
@@ -169,7 +128,7 @@ describe('sagas middleware', () => {
       user: {
         "id": 1,
         "username": "tinkerware",
-        "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3"
+        "authorization": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
     };
     const userRepos = {
@@ -211,7 +170,7 @@ describe('sagas middleware', () => {
     const generator = getUserRepositories({
       'value': fromJS({
         'userName': userAccess.user.username,
-        'accessToken': userAccess.user.access_token
+        'authorization': userAccess.user.authorization
       })
     });
     
@@ -220,7 +179,7 @@ describe('sagas middleware', () => {
     expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetRepositories, userAccess.user.username, userAccess.user.access_token)
+      call(doRequestGetRepositories, userAccess.user.username, userAccess.user.authorization)
     );
 
     expect(generator.next(userRepos).value).to.deep.equal(

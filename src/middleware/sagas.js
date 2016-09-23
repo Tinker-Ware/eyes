@@ -52,14 +52,13 @@ export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
     });
 }
 
-export function* doRequestGetRepositories(username, accessToken) {
+export function* doRequestGetRepositories(username, authorization) {
   return yield call(
     doRequest, process.env.HOST + '/api/v1/repository/github/'+ username +'/repos',
     {
       method: 'GET',
       headers: {
-        'authorization': 'Bearer qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf',
-        'provider-token': accessToken
+        'authorization': 'Bearer ' + authorization
       },
       mode: 'cors'
     });
@@ -209,7 +208,7 @@ export function* getUserSesion(userLogin) {
 
 export function* getUserRepositories(userAccess) {
   try {
-    const userRepos = yield call(doRequestGetRepositories, userAccess.value.get('userName'), userAccess.value.get('accessToken'));
+    const userRepos = yield call(doRequestGetRepositories, userAccess.value.get('userName'), userAccess.value.get('authorization'));
     yield put(actions.receiveRepositories(fromJS({
       repositories: userRepos.repositories
     })));
