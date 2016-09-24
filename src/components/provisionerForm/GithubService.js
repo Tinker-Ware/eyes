@@ -71,7 +71,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
         className="button success radius btn-config">
           <i className="step fi-widget" />
            {repositoryAppState.get('show_repositories') ?
-             'Hide Your Repositories' : 'Show Your Repositories'}</a> : '';
+             'Hide Repositories' : 'Select Repository'}</a> : '';
   const repositoryList =
     (repositoryAppState.get('integration')) && repositoryAppState.get('repositories') ?
       repositoryAppState.get('repositories').toJS().map((value, index) => 
@@ -115,7 +115,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
                 className="GitHub"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
               {(repositoryAppState.get('integration')) ? 
-                'Log out' : 'Log in with Github'}
+                'Connected: '+repositoryAppState.get('integration').toJS().username : 'Connect Github'}
           </Link>
           {optionsRepositoryList}
           {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration')) ? 
