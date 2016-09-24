@@ -38,12 +38,11 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }));
     }
   };
-  const handleGithubRepos = (e) => {
-    e.preventDefault();
+  const handleGithubRepos = (e, full_name) => {
     setRepository(fromJS({
       repository: {
         provider: "github",
-        name: e.target.parentNode.id
+        name: full_name
       }
     }));
   };
@@ -79,30 +78,30 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
         <div
           className={repositoryAppState.get('show_repositories')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
           key={index}>
-            <div
-              className="switch"
-              id={value.name}>
-                <input
-                  className="switch-input"
-                  onClick={handleGithubRepos}
-                  id={index}
-                  type="radio"
-                  name="repositorySwitch" />
-                <label
-                  className="switch-paddle"
-                  htmlFor={index}>
-                    <span className="show-for-sr">{value.name}</span>
-                    <span
-                      className="switch-active"
-                      aria-hidden="true">Yes</span>
-                    <span
-                      className="switch-inactive"
-                      aria-hidden="true">No</span>
-                </label>
-            </div>
-            <div className="switch-description">
-                <span>{value.full_name}</span>
-            </div>
+          <div
+            className="switch large">
+            <input className="switch-input"
+              id={index}
+              type="radio"
+              onClick={(event)=>handleGithubRepos(event, value.full_name)}
+              name="exampleSwitch"/>
+            <label
+              className="switch-paddle"
+              htmlFor={index}>
+              <span className="show-for-sr">Do you like me?</span>
+              <span
+                className="switch-active"
+                aria-hidden="true">Yes
+              </span>
+              <span
+                className="switch-inactive"
+                aria-hidden="true">No
+              </span>
+            </label>
+          </div>
+          <div className="switch-description">
+              <span>{value.full_name}</span>
+          </div>
         </div> ) : '';
   return (
     <div className="large-6 medium-6 small-12 columns">
