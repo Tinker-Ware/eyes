@@ -104,19 +104,22 @@ export function* doRequestGetUserSesion(userSesion) {
     });
 }
 
-export function* doRequestPostCloudProviderKey(accessToken, authorization, key) {
+export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
   return yield call(
-    doRequest, process.env.HOST + '/api/v1/cloud/keys',
+    doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/sshkeys',
     {
       method: 'POST',
       headers: {
         'authorization': 'Bearer ' + authorization,
-        'provider-token': accessToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'key': key
+        'sshkey': {
+          'user_id': user_id,
+          'key': key.toJS().public_key,
+          'title': key.toJS().name
+        }
       }),
       mode: 'cors'
     });
@@ -219,7 +222,7 @@ export function* getUserRepositories(userAccess) {
 
 export function* postCloudProviderKey(cloudProviderKeys) {
   try {
-    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('access_token'), cloudProviderKeys.value.get('authorization'), cloudProviderKeys.value.get('sshKey'));
+    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('authorization'), cloudProviderKeys.value.get('user_id'),  cloudProviderKeys.value.get('sshKey'));
     yield put(actions.setCloudProviderSshKeys(fromJS({
       'sshKeys': cloudProviderKeys.value.get('sshKeys'),
       'sshKey': [cloudProviderKey.key]

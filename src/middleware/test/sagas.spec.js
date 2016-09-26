@@ -189,7 +189,7 @@ describe('sagas middleware', () => {
     );
   });
   
-  it('handles POST_CLOUD_PROVIDER_SSH_KEY', () => {
+  it('handles REQUEST_POST_CLOUD_PROVIDER_KEY', () => {
     const userAccess = {
       'cloud_provider': {
         "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",

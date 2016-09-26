@@ -13,18 +13,17 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   };
   
   const StoreSSHKeyKeypress = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
       requestPostCloudProviderSSHKey(fromJS({
         'authorization': userAppState.get('user_session').toJS().token,
-        'access_token': cloudProviderAppState.get('cloud_provider').toJS().access_token,
+        'user_id': userAppState.get('user_session').toJS().id,
         'sshKeys': cloudProviderAppState.get('cloud_provider_ssh_keys'),
         'sshKey': {
           'name': cloudProviderAppState.get('cloud_provider_ssh_keys_name'),
           'public_key': cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')
         }
       }));
-      // async call to cloudprovider api
       ShowSSHKeyButtonKeypress(e);
       setSSHKeyTitle(fromJS({
         name: ''
