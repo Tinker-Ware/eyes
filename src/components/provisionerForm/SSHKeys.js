@@ -56,7 +56,6 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
       public_key: e.target.value
     }));
   };
-  
   const PrintSSHKeys = 
     (cloudProviderAppState.get('cloud_provider_ssh_keys')) ?
       cloudProviderAppState.get('cloud_provider_ssh_keys').map((value, index) => 
@@ -65,7 +64,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
           identifier={index}
           id={value.get('id')}
           key={index}
-          value={value.get('name')}
+          value={value.get('title')}
           isActive={value.get('enable')?true:false}
           end={(index == cloudProviderAppState.get('cloud_provider_ssh_keys').size - 1) ? "end" : ""}
         />) : "";

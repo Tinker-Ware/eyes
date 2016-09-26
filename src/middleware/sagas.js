@@ -41,7 +41,7 @@ export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
 
 export function* doRequestGetCloudProviderKeys(authorization, user_id) {
   return yield call(
-    doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/keys',
+    doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/ssh_keys',
     {
       method: 'GET',
       headers: {
@@ -113,7 +113,7 @@ export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'sshkey': {
+        'ssh_key': {
           'user_id': user_id,
           'key': key.toJS().public_key,
           'title': key.toJS().name
@@ -180,7 +180,7 @@ export function* getCloudProviderKeys(userAccess) {
     const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('authorization'), userAccess.value.get('user_id'));
     yield put(actions.setCloudProviderSshKeys(fromJS({
       sshKeys: [],
-      sshKey: cloudProviderKeys.keys
+      sshKey: cloudProviderKeys.ssh_keys
     })));
   }
   catch(error) {
@@ -227,7 +227,7 @@ export function* postCloudProviderKey(cloudProviderKeys) {
     const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get('authorization'), cloudProviderKeys.value.get('user_id'),  cloudProviderKeys.value.get('sshKey'));
     yield put(actions.setCloudProviderSshKeys(fromJS({
       'sshKeys': cloudProviderKeys.value.get('sshKeys'),
-      'sshKey': [cloudProviderKey.key]
+      'sshKey': [cloudProviderKey.ssh_key]
     })));
   }
   catch(error) {

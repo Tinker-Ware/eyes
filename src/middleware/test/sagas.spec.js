@@ -73,7 +73,7 @@ describe('sagas middleware', () => {
       }
     };
     const cloudProviderKeys = {
-      "keys": [
+      "ssh_keys": [
         {
           "id": 1,
           "name": "My little key",
@@ -104,7 +104,7 @@ describe('sagas middleware', () => {
     expect(generator.next(cloudProviderKeys).value).to.deep.equal(
       put(actions.setCloudProviderSshKeys(fromJS({
         sshKeys: [],
-        sshKey: cloudProviderKeys.keys
+        sshKey: cloudProviderKeys.ssh_keys
       })))
     );
   });
@@ -207,7 +207,7 @@ describe('sagas middleware', () => {
       }
     };
     const cloudProviderKey = {
-      "key": {
+      "ssh_key": {
         "id": 2,
         "name": "My key",
         "provider": "digital_ocean",
@@ -235,7 +235,7 @@ describe('sagas middleware', () => {
         'authorization': authorization,
         'user_id': userAccess.user.id,
         'sshKeys': cloudProviderKeys.sshKeys,
-        'sshKey': cloudProviderKey.key
+        'sshKey': cloudProviderKey.ssh_key
       })
     });
     
@@ -244,14 +244,14 @@ describe('sagas middleware', () => {
     expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestPostCloudProviderKey, authorization, userAccess.user.id,  fromJS(cloudProviderKey.key))
+      call(doRequestPostCloudProviderKey, authorization, userAccess.user.id,  fromJS(cloudProviderKey.ssh_key))
     );
     
     expect(generator.next(cloudProviderKey).value).to.deep.equal(
       put(actions.setCloudProviderSshKeys(fromJS(
       {
         'sshKeys': cloudProviderKeys.sshKeys,
-        'sshKey': [cloudProviderKey.key]
+        'sshKey': [cloudProviderKey.ssh_key]
       })))
     );
   });
