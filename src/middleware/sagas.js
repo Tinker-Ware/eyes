@@ -39,14 +39,13 @@ export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
     });
 }
 
-export function* doRequestGetCloudProviderKeys(accessToken, authorization) {
+export function* doRequestGetCloudProviderKeys(authorization, user_id) {
   return yield call(
-    doRequest, process.env.HOST + '/api/v1/cloud/keys',
+    doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/keys',
     {
       method: 'GET',
       headers: {
-        'authorization': 'Bearer ' + authorization,
-        'provider-token': accessToken
+        'authorization': 'Bearer ' + authorization
       },
       mode: 'cors'
     });
@@ -106,12 +105,11 @@ export function* doRequestGetUserSesion(userSesion) {
 
 export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
   return yield call(
-    doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/sshkeys',
+    doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/ssh_keys',
     {
       method: 'POST',
       headers: {
         'authorization': 'Bearer ' + authorization,
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -168,6 +166,10 @@ export function* getCloudProviderAccess(userAccess) {
         cloud_provider: cloudProviderAccess.callback
       }))
     );
+    yield put(actions.requestCloudProviderKeys(fromJS({
+        authorization: userAccess.value.get('authorization'),
+        user_id: userAccess.value.get('oauth_request').get('user_id')
+      })));
   }
   catch(error) {
   }
@@ -175,7 +177,7 @@ export function* getCloudProviderAccess(userAccess) {
 
 export function* getCloudProviderKeys(userAccess) {
   try {
-    const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('access_token'), userAccess.value.get('authorization'));
+    const cloudProviderKeys = yield call(doRequestGetCloudProviderKeys, userAccess.value.get('authorization'), userAccess.value.get('user_id'));
     yield put(actions.setCloudProviderSshKeys(fromJS({
       sshKeys: [],
       sshKey: cloudProviderKeys.keys

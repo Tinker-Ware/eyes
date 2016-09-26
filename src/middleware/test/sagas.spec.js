@@ -18,13 +18,6 @@ describe('sagas middleware', () => {
     
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
     
-    const cloudProviderAccess = {
-      callback: {
-        "provider": "digitalocean",
-        "username": "ileonelperea"
-      }
-    };
-    
     const generator = getCloudProviderAccess({
       value: 
       fromJS({
@@ -41,26 +34,42 @@ describe('sagas middleware', () => {
       call(doRequestGetCloudProviderAccess, authorization, fromJS(userAccess.oauth_request))
     );
     
+    const cloudProviderAccess = {
+      callback: {
+        "provider": "digitalocean",
+        "username": "ileonelperea"
+      }
+    };
+    
     expect(generator.next(cloudProviderAccess).value).to.deep.equal(
       put(actions.setCloudProviderAccess(fromJS({
           cloud_provider: cloudProviderAccess.callback
+        })))
+    );
+    
+    const userAccess2 = {
+      value: fromJS({
+        "authorization": authorization,
+        "oauth_request": {
+          "user_id": userAccess.oauth_request.user_id
+        }
+       })
+     };
+     
+    expect(generator.next(userAccess2).value).to.deep.equal(
+      put(actions.requestCloudProviderKeys(fromJS({
+          authorization: authorization,
+          user_id: userAccess.oauth_request.user_id
         })))
     );
   });
   
   it('handles GET_CLOUD_PROVIDER_SSH_KEYS', () => {
     const userAccess = {
-      'cloud_provider': {
-        "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",
-        "token_type": "bearer",
-        "expires_in": "2592000",
-        "refresh_token": "00a3aae641658d",
-        "scope": "read write",
-        "info": {
-          "name": "Sammy the Shark",
-          "email":"sammy@digitalocean.com",
-          "uuid":"e028b1b918853eca7fba208a9d7e9d29a6e93c57"
-        }
+      user: {
+        "id": 1,
+        "username": "tinkerware",
+        "authorization": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
     };
     const cloudProviderKeys = {
@@ -79,7 +88,7 @@ describe('sagas middleware', () => {
    
     const generator = getCloudProviderKeys({
       'value': fromJS({
-        'access_token': userAccess.cloud_provider.access_token,
+        'user_id': userAccess.user.id,
         'authorization': authorization
       })
     });
@@ -89,7 +98,7 @@ describe('sagas middleware', () => {
     expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestGetCloudProviderKeys, userAccess.cloud_provider.access_token, authorization)
+      call(doRequestGetCloudProviderKeys, authorization, userAccess.user.id)
     );
 
     expect(generator.next(cloudProviderKeys).value).to.deep.equal(
@@ -191,17 +200,10 @@ describe('sagas middleware', () => {
   
   it('handles REQUEST_POST_CLOUD_PROVIDER_KEY', () => {
     const userAccess = {
-      'cloud_provider': {
-        "access_token": "77e027c7447f468068a7d4fea41e7149a75a94088082c66fcf555de3977f69d3",
-        "token_type": "bearer",
-        "expires_in": "2592000",
-        "refresh_token": "00a3aae641658d",
-        "scope": "read write",
-        "info": {
-          "name": "Sammy the Shark",
-          "email":"sammy@digitalocean.com",
-          "uuid":"e028b1b918853eca7fba208a9d7e9d29a6e93c57"
-        }
+      user: {
+        "id": 1,
+        "username": "tinkerware",
+        "authorization": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
     };
     const cloudProviderKey = {
@@ -231,7 +233,7 @@ describe('sagas middleware', () => {
     const generator = postCloudProviderKey({
       'value': fromJS({
         'authorization': authorization,
-        'access_token': userAccess.cloud_provider.access_token,
+        'user_id': userAccess.user.id,
         'sshKeys': cloudProviderKeys.sshKeys,
         'sshKey': cloudProviderKey.key
       })
@@ -242,7 +244,7 @@ describe('sagas middleware', () => {
     expect(generatorError).to.throw(err);
     
     expect(generator.next().value).to.deep.equal(
-      call(doRequestPostCloudProviderKey, userAccess.cloud_provider.access_token, authorization,  fromJS(cloudProviderKey.key))
+      call(doRequestPostCloudProviderKey, authorization, userAccess.user.id,  fromJS(cloudProviderKey.key))
     );
     
     expect(generator.next(cloudProviderKey).value).to.deep.equal(
