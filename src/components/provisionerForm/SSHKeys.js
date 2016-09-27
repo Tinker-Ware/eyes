@@ -13,18 +13,16 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   };
   
   const StoreSSHKeyKeypress = (e) => {
-    e.preventDefault();
     if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
       requestPostCloudProviderSSHKey(fromJS({
         'authorization': userAppState.get('user_session').toJS().token,
-        'access_token': cloudProviderAppState.get('cloud_provider').toJS().access_token,
+        'user_id': userAppState.get('user_session').toJS().id,
         'sshKeys': cloudProviderAppState.get('cloud_provider_ssh_keys'),
         'sshKey': {
           'name': cloudProviderAppState.get('cloud_provider_ssh_keys_name'),
           'public_key': cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')
         }
       }));
-      // async call to cloudprovider api
       ShowSSHKeyButtonKeypress(e);
       setSSHKeyTitle(fromJS({
         name: ''
@@ -57,7 +55,6 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
       public_key: e.target.value
     }));
   };
-  
   const PrintSSHKeys = 
     (cloudProviderAppState.get('cloud_provider_ssh_keys')) ?
       cloudProviderAppState.get('cloud_provider_ssh_keys').map((value, index) => 
@@ -66,7 +63,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
           identifier={index}
           id={value.get('id')}
           key={index}
-          value={value.get('name')}
+          value={value.get('title')}
           isActive={value.get('enable')?true:false}
           end={(index == cloudProviderAppState.get('cloud_provider_ssh_keys').size - 1) ? "end" : ""}
         />) : "";
