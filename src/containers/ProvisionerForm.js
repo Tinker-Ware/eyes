@@ -32,7 +32,7 @@ export class ServiceForm extends Component {
         <div className="row">
           <div className="large-10 columns">
             <h1><i className="step fi-clipboard-notes" />
-              Create a Services
+              Create a Service
             </h1>
             <ProjectName 
               projectNameAppState={this.props.projectNameAppState}

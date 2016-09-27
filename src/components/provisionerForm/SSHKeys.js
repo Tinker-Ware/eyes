@@ -13,7 +13,6 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
   };
   
   const StoreSSHKeyKeypress = (e) => {
-    // e.preventDefault();
     if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
       requestPostCloudProviderSSHKey(fromJS({
         'authorization': userAppState.get('user_session').toJS().token,
