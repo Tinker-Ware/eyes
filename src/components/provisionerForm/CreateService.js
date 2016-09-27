@@ -6,7 +6,7 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
   const handleCreateUserProject = (e) => {
     e.preventDefault();
     requestPostUserProject(fromJS({
-      "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
+      "authorization": userAppState.get('user_session').toJS().token,
       "user_project":{
         "user_id": userAppState.get('user_session').toJS().id,
         "project_name": projectNameAppState.get("project_name"),
@@ -18,14 +18,12 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
         },
         "repository": {
           "provider": repositoryAppState.get("repository").toJS().provider,
-          "username": repositoryAppState.get("integration").toJS().username,
-          "name": repositoryAppState.get("repository").toJS().name
+          "name": repositoryAppState.get("repository").toJS().full_name
         },
-        "keys": cloudProviderAppState.get('cloud_provider_ssh_keys').filter(value => 
+        "ssh_keys": cloudProviderAppState.get('cloud_provider_ssh_keys').filter(value => 
           value.get('enable') == true
         ).map(value => 
           Map({
-            id: value.get('id'),
             fingerprint: value.get('fingerprint')
           })
         ).toJS()

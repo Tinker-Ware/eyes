@@ -149,7 +149,6 @@ export function* doRequestPostUserProject(userProject, authorization) {
       method: 'POST',
       headers: {
         'authorization': 'Bearer ' + authorization,
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -248,6 +247,7 @@ export function* postUser(user) {
 
 export function* postUserProject(project) {
   try {
+    console.log(project);
     yield call(doRequestPostUserProject, project.value.get('user_project'), project.value.get('authorization'));
   }
   catch(error) {
