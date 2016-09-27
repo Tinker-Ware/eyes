@@ -10,21 +10,38 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
       "user_project":{
         "user_id": userAppState.get('user_session').toJS().id,
         "project_name": projectNameAppState.get("project_name"),
-        "application_name": applicationAppState.get("application_name"),
+        "roles": (applicationAppState.get("application_name")=='Ghost')?
+          [
+            ["role": applicationAppState.get("application_name").toLowerCase(), "sudo": "yes"]
+          ]: [
+            ["role": "web", "sudo": "yes"]
+          ],
         "server_provider": "digital_ocean",
-        "configuration": {
+        "configuration": (applicationAppState.get("application_name")=='Ghost')?
+        {
           "server_name": projectNameAppState.get("project_name"),
-          "nginx_remove_default_vhost": "true"
+          "ghost_user_name": projectNameAppState.get("project_name").split(".")[0],
+          "ghost_user_group": projectNameAppState.get("project_name").split(".")[0],
+          "ghost_repo": "https://github.com/"+repositoryAppState.get("repository").toJS().name
+        }: {
+          "server_name": projectNameAppState.get("project_name"),
+          "nginx_remove_default_vhost": "true",
+          "server_user": projectNameAppState.get("project_name").split(".")[0],
+          "server_group": projectNameAppState.get("project_name").split(".")[0],
+          "github_repo": "https://github.com/"+repositoryAppState.get("repository").toJS().name
         },
         "repository": {
           "provider": repositoryAppState.get("repository").toJS().provider,
-          "name": repositoryAppState.get("repository").toJS().full_name
+          "name": repositoryAppState.get("repository").toJS().name
         },
         "ssh_keys": cloudProviderAppState.get('cloud_provider_ssh_keys').filter(value => 
           value.get('enable') == true
         ).map(value => 
           Map({
-            fingerprint: value.get('fingerprint')
+            user_id: userAppState.get('user_session').toJS().id,
+            title: value.get('title'),
+            fingerprint: value.get('fingerprint'),
+            key: value.get('key')
           })
         ).toJS()
       }

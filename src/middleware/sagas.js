@@ -247,7 +247,6 @@ export function* postUser(user) {
 
 export function* postUserProject(project) {
   try {
-    console.log(project);
     yield call(doRequestPostUserProject, project.value.get('user_project'), project.value.get('authorization'));
   }
   catch(error) {
