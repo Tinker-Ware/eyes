@@ -23,7 +23,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
   }
   const handleGithubLogin = (e) => {
     e.preventDefault();
-    if(e.target.text != "Log out"){
+    if(!e.target.text.includes("Connected")){
       let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=cfc461f8cf0dc4de566d&response_type=cod&state=github&scope=user%3Aemail+repo', 'Github Oauth', 'height=600,width=450');
       if (win) win.focus();
     }else{

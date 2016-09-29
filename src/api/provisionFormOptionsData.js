@@ -21,13 +21,9 @@ module.exports = {
 					identifier: 'Ghost',
 					name: 'Ghost'
 				},
-				{
-					identifier: 'GitLab',
-					name: 'GitLab'
-				},
-    {
+        {
 					identifier: 'none',
-					name: 'None'
+					name: 'Plain Html'
 				}
 			],
 			packages: [

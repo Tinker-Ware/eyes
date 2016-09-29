@@ -149,7 +149,6 @@ export function* doRequestPostUserProject(userProject, authorization) {
       method: 'POST',
       headers: {
         'authorization': 'Bearer ' + authorization,
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
