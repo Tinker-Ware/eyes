@@ -19,5 +19,8 @@ browserSync({
   logLevel: "silent",
   open: false,
   notify: false,
+  files: [
+    'src/*.html'
+  ],
   middleware: [historyApiFallback()]
 });
