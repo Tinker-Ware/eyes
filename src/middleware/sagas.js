@@ -103,6 +103,18 @@ export function* doRequestGetUserSesion(userSesion) {
     });
 }
 
+export function* doRequestGetRefreshSession(authorization) {
+  return yield call(
+    doRequest, process.env.HOST + '/api/v1/users/refresh',
+    {
+      method: 'GET',
+      headers: {
+        'authorization': 'Bearer ' + authorization
+      },
+      mode: 'cors'
+    });
+}
+
 export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
   return yield call(
     doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/ssh_keys',
@@ -165,7 +177,6 @@ export function* getCloudProviderAccess(userAccess) {
         cloud_provider: cloudProviderAccess.callback
       }))
     );
-    // Here
     yield put(actions.requestPostProviderKey(fromJS({
         'authorization': userAccess.value.get('authorization'),
         'user_id': userAccess.value.get('oauth_request').toJS().user_id,
@@ -211,6 +222,8 @@ export function* getRepositoryAccess(userAccess) {
 export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
+    if(userSession.user_session.integrations)
+      yield call(refreshIntegrations, userSession);
     cookie.save('user_session', userSession.user_session, { path: '/' });
     yield put(actions.setUser(fromJS({
       'user_session': userSession.user_session,
@@ -263,6 +276,46 @@ export function* postUserProject(project) {
     // yield put(actions.requestPostUserProjectError(fromJS({
     //   'error': error,
     // })));
+  }
+}
+
+export function* refreshSession(userAccess) {
+  try {
+    const refreshSession = yield call(doRequestGetRefreshSession, userAccess.value.get('authorization'));
+    // console.log();
+    // yield put(actions.receiveRepositories(fromJS({
+    //   repositories: userRepos.repositories
+    // })));
+  }
+  catch(error) {
+  }
+}
+
+export function* refreshIntegrations(userSession) {
+  try {
+    if(userSession.user_session.integrations.digital_ocean){
+      yield put(actions.setCloudProviderAccess(fromJS({
+          cloud_provider: {
+            "provider": "digital_ocean",
+            "username": userSession.user_session.integrations.digital_ocean
+          }
+        }))
+      );
+      yield put(actions.requestCloudProviderKeys(fromJS({
+          authorization: userSession.user_session.token,
+          user_id: userSession.user_session.id
+        })));
+    }
+    if(userSession.user_session.integrations.github)
+      yield put(actions.receiveRepositoryAccess(fromJS({
+          'integration': {
+            "provider": "github",
+            "username": userSession.user_session.integrations.github
+          }
+        }))
+      );
+  }
+  catch(error) {
   }
 }
 

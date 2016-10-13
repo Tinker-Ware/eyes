@@ -17,7 +17,6 @@ const bundler = webpack(config);
 browserSync({
   port: 3000,
   ghostMode: false,
-  logLevel: "silent",
   notify: false,
   socket: {
     path: '/browser-sync/socket.io',

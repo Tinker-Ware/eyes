@@ -16,7 +16,6 @@ browserSync({
   },
   ui: false,
   ghostMode: false,
-  logLevel: "silent",
   open: false,
   notify: false,
   files: [
