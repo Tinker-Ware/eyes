@@ -29,7 +29,7 @@ notifications:
   to:
   - leonel@tinkerware.io
   subject: 'Build failed: provisioner-website'
-  message: The continuous integration build failed. See https://ci.appveyor.com/project/iLeonelPerea/provisioning-webpage for details.
+  message: The continuous integration build failed. See https://ci.appveyor.com/project/iLeonelPerea/eyes for details.
   on_build_success: false
   on_build_failure: true
   on_build_status_changed: false
