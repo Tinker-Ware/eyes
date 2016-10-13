@@ -222,12 +222,7 @@ export function* getRepositoryAccess(userAccess) {
 export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
-    if(userSession.user_session.integrations)
-      yield call(refreshIntegrations, userSession);
-    cookie.save('user_session', userSession.user_session, { path: '/' });
-    yield put(actions.setUser(fromJS({
-      'user_session': userSession.user_session,
-    })));
+    yield call(refreshUserSesion, userSession);
   }
   catch(error) {
   }
@@ -281,11 +276,21 @@ export function* postUserProject(project) {
 
 export function* refreshSession(userAccess) {
   try {
-    const refreshSession = yield call(doRequestGetRefreshSession, userAccess.value.get('authorization'));
-    // console.log();
-    // yield put(actions.receiveRepositories(fromJS({
-    //   repositories: userRepos.repositories
-    // })));
+    const userSession = yield call(doRequestGetRefreshSession, userAccess.value.get('authorization'));
+    yield call(refreshUserSesion, userSession);
+  }
+  catch(error) {
+  }
+}
+
+export function* refreshUserSesion(userSession) {
+  try {
+    if(userSession.user_session.integrations)
+      yield call(refreshIntegrations, userSession);
+    cookie.save('user_session', userSession.user_session, { path: '/' });
+    yield put(actions.setUser(fromJS({
+      'user_session': userSession.user_session,
+    })));
   }
   catch(error) {
   }
@@ -328,6 +333,7 @@ export default function* root() {
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion),
-    takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject)
+    takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
+    takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession)
   ];
 }

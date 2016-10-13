@@ -60,6 +60,10 @@ export function requestRepositoryAccess(value) {
   return { type: types.REQUEST_GITHUB_ACCESS, value };
 }
 
+export function requestRefreshUserSession(value) {
+  return { type: types.REQUEST_REFRESH_USER_SESSION, value };
+}
+
 export function requestUserRepositories(value) {
   return { type: types.REQUEST_GITHUB_REPOSITORIES, value };
 }
