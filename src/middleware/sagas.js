@@ -326,14 +326,14 @@ export function* refreshIntegrations(userSession) {
 
 export default function* root() {
   yield[
-    takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
-    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
+    takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
+    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
-    takeLatest(types.REQUEST_POST_USER, postUser),
-    takeLatest(types.REQUEST_USER_SESION, getUserSesion),
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
-    takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession)
+    takeLatest(types.REQUEST_POST_USER, postUser),
+    takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
+    takeLatest(types.REQUEST_USER_SESION, getUserSesion)
   ];
 }
