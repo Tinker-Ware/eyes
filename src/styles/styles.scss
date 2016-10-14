@@ -41,6 +41,12 @@ ul{
   visibility: hidden;
 }
 
+.repository-list {
+  max-height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
 @media screen and (max-width: 39.9375em) {
   .hide-for-small-only {
     display: none !important;

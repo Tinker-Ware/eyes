@@ -120,7 +120,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           {optionsRepositoryList}
           {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration')) ? 
             <h5 id="firstModalTitle">Select a repository.</h5> : ''}
-          <div className="row">
+          <div className="row repository-list">
               {repositoryList}
           </div>
         </li>
