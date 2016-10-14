@@ -103,6 +103,18 @@ export function* doRequestGetUserSesion(userSesion) {
     });
 }
 
+export function* doRequestGetRefreshSession(authorization) {
+  return yield call(
+    doRequest, process.env.HOST + '/api/v1/users/refresh',
+    {
+      method: 'GET',
+      headers: {
+        'authorization': 'Bearer ' + authorization
+      },
+      mode: 'cors'
+    });
+}
+
 export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
   return yield call(
     doRequest, process.env.HOST + '/api/v1/users/'+user_id+'/ssh_keys',
@@ -165,6 +177,15 @@ export function* getCloudProviderAccess(userAccess) {
         cloud_provider: cloudProviderAccess.callback
       }))
     );
+    yield put(actions.requestPostProviderKey(fromJS({
+        'authorization': userAccess.value.get('authorization'),
+        'user_id': userAccess.value.get('oauth_request').toJS().user_id,
+        'sshKeys': [],
+        'sshKey': {
+          'name': 'deploy_key',
+          'public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCtmlfAafr14dY5WPFtZV7GpVwgp6/atw7eonjhWfWZfHFmx2TTpUGUbH4o+Z6VI+9GImcpnk+8S/OLSCIT0ueQ6xxqnP6tdREaSZAMyB0f7vGxnuOv3n/sqyFlio1rzaysQv11AFML2QmxR0mNqjODAkwqDGPvbD1qyUDXT33YW9xRf5TJ7oJ4GnRXVArAvQdTa7tWOYCseQsUSkmsJXzcOkEAGfUkJSrvpss8FlfksVV2M4OL5qeNWMfuqY8sKyTcxCBpbpeBClIx2Z7l9iNxPyTXyo7Ma+65SwPVYCUNM5vRy77miGZhLuZDVwdXqD1VnlTCQhppPUh1R9+IxWMRbomNCxPOJtuj2Q7dB5oY990Heg58yLCv2LdVhY7OM+2lUksBoTrQkpjMMMfPxwU/6l9Eiq4KiX0BIZIPQFbbE33yfaLmKEwOcVBYflS3t/yJAFDUecPC3j488HpY23yMPXiredRaGebbXGiVBKOp6zjftFJzes1PvWmP+XiAq52uGiTH2mzlMrlzd4Jpfegy6uGl4r58LkLJOInl89XWYsxHlzC+1pPhSbmYCJvv//0P4O8afSUgjlRBBfiyOo1+mE9m5BcgEGd6ZbtF7mVAAoqgXx2kSdMglt9+WV0/X+TF/G0QBCpMeBqvrWKTwDDtaWlcEeBE/C5ObIledyKpjw== tinkerwareio@gmail.com'
+        }
+      })));
     yield put(actions.requestCloudProviderKeys(fromJS({
         authorization: userAccess.value.get('authorization'),
         user_id: userAccess.value.get('oauth_request').get('user_id')
@@ -201,10 +222,7 @@ export function* getRepositoryAccess(userAccess) {
 export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get('user_session'));
-    cookie.save('user_session', userSession.user_session, { path: '/' });
-    yield put(actions.setUser(fromJS({
-      'user_session': userSession.user_session,
-    })));
+    yield call(refreshUserSesion, userSession);
   }
   catch(error) {
   }
@@ -256,15 +274,66 @@ export function* postUserProject(project) {
   }
 }
 
+export function* refreshSession(userAccess) {
+  try {
+    const userSession = yield call(doRequestGetRefreshSession, userAccess.value.get('authorization'));
+    yield call(refreshUserSesion, userSession);
+  }
+  catch(error) {
+  }
+}
+
+export function* refreshUserSesion(userSession) {
+  try {
+    if(userSession.user_session.integrations)
+      yield call(refreshIntegrations, userSession);
+    cookie.save('user_session', userSession.user_session, { path: '/' });
+    yield put(actions.setUser(fromJS({
+      'user_session': userSession.user_session,
+    })));
+  }
+  catch(error) {
+  }
+}
+
+export function* refreshIntegrations(userSession) {
+  try {
+    if(userSession.user_session.integrations.digital_ocean){
+      yield put(actions.setCloudProviderAccess(fromJS({
+          cloud_provider: {
+            "provider": "digital_ocean",
+            "username": userSession.user_session.integrations.digital_ocean
+          }
+        }))
+      );
+      yield put(actions.requestCloudProviderKeys(fromJS({
+          authorization: userSession.user_session.token,
+          user_id: userSession.user_session.id
+        })));
+    }
+    if(userSession.user_session.integrations.github)
+      yield put(actions.receiveRepositoryAccess(fromJS({
+          'integration': {
+            "provider": "github",
+            "username": userSession.user_session.integrations.github
+          }
+        }))
+      );
+  }
+  catch(error) {
+  }
+}
+
 export default function* root() {
   yield[
-    takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
-    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
+    takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
+    takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
+    takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
     takeLatest(types.REQUEST_POST_USER, postUser),
-    takeLatest(types.REQUEST_USER_SESION, getUserSesion),
-    takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject)
+    takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
+    takeLatest(types.REQUEST_USER_SESION, getUserSesion)
   ];
 }

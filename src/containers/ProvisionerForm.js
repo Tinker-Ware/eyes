@@ -22,10 +22,14 @@ export class ServiceForm extends Component {
       browserHistory.push('/login');
   }
   render() {
-    if(!this.props.userAppState.get('user_session'))
+    if(!this.props.userAppState.get('user_session')){
       this.props.actions.setUserSesion(fromJS({
         'user_session': cookie.load('user_session')
       }));
+      this.props.actions.requestRefreshUserSession(fromJS({
+        'authorization': cookie.load('user_session').token
+      }));
+    }
     return (
       <div className="row">
         <Menu userAppState={this.props.userAppState} />
