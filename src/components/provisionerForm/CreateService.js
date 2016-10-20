@@ -5,19 +5,15 @@ import {fromJS, Map} from 'immutable';
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   const handleCreateUserProject = (e) => {
     e.preventDefault();
+    console.log(applicationAppState.get("application_name").toJS().roles);
     requestPostUserProject(fromJS({
       "authorization": userAppState.get('user_session').toJS().token,
       "user_project":{
         "user_id": userAppState.get('user_session').toJS().id,
         "project_name": projectNameAppState.get("project_name"),
-        "roles":[
-          {
-            "role": (applicationAppState.get("application_name") == 'Ghost') ? applicationAppState.get("application_name").toLowerCase() : "web", 
-            "sudo": "yes"
-          }
-        ],
+        "roles": applicationAppState.get("application_name").toJS().roles,
         "server_provider": "digital_ocean",
-        "configuration": (applicationAppState.get("application_name")=='Ghost')?
+        "configuration": (applicationAppState.get("application_name").toJS().name=='Ghost')?
         {
           "server_name": projectNameAppState.get("project_name"),
           "ghost_user_name": projectNameAppState.get("project_name").split(".")[0],

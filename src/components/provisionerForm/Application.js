@@ -4,16 +4,23 @@ import { fromJS } from 'immutable';
 import ApplicationItem from './ApplicationItem';
 
 const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
-  const handleApplicationClick = (e) => {
+  const handleApplicationClick = (e, role) => {
     e.preventDefault();
-    if( e.target.nodeName.toLowerCase()=="span" || e.target.nodeName.toLowerCase()=="img" )
+    if( e.target.nodeName.toLowerCase()=="span" || e.target.nodeName.toLowerCase()=="img" ){
       setApplication(fromJS({
-        application: e.target.parentNode.id
+        application: {
+          name: e.target.parentNode.id,
+          roles: role
+        }
       }));
-    else
+    }else{
       setApplication(fromJS({
-        application: e.target.id
+        application: {
+          name: e.target.id,
+          roles: role
+        }
       }));
+    }
   };
   return (
     <div className="row">
@@ -23,9 +30,10 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
       </h2>
       {applicationsOptions.map((value, index) => 
         <ApplicationItem
-          activeApplication={applicationAppState.get('application_name')}
+          activeApplication={applicationAppState.get('application_name')?applicationAppState.get('application_name').toJS().name:""}
           key={value.identifier}
           identifier={value.identifier}
+          roles={value.roles}
           handleClick={handleApplicationClick}
           name={value.name}
           end={(index == applicationsOptions.length - 1) ? true : false} />)}
