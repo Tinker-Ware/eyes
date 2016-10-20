@@ -10,14 +10,9 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
       "user_project":{
         "user_id": userAppState.get('user_session').toJS().id,
         "project_name": projectNameAppState.get("project_name"),
-        "roles":[
-          {
-            "role": (applicationAppState.get("application_name") == 'Ghost') ? applicationAppState.get("application_name").toLowerCase() : "web", 
-            "sudo": "yes"
-          }
-        ],
+        "roles": applicationAppState.get("application_name").toJS().roles,
         "server_provider": "digital_ocean",
-        "configuration": (applicationAppState.get("application_name")=='Ghost')?
+        "configuration": (applicationAppState.get("application_name").toJS().name=='Ghost')?
         {
           "server_name": projectNameAppState.get("project_name"),
           "ghost_user_name": projectNameAppState.get("project_name").split(".")[0],

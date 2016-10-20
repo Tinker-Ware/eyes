@@ -19,10 +19,26 @@ module.exports = {
 			application: [
 				{
 					identifier: 'Ghost',
+          roles: [
+            {
+              'role': 'ghost',
+              'sudo': 'no'
+            }
+          ],
 					name: 'Ghost'
 				},
         {
-					identifier: 'none',
+					identifier: 'PlainHTML',
+          roles: [
+            {
+              'role': 'base',
+              'sudo': 'yes'
+            },
+            {
+              'role': 'web',
+              'sudo': 'no'
+            }
+          ],
 					name: 'Plain Html'
 				}
 			],

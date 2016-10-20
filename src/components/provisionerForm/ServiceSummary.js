@@ -21,7 +21,7 @@ const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repository
          Aplication
       </h4>
       <p id="label-aplications">
-        {(applicationAppState.get('application_name')) ? applicationAppState.get('application_name'):'none'}
+        {(applicationAppState.get('application_name')) ? applicationAppState.get('application_name').toJS().name:'none'}
       </p>
       <CreateService
         cloudProviderAppState={cloudProviderAppState}
