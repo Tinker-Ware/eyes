@@ -5,7 +5,6 @@ import {fromJS, Map} from 'immutable';
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   const handleCreateUserProject = (e) => {
     e.preventDefault();
-    console.log(applicationAppState.get("application_name").toJS().roles);
     requestPostUserProject(fromJS({
       "authorization": userAppState.get('user_session').toJS().token,
       "user_project":{

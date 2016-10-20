@@ -35,7 +35,7 @@ module.exports = {
               'sudo': 'yes'
             },
             {
-              'role': 'web_server',
+              'role': 'web',
               'sudo': 'no'
             }
           ],
