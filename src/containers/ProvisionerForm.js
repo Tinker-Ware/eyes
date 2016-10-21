@@ -22,7 +22,7 @@ export class ServiceForm extends Component {
       browserHistory.push('/login');
   }
   render() {
-    if(!this.props.userAppState.get('user_session')){
+    if(!this.props.userAppState.get('user_session') && cookie.load('user_session')){
       this.props.actions.setUserSesion(fromJS({
         'user_session': cookie.load('user_session')
       }));
@@ -38,7 +38,7 @@ export class ServiceForm extends Component {
             <h1><i className="step fi-clipboard-notes" />
               Create a Service
             </h1>
-            <ProjectName 
+            <ProjectName
               projectNameAppState={this.props.projectNameAppState}
               setProjectName={this.props.actions.setProjectName} />
             <div className="row">
@@ -46,10 +46,10 @@ export class ServiceForm extends Component {
                 <i className="step fi-share" />
                  Connect Service(s)
               </h2>
-              {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?       
-                provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) =>   
+              {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
+                provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) =>
                   (value.identifier == 'github') ?
-                    <GithubService 
+                    <GithubService
                       key = {value.identifier}
                       repositoryAppState={this.props.repositoryAppState}
                       setRepository={this.props.actions.setRepository}
@@ -67,7 +67,7 @@ export class ServiceForm extends Component {
                 userAppState={this.props.userAppState} />
             </div>
             <Application
-              applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ? 
+              applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
                 provisionFormOptionsApi.getProvisionFormOptions()[0].application : ''}
               applicationAppState={this.props.applicationAppState}
               setApplication={this.props.actions.setApplication}/>
