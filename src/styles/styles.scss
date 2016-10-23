@@ -1593,6 +1593,10 @@ input[type="submit"] {
   background: url(../img/applications_icons.png) -596px 0;
 }
 
+.Yii {
+  background: url(../img/applications_icons.png) -1722px 0;
+}
+
 .Rails {
   background: url(../img/applications_icons.png) -1522px 0;
 }
@@ -1665,7 +1669,7 @@ input[type="submit"] {
     background: url(../img/applications_icons.png) -1655px 0;
 }
 
-.freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine, .PlainHTML {
+.freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine, .PlainHTML, .Yii {
   filter: blur(1px) grayscale(90%);
   -webkit-filter: blur(1px) grayscale(90%);
   -moz-filter: blur(1px) grayscale(90%);
@@ -1678,7 +1682,7 @@ input[type="submit"] {
 }
 
 .selection-table:hover .bullet-item {
-  .freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine, .PlainHTML {
+  .freeBSDAMP, .LAMP, .LEMP, .MEAN, .Joomla, .Drone, .Ghost, .Rails, .Drupal, .MongoDB, .Node, .Cassandra, .Stack, .Django, .Docker, .Magento, .GitLab, .MumbleServer, .MediaWiki, .WordPress, .OwnCloud, .Dokku, .PHPMyAdmin, .Redmine, .PlainHTML, .Yii {
     filter: none;
     -webkit-filter: none;
     -moz-filter: none;
