@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import path from 'path';
 import * as hosts from './src/constants/Hosts';
 
 export default {
@@ -15,7 +16,7 @@ export default {
     'whatwg-fetch',
     './src/webpack-public-path',
     'webpack-hot-middleware/client?reload=true',
-    './src/apps/development'
+    path.resolve(__dirname, './src/apps/development.js') // Defining path seems necessary for this to work consistently on Windows machines.
   ],
   watchOptions: {
     aggregateTimeout: 300,
@@ -23,7 +24,7 @@ export default {
   },
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
-    path: `${__dirname}/src`, // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
