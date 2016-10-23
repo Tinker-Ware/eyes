@@ -1,5 +1,5 @@
 module.exports = {
-	provision_form_options: 
+	provision_form_options:
 	[
 		{
 			services: [
@@ -26,6 +26,16 @@ module.exports = {
             }
           ],
 					name: 'Ghost'
+				},
+        {
+					identifier: 'Yii',
+          roles: [
+            {
+              'role': 'yii',
+              'sudo': 'no'
+            }
+          ],
+					name: 'Yii'
 				},
         {
 					identifier: 'PlainHTML',
