@@ -63,9 +63,9 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
   const optionsRepositoryList=
     (repositoryAppState.get("integration"))?
       <a
+        className="button success radius btn-config"
         href="#"
-        onClick={handleGithubConfigurationEnable}
-        className="button success radius btn-config">
+        onClick={handleGithubConfigurationEnable}>
           <i className="step fi-widget" />
            {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
@@ -78,20 +78,20 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
             className="switch large">
             <input className="switch-input"
               id={index}
-              type="radio"
+              name="exampleSwitch"
               onClick={(event)=>handleGithubRepos(event, value.full_name)}
-              name="exampleSwitch"/>
+              type="radio"/>
             <label
               className="switch-paddle"
               htmlFor={index}>
               <span className="show-for-sr">Do you like me?</span>
               <span
-                className="switch-active"
-                aria-hidden="true">Yes
+                aria-hidden="true"
+                className="switch-active">Yes
               </span>
               <span
-                className="switch-inactive"
-                aria-hidden="true">No
+                aria-hidden="true"
+                className="switch-inactive">No
               </span>
             </label>
           </div>
@@ -104,9 +104,9 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       <ul className="selection-table">
         <li className="bullet-item">
           <Link
+            className="button radius btn-connect"
             href="#"
-            onClick={handleGithubLogin}
-            className="button radius btn-connect">
+            onClick={handleGithubLogin}>
               <img
                 className="GitHub"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />

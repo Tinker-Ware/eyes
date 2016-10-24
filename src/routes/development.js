@@ -10,23 +10,30 @@ import ServiceOAuth from "../containers/ServiceOAuth";
 
 export default (
   <Route
-    path="/"
-    component={App}>
+    component={App}
+    path="/">
     <IndexRoute component={ProvisionerForm} />
     <Route
-      path="/user"
-      component={UserProfile}>
+      component={UserProfile}
+      path="/user">
       <IndexRoute component={Profile} />
     </Route>
     <Route
+      component={UserLogin}
       path="login"
-      component={UserLogin} />
+    />
     <Route
+      component={UserSignup}
       path="/registrations/new"
-      component={UserSignup} />
+    />
     <Route
+      component={ServiceOAuth}
       path="/oauth/:serviceName"
-      component={ServiceOAuth} />
-    <Route status={404} path="*" component={ProvisionerForm} />
+    />
+    <Route
+      component={ProvisionerForm}
+      path="*"
+      status={404}
+    />
   </Route>
 );

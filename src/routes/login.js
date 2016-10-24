@@ -6,12 +6,17 @@ import UserSignup from "../containers/UserSignup";
 
 export default (
   <Route
-    path="/"
-    component={App}>
+    component={App}
+    path="/">
     <IndexRoute component={UserLogin} />
     <Route
+      component={UserSignup}
       path="/registrations/new"
-      component={UserSignup} />
-    <Route status={404} path="*" component={UserLogin} />
+    />
+    <Route
+      component={UserLogin}
+      path="*"
+      status={404}
+    />
   </Route>
 );

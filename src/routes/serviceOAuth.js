@@ -5,10 +5,11 @@ import ServiceOAuth from "../containers/ServiceOAuth";
 
 export default (
   <Route
-    path="/"
-    component={App}>
+    component={App}
+    path="/">
     <Route
+      component={ServiceOAuth}
       path="/oauth/:serviceName"
-      component={ServiceOAuth} />
+    />
   </Route>
 );

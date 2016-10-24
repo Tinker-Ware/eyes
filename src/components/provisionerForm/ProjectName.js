@@ -23,16 +23,17 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
           <div className="row">
             <div className="large-12 columns">
               <input
-                type="text"
-                id="input-project_name"
-                placeholder="projectname.servername"
-                pattern="([a-z0-9]){2,15}\.([a-z0-9]){2,15}"
-                title="Format needed: nombreproyecto.nombreservidor"
                 autoComplete="off"
-                onChange={ProjectNameKeypress}
+                id="input-project_name"
                 name="projectName"
+                onChange={ProjectNameKeypress}
+                pattern="([a-z0-9]){2,15}\.([a-z0-9]){2,15}"
+                placeholder="projectname.servername"
+                required
+                title="Format needed: nombreproyecto.nombreservidor"
+                type="text"
                 value={projectNameAppState.project_name}
-                required/>
+              />
             </div>
           </div>
         </form>

@@ -50,50 +50,57 @@ export class ServiceForm extends Component {
                     <GithubService
                       key = {value.identifier}
                       repositoryAppState={this.props.repositoryAppState}
-                      setRepository={this.props.actions.setRepository}
-                      setIntegracion={this.props.actions.setIntegracion}
                       requestRepositoryAccess={this.props.actions.requestRepositoryAccess}
                       requestUserRepositories={this.props.actions.requestUserRepositories}
+                      setIntegracion={this.props.actions.setIntegracion}
+                      setRepository={this.props.actions.setRepository}
                       setShowRepositories={this.props.actions.setShowRepositories}
-                      userAppState={this.props.userAppState} /> :""):""}
+                      userAppState={this.props.userAppState}
+                    />
+                  :"")
+                :""}
               <CloudProvider
                 clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                 cloudProviderAppState={this.props.cloudProviderAppState}
                 requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
                 setCloudProvider={this.props.actions.setCloudProvider}
-                userAppState={this.props.userAppState} />
+                userAppState={this.props.userAppState}
+              />
             </div>
             <Application
-              applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
-                provisionFormOptionsApi.getProvisionFormOptions()[0].application :""}
               applicationAppState={this.props.applicationAppState}
-              setApplication={this.props.actions.setApplication}/>
+              applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application :""}
+              setApplication={this.props.actions.setApplication}
+            />
             <SSHKeys
+              cloudProviderAppState={this.props.cloudProviderAppState}
               deleteSSHKey={this.props.actions.deleteSSHKey}
               enableSSHKey={this.props.actions.enableSSHKey}
-              showSSHKey={this.props.actions.showSSHKey}
               requestPostCloudProviderSSHKey={this.props.actions.requestPostCloudProviderSSHKey}
               setSSHKey={this.props.actions.setSSHKey}
-              setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
               setSSHKeyContent={this.props.actions.setSSHKeyContent}
-              cloudProviderAppState={this.props.cloudProviderAppState}
-              userAppState={this.props.userAppState} />
+              setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
+              showSSHKey={this.props.actions.showSSHKey}
+              userAppState={this.props.userAppState}
+            />
             <CreateService
+              applicationAppState={this.props.applicationAppState}
               cloudProviderAppState={this.props.cloudProviderAppState}
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
-              applicationAppState={this.props.applicationAppState}
+              requestPostUserProject={this.props.actions.requestPostUserProject}
               userAppState={this.props.userAppState}
-              requestPostUserProject={this.props.actions.requestPostUserProject} />
+              />
           </div>
           <div className="large-2 columns hide-for-small-only hide-for-medium-only">
             <ServiceSummary
+              applicationAppState={this.props.applicationAppState}
               cloudProviderAppState={this.props.cloudProviderAppState}
               projectNameAppState={this.props.projectNameAppState}
               repositoryAppState={this.props.repositoryAppState}
-              applicationAppState={this.props.applicationAppState}
+              requestPostUserProject={this.props.actions.requestPostUserProject}
               userAppState={this.props.userAppState}
-              requestPostUserProject={this.props.actions.requestPostUserProject} />
+            />
           </div>
         </div>
         <div className="row">

@@ -5,9 +5,13 @@ import ProvisionerForm from "../containers/ProvisionerForm";
 
 export default (
   <Route
-    path="/"
-    component={App}>
+    component={App}
+    path="/">
     <IndexRoute component={ProvisionerForm} />
-    <Route status={404} path="*" component={ProvisionerForm} />
+    <Route
+      component={ProvisionerForm}
+      path="*"
+      status={404}
+    />
   </Route>
 );

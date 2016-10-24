@@ -4,7 +4,7 @@
 const provision_form_options = require("./provisionFormOptionsData").provision_form_options;
 const _ = require("lodash"); // eslint-disable-line no-unused-vars
 
-const _clone = function(item) {
+const _clone = function(item) { // eslint-disable-line no-underscore-dangle
 	return JSON.parse(JSON.stringify(item));
 };
 

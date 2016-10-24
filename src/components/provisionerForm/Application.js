@@ -30,12 +30,14 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
       {applicationsOptions.map((value, index) =>
         <ApplicationItem
           activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
-          key={value.identifier}
-          identifier={value.identifier}
-          roles={value.roles}
+          end={(index == applicationsOptions.length - 1) ? true : false}
           handleClick={handleApplicationClick}
+          identifier={value.identifier}
+          key={value.identifier}
           name={value.name}
-          end={(index == applicationsOptions.length - 1) ? true : false} />)}
+          roles={value.roles}
+        />)
+      }
     </div>
   );
 };

@@ -47,82 +47,89 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
     (cloudProviderAppState.get("cloud_provider_ssh_keys")) ?
       cloudProviderAppState.get("cloud_provider_ssh_keys").map((value, index) =>
         <SSHKeysItem
+          end={(index == cloudProviderAppState.get("cloud_provider_ssh_keys").size - 1) ? "end" : ""}
           handleClick={handleSSHKeyClick}
-          identifier={index}
           id={value.get("id")}
+          identifier={index}
+          isActive={value.get("enable")?true:false}
           key={index}
           value={value.get("title")}
-          isActive={value.get("enable")?true:false}
-          end={(index == cloudProviderAppState.get("cloud_provider_ssh_keys").size - 1) ? "end" : ""}
         />) : "";
 
   const AddSHHKeyButton =
     !(cloudProviderAppState.get("show_cloud_provider_ssh_key")) ?
-      <p><a
-        href="javascript:void(0);"
-        onClick={ShowSSHKeyButtonKeypress}
-        id="show_cloud_provider_ssh_key">+ Add SSH Key</a></p> :
-        <div className="ssh_key_content">
-          <div className="large-offset-9 large-3 medium-9">
-            <p className="right">
-              <a
-                href="javascript:void(0);"
-                onClick={ShowSSHKeyButtonKeypress}
-                id="hide_ssh_key">
-                Close</a>
-            </p>
+      <p>
+        <a
+          href="javascript:void(0);"
+          id="show_cloud_provider_ssh_key">+ Add SSH Key
+          onClick={ShowSSHKeyButtonKeypress}
+        </a>
+      </p> :
+      <div className="ssh_key_content">
+        <div className="large-offset-9 large-3 medium-9">
+          <p className="right">
+            <a
+              href="javascript:void(0);"
+              id="hide_ssh_key"
+              onClick={ShowSSHKeyButtonKeypress}>
+              Close
+            </a>
+          </p>
+        </div>
+        <form>
+          <div className="row">
+            <div className="columns">
+              <label className="error">
+                <textarea
+                  cols="50"
+                  id="ssh_key_content_value"
+                  onChange={SSHKeyContentKeypress}
+                  placeholder="SSH Key Content"
+                  rows="5"
+                  value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
+                />
+              </label>
+              <div
+                className="hide"
+                id="ssh_key_content_value_error">
+                <small className="error hide">SSH Key Content can not be blank</small>
+              </div>
+            </div>
           </div>
-          <form>
-            <div className="row">
-              <div className="columns">
-                <label className="error">
-                  <textarea
-                    id="ssh_key_content_value"
-                    cols="50"
-                    rows="5"
-                    value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
-                    onChange={SSHKeyContentKeypress}
-                    placeholder="SSH Key Content" />
-                </label>
-                <div
-                  className="hide"
-                  id="ssh_key_content_value_error">
-                  <small className="error hide">SSH Key Content can not be blank</small>
+          <div className="row">
+            <div className="columns">
+              <div className="row">
+                <div className="small-9 columns">
+                  <label className="error">
+                    <input
+                      id="ssh_key_content_title"
+                      maxLength="20"
+                      onChange={SSHKeyTitleKeypress}
+                      placeholder="Title"
+                      type="text"
+                      value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
+                    />
+                  </label>
+                  <div
+                    className="hide"
+                    id="ssh_key_content_title_error">
+                    <small className="error">SSH Key Title can not be blank</small>
+                  </div>
+                </div>
+                <div className="small-3 columns">
+                  <a
+                    className="button postfix">Add SSH Key
+                    href="javascript:void(0);"
+                    id="save_ssh_key"
+                    onClick={StoreSSHKeyKeypress}
+                  </a>
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="columns">
-                <div className="row">
-                  <div className="small-9 columns">
-                    <label className="error">
-                      <input
-                        type="text"
-                        id="ssh_key_content_title"
-                        maxLength="20"
-                        value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
-                        onChange={SSHKeyTitleKeypress}
-                        placeholder="Title" />
-                    </label>
-                    <div
-                      className="hide"
-                      id="ssh_key_content_title_error">
-                      <small className="error">SSH Key Title can not be blank</small>
-                    </div>
-                  </div>
-                  <div className="small-3 columns">
-                    <a
-                      href="javascript:void(0);"
-                      onClick={StoreSSHKeyKeypress}
-                      id="save_ssh_key"
-                      className="button postfix">Add SSH Key</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-          <p>Adding an SSH key is a recommended security measure.</p>
-        </div>;
+          </div>
+        </form>
+        <p>Adding an SSH key is a recommended security measure.</p>
+      </div>;
 
   const SSHKeyForm =
     cloudProviderAppState.get("cloud_provider")?
