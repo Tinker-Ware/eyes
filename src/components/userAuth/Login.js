@@ -6,7 +6,7 @@ import { push } from 'react-router-redux';
 const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
   const handleUserSesion = (e) => {
     e.preventDefault();
-    !userAppState.get('user_session') ? 
+    !userAppState.get('user_session')?
       requestGetUserSesion(fromJS({
         "user_session": {
           "email": userAppState.get('user_sesion_email'),
@@ -14,7 +14,6 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         }
       })) : '';
   };
-  
   const handleUserSesionEmail = (e) => {
     e.preventDefault();
     setUserSesionEmail(fromJS({

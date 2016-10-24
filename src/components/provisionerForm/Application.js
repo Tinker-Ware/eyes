@@ -28,7 +28,7 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
         <i className="step fi-social-dropbox" />
          Select Application
       </h2>
-      {applicationsOptions.map((value, index) => 
+      {applicationsOptions.map((value, index) =>
         <ApplicationItem
           activeApplication={applicationAppState.get('application_name')?applicationAppState.get('application_name').toJS().name:""}
           key={value.identifier}

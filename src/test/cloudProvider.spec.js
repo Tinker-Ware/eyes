@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import cloudProvider from '../reducers/cloudProvider';
 
 describe('reducer', () => {
-  
   it('handles CLEAR_CLOUD_PROVIDER_SSH_KEYS', () => {
     const initialState = Map();
     const action = {
@@ -18,7 +17,6 @@ describe('reducer', () => {
       cloud_provider_ssh_keys: ''
     }));
   });
-  
   it('handles SET_CLOUD_PROVIDER', () => {
     const initialState = Map();
     const action = {type: 'SET_CLOUD_PROVIDER', value: fromJS({
@@ -52,7 +50,6 @@ describe('reducer', () => {
       }
     }));
   });
-  
   it('handles SET_CLOUD_PROVIDER_SSH_KEY when no exist SSHKeys', () => {
     const initialState = Map();
     const action = {
@@ -81,7 +78,6 @@ describe('reducer', () => {
       }]
     }));
   });
-  
   it('handles SET_CLOUD_PROVIDER_SSH_KEY when exist SSHKeys', () => {
     const initialState = Map();
     const action = {
@@ -145,7 +141,6 @@ describe('reducer', () => {
       }]
     }));
   });
-  
   it('handles SET_CLOUD_PROVIDER_SSH_KEY_NAME', () => {
     const initialState = Map();
     const action = {
@@ -160,7 +155,6 @@ describe('reducer', () => {
       cloud_provider_ssh_keys_name: 'Marco SSH'
     }));
   });
-  
   it('handles SHOW_CLOUD_PROVIDER_SSH_KEY', () => {
     const initialState = Map();
     const action = {
@@ -175,7 +169,6 @@ describe('reducer', () => {
       show_cloud_provider_ssh_key: true
     }));
   });
-  
   it('handles SET_CLOUD_PROVIDER_SSH_KEY_PUBLIC_KEY', () => {
     const initialState = Map();
     const action = {
@@ -190,7 +183,6 @@ describe('reducer', () => {
       cloud_provider_ssh_keys_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSUGPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XAt3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/EnmZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbxNrRFi9wrf+M7Q== schacon@mylaptop.local"
     }));
   });
-  
   it('handles ENABLE_CLOUD_PROVIDER_SSH_KEY', () => {
     const initialState = Map();
     const action = {
@@ -199,13 +191,13 @@ describe('reducer', () => {
         sshKeys:
           [{
             id: 0,
-            name: "title", 
+            name: "title",
             public_key:"value",
             enable: true
           },
           {
             id: 1,
-            name: "title", 
+            name: "title",
             public_key:"value",
             enable: true
           }],
@@ -222,7 +214,6 @@ describe('reducer', () => {
       }]
     }));
   });
-  
   it('handles DELETE_CLOUD_PROVIDER_SSH_KEY', () => {
     const initialState = Map();
     const action = {
@@ -252,14 +243,11 @@ describe('reducer', () => {
       }]
     }));
   });
-
   it('handles DEFAULT', () => {
     const initialState = Map();
     const action = {type: ''};
     const nextState = cloudProvider(initialState, action);
-    
     expect(nextState).to.equal(fromJS({
     }));
   });
-  
 });

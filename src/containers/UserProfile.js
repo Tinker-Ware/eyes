@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/userActions';
 import AccountSidebar from "../components/user/AccountSidebar";
 import UserSidebar from "../components/user/UserSidebar";
-  
+
 export class UserProfile extends Component {
   constructor(props) {
     super(props);

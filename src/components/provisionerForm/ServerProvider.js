@@ -7,7 +7,7 @@ const ServerProvider = () => {
       className="row"
       id="server-provider">
       <h2>
-        <i className="step fi-cloud" /> 
+        <i className="step fi-cloud" />
           Select Server Provider
         </h2>
       <div className="large-3 medium-6 small-6 columns">

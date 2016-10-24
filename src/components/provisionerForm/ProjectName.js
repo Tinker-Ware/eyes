@@ -10,7 +10,7 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
       name: e.target.value
     }));
   };
-    
+
   return (
     <div
       className="row"

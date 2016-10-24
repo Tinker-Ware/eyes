@@ -1,13 +1,12 @@
 import "babel-polyfill";
 import { expect } from 'chai';
 import { takeLatest } from 'redux-saga';
-import { call, put, fork } from 'redux-saga/effects'; 
+import { call, put, fork } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 import * as actions from '../actions/MiddlewareActions';
 import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from '../sagas';
 
 describe('sagas middleware', () => {
-  
   it('handles REQUEST_CLOUD_PROVIDER_ACCESS', () => {
     const userAccess = {
       "oauth_request": {
@@ -17,7 +16,7 @@ describe('sagas middleware', () => {
     };
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
     const generator = getCloudProviderAccess({
-      value: 
+      value:
       fromJS({
         "authorization": authorization,
         "oauth_request": userAccess.oauth_request
@@ -66,7 +65,6 @@ describe('sagas middleware', () => {
         })))
     );
   });
-  
   it('handles REQUEST_CLOUD_PROVIDER_KEYS', () => {
     const userAccess = {
       user: {
@@ -116,7 +114,7 @@ describe('sagas middleware', () => {
     };
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
     const generator = getRepositoryAccess({
-      value: 
+      value:
       fromJS({
         "authorization": authorization,
         "oauth_request": userAccess.oauth_request
@@ -167,7 +165,7 @@ describe('sagas middleware', () => {
           "name": "infrastructure",
           "full_name": "Tinker-Ware/infrastructure",
           "description": "Ansible-based configuration definitions for various servers used by the Tinkerware project",
-          "private": true, 
+          "private": true,
           "html_url": "https://github.com/Tinker-Ware/infrastructure",
           "clone_url": "git@github.com/Tinker-Ware/infrastructure.git",
           "ssh_url": "git@github.com/Tinker-Ware/infrastructure.git"
@@ -405,5 +403,4 @@ describe('sagas middleware', () => {
       call(refreshUserSesion, userAccess.user_session)
     );
   });
-  
 });

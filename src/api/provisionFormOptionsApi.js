@@ -10,7 +10,7 @@ const _clone = function(item) {
 
 const provisionFormOptionsApi = {
 	getProvisionFormOptions: function() {
-		return _clone(provision_form_options); 
+		return _clone(provision_form_options);
 	}
 
 };

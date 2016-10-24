@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import user from '../reducers/user';
 
 describe('reducer', () => {
-  
   it('handles SET_USER', () => {
     const initialState = Map();
     const action = {type: 'SET_USER', value: fromJS({
@@ -22,7 +21,6 @@ describe('reducer', () => {
       }
     }));
   });
-  
   it('handles SET_USER_INFORMATION', () => {
     const initialState = Map();
     const action = {type: 'SET_USER_INFORMATION', value: fromJS({
@@ -45,7 +43,6 @@ describe('reducer', () => {
       }
     }));
   });
-  
   it('handles SET_USER_SESION', () => {
     const initialState = Map();
     const action = {type: 'SET_USER_SESION', value: fromJS({
@@ -64,7 +61,6 @@ describe('reducer', () => {
       }
     }));
   });
-  
   it('handles SET_USER_SESION_EMAIL', () => {
     const initialState = Map();
     const action = {type: 'SET_USER_SESION_EMAIL', value: fromJS({
@@ -77,7 +73,6 @@ describe('reducer', () => {
       "user_sesion_email": "some@email.com"
     }));
   });
-  
   it('handles SET_USER_SESION_PASSWORD', () => {
     const initialState = Map();
     const action = {type: 'SET_USER_SESION_PASSWORD', value: fromJS({
@@ -90,12 +85,11 @@ describe('reducer', () => {
       "user_sesion_password": "somepassword"
     }));
   });
-  
   it('handles DEFAULT', () => {
     const initialState = Map();
     const action = {type: ''};
     const nextState = user(initialState, action);
-    
+
     expect(nextState).to.equal(fromJS({
     }));
   });

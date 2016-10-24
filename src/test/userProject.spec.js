@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import userProject from '../reducers/userProject';
 
 describe('reducer', () => {
-  
   it('handles SET_USER_PROJECT', () => {
     const initialState = Map();
     const action = {type: 'SET_USER_PROJECT', value: fromJS({
@@ -58,7 +57,6 @@ describe('reducer', () => {
       ]
     }));
   });
-
   it('handles REQUEST_POST_USER_PROJECT_FAILED', () => {
     const initialState = Map();
     const action = {type: 'REQUEST_POST_USER_PROJECT_FAILED', value: fromJS({
@@ -75,14 +73,13 @@ describe('reducer', () => {
       }
     }));
   });
-  
   it('handles DEFAULT', () => {
     const initialState = Map();
     const action = {type: ''};
     const nextState = userProject(initialState, action);
-    
+
     expect(nextState).to.equal(fromJS({
     }));
   });
-  
+
 });

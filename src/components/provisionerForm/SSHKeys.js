@@ -11,7 +11,7 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
       id: parseInt(e.target.parentNode.id)
     }));
   };
-  
+
   const StoreSSHKeyKeypress = (e) => {
     if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
       requestPostCloudProviderSSHKey(fromJS({
@@ -32,7 +32,6 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
       }));
     }
   };
-  
   const ShowSSHKeyButtonKeypress = (e) => {
     e.preventDefault();
     showSSHKey(
@@ -41,23 +40,21 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
       })
     );
   };
-  
   const SSHKeyTitleKeypress = (e) => {
     e.preventDefault();
     setSSHKeyTitle(fromJS({
       name: e.target.value
     }));
   };
-  
   const SSHKeyContentKeypress = (e) => {
     e.preventDefault();
     setSSHKeyContent(fromJS({
       public_key: e.target.value
     }));
   };
-  const PrintSSHKeys = 
+  const PrintSSHKeys =
     (cloudProviderAppState.get('cloud_provider_ssh_keys')) ?
-      cloudProviderAppState.get('cloud_provider_ssh_keys').map((value, index) => 
+      cloudProviderAppState.get('cloud_provider_ssh_keys').map((value, index) =>
         <SSHKeysItem
           handleClick={handleSSHKeyClick}
           identifier={index}
@@ -67,13 +64,13 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
           isActive={value.get('enable')?true:false}
           end={(index == cloudProviderAppState.get('cloud_provider_ssh_keys').size - 1) ? "end" : ""}
         />) : "";
-  
-  const AddSHHKeyButton = 
+
+  const AddSHHKeyButton =
     !(cloudProviderAppState.get('show_cloud_provider_ssh_key')) ?
       <p><a
         href="javascript:void(0);"
         onClick={ShowSSHKeyButtonKeypress}
-        id="show_cloud_provider_ssh_key">+ Add SSH Key</a></p> : 
+        id="show_cloud_provider_ssh_key">+ Add SSH Key</a></p> :
         <div className="ssh_key_content">
           <div className="large-offset-9 large-3 medium-9">
             <p className="right">
@@ -96,8 +93,8 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                     onChange={SSHKeyContentKeypress}
                     placeholder="SSH Key Content" />
                 </label>
-                <div 
-                  className="hide" 
+                <div
+                  className="hide"
                   id="ssh_key_content_value_error">
                   <small className="error hide">SSH Key Content can not be blank</small>
                 </div>
@@ -108,25 +105,25 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
                 <div className="row">
                   <div className="small-9 columns">
                     <label className="error">
-                      <input 
+                      <input
                         type="text"
-                        id="ssh_key_content_title" 
+                        id="ssh_key_content_title"
                         maxLength="20"
                         value={cloudProviderAppState.get('cloud_provider_ssh_keys_name')?cloudProviderAppState.get('cloud_provider_ssh_keys_name'):''}
                         onChange={SSHKeyTitleKeypress}
                         placeholder="Title" />
                     </label>
-                    <div 
-                      className="hide" 
+                    <div
+                      className="hide"
                       id="ssh_key_content_title_error">
                       <small className="error">SSH Key Title can not be blank</small>
                     </div>
                   </div>
                   <div className="small-3 columns">
-                    <a 
-                      href="javascript:void(0);" 
+                    <a
+                      href="javascript:void(0);"
                       onClick={StoreSSHKeyKeypress}
-                      id="save_ssh_key" 
+                      id="save_ssh_key"
                       className="button postfix">Add SSH Key</a>
                   </div>
                 </div>
@@ -135,17 +132,17 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
           </form>
           <p>Adding an SSH key is a recommended security measure.</p>
         </div>;
-      
+
   const SSHKeyForm =
     cloudProviderAppState.get('cloud_provider')?
       <div className="large-12 medium-12 small-12 columns end">
         {AddSHHKeyButton}
       </div> : "";
-  
+
   return (
     <div
       className="row"
-      data-magellan-destination="ssh-keys" 
+      data-magellan-destination="ssh-keys"
       id="ssh-keys">
       <h2>
         <i className="step fi-key" />

@@ -10,7 +10,7 @@ const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repository
          Your Service
       </h3>
       <h4 className="color-green">
-        <i className="step fi-italic" /> 
+        <i className="step fi-italic" />
          Project Name
       </h4>
       <p id="label-project-name">

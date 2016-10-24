@@ -11,7 +11,7 @@ const AutomationSoftware = () => {
       <div className="large-4 medium-6 small-6 columns">
         <ul className="selection-table active">
           <li className="price">
-            <img 
+            <img
               className="puppet small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           </li>
           <li className="bullet-item">Puppet</li>
@@ -20,7 +20,7 @@ const AutomationSoftware = () => {
       <div className="large-4 medium-6 small-6 columns" data-equalizer-watch>
         <ul className="selection-table">
           <li className="price">
-            <img 
+            <img
               className="ansible small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           </li>
           <li className="bullet-item">Ansible</li>
@@ -29,7 +29,7 @@ const AutomationSoftware = () => {
       <div className="large-4 medium-6 small-6 columns end">
         <ul className="selection-table">
           <li className="price">
-            <img 
+            <img
               className="chef small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
             </li>
           <li className="bullet-item">Chef</li>

@@ -17,7 +17,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
         }));
         cookie.remove('digitalocean_oauth');
         clearInterval(timer);
-      }  
+      }
     }, 1000);
   }
   const handleDigitalOceanLogin = (e) => {
@@ -44,7 +44,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
             onClick={handleDigitalOceanLogin}>
             <img
               className="DigitalOcean" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-            {(cloudProviderAppState.get('cloud_provider')) ? 
+            {(cloudProviderAppState.get('cloud_provider')) ?
               'Connected: '+ cloudProviderAppState.get('cloud_provider').toJS().username : 'Connect Digital Ocean'}
           </Link>
         </li>

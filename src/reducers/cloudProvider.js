@@ -29,7 +29,7 @@ export default function cloudProvider(state = initialState, action) {
     }
     case SET_CLOUD_PROVIDER_SSH_KEY:
     {
-      return state.set('cloud_provider_ssh_keys', 
+      return state.set('cloud_provider_ssh_keys',
         action.value.get('sshKeys').toSet().union(
           action.value.get('sshKey').map( value =>
             value.set('enable', false)
@@ -39,7 +39,7 @@ export default function cloudProvider(state = initialState, action) {
     }
     case ENABLE_CLOUD_PROVIDER_SSH_KEY:
     {
-      return state.set('cloud_provider_ssh_keys', action.value.get('sshKeys').map(value => 
+      return state.set('cloud_provider_ssh_keys', action.value.get('sshKeys').map(value=>
         value.get('id') === action.value.get('id') ?
           value.set('enable', !value.get('enable')) : value
       ));
@@ -50,7 +50,7 @@ export default function cloudProvider(state = initialState, action) {
     }
     case DELETE_CLOUD_PROVIDER_SSH_KEY:
     {
-      return state.set('cloud_provider_ssh_keys', action.value.get('sshKeys').filter(value => 
+      return state.set('cloud_provider_ssh_keys', action.value.get('sshKeys').filter(value=>
         value.get('id') !== action.value.get('id')
       ));
     }

@@ -5,7 +5,7 @@ import cookie from 'react-cookie';
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
   if(userAppState.get('user_session')){
-    let timer; 
+    let timer;
     timer = setInterval(function(){
       if(cookie.load('github_oauth')){
         requestRepositoryAccess(fromJS({
@@ -55,7 +55,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       repositoryAppState.get('integration') && !repositoryAppState.get('repositories') ?
         requestUserRepositories(fromJS({
           "userName": repositoryAppState.get('integration').toJS().username,
-          "authorization": userAppState.get('user_session').toJS().token})) : 
+          "authorization": userAppState.get('user_session').toJS().token})):
         '';
     }else{
       setShowRepositories(fromJS({
@@ -63,8 +63,8 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }));
     }
   };
-  const optionsRepositoryList = 
-    (repositoryAppState.get('integration')) ? 
+  const optionsRepositoryList=
+    (repositoryAppState.get('integration'))?
       <a
         href="#"
         onClick={handleGithubConfigurationEnable}
@@ -74,7 +74,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
              'Hide Repositories' : 'Select Repository'}</a> : '';
   const repositoryList =
     (repositoryAppState.get('integration')) && repositoryAppState.get('repositories') ?
-      repositoryAppState.get('repositories').toJS().map((value, index) => 
+      repositoryAppState.get('repositories').toJS().map((value, index)=>
         <div
           className={repositoryAppState.get('show_repositories')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
           key={index}>
@@ -114,11 +114,11 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
               <img
                 className="GitHub"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-              {(repositoryAppState.get('integration')) ? 
+              {(repositoryAppState.get('integration'))?
                 'Connected: '+repositoryAppState.get('integration').toJS().username : 'Connect Github'}
           </Link>
           {optionsRepositoryList}
-          {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration')) ? 
+          {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration'))?
             <h5 id="firstModalTitle">Select a repository.</h5> : ''}
           <div className="row repository-list">
               {repositoryList}

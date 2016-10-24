@@ -11,13 +11,13 @@ import rootReducer from '../reducers';
 export default function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
   const reduxImmutalbeMiddleware = reduxImmutableStateInvariant();
-  
+
   const store = createStore(rootReducer, applyMiddleware(reduxImmutalbeMiddleware, sagaMiddleware), initialState, compose(
     // Add other middleware on this line...
     window.devToolsExtension ? window.devToolsExtension() : f => f //add support for Redux dev tools
     )
   );
-  
+
   sagaMiddleware.run(root);
 
   if (module.hot) {

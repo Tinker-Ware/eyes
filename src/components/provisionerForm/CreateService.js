@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
 import {fromJS, Map} from 'immutable';
 
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
@@ -29,9 +29,9 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           "provider": repositoryAppState.get("repository").toJS().provider,
           "name": repositoryAppState.get("repository").toJS().name
         },
-        "ssh_keys": cloudProviderAppState.get('cloud_provider_ssh_keys').filter(value => 
+        "ssh_keys": cloudProviderAppState.get('cloud_provider_ssh_keys').filter(value=>
           value.get('enable') == true
-        ).map(value => 
+        ).map(value=>
           Map({
             user_id: userAppState.get('user_session').toJS().id,
             title: value.get('title'),
@@ -42,18 +42,18 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
       }
     }));
   };
-  const btnCreateService = 
-    repositoryAppState.get('integration') && 
-    repositoryAppState.get('repository') &&
-    projectNameAppState.get('project_name') && 
-    applicationAppState.get('application_name') ? 
+  const btnCreateService =
+    repositoryAppState.get('integration')&&
+    repositoryAppState.get('repository')&&
+    projectNameAppState.get('project_name')&&
+    applicationAppState.get('application_name') ?
       <a
         href="javascript:void(0);"
         id="btn-create_service"
         onClick={handleCreateUserProject}
         className="button radius expanded">
           <i className="step fi-power" />
-           Create Service</a> : 
+           Create Service</a> :
       <a
         href="javascript:void(0);"
         id="btn-create_service"

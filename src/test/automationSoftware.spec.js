@@ -16,7 +16,7 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {type: ''};
     const nextState = automationSoftware(initialState, action);
-    
+
     expect(nextState).to.equal(fromJS({
     }));
   });

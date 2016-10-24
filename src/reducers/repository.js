@@ -4,7 +4,7 @@ import { Map, fromJS } from 'immutable';
 const initialState = Map({
   integration: "",
   repositories: "",
-  repository: "", 
+  repository: "",
   show_repositories: false
 });
 

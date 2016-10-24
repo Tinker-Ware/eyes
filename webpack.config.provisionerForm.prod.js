@@ -34,7 +34,7 @@ export default {
     }),
 
     new webpack.HotModuleReplacementPlugin(),
-    
+
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
 
