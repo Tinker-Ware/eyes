@@ -63,35 +63,34 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
   const optionsRepositoryList=
     (repositoryAppState.get("integration"))?
       <a
-        className="button success radius btn-config"
-        href="#"
-        onClick={handleGithubConfigurationEnable}>
+          className="button success radius btn-config"
+          href="#"
+          onClick={handleGithubConfigurationEnable}>
           <i className="step fi-widget" />
            {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
     (repositoryAppState.get("integration")) && repositoryAppState.get("repositories") ?
       repositoryAppState.get("repositories").toJS().map((value, index)=>
         <div
-          className={repositoryAppState.get("show_repositories")? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
-          key={index}>
-          <div
-            className="switch large">
+            className={repositoryAppState.get("show_repositories")? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
+            key={index}>
+          <div className="switch large" >
             <input className="switch-input"
-              id={index}
-              name="exampleSwitch"
-              onClick={(event)=>handleGithubRepos(event, value.full_name)}
-              type="radio"/>
+                id={index}
+                name="exampleSwitch"
+                onClick={(event)=>handleGithubRepos(event, value.full_name)}
+                type="radio"/>
             <label
-              className="switch-paddle"
-              htmlFor={index}>
+                className="switch-paddle"
+                htmlFor={index}>
               <span className="show-for-sr">Do you like me?</span>
               <span
-                aria-hidden="true"
-                className="switch-active">Yes
+                  aria-hidden="true"
+                  className="switch-active">Yes
               </span>
               <span
-                aria-hidden="true"
-                className="switch-inactive">No
+                  aria-hidden="true"
+                  className="switch-inactive">No
               </span>
             </label>
           </div>
@@ -104,10 +103,10 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       <ul className="selection-table">
         <li className="bullet-item">
           <Link
-            className="button radius btn-connect"
-            href="#"
-            onClick={handleGithubLogin}>
-              <img
+              className="button radius btn-connect"
+              href="#"
+              onClick={handleGithubLogin}>
+            <img
                 className="GitHub"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
               {(repositoryAppState.get("integration"))?"Connected:"+repositoryAppState.get("integration").toJS().username :"Connect Github"}

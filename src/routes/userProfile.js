@@ -5,13 +5,13 @@ import UserProfile from "../containers/UserProfile";
 
 export default (
   <Route
-    component={UserProfile}
-    path="/">
+      component={UserProfile}
+      path="/" >
     <IndexRoute component={Profile} />
     <Route
-      component={Profile}
-      path="*"
-      status={404}
+        component={Profile}
+        path="*"
+        status={404}
     />
   </Route>
 );

@@ -3,8 +3,8 @@ import React from "react";
 const Distribution = () => {
   return (
     <div
-      className="row"
-      id="distribution">
+        className="row"
+        id="distribution">
       <h2>
         <i className="step fi-annotate" />
          Select Distribution

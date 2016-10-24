@@ -12,8 +12,8 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
 
   return (
     <div
-      className="row"
-      id="project-configuration">
+        className="row"
+        id="project-configuration">
       <h2>
         <i className="step fi-italic" />
          Project Name
@@ -23,16 +23,16 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
           <div className="row">
             <div className="large-12 columns">
               <input
-                autoComplete="off"
-                id="input-project_name"
-                name="projectName"
-                onChange={ProjectNameKeypress}
-                pattern="([a-z0-9]){2,15}\.([a-z0-9]){2,15}"
-                placeholder="projectname.servername"
-                required
-                title="Format needed: nombreproyecto.nombreservidor"
-                type="text"
-                value={projectNameAppState.project_name}
+                  autoComplete="off"
+                  id="input-project_name"
+                  name="projectName"
+                  onChange={ProjectNameKeypress}
+                  pattern="([a-z0-9]){2,15}\.([a-z0-9]){2,15}"
+                  placeholder="projectname.servername"
+                  required
+                  title="Format needed: nombreproyecto.nombreservidor"
+                  type="text"
+                  value={projectNameAppState.project_name}
               />
             </div>
           </div>

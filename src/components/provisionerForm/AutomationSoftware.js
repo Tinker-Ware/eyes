@@ -11,7 +11,8 @@ const AutomationSoftware = () => {
         <ul className="selection-table active">
           <li className="price">
             <img
-              className="puppet small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                className="puppet small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           </li>
           <li className="bullet-item">Puppet</li>
         </ul>
@@ -20,7 +21,8 @@ const AutomationSoftware = () => {
         <ul className="selection-table">
           <li className="price">
             <img
-              className="ansible small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                className="ansible small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
           </li>
           <li className="bullet-item">Ansible</li>
         </ul>
@@ -29,7 +31,8 @@ const AutomationSoftware = () => {
         <ul className="selection-table">
           <li className="price">
             <img
-              className="chef small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                className="chef small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
             </li>
           <li className="bullet-item">Chef</li>
         </ul>

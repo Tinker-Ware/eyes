@@ -25,10 +25,10 @@ export class UserLogin extends Component {
     return (
       <div className="row">
         <Login
-          requestGetUserSesion={this.props.actions.requestGetUserSesion}
-          setUserSesionEmail={this.props.actions.setUserSesionEmail}
-          setUserSesionPassword={this.props.actions.setUserSesionPassword}
-          userAppState={this.props.userAppState} />
+            requestGetUserSesion={this.props.actions.requestGetUserSesion}
+            setUserSesionEmail={this.props.actions.setUserSesionEmail}
+            setUserSesionPassword={this.props.actions.setUserSesionPassword}
+            userAppState={this.props.userAppState} />
       </div>
     );
   }

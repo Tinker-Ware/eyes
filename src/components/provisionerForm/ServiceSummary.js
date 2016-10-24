@@ -23,12 +23,12 @@ const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repository
         {(applicationAppState.get("application_name")) ? applicationAppState.get("application_name").toJS().name:"none"}
       </p>
       <CreateService
-        applicationAppState={applicationAppState}
-        cloudProviderAppState={cloudProviderAppState}
-        projectNameAppState={projectNameAppState}
-        repositoryAppState={repositoryAppState}
-        requestPostUserProject={requestPostUserProject}
-        userAppState={userAppState}
+          applicationAppState={applicationAppState}
+          cloudProviderAppState={cloudProviderAppState}
+          projectNameAppState={projectNameAppState}
+          repositoryAppState={repositoryAppState}
+          requestPostUserProject={requestPostUserProject}
+          userAppState={userAppState}
       />
     </div>
   );

@@ -25,10 +25,10 @@ export class UserSignup extends Component {
     return (
       <div className="row">
         <Signup
-          requestPostUser={this.props.actions.requestPostUser}
-          setUserSesionEmail={this.props.actions.setUserSesionEmail}
-          setUserSesionPassword={this.props.actions.setUserSesionPassword}
-          userAppState={this.props.userAppState} />
+            requestPostUser={this.props.actions.requestPostUser}
+            setUserSesionEmail={this.props.actions.setUserSesionEmail}
+            setUserSesionPassword={this.props.actions.setUserSesionPassword}
+            userAppState={this.props.userAppState} />
       </div>
     );
   }

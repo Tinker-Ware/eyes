@@ -32,32 +32,32 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
             <input
-              name="Email Address"
-              onChange={handleUserSesionEmail}
-              placeholder="Email Address"
-              type="text"
-              value={userAppState.get("user_sesion_email")?userAppState.get("user_sesion_email"):""}
+                name="Email Address"
+                onChange={handleUserSesionEmail}
+                placeholder="Email Address"
+                type="text"
+                value={userAppState.get("user_sesion_email")?userAppState.get("user_sesion_email"):""}
             />
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
             <input
-              name="Password"
-              onChange={handleUserSesionPassword}
-              placeholder="Password"
-              type="password"
-              value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
+                name="Password"
+                onChange={handleUserSesionPassword}
+                placeholder="Password"
+                type="password"
+                value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
             />
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
             <input
-              className="success button expanded"
-              name="Submit"
-              type="submit"
-              value="Submit"
+                className="success button expanded"
+                name="Submit"
+                type="submit"
+                value="Submit"
             />
           </div>
         </div>

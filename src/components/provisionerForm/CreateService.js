@@ -47,17 +47,18 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
     projectNameAppState.get("project_name")&&
     applicationAppState.get("application_name") ?
       <a
-        className="button radius expanded"
-        href="javascript:void(0);"
-        id="btn-create_service"
-        onClick={handleCreateUserProject}>
+          className="button radius expanded"
+          href="javascript:void(0);"
+          id="btn-create_service"
+          onClick={handleCreateUserProject} >
           <i className="step fi-power" />
-           Create Service</a> :
+           Create Service
+      </a> :
       <a
-        className="button radius expanded disabled"
-        href="javascript:void(0);"
-        id="btn-create_service"
-        onClick={handleCreateUserProject}>
+          className="button radius expanded disabled"
+          href="javascript:void(0);"
+          id="btn-create_service"
+          onClick={handleCreateUserProject} >
           <i className="step fi-power" />
            Create Service</a>;
     return (

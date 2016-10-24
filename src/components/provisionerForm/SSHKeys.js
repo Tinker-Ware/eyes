@@ -47,31 +47,32 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
     (cloudProviderAppState.get("cloud_provider_ssh_keys")) ?
       cloudProviderAppState.get("cloud_provider_ssh_keys").map((value, index) =>
         <SSHKeysItem
-          end={(index == cloudProviderAppState.get("cloud_provider_ssh_keys").size - 1) ? "end" : ""}
-          handleClick={handleSSHKeyClick}
-          id={value.get("id")}
-          identifier={index}
-          isActive={value.get("enable")?true:false}
-          key={index}
-          value={value.get("title")}
+            end={(index == cloudProviderAppState.get("cloud_provider_ssh_keys").size - 1) ? "end" : ""}
+            handleClick={handleSSHKeyClick}
+            id={value.get("id")}
+            identifier={index}
+            isActive={value.get("enable")?true:false}
+            key={index}
+            value={value.get("title")}
         />) : "";
 
   const AddSHHKeyButton =
     !(cloudProviderAppState.get("show_cloud_provider_ssh_key")) ?
       <p>
         <a
-          href="javascript:void(0);"
-          id="show_cloud_provider_ssh_key">+ Add SSH Key
-          onClick={ShowSSHKeyButtonKeypress}
+            href="javascript:void(0);"
+            id="show_cloud_provider_ssh_key"
+            onClick={ShowSSHKeyButtonKeypress} >
+          + Add SSH Key
         </a>
       </p> :
       <div className="ssh_key_content">
         <div className="large-offset-9 large-3 medium-9">
           <p className="right">
             <a
-              href="javascript:void(0);"
-              id="hide_ssh_key"
-              onClick={ShowSSHKeyButtonKeypress}>
+                href="javascript:void(0);"
+                id="hide_ssh_key"
+                onClick={ShowSSHKeyButtonKeypress} >
               Close
             </a>
           </p>
@@ -81,17 +82,17 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
             <div className="columns">
               <label className="error">
                 <textarea
-                  cols="50"
-                  id="ssh_key_content_value"
-                  onChange={SSHKeyContentKeypress}
-                  placeholder="SSH Key Content"
-                  rows="5"
-                  value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
+                    cols="50"
+                    id="ssh_key_content_value"
+                    onChange={SSHKeyContentKeypress}
+                    placeholder="SSH Key Content"
+                    rows="5"
+                    value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
                 />
               </label>
               <div
-                className="hide"
-                id="ssh_key_content_value_error">
+                  className="hide"
+                  id="ssh_key_content_value_error">
                 <small className="error hide">SSH Key Content can not be blank</small>
               </div>
             </div>
@@ -102,26 +103,26 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                 <div className="small-9 columns">
                   <label className="error">
                     <input
-                      id="ssh_key_content_title"
-                      maxLength="20"
-                      onChange={SSHKeyTitleKeypress}
-                      placeholder="Title"
-                      type="text"
-                      value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
+                        id="ssh_key_content_title"
+                        maxLength="20"
+                        onChange={SSHKeyTitleKeypress}
+                        placeholder="Title"
+                        type="text"
+                        value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
                     />
                   </label>
                   <div
-                    className="hide"
-                    id="ssh_key_content_title_error">
+                      className="hide"
+                      id="ssh_key_content_title_error">
                     <small className="error">SSH Key Title can not be blank</small>
                   </div>
                 </div>
                 <div className="small-3 columns">
                   <a
-                    className="button postfix">Add SSH Key
-                    href="javascript:void(0);"
-                    id="save_ssh_key"
-                    onClick={StoreSSHKeyKeypress}
+                      className="button postfix">Add SSH Key
+                      href="javascript:void(0);"
+                      id="save_ssh_key"
+                      onClick={StoreSSHKeyKeypress}
                   </a>
                 </div>
               </div>
@@ -139,9 +140,9 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
 
   return (
     <div
-      className="row"
-      data-magellan-destination="ssh-keys"
-      id="ssh-keys">
+        className="row"
+        data-magellan-destination="ssh-keys"
+        id="ssh-keys">
       <h2>
         <i className="step fi-key" />
          Add SSH Keys
