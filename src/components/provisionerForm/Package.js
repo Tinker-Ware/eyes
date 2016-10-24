@@ -4,7 +4,8 @@ const Package = () => {
   return (
     <div
         className="row"
-        id="packages">
+        id="packages"
+    >
       <h2>
         <i className="step fi-archive" />
          Select Package
@@ -14,7 +15,8 @@ const Package = () => {
           <li className="bullet-item">
             <img
                 className="Sinatra"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             Sinatra
           </li>
         </ul>
@@ -24,7 +26,8 @@ const Package = () => {
           <li className="bullet-item">
             <img
                 className="Ruby"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             Ruby
           </li>
         </ul>
@@ -34,7 +37,8 @@ const Package = () => {
           <li className="bullet-item">
             <img
                 className="Haskell"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             Haskell
           </li>
         </ul>
@@ -44,7 +48,8 @@ const Package = () => {
           <li className="bullet-item">
             <img
                 className="Emacs"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             Emacs
           </li>
         </ul>
@@ -54,7 +59,8 @@ const Package = () => {
           <li className="bullet-item">
             <img
                 className="VIM"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             VIM
           </li>
         </ul>

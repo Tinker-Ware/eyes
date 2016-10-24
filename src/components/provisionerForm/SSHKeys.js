@@ -62,7 +62,8 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
         <a
             href="javascript:void(0);"
             id="show_cloud_provider_ssh_key"
-            onClick={ShowSSHKeyButtonKeypress} >
+            onClick={ShowSSHKeyButtonKeypress}
+        >
           + Add SSH Key
         </a>
       </p> :
@@ -72,7 +73,8 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
             <a
                 href="javascript:void(0);"
                 id="hide_ssh_key"
-                onClick={ShowSSHKeyButtonKeypress} >
+                onClick={ShowSSHKeyButtonKeypress}
+            >
               Close
             </a>
           </p>
@@ -92,7 +94,8 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
               </label>
               <div
                   className="hide"
-                  id="ssh_key_content_value_error">
+                  id="ssh_key_content_value_error"
+              >
                 <small className="error hide">SSH Key Content can not be blank</small>
               </div>
             </div>
@@ -113,16 +116,18 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                   </label>
                   <div
                       className="hide"
-                      id="ssh_key_content_title_error">
+                      id="ssh_key_content_title_error"
+                  >
                     <small className="error">SSH Key Title can not be blank</small>
                   </div>
                 </div>
                 <div className="small-3 columns">
                   <a
-                      className="button postfix">Add SSH Key
+                      className="button postfix"
                       href="javascript:void(0);"
                       id="save_ssh_key"
                       onClick={StoreSSHKeyKeypress}
+                  >Add SSH Key
                   </a>
                 </div>
               </div>
@@ -142,7 +147,8 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
     <div
         className="row"
         data-magellan-destination="ssh-keys"
-        id="ssh-keys">
+        id="ssh-keys"
+    >
       <h2>
         <i className="step fi-key" />
          Add SSH Keys

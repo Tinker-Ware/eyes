@@ -6,7 +6,8 @@ import UserProfile from "../containers/UserProfile";
 export default (
   <Route
       component={UserProfile}
-      path="/" >
+      path="/"
+  >
     <IndexRoute component={Profile} />
     <Route
         component={Profile}

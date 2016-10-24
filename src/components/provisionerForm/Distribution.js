@@ -4,7 +4,8 @@ const Distribution = () => {
   return (
     <div
         className="row"
-        id="distribution">
+        id="distribution"
+    >
       <h2>
         <i className="step fi-annotate" />
          Select Distribution

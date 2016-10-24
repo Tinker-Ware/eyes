@@ -13,7 +13,8 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
   return (
     <div
         className="row"
-        id="project-configuration">
+        id="project-configuration"
+    >
       <h2>
         <i className="step fi-italic" />
          Project Name

@@ -8,7 +8,8 @@ const Repositories = () => {
       <div className="row">
         <Link
             className="medium-2 columns button"
-            to="#" >
+            to="#"
+        >
           <span className="fi-social-github">
             Github
           </span>

@@ -28,7 +28,8 @@ export class UserLogin extends Component {
             requestGetUserSesion={this.props.actions.requestGetUserSesion}
             setUserSesionEmail={this.props.actions.setUserSesionEmail}
             setUserSesionPassword={this.props.actions.setUserSesionPassword}
-            userAppState={this.props.userAppState} />
+            userAppState={this.props.userAppState}
+        />
       </div>
     );
   }

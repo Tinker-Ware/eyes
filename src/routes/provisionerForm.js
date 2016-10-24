@@ -6,7 +6,8 @@ import ProvisionerForm from "../containers/ProvisionerForm";
 export default (
   <Route
       component={App}
-      path="/" >
+      path="/"
+  >
     <IndexRoute component={ProvisionerForm} />
     <Route
         component={ProvisionerForm}

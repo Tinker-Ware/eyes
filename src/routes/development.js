@@ -11,11 +11,13 @@ import ServiceOAuth from "../containers/ServiceOAuth";
 export default (
   <Route
       component={App}
-      path="/" >
+      path="/"
+  >
     <IndexRoute component={ProvisionerForm} />
     <Route
         component={UserProfile}
-        path="/user">
+        path="/user"
+    >
       <IndexRoute component={Profile} />
     </Route>
     <Route

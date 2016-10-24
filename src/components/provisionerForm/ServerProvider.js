@@ -4,7 +4,8 @@ const ServerProvider = () => {
   return (
     <div
         className="row"
-        id="server-provider">
+        id="server-provider"
+    >
       <h2>
         <i className="step fi-cloud" />
           Select Server Provider
@@ -14,7 +15,8 @@ const ServerProvider = () => {
           <li className="price">
             <img
                 className="amazon_web_services small-image"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             </li>
           <li className="bullet-item">Amazon Web Services</li>
         </ul>
@@ -24,7 +26,8 @@ const ServerProvider = () => {
           <li className="price">
             <img
                 className="digital_ocean small-image"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             </li>
           <li className="bullet-item">Digital Ocean</li>
         </ul>
@@ -34,7 +37,8 @@ const ServerProvider = () => {
           <li className="price">
             <img
                 className="google_cloud small-image"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">Google Cloud</li>
         </ul>
@@ -44,7 +48,8 @@ const ServerProvider = () => {
           <li className="price">
             <img
                 className="none small-image"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">None</li>
         </ul>

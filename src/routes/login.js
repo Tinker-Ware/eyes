@@ -7,7 +7,8 @@ import UserSignup from "../containers/UserSignup";
 export default (
   <Route
       component={App}
-      path="/" >
+      path="/"
+  >
     <IndexRoute component={UserLogin} />
     <Route
         component={UserSignup}

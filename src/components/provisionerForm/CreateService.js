@@ -50,7 +50,8 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           className="button radius expanded"
           href="javascript:void(0);"
           id="btn-create_service"
-          onClick={handleCreateUserProject} >
+          onClick={handleCreateUserProject}
+      >
           <i className="step fi-power" />
            Create Service
       </a> :
@@ -58,7 +59,8 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           className="button radius expanded disabled"
           href="javascript:void(0);"
           id="btn-create_service"
-          onClick={handleCreateUserProject} >
+          onClick={handleCreateUserProject}
+      >
           <i className="step fi-power" />
            Create Service</a>;
     return (

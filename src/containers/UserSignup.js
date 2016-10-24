@@ -28,7 +28,8 @@ export class UserSignup extends Component {
             requestPostUser={this.props.actions.requestPostUser}
             setUserSesionEmail={this.props.actions.setUserSesionEmail}
             setUserSesionPassword={this.props.actions.setUserSesionPassword}
-            userAppState={this.props.userAppState} />
+            userAppState={this.props.userAppState}
+        />
       </div>
     );
   }

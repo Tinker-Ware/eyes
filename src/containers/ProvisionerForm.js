@@ -38,7 +38,8 @@ export class ServiceForm extends Component {
             </h1>
             <ProjectName
                 projectNameAppState={this.props.projectNameAppState}
-                setProjectName={this.props.actions.setProjectName} />
+                setProjectName={this.props.actions.setProjectName}
+            />
             <div className="row">
               <h2>
                 <i className="step fi-share" />
@@ -90,7 +91,7 @@ export class ServiceForm extends Component {
                 repositoryAppState={this.props.repositoryAppState}
                 requestPostUserProject={this.props.actions.requestPostUserProject}
                 userAppState={this.props.userAppState}
-              />
+            />
           </div>
           <div className="large-2 columns hide-for-small-only hide-for-medium-only">
             <ServiceSummary
