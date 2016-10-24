@@ -41,7 +41,8 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
               href="#"
               onClick={handleDigitalOceanLogin} >
             <img
-                className="DigitalOcean" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+                className="DigitalOcean"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
             {(cloudProviderAppState.get("cloud_provider")) ?"Connected:"+ cloudProviderAppState.get("cloud_provider").toJS().username :"Connect Digital Ocean"}
           </Link>
         </li>

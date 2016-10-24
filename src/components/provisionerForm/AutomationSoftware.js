@@ -2,7 +2,9 @@ import React from "react";
 
 const AutomationSoftware = () => {
   return (
-    <div className="row" id="automation-software">
+    <div
+        className="row"
+        id="automation-software" >
       <h2>
         <i className="step fi-upload-cloud" />
          Select Automation Software
@@ -17,7 +19,9 @@ const AutomationSoftware = () => {
           <li className="bullet-item">Puppet</li>
         </ul>
       </div>
-      <div className="large-4 medium-6 small-6 columns" data-equalizer-watch>
+      <div
+          className="large-4 medium-6 small-6 columns"
+          data-equalizer-watch >
         <ul className="selection-table">
           <li className="price">
             <img

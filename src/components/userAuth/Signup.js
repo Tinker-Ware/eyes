@@ -46,7 +46,8 @@ const Signup = ( { requestPostUser, setUserSesionEmail, setUserSesionPassword, u
                 name="Password"
                 onChange={handleUserSesionPassword}
                 placeholder="Password"
-                type="password"value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
+                type="password"
+                value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
             />
           </div>
         </div>

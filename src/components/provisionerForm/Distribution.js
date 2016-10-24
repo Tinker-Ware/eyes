@@ -12,7 +12,10 @@ const Distribution = () => {
       <div className="large-3 medium-4 small-6 columns">
         <ul className="selection-table">
           <li className="price">
-            <img className="Ubuntu small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+            <img
+                className="Ubuntu small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">Ubuntu</li>
           <li className="description">
@@ -31,7 +34,10 @@ const Distribution = () => {
       <div className="large-3 medium-4 small-6 columns">
         <ul className="selection-table">
           <li className="price">
-            <img className="FreeBSD small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+            <img
+                className="FreeBSD small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">FreeBSD</li>
           <li className="description">
@@ -45,7 +51,10 @@ const Distribution = () => {
       <div className="large-3 medium-4 small-6 columns">
         <ul className="selection-table">
           <li className="price">
-            <img className="Fedora small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+            <img
+                className="Fedora small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">Fedora</li>
           <li className="description">
@@ -60,7 +69,10 @@ const Distribution = () => {
       <div className="large-3 medium-4 small-6 columns">
         <ul className="selection-table active">
           <li className="price">
-            <img className="Debian small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+            <img
+                className="Debian small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">Debian</li>
           <li className="description">
@@ -79,7 +91,10 @@ const Distribution = () => {
       <div className="large-3 medium-4 small-6 columns">
         <ul className="selection-table">
           <li className="price">
-            <img className="CoreOS small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+            <img
+                className="CoreOS small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
           </li>
           <li className="bullet-item">CoreOS</li>
           <li className="description">
@@ -95,7 +110,10 @@ const Distribution = () => {
       <div className="large-3 medium-4 small-6 columns end">
         <ul className="selection-table">
           <li className="price">
-            <img className="CentOS small-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+            <img
+                className="CentOS small-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            />
             </li>
           <li className="bullet-item">CentOS</li>
           <li className="description">
