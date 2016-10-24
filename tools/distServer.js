@@ -19,7 +19,6 @@ app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-var server = app.listen(app.get('port'), function() {
-  var port = server.address().port;
+app.listen(app.get('port'), function() {
   console.log('Running production build...');
 });

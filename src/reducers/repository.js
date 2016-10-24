@@ -1,5 +1,5 @@
 import { SET_REPOSITORIES, SET_REPOSITORY, SET_INTEGRATION, SET_SHOW_REPOSITORIES } from '../constants/ActionTypes';
-import { Map, fromJS } from 'immutable';
+import Map from 'immutable';
 
 const initialState = Map({
   integration: "",

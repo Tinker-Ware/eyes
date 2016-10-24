@@ -1,10 +1,9 @@
 import "babel-polyfill";
 import { expect } from 'chai';
-import { takeLatest } from 'redux-saga';
-import { call, put, fork } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 import * as actions from '../actions/MiddlewareActions';
-import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from '../sagas';
+import { doRequestGetCloudProviderAccess, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from '../sagas';
 
 describe('sagas middleware', () => {
   it('handles REQUEST_CLOUD_PROVIDER_ACCESS', () => {
@@ -275,12 +274,6 @@ describe('sagas middleware', () => {
         }]
       }
     };
-    const userAccess = {
-      'user_sesion': {
-        'email': 'some@email.com',
-        'token': 'GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu'
-      }
-    };
     const userAuthorization = {
       'user_sesion': {
         'token': 'qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf'
@@ -325,12 +318,6 @@ describe('sagas middleware', () => {
         'password': 'somepassword'
       }
     };
-    const userAccess = {
-      'user_sesion': {
-        'email': 'some@email.com',
-        'token': 'GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu'
-      }
-    };
     const generator = postUser({
       'value': fromJS({
         'user_signup': {
@@ -368,11 +355,6 @@ describe('sagas middleware', () => {
     const err = new ReferenceError('404');
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
-    const userSession = {
-      "value": fromJS({
-        "authorization": userAccess.user_session.token
-      })
-    };
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetRefreshSession, userAccess.user_session.token)
     );

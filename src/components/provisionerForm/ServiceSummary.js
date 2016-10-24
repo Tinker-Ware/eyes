@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
 import CreateService from './CreateService';
 
 const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {

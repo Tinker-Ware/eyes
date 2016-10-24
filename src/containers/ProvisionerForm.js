@@ -47,7 +47,7 @@ export class ServiceForm extends Component {
                  Connect Service(s)
               </h2>
               {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
-                provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value, index) =>
+                provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value) =>
                   (value.identifier == 'github') ?
                     <GithubService
                       key = {value.identifier}

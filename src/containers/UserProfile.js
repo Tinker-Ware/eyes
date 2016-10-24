@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import {Link, IndexLink} from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/userActions';

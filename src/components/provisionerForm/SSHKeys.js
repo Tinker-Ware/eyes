@@ -1,9 +1,8 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
-import {Map, fromJS} from 'immutable';
+import React, { PropTypes } from 'react';
+import { fromJS } from 'immutable';
 import SSHKeysItem from './SSHKeysItem';
 
-const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState, userAppState} ) => {
+const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState, userAppState} ) => {
   const handleSSHKeyClick = (e) => {
     e.preventDefault();
     enableSSHKey(fromJS({
@@ -155,11 +154,9 @@ const SSHKeys = ( {deleteSSHKey, enableSSHKey, showSSHKey, setSSHKey, setSSHKeyT
 };
 
 SSHKeys.propTypes = {
-  deleteSSHKey: PropTypes.func.isRequired,
   enableSSHKey: PropTypes.func.isRequired,
   requestPostCloudProviderSSHKey: PropTypes.func.isRequired,
   showSSHKey: PropTypes.func.isRequired,
-  setSSHKey: PropTypes.func.isRequired,
   setSSHKeyTitle: PropTypes.func.isRequired,
   setSSHKeyContent: PropTypes.func.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,

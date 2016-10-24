@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga';
-import { call, put, fork } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 import 'whatwg-fetch';
 import * as actions from './actions/MiddlewareActions';

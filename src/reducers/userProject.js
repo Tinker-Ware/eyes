@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import Map from 'immutable';
 import { SET_USER_PROJECT, REQUEST_POST_USER_PROJECT_FAILED } from '../constants/ActionTypes';
 
 const initialState = Map({

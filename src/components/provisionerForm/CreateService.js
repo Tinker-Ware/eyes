@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import {fromJS, Map} from 'immutable';
+import { fromJS, Map } from 'immutable';
 
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   const handleCreateUserProject = (e) => {

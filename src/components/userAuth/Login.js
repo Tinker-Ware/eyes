@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { fromJS } from 'immutable';
-import { push } from 'react-router-redux';
 
 const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
   const handleUserSesion = (e) => {
