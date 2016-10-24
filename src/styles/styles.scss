@@ -729,7 +729,7 @@ input + .switch-paddle {
 
 .switch-paddle::after {
   background: #fefefe;
-  content: '';
+  content:"";
   display: block;
   position: absolute;
   height: 1.5rem;
@@ -748,7 +748,7 @@ input:checked ~ .switch-paddle {
   }
 }
 
-[data-whatinput='mouse'] input:focus ~ .switch-paddle {
+[data-whatinput="mouse"] input:focus ~ .switch-paddle {
   outline: 0;
 }
 
@@ -1439,15 +1439,15 @@ input[type="submit"] {
 
 /* Automation Software */
 .puppet{
-    background: url('../img/automation_icons.png') -300px 0;
+    background: url("../img/automation_icons.png") -300px 0;
 }
 
 .ansible{
-    background: url('../img/automation_icons.png') -0px 0;
+    background: url("../img/automation_icons.png") -0px 0;
 }
 
 .chef{
-    background: url('../img/automation_icons.png') -150px 0;
+    background: url("../img/automation_icons.png") -150px 0;
 }
 
 .puppet, .ansible, .chef{

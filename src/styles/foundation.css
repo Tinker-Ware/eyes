@@ -274,8 +274,8 @@ input {
   line-height: normal; }
 
 /**
-   * It's recommended that you don't attempt to style these elements.
-   * Firefox's implementation doesn't respect box-sizing, padding, or width.
+   * It"s recommended that you don"t attempt to style these elements.
+   * Firefox"s implementation doesn"t respect box-sizing, padding, or width.
    *
    * 1. Address box sizing set to `content-box` in IE 8/9/10.
    * 2. Remove excess padding in IE 8/9/10.
@@ -288,7 +288,7 @@ input[type="radio"] {
   /* 2 */ }
 
 /**
-   * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+   * Fix the cursor style for Chrome"s increment/decrement buttons. For certain
    * `font-size` values of the `input`, it causes the cursor style of the
    * decrement button to change from `default` to `text`.
    */
@@ -317,7 +317,7 @@ input[type="search"]::-webkit-search-decoration {
 
 /**
    * Define consistent border, margin, and padding.
-   * [NOTE] We don't enable this ruleset in Foundation, because we want the <fieldset> element to have plain styling.
+   * [NOTE] We don"t enable this ruleset in Foundation, because we want the <fieldset> element to have plain styling.
    */
 /* fieldset {
     border: 1px solid #c0c0c0;
@@ -326,7 +326,7 @@ input[type="search"]::-webkit-search-decoration {
   } */
 /**
    * 1. Correct `color` not being inherited in IE 8/9/10/11.
-   * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+   * 2. Remove padding so people aren"t caught out if they zero out fieldsets.
    */
 legend {
   border: 0;
@@ -341,7 +341,7 @@ textarea {
   overflow: auto; }
 
 /**
-   * Don't inherit the `font-weight` (applied by a rule above).
+   * Don"t inherit the `font-weight` (applied by a rule above).
    * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
    */
 optgroup {
@@ -430,7 +430,7 @@ button {
   margin-left: auto;
   margin-right: auto; }
   .row::before, .row::after {
-    content: ' ';
+    content:"";
     display: table;
     -webkit-flex-basis: 0;
         -ms-flex-preferred-size: 0;
@@ -1321,7 +1321,7 @@ cite {
   font-size: 0.8125rem;
   color: #8a8a8a; }
   cite:before {
-    content: '\2014 \0020'; }
+    content:"\2014 \0020"; }
 
 abbr {
   color: #0a0a0a;
@@ -1427,9 +1427,9 @@ kbd {
   a[href]:after {
     content: " (" attr(href) ")"; }
   .ir a:after,
-  a[href^='javascript:']:after,
-  a[href^='#']:after {
-    content: ''; }
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content:""; }
   abbr[title]:after {
     content: " (" attr(title) ")"; }
   pre,
@@ -1469,7 +1469,7 @@ kbd {
   font-size: 0.9rem;
   background-color: #2199e8;
   color: #fefefe; }
-  [data-whatinput='mouse'] .button {
+  [data-whatinput="mouse"] .button {
     outline: 0; }
   .button:hover, .button:focus {
     background-color: #1583cc;
@@ -1558,7 +1558,7 @@ kbd {
     cursor: not-allowed;
     pointer-events: none; }
   .button.dropdown::after {
-    content: '';
+    content:"";
     display: block;
     width: 0;
     height: 0;
@@ -1584,7 +1584,7 @@ kbd {
   width: 20px;
   height: 16px; }
   .menu-icon::after {
-    content: '';
+    content:"";
     position: absolute;
     display: block;
     width: 100%;
@@ -1605,7 +1605,7 @@ kbd {
   width: 20px;
   height: 16px; }
   .menu-icon.dark::after {
-    content: '';
+    content:"";
     position: absolute;
     display: block;
     width: 100%;
@@ -1644,7 +1644,7 @@ body.is-reveal-open {
   margin-left: auto;
   margin-right: auto;
   overflow-y: auto; }
-  [data-whatinput='mouse'] .reveal {
+  [data-whatinput="mouse"] .reveal {
     outline: 0; }
   @media screen and (min-width: 40em) {
     .reveal {

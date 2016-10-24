@@ -1,21 +1,21 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
-import { fromJS } from 'immutable';
-import cookie from 'react-cookie';
+import React, {PropTypes} from "react";
+import {Link} from "react-router";
+import { fromJS } from "immutable";
+import cookie from "react-cookie";
 
 const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {
-  if(userAppState.get('user_session')){
+  if(userAppState.get("user_session")){
     let timer;
     timer = setInterval(function(){
-      if(cookie.load('digitalocean_oauth')) {
+      if(cookie.load("digitalocean_oauth")) {
         requestCloudProviderAccess(fromJS({
-          "authorization": userAppState.get('user_session').toJS().token,
+          "authorization": userAppState.get("user_session").toJS().token,
           "oauth_request": {
-            "user_id": userAppState.get('user_session').toJS().id,
-            "code": cookie.load('digitalocean_oauth').code
+            "user_id": userAppState.get("user_session").toJS().id,
+            "code": cookie.load("digitalocean_oauth").code
           }
         }));
-        cookie.remove('digitalocean_oauth');
+        cookie.remove("digitalocean_oauth");
         clearInterval(timer);
       }
     }, 1000);
@@ -23,15 +23,13 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
   const handleDigitalOceanLogin = (e) => {
     e.preventDefault();
     if(!e.target.text.includes("Connected")){
-      let win = window.open('https://cloud.digitalocean.com/v1/oauth/authorize?client_id=c3e276cc1700efb5dc98d7d5a90643bfe72ecbc10406761c6bc6a6328cfa1077&redirect_uri=http://provision.tinkerware.io/oauth/digitalocean&response_type=code&scope=read+write', 'Digital Ocean Oauth', 'height=600,width=850');
+      let win = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=c3e276cc1700efb5dc98d7d5a90643bfe72ecbc10406761c6bc6a6328cfa1077&redirect_uri=http://provision.tinkerware.io/oauth/digitalocean&response_type=code&scope=read+write","Digital Ocean Oauth","height=600,width=850");
       if (win) win.focus();
     }else{
       setCloudProvider(fromJS({
-        cloud_provider: ''
-      }));
+        cloud_provider:""}));
       clearCloudProviderSSHKeys(fromJS({
-        cloud_provider_ssh_keys: ''
-      }));
+        cloud_provider_ssh_keys:""}));
     }
   };
   return (
@@ -44,8 +42,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
             onClick={handleDigitalOceanLogin}>
             <img
               className="DigitalOcean" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-            {(cloudProviderAppState.get('cloud_provider')) ?
-              'Connected: '+ cloudProviderAppState.get('cloud_provider').toJS().username : 'Connect Digital Ocean'}
+            {(cloudProviderAppState.get("cloud_provider")) ?"Connected:"+ cloudProviderAppState.get("cloud_provider").toJS().username :"Connect Digital Ocean"}
           </Link>
         </li>
       </ul>

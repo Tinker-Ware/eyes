@@ -1,41 +1,33 @@
-import React, { PropTypes } from 'react';
-import { fromJS } from 'immutable';
-import SSHKeysItem from './SSHKeysItem';
+import React, { PropTypes } from "react";
+import { fromJS } from "immutable";
+import SSHKeysItem from "./SSHKeysItem";
 
 const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState, userAppState} ) => {
   const handleSSHKeyClick = (e) => {
     e.preventDefault();
     enableSSHKey(fromJS({
-      sshKeys: cloudProviderAppState.get('cloud_provider_ssh_keys'),
+      sshKeys: cloudProviderAppState.get("cloud_provider_ssh_keys"),
       id: parseInt(e.target.parentNode.id)
     }));
   };
 
   const StoreSSHKeyKeypress = (e) => {
-    if(cloudProviderAppState.get('cloud_provider_ssh_keys_name') && cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')){
-      requestPostCloudProviderSSHKey(fromJS({
-        'authorization': userAppState.get('user_session').toJS().token,
-        'user_id': userAppState.get('user_session').toJS().id,
-        'sshKeys': cloudProviderAppState.get('cloud_provider_ssh_keys'),
-        'sshKey': {
-          'name': cloudProviderAppState.get('cloud_provider_ssh_keys_name'),
-          'public_key': cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')
+    if(cloudProviderAppState.get("cloud_provider_ssh_keys_name") && cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")){
+      requestPostCloudProviderSSHKey(fromJS({"authorization": userAppState.get("user_session").toJS().token,"user_id": userAppState.get("user_session").toJS().id,"sshKeys": cloudProviderAppState.get("cloud_provider_ssh_keys"),"sshKey": {"name": cloudProviderAppState.get("cloud_provider_ssh_keys_name"),"public_key": cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")
         }
       }));
       ShowSSHKeyButtonKeypress(e);
       setSSHKeyTitle(fromJS({
-        name: ''
-      }));
+        name:""}));
       setSSHKeyContent(fromJS({
-        public_key: ''
-      }));
+        public_key:""}));
     }
   };
   const ShowSSHKeyButtonKeypress = (e) => {
     e.preventDefault();
     showSSHKey(
       fromJS({
-        show_cloud_provider_ssh_key: !cloudProviderAppState.get('show_cloud_provider_ssh_key')
+        show_cloud_provider_ssh_key: !cloudProviderAppState.get("show_cloud_provider_ssh_key")
       })
     );
   };
@@ -52,20 +44,20 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
     }));
   };
   const PrintSSHKeys =
-    (cloudProviderAppState.get('cloud_provider_ssh_keys')) ?
-      cloudProviderAppState.get('cloud_provider_ssh_keys').map((value, index) =>
+    (cloudProviderAppState.get("cloud_provider_ssh_keys")) ?
+      cloudProviderAppState.get("cloud_provider_ssh_keys").map((value, index) =>
         <SSHKeysItem
           handleClick={handleSSHKeyClick}
           identifier={index}
-          id={value.get('id')}
+          id={value.get("id")}
           key={index}
-          value={value.get('title')}
-          isActive={value.get('enable')?true:false}
-          end={(index == cloudProviderAppState.get('cloud_provider_ssh_keys').size - 1) ? "end" : ""}
+          value={value.get("title")}
+          isActive={value.get("enable")?true:false}
+          end={(index == cloudProviderAppState.get("cloud_provider_ssh_keys").size - 1) ? "end" : ""}
         />) : "";
 
   const AddSHHKeyButton =
-    !(cloudProviderAppState.get('show_cloud_provider_ssh_key')) ?
+    !(cloudProviderAppState.get("show_cloud_provider_ssh_key")) ?
       <p><a
         href="javascript:void(0);"
         onClick={ShowSSHKeyButtonKeypress}
@@ -88,7 +80,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                     id="ssh_key_content_value"
                     cols="50"
                     rows="5"
-                    value={cloudProviderAppState.get('cloud_provider_ssh_keys_public_key')?cloudProviderAppState.get('cloud_provider_ssh_keys_public_key'):''}
+                    value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
                     onChange={SSHKeyContentKeypress}
                     placeholder="SSH Key Content" />
                 </label>
@@ -108,7 +100,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                         type="text"
                         id="ssh_key_content_title"
                         maxLength="20"
-                        value={cloudProviderAppState.get('cloud_provider_ssh_keys_name')?cloudProviderAppState.get('cloud_provider_ssh_keys_name'):''}
+                        value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
                         onChange={SSHKeyTitleKeypress}
                         placeholder="Title" />
                     </label>
@@ -133,7 +125,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
         </div>;
 
   const SSHKeyForm =
-    cloudProviderAppState.get('cloud_provider')?
+    cloudProviderAppState.get("cloud_provider")?
       <div className="large-12 medium-12 small-12 columns end">
         {AddSHHKeyButton}
       </div> : "";

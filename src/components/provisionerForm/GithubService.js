@@ -1,22 +1,22 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { fromJS } from 'immutable';
-import cookie from 'react-cookie';
+import React, { PropTypes } from "react";
+import { Link } from "react-router";
+import { fromJS } from "immutable";
+import cookie from "react-cookie";
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
-  if(userAppState.get('user_session')){
+  if(userAppState.get("user_session")){
     let timer;
     timer = setInterval(function(){
-      if(cookie.load('github_oauth')){
+      if(cookie.load("github_oauth")){
         requestRepositoryAccess(fromJS({
-          "authorization": userAppState.get('user_session').toJS().token,
+          "authorization": userAppState.get("user_session").toJS().token,
           "oauth_request": {
-            "user_id": userAppState.get('user_session').toJS().id,
-            "code": cookie.load('github_oauth').code,
-            "state": cookie.load('github_oauth').state
+            "user_id": userAppState.get("user_session").toJS().id,
+            "code": cookie.load("github_oauth").code,
+            "state": cookie.load("github_oauth").state
           }
         }));
-        cookie.remove('github_oauth');
+        cookie.remove("github_oauth");
         clearInterval(timer);
       }
     }, 1000);
@@ -24,15 +24,13 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
   const handleGithubLogin = (e) => {
     e.preventDefault();
     if(!e.target.text.includes("Connected")){
-      let win = window.open('http://github.com/login/oauth/authorize?access_type=online&client_id=cfc461f8cf0dc4de566d&response_type=cod&state=github&scope=user%3Aemail+repo', 'Github Oauth', 'height=600,width=450');
+      let win = window.open("http://github.com/login/oauth/authorize?access_type=online&client_id=cfc461f8cf0dc4de566d&response_type=cod&state=github&scope=user%3Aemail+repo","Github Oauth","height=600,width=450");
       if (win) win.focus();
     }else{
       setIntegracion(fromJS({
-        integration: ''
-      }));
+        integration:""}));
       setRepository(fromJS({
-        repository: ''
-      }));
+        repository:""}));
       setShowRepositories(fromJS({
         show: false
       }));
@@ -48,15 +46,14 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
   };
   const handleGithubConfigurationEnable = (e) => {
     e.preventDefault();
-    if (!repositoryAppState.get('show_repositories')){
+    if (!repositoryAppState.get("show_repositories")){
       setShowRepositories(fromJS({
         show: true
       }));
-      repositoryAppState.get('integration') && !repositoryAppState.get('repositories') ?
+      repositoryAppState.get("integration") && !repositoryAppState.get("repositories") ?
         requestUserRepositories(fromJS({
-          "userName": repositoryAppState.get('integration').toJS().username,
-          "authorization": userAppState.get('user_session').toJS().token})):
-        '';
+          "userName": repositoryAppState.get("integration").toJS().username,
+          "authorization": userAppState.get("user_session").toJS().token})):"";
     }else{
       setShowRepositories(fromJS({
         show: false
@@ -64,19 +61,18 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
     }
   };
   const optionsRepositoryList=
-    (repositoryAppState.get('integration'))?
+    (repositoryAppState.get("integration"))?
       <a
         href="#"
         onClick={handleGithubConfigurationEnable}
         className="button success radius btn-config">
           <i className="step fi-widget" />
-           {repositoryAppState.get('show_repositories') ?
-             'Hide Repositories' : 'Select Repository'}</a> : '';
+           {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
-    (repositoryAppState.get('integration')) && repositoryAppState.get('repositories') ?
-      repositoryAppState.get('repositories').toJS().map((value, index)=>
+    (repositoryAppState.get("integration")) && repositoryAppState.get("repositories") ?
+      repositoryAppState.get("repositories").toJS().map((value, index)=>
         <div
-          className={repositoryAppState.get('show_repositories')? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
+          className={repositoryAppState.get("show_repositories")? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
           key={index}>
           <div
             className="switch large">
@@ -102,7 +98,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           <div className="switch-description">
               <span>{value.full_name}</span>
           </div>
-        </div> ) : '';
+        </div> ) :"";
   return (
     <div className="large-6 medium-6 small-12 columns">
       <ul className="selection-table">
@@ -114,12 +110,11 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
               <img
                 className="GitHub"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-              {(repositoryAppState.get('integration'))?
-                'Connected: '+repositoryAppState.get('integration').toJS().username : 'Connect Github'}
+              {(repositoryAppState.get("integration"))?"Connected:"+repositoryAppState.get("integration").toJS().username :"Connect Github"}
           </Link>
           {optionsRepositoryList}
-          {repositoryAppState.get('show_repositories') && (repositoryAppState.get('integration'))?
-            <h5 id="firstModalTitle">Select a repository.</h5> : ''}
+          {repositoryAppState.get("show_repositories") && (repositoryAppState.get("integration"))?
+            <h5 id="firstModalTitle">Select a repository.</h5> :""}
           <div className="row repository-list">
               {repositoryList}
           </div>

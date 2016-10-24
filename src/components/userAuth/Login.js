@@ -1,17 +1,17 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { fromJS } from 'immutable';
+import React, { PropTypes } from "react";
+import { Link } from "react-router";
+import { fromJS } from "immutable";
 
 const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
   const handleUserSesion = (e) => {
     e.preventDefault();
-    !userAppState.get('user_session')?
+    !userAppState.get("user_session")?
       requestGetUserSesion(fromJS({
         "user_session": {
-          "email": userAppState.get('user_sesion_email'),
-          "password": userAppState.get('user_sesion_password')
+          "email": userAppState.get("user_sesion_email"),
+          "password": userAppState.get("user_sesion_password")
         }
-      })) : '';
+      })) :"";
   };
   const handleUserSesionEmail = (e) => {
     e.preventDefault();
@@ -31,12 +31,12 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
       <form onSubmit={handleUserSesion}>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <input type="text" value={userAppState.get('user_sesion_email')?userAppState.get('user_sesion_email'):''} name="Email Address" onChange={handleUserSesionEmail} placeholder="Email Address" />
+            <input type="text" value={userAppState.get("user_sesion_email")?userAppState.get("user_sesion_email"):""} name="Email Address" onChange={handleUserSesionEmail} placeholder="Email Address" />
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <input type="password" value={userAppState.get('user_sesion_password')?userAppState.get('user_sesion_password'):''} name="Password" onChange={handleUserSesionPassword} placeholder="Password" />
+            <input type="password" value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""} name="Password" onChange={handleUserSesionPassword} placeholder="Password" />
           </div>
         </div>
         <div className="row">

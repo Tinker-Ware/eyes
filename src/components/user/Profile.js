@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router';
-import Services from './Services';
+import React from "react";
+import { Link } from "react-router";
+import Services from "./Services";
 
 const Profile = () => {
   return (
@@ -17,10 +17,10 @@ const Profile = () => {
             <span>Address</span>
           </li>
           <li>
-            <Link to={'/user/id'}>Add/Edit Address</Link>
+            <Link to={"/user/id"}>Add/Edit Address</Link>
           </li>
           <li>
-            <Link to={'/user/id'}>Edit</Link>
+            <Link to={"/user/id"}>Edit</Link>
           </li>
         </ul>
       </div>

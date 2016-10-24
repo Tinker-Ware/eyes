@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route } from 'react-router';
-import App from '../components/App';
-import ServiceOAuth from '../containers/ServiceOAuth';
+import React from "react";
+import { Route } from "react-router";
+import App from "../components/App";
+import ServiceOAuth from "../containers/ServiceOAuth";
 
 export default (
   <Route

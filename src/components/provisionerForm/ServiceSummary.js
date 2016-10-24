@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import CreateService from './CreateService';
+import React, {PropTypes} from "react";
+import CreateService from "./CreateService";
 
 const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   return (
@@ -13,14 +13,14 @@ const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repository
          Project Name
       </h4>
       <p id="label-project-name">
-        {(projectNameAppState.get('project_name')) ? projectNameAppState.get('project_name'):'none'}
+        {(projectNameAppState.get("project_name")) ? projectNameAppState.get("project_name"):"none"}
       </p>
       <h4 className="color-green">
         <i className="step fi-social-dropbox" />
          Aplication
       </h4>
       <p id="label-aplications">
-        {(applicationAppState.get('application_name')) ? applicationAppState.get('application_name').toJS().name:'none'}
+        {(applicationAppState.get("application_name")) ? applicationAppState.get("application_name").toJS().name:"none"}
       </p>
       <CreateService
         cloudProviderAppState={cloudProviderAppState}

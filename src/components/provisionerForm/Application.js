@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
-import { fromJS } from 'immutable';
-import ApplicationItem from './ApplicationItem';
+import React, { PropTypes } from "react";
+import { fromJS } from "immutable";
+import ApplicationItem from "./ApplicationItem";
 
 const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
   const handleApplicationClick = (e, role) => {
@@ -29,7 +29,7 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
       </h2>
       {applicationsOptions.map((value, index) =>
         <ApplicationItem
-          activeApplication={applicationAppState.get('application_name')?applicationAppState.get('application_name').toJS().name:""}
+          activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
           key={value.identifier}
           identifier={value.identifier}
           roles={value.roles}

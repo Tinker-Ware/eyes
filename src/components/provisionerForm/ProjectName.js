@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { fromJS } from 'immutable';
+import React, { PropTypes } from "react";
+import { fromJS } from "immutable";
 
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {
 

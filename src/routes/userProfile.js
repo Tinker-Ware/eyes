@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import Profile from '../components/user/Profile';
-import UserProfile from '../containers/UserProfile';
+import React from "react";
+import { Route, IndexRoute } from "react-router";
+import Profile from "../components/user/Profile";
+import UserProfile from "../containers/UserProfile";
 
 export default (
   <Route

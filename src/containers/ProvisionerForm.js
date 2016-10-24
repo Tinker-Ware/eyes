@@ -1,33 +1,31 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { fromJS } from 'immutable';
-import cookie from 'react-cookie';
-import * as actions from '../actions/ServiceFormActions';
-import Application from '../components/provisionerForm/Application';
-import CreateService from '../components/provisionerForm/CreateService';
-import CloudProvider from '../components/provisionerForm/CloudProvider';
-import GithubService from '../components/provisionerForm/GithubService';
-import Menu from '../components/provisionerForm/Menu';
-import ProjectName from '../components/provisionerForm/ProjectName';
-import ServiceSummary from '../components/provisionerForm/ServiceSummary';
-import SSHKeys from '../components/provisionerForm/SSHKeys';
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { browserHistory } from "react-router";
+import { bindActionCreators } from "redux";
+import { fromJS } from "immutable";
+import cookie from "react-cookie";
+import * as actions from "../actions/ServiceFormActions";
+import Application from "../components/provisionerForm/Application";
+import CreateService from "../components/provisionerForm/CreateService";
+import CloudProvider from "../components/provisionerForm/CloudProvider";
+import GithubService from "../components/provisionerForm/GithubService";
+import Menu from "../components/provisionerForm/Menu";
+import ProjectName from "../components/provisionerForm/ProjectName";
+import ServiceSummary from "../components/provisionerForm/ServiceSummary";
+import SSHKeys from "../components/provisionerForm/SSHKeys";
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
 export class ServiceForm extends Component {
   componentWillMount() {
-    if (!cookie.load('user_session'))
-      browserHistory.push('/login');
+    if (!cookie.load("user_session"))
+      browserHistory.push("/login");
   }
   render() {
-    if(!this.props.userAppState.get('user_session') && cookie.load('user_session')){
-      this.props.actions.setUserSesion(fromJS({
-        'user_session': cookie.load('user_session')
+    if(!this.props.userAppState.get("user_session") && cookie.load("user_session")){
+      this.props.actions.setUserSesion(fromJS({"user_session": cookie.load("user_session")
       }));
-      this.props.actions.requestRefreshUserSession(fromJS({
-        'authorization': cookie.load('user_session').token
+      this.props.actions.requestRefreshUserSession(fromJS({"authorization": cookie.load("user_session").token
       }));
     }
     return (
@@ -48,7 +46,7 @@ export class ServiceForm extends Component {
               </h2>
               {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
                 provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value) =>
-                  (value.identifier == 'github') ?
+                  (value.identifier =="github") ?
                     <GithubService
                       key = {value.identifier}
                       repositoryAppState={this.props.repositoryAppState}
@@ -57,8 +55,7 @@ export class ServiceForm extends Component {
                       requestRepositoryAccess={this.props.actions.requestRepositoryAccess}
                       requestUserRepositories={this.props.actions.requestUserRepositories}
                       setShowRepositories={this.props.actions.setShowRepositories}
-                      userAppState={this.props.userAppState} /> : ''
-                  ):''}
+                      userAppState={this.props.userAppState} /> :""):""}
               <CloudProvider
                 clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                 cloudProviderAppState={this.props.cloudProviderAppState}
@@ -68,7 +65,7 @@ export class ServiceForm extends Component {
             </div>
             <Application
               applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
-                provisionFormOptionsApi.getProvisionFormOptions()[0].application : ''}
+                provisionFormOptionsApi.getProvisionFormOptions()[0].application :""}
               applicationAppState={this.props.applicationAppState}
               setApplication={this.props.actions.setApplication}/>
             <SSHKeys
