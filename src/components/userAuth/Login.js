@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import { Link } from "react-router";
+// import { Link } from "react-router";
 import { fromJS } from "immutable";
 
 const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
@@ -63,7 +63,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
             />
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="large-6 large-centered medium-6 columns">
             <p className="text-center">
               <Link to="#">
@@ -81,7 +81,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
               </Link>
             </p>
           </div>
-        </div>
+        </div> */}
       </form>
     </div>
   );

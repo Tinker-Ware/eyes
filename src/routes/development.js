@@ -5,7 +5,7 @@ import Profile from "../components/user/Profile";
 import ProvisionerForm from "../containers/ProvisionerForm";
 import UserProfile from "../containers/UserProfile";
 import UserLogin from "../containers/UserLogin";
-import UserSignup from "../containers/UserSignup";
+// import UserSignup from "../containers/UserSignup";
 import ServiceOAuth from "../containers/ServiceOAuth";
 
 export default (
@@ -24,10 +24,10 @@ export default (
         component={UserLogin}
         path="login"
     />
-    <Route
+    {/* <Route
         component={UserSignup}
         path="/registrations/new"
-    />
+    /> */}
     <Route
         component={ServiceOAuth}
         path="/oauth/:serviceName"
