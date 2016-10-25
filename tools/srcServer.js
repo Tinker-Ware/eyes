@@ -2,14 +2,14 @@
 // which supports hot reloading and synchronized testing.
 
 // Require Browsersync along with webpack and middleware for it
-import browserSync from 'browser-sync';
+import browserSync from "browser-sync";
 // Required for react-router browserHistory
 // see https://github.com/BrowserSync/browser-sync/issues/204#issuecomment-102623643
-import historyApiFallback from 'connect-history-api-fallback';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config.dev';
+import historyApiFallback from "connect-history-api-fallback";
+import webpack from "webpack";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
+import config from "../webpack.config.dev";
 
 const bundler = webpack(config);
 
@@ -19,17 +19,17 @@ browserSync({
   ghostMode: false,
   notify: false,
   socket: {
-    path: '/browser-sync/socket.io',
-    clientPath: '/browser-sync',
-    namespace: '/browser-sync'
+    path: "/browser-sync/socket.io",
+    clientPath: "/browser-sync",
+    namespace: "/browser-sync"
   },
   server: {
-    baseDir: 'src',
+    baseDir: "src",
 
     middleware: [
       historyApiFallback(),
       webpackDevMiddleware(bundler, {
-        publicPath: config.output.publicPath, // Dev middleware can't access config, so we provide publicPath
+        publicPath: config.output.publicPath, // Dev middleware can"t access config, so we provide publicPath
         noInfo: false, // Suppress noisy webpack output so only errors are displayed to the console
         quiet: false,
         stats: {
@@ -44,12 +44,12 @@ browserSync({
         // for other settings see
         // http://webpack.github.io/docs/webpack-dev-middleware.html
       }),
-              
+
       webpackHotMiddleware(bundler) // bundler should be the same as above
     ]
   },
 
-  // no need to watch '*.js' here, webpack will take care of it for us,
-  // including full page reloads if HMR won't work
-  "files": './src',
+  // no need to watch"*.js"here, webpack will take care of it for us,
+  // including full page reloads if HMR won"t work
+  "files": "./src",
 });

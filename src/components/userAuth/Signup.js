@@ -1,20 +1,18 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { fromJS } from 'immutable';
-import { push } from 'react-router-redux';
+import React, { PropTypes } from "react";
+import { Link } from "react-router";
+import { fromJS } from "immutable";
 
 const Signup = ( { requestPostUser, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
   const handleUserSignup = (e) => {
     e.preventDefault();
-    !userAppState.get('user_session') ? 
+    !userAppState.get("user_session")?
       requestPostUser(fromJS({
         "user_signup": {
-          "email": userAppState.get('user_sesion_email'),
-          "password": userAppState.get('user_sesion_password')
+          "email": userAppState.get("user_sesion_email"),
+          "password": userAppState.get("user_sesion_password")
         }
-      })) : '';
+      })) :"";
   };
-  
   const handleUserSesionEmail = (e) => {
     e.preventDefault();
     setUserSesionEmail(fromJS({
@@ -29,31 +27,60 @@ const Signup = ( { requestPostUser, setUserSesionEmail, setUserSesionPassword, u
   };
   return (
     <div className="row">
-      <h2 className="text-center">Sign Up</h2>
+      <h2 className="text-center">
+        {"Sign Up"}
+      </h2>
       <form onSubmit={handleUserSignup}>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <input type="text" value={userAppState.get('user_sesion_email')?userAppState.get('user_sesion_email'):''} name="Email Address" onChange={handleUserSesionEmail} placeholder="Email Address" />
+            <input
+                name="Email Address"
+                onChange={handleUserSesionEmail}
+                placeholder="Email Address"
+                type="text"
+                value={userAppState.get("user_sesion_email")?userAppState.get("user_sesion_email"):""}
+            />
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <input type="password" value={userAppState.get('user_sesion_password')?userAppState.get('user_sesion_password'):''} name="Password" onChange={handleUserSesionPassword} placeholder="Password" />
+            <input
+                name="Password"
+                onChange={handleUserSesionPassword}
+                placeholder="Password"
+                type="password"
+                value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
+            />
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <input type="submit" name="Submit" className="success button expanded" value="Submit" />
+            <input
+                className="success button expanded"
+                name="Submit"
+                type="submit"
+                value="Submit"
+            />
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center">By signin up, yopu agree to the <Link to="#">Terms of Service</Link></p>
+            <p className="text-center">
+              {"By signin up, yopu agree to the"}
+              <Link to="#">
+                {"Terms of Service"}
+              </Link>
+            </p>
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center">Already have an account? <Link to="/login">Log In</Link></p>
+            <p className="text-center">
+              {"Already have an account?"}
+              <Link to="/login">
+                &nbsp;{"Log In"}
+              </Link>
+            </p>
           </div>
         </div>
       </form>

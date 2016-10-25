@@ -1,14 +1,12 @@
 import "babel-polyfill";
-import { expect } from 'chai';
-import { takeLatest } from 'redux-saga';
-import { call, put, fork } from 'redux-saga/effects'; 
-import { fromJS } from 'immutable';
-import * as actions from '../actions/MiddlewareActions';
-import { doRequest, doRequestGetCloudProviderAccess, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from '../sagas';
+import { expect } from "chai";
+import { call, put } from "redux-saga/effects";
+import { fromJS } from "immutable";
+import * as actions from "../actions/MiddlewareActions";
+import { doRequestGetCloudProviderAccess, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from "../sagas";
 
-describe('sagas middleware', () => {
-  
-  it('handles REQUEST_CLOUD_PROVIDER_ACCESS', () => {
+describe("sagas middleware", () => {
+  it("handles REQUEST_CLOUD_PROVIDER_ACCESS", () => {
     const userAccess = {
       "oauth_request": {
         "user_id": 1,
@@ -17,13 +15,13 @@ describe('sagas middleware', () => {
     };
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
     const generator = getCloudProviderAccess({
-      value: 
+      value:
       fromJS({
         "authorization": authorization,
         "oauth_request": userAccess.oauth_request
        })
      });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -49,14 +47,7 @@ describe('sagas middleware', () => {
        })
      };
     expect(generator.next(userAccess2).value).to.deep.equal(
-     put(actions.requestPostProviderKey(fromJS({
-       'authorization': authorization,
-       'user_id': userAccess.oauth_request.user_id,
-       'sshKeys': [],
-       'sshKey': {
-         'name': 'deploy_key',
-         'public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCtmlfAafr14dY5WPFtZV7GpVwgp6/atw7eonjhWfWZfHFmx2TTpUGUbH4o+Z6VI+9GImcpnk+8S/OLSCIT0ueQ6xxqnP6tdREaSZAMyB0f7vGxnuOv3n/sqyFlio1rzaysQv11AFML2QmxR0mNqjODAkwqDGPvbD1qyUDXT33YW9xRf5TJ7oJ4GnRXVArAvQdTa7tWOYCseQsUSkmsJXzcOkEAGfUkJSrvpss8FlfksVV2M4OL5qeNWMfuqY8sKyTcxCBpbpeBClIx2Z7l9iNxPyTXyo7Ma+65SwPVYCUNM5vRy77miGZhLuZDVwdXqD1VnlTCQhppPUh1R9+IxWMRbomNCxPOJtuj2Q7dB5oY990Heg58yLCv2LdVhY7OM+2lUksBoTrQkpjMMMfPxwU/6l9Eiq4KiX0BIZIPQFbbE33yfaLmKEwOcVBYflS3t/yJAFDUecPC3j488HpY23yMPXiredRaGebbXGiVBKOp6zjftFJzes1PvWmP+XiAq52uGiTH2mzlMrlzd4Jpfegy6uGl4r58LkLJOInl89XWYsxHlzC+1pPhSbmYCJvv//0P4O8afSUgjlRBBfiyOo1+mE9m5BcgEGd6ZbtF7mVAAoqgXx2kSdMglt9+WV0/X+TF/G0QBCpMeBqvrWKTwDDtaWlcEeBE/C5ObIledyKpjw== tinkerwareio@gmail.com'
-       }
+     put(actions.requestPostProviderKey(fromJS({"authorization": authorization,"user_id": userAccess.oauth_request.user_id,"sshKeys": [],"sshKey": {"name":"deploy_key","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCtmlfAafr14dY5WPFtZV7GpVwgp6/atw7eonjhWfWZfHFmx2TTpUGUbH4o+Z6VI+9GImcpnk+8S/OLSCIT0ueQ6xxqnP6tdREaSZAMyB0f7vGxnuOv3n/sqyFlio1rzaysQv11AFML2QmxR0mNqjODAkwqDGPvbD1qyUDXT33YW9xRf5TJ7oJ4GnRXVArAvQdTa7tWOYCseQsUSkmsJXzcOkEAGfUkJSrvpss8FlfksVV2M4OL5qeNWMfuqY8sKyTcxCBpbpeBClIx2Z7l9iNxPyTXyo7Ma+65SwPVYCUNM5vRy77miGZhLuZDVwdXqD1VnlTCQhppPUh1R9+IxWMRbomNCxPOJtuj2Q7dB5oY990Heg58yLCv2LdVhY7OM+2lUksBoTrQkpjMMMfPxwU/6l9Eiq4KiX0BIZIPQFbbE33yfaLmKEwOcVBYflS3t/yJAFDUecPC3j488HpY23yMPXiredRaGebbXGiVBKOp6zjftFJzes1PvWmP+XiAq52uGiTH2mzlMrlzd4Jpfegy6uGl4r58LkLJOInl89XWYsxHlzC+1pPhSbmYCJvv//0P4O8afSUgjlRBBfiyOo1+mE9m5BcgEGd6ZbtF7mVAAoqgXx2kSdMglt9+WV0/X+TF/G0QBCpMeBqvrWKTwDDtaWlcEeBE/C5ObIledyKpjw== tinkerwareio@gmail.com"}
       })))
     );
     expect(generator.next(userAccess2).value).to.deep.equal(
@@ -66,8 +57,7 @@ describe('sagas middleware', () => {
         })))
     );
   });
-  
-  it('handles REQUEST_CLOUD_PROVIDER_KEYS', () => {
+  it("handles REQUEST_CLOUD_PROVIDER_KEYS", () => {
     const userAccess = {
       user: {
         "id": 1,
@@ -87,13 +77,10 @@ describe('sagas middleware', () => {
       ]
     };
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
-    const generator = getCloudProviderKeys({
-      'value': fromJS({
-        'user_id': userAccess.user.id,
-        'authorization': authorization
+    const generator = getCloudProviderKeys({"value": fromJS({"user_id": userAccess.user.id,"authorization": authorization
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -107,7 +94,7 @@ describe('sagas middleware', () => {
     );
   });
 
-  it('handles REQUEST_GITHUB_ACCESS', () => {
+  it("handles REQUEST_GITHUB_ACCESS", () => {
     const userAccess = {
       "oauth_request": {
         "user_id": 1,
@@ -116,13 +103,13 @@ describe('sagas middleware', () => {
     };
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
     const generator = getRepositoryAccess({
-      value: 
+      value:
       fromJS({
         "authorization": authorization,
         "oauth_request": userAccess.oauth_request
        })
      });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -141,7 +128,7 @@ describe('sagas middleware', () => {
     );
   });
 
-  it('handles REQUEST_GITHUB_REPOSITORIES', () => {
+  it("handles REQUEST_GITHUB_REPOSITORIES", () => {
     const userAccess = {
       user: {
         "id": 1,
@@ -167,7 +154,7 @@ describe('sagas middleware', () => {
           "name": "infrastructure",
           "full_name": "Tinker-Ware/infrastructure",
           "description": "Ansible-based configuration definitions for various servers used by the Tinkerware project",
-          "private": true, 
+          "private": true,
           "html_url": "https://github.com/Tinker-Ware/infrastructure",
           "clone_url": "git@github.com/Tinker-Ware/infrastructure.git",
           "ssh_url": "git@github.com/Tinker-Ware/infrastructure.git"
@@ -184,13 +171,10 @@ describe('sagas middleware', () => {
         }
       ]
     };
-    const generator = getUserRepositories({
-      'value': fromJS({
-        'userName': userAccess.user.username,
-        'authorization': userAccess.user.authorization
+    const generator = getUserRepositories({"value": fromJS({"userName": userAccess.user.username,"authorization": userAccess.user.authorization
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -203,7 +187,7 @@ describe('sagas middleware', () => {
     );
   });
 
-  it('handles REQUEST_POST_CLOUD_PROVIDER_KEY', () => {
+  it("handles REQUEST_POST_CLOUD_PROVIDER_KEY", () => {
     const userAccess = {
       user: {
         "id": 1,
@@ -232,15 +216,11 @@ describe('sagas middleware', () => {
         ]
       };
     const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
-    const generator = postCloudProviderKey({
-      'value': fromJS({
-        'authorization': authorization,
-        'user_id': userAccess.user.id,
-        'sshKeys': cloudProviderKeys.sshKeys,
-        'sshKey': cloudProviderKey.ssh_key
+    const generator = postCloudProviderKey({"value": fromJS({"authorization": authorization,
+"user_id": userAccess.user.id,"sshKeys": cloudProviderKeys.sshKeys,"sshKey": cloudProviderKey.ssh_key
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -248,14 +228,12 @@ describe('sagas middleware', () => {
     );
     expect(generator.next(cloudProviderKey).value).to.deep.equal(
       put(actions.setCloudProviderSshKeys(fromJS(
-      {
-        'sshKeys': cloudProviderKeys.sshKeys,
-        'sshKey': [cloudProviderKey.ssh_key]
+      {"sshKeys": cloudProviderKeys.sshKeys,"sshKey": [cloudProviderKey.ssh_key]
       })))
     );
   });
 
-  it('handles REQUEST_POST_USER_PROJECT', () => {
+  it("handles REQUEST_POST_USER_PROJECT", () => {
     const userProject = {
       "project": {
         "user_id": 1,
@@ -277,19 +255,9 @@ describe('sagas middleware', () => {
         }]
       }
     };
-    const userAccess = {
-      'user_sesion': {
-        'email': 'some@email.com',
-        'token': 'GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu'
-      }
+    const userAuthorization = {"user_sesion": {"token":"qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf"}
     };
-    const userAuthorization = {
-      'user_sesion': {
-        'token': 'qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf'
-      }
-    };
-    const generator = postUserProject({
-      'value': fromJS({
+    const generator = postUserProject({"value": fromJS({
         "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
         "user_project": {
           "user_id": 1,
@@ -312,7 +280,7 @@ describe('sagas middleware', () => {
         }
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -320,28 +288,14 @@ describe('sagas middleware', () => {
     );
   });
 
-  it('handles REQUEST_POST_USER', () => {
-    const user = {
-      'user_signup': {
-        'email': 'some@email.com',
-        'password': 'somepassword'
-      }
+  it("handles REQUEST_POST_USER", () => {
+    const user = {"user_signup": {"email":"some@email.com","password":"somepassword"}
     };
-    const userAccess = {
-      'user_sesion': {
-        'email': 'some@email.com',
-        'token': 'GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu'
-      }
-    };
-    const generator = postUser({
-      'value': fromJS({
-        'user_signup': {
-          'email': user.user_signup.email,
-          'password': user.user_signup.password
+    const generator = postUser({"value": fromJS({"user_signup": {"email": user.user_signup.email,"password": user.user_signup.password
         }
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -349,32 +303,24 @@ describe('sagas middleware', () => {
     );
     expect(generator.next(user).value).to.deep.equal(
       put(actions.setUser(fromJS(
-      {
-        'user_session': user.user_sesion
+      {"user_session": user.user_sesion
       })))
     );
   });
 
-  it('handles REQUEST_REFRESH_USER_SESSION', () => {
+  it("handles REQUEST_REFRESH_USER_SESSION", () => {
     const userAccess = {
-      "user_session": {
-        'email': 'some@email.com',
+      "user_session": {"email":"some@email.com",
         "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
     };
-    const generator = refreshSession({
-      'value': fromJS({
+    const generator = refreshSession({"value": fromJS({
         "authorization": userAccess.user_session.token
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
-    const userSession = {
-      "value": fromJS({
-        "authorization": userAccess.user_session.token
-      })
-    };
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetRefreshSession, userAccess.user_session.token)
     );
@@ -383,19 +329,17 @@ describe('sagas middleware', () => {
     );
   });
 
-  it('handles REQUEST_USER_SESION', () => {
+  it("handles REQUEST_USER_SESION", () => {
     const userAccess = {
-      "user_session": {
-        'email': 'some@email.com',
+      "user_session": {"email":"some@email.com",
         "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
       }
     };
-    const generator = getUserSesion({
-      'value': fromJS({
+    const generator = getUserSesion({"value": fromJS({
         "user_session": userAccess.user_session
       })
     });
-    const err = new ReferenceError('404');
+    const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
@@ -405,5 +349,4 @@ describe('sagas middleware', () => {
       call(refreshUserSesion, userAccess.user_session)
     );
   });
-  
 });

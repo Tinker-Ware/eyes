@@ -1,11 +1,12 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
+import React from "react";
 import Repositories from "./Repositories";
 
 const Services = () => {
   return (
     <div>
-      <h2>Connect Services</h2>
+      <h2>
+        {"Connect Services"}
+      </h2>
       <Repositories />
     </div>
   );

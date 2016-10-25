@@ -1,7 +1,6 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { fromJS } from 'immutable';
-import ApplicationItem from './ApplicationItem';
+import React, { PropTypes } from "react";
+import { fromJS } from "immutable";
+import ApplicationItem from "./ApplicationItem";
 
 const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
   const handleApplicationClick = (e, role) => {
@@ -26,17 +25,19 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
     <div className="row">
       <h2>
         <i className="step fi-social-dropbox" />
-         Select Application
+         {"Select Application"}
       </h2>
-      {applicationsOptions.map((value, index) => 
+      {applicationsOptions.map((value, index) =>
         <ApplicationItem
-          activeApplication={applicationAppState.get('application_name')?applicationAppState.get('application_name').toJS().name:""}
-          key={value.identifier}
-          identifier={value.identifier}
-          roles={value.roles}
-          handleClick={handleApplicationClick}
-          name={value.name}
-          end={(index == applicationsOptions.length - 1) ? true : false} />)}
+            activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
+            end={(index == applicationsOptions.length - 1) ? true : false}
+            handleClick={handleApplicationClick}
+            identifier={value.identifier}
+            key={value.identifier}
+            name={value.name}
+            roles={value.roles}
+        />)
+      }
     </div>
   );
 };

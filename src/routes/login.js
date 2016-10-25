@@ -1,17 +1,23 @@
-import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from '../components/App';
-import UserLogin from '../containers/UserLogin';
-import UserSignup from '../containers/UserSignup';
+import React from "react";
+import { Route, IndexRoute } from "react-router";
+import App from "../components/App";
+import UserLogin from "../containers/UserLogin";
+import UserSignup from "../containers/UserSignup";
 
 export default (
   <Route
-    path="/"
-    component={App}>
+      component={App}
+      path="/"
+  >
     <IndexRoute component={UserLogin} />
     <Route
-      path="/registrations/new"
-      component={UserSignup} />
-    <Route status={404} path="*" component={UserLogin} />
+        component={UserSignup}
+        path="/registrations/new"
+    />
+    <Route
+        component={UserLogin}
+        path="*"
+        status={404}
+    />
   </Route>
 );

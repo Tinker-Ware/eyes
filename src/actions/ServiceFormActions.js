@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionTypes';
+import * as types from "../constants/ActionTypes";
 
 export function clearCloudProviderSSHKeys(value) {
   return { type: types.CLEAR_CLOUD_PROVIDER_SSH_KEYS, value };

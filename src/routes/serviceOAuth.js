@@ -1,14 +1,16 @@
-import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from '../components/App';
-import ServiceOAuth from '../containers/ServiceOAuth';
+import React from "react";
+import { Route } from "react-router";
+import App from "../components/App";
+import ServiceOAuth from "../containers/ServiceOAuth";
 
 export default (
   <Route
-    path="/"
-    component={App}>
+      component={App}
+      path="/"
+  >
     <Route
-      path="/oauth/:serviceName"
-      component={ServiceOAuth} />
+        component={ServiceOAuth}
+        path="/oauth/:serviceName"
+    />
   </Route>
 );
