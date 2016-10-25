@@ -4,7 +4,9 @@ import Repositories from "./Repositories";
 const Services = () => {
   return (
     <div>
-      <h2>Connect Services</h2>
+      <h2>
+        {"Connect Services"}
+      </h2>
       <Repositories />
     </div>
   );

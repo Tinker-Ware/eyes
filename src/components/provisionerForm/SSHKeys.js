@@ -64,7 +64,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
             id="show_cloud_provider_ssh_key"
             onClick={ShowSSHKeyButtonKeypress}
         >
-          + Add SSH Key
+          {"+ Add SSH Key"}
         </a>
       </p> :
       <div className="ssh_key_content">
@@ -75,7 +75,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                 id="hide_ssh_key"
                 onClick={ShowSSHKeyButtonKeypress}
             >
-              Close
+              {"Close"}
             </a>
           </p>
         </div>
@@ -96,7 +96,9 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                   className="hide"
                   id="ssh_key_content_value_error"
               >
-                <small className="error hide">SSH Key Content can not be blank</small>
+                <small className="error hide">
+                  {"SSH Key Content can not be blank"}
+                </small>
               </div>
             </div>
           </div>
@@ -118,7 +120,9 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                       className="hide"
                       id="ssh_key_content_title_error"
                   >
-                    <small className="error">SSH Key Title can not be blank</small>
+                    <small className="error">
+                      {"SSH Key Title can not be blank"}
+                    </small>
                   </div>
                 </div>
                 <div className="small-3 columns">
@@ -127,14 +131,15 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
                       href="javascript:void(0);"
                       id="save_ssh_key"
                       onClick={StoreSSHKeyKeypress}
-                  >Add SSH Key
+                  >
+                    {"Add SSH Key"}
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        <p>Adding an SSH key is a recommended security measure.</p>
+        <p>{"Adding an SSH key is a recommended security measure."}</p>
       </div>;
 
   const SSHKeyForm =
@@ -151,7 +156,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
     >
       <h2>
         <i className="step fi-key" />
-         Add SSH Keys
+        {"Add SSH Keys"}
       </h2>
     {PrintSSHKeys}
     {SSHKeyForm}

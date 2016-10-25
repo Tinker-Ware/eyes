@@ -34,7 +34,7 @@ export class ServiceForm extends Component {
         <div className="row">
           <div className="large-10 columns">
             <h1><i className="step fi-clipboard-notes" />
-              Create a Service
+              {"Create a Service"}
             </h1>
             <ProjectName
                 projectNameAppState={this.props.projectNameAppState}
@@ -43,7 +43,7 @@ export class ServiceForm extends Component {
             <div className="row">
               <h2>
                 <i className="step fi-share" />
-                 Connect Service(s)
+                {"Connect Service(s)"}
               </h2>
               {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
                 provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value) =>
@@ -108,7 +108,9 @@ export class ServiceForm extends Component {
           <footer>
             <div className="row">
               <div className="large-12 large-centered medium-12 medium-centered small-12 small-centered columns">
-                <p className="copyright">© 2015, Inc. All rights reserved.</p>
+                <p className="copyright">
+                  {"© 2015, Inc. All rights reserved."}
+                </p>
               </div>
             </div>
           </footer>

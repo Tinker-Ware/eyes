@@ -8,7 +8,7 @@ const AutomationSoftware = () => {
     >
       <h2>
         <i className="step fi-upload-cloud" />
-         Select Automation Software
+         {"Select Automation Software"}
       </h2>
       <div className="large-4 medium-6 small-6 columns">
         <ul className="selection-table active">
@@ -18,7 +18,9 @@ const AutomationSoftware = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
           </li>
-          <li className="bullet-item">Puppet</li>
+          <li className="bullet-item">
+            {"Puppet"}
+          </li>
         </ul>
       </div>
       <div
@@ -32,7 +34,9 @@ const AutomationSoftware = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
           </li>
-          <li className="bullet-item">Ansible</li>
+          <li className="bullet-item">
+            {"Ansible"}
+          </li>
         </ul>
       </div>
       <div className="large-4 medium-6 small-6 columns end">
@@ -43,7 +47,9 @@ const AutomationSoftware = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
             </li>
-          <li className="bullet-item">Chef</li>
+          <li className="bullet-item">
+            {"Chef"}
+          </li>
         </ul>
       </div>
     </div>

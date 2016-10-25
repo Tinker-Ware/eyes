@@ -87,16 +87,20 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
                 className="switch-paddle"
                 htmlFor={index}
             >
-              <span className="show-for-sr">Do you like me?</span>
+              <span className="show-for-sr">
+                {"Do you like me?"}
+              </span>
               <span
                   aria-hidden="true"
                   className="switch-active"
-              >Yes
+              >
+                {"Yes"}
               </span>
               <span
                   aria-hidden="true"
                   className="switch-inactive"
-              >No
+              >
+                {"No"}
               </span>
             </label>
           </div>
@@ -121,7 +125,9 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           </Link>
           {optionsRepositoryList}
           {repositoryAppState.get("show_repositories") && (repositoryAppState.get("integration"))?
-            <h5 id="firstModalTitle">Select a repository.</h5> :""}
+            <h5 id="firstModalTitle">
+              {"Select a repository."}
+            </h5> :""}
           <div className="row repository-list">
               {repositoryList}
           </div>

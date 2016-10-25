@@ -27,7 +27,9 @@ const Signup = ( { requestPostUser, setUserSesionEmail, setUserSesionPassword, u
   };
   return (
     <div className="row">
-      <h2 className="text-center">Sign Up</h2>
+      <h2 className="text-center">
+        {"Sign Up"}
+      </h2>
       <form onSubmit={handleUserSignup}>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
@@ -63,12 +65,22 @@ const Signup = ( { requestPostUser, setUserSesionEmail, setUserSesionPassword, u
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center">By signin up, yopu agree to the <Link to="#">Terms of Service</Link></p>
+            <p className="text-center">
+              {"By signin up, yopu agree to the"}
+              <Link to="#">
+                {"Terms of Service"}
+              </Link>
+            </p>
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center">Already have an account? <Link to="/login">Log In</Link></p>
+            <p className="text-center">
+              {"Already have an account?"}
+              <Link to="/login">
+                &nbsp;{"Log In"}
+              </Link>
+            </p>
           </div>
         </div>
       </form>

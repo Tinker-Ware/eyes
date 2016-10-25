@@ -5,12 +5,29 @@ const AccountSidebar = () => {
   return (
     <div>
       <nav>
-        <h3>Account</h3>
+        <h3>
+          {"Account"}
+        </h3>
         <ul>
-          <li><Link to="#">Account</Link></li>
-          <li><Link to="#">Billing</Link></li>
-          <li><Link to="#">Team</Link></li>
-          <li><Link to="#">Project/Services</Link></li>
+          <li>
+            <Link to="#">
+              {"Account"}
+            </Link></li>
+          <li>
+            <Link to="#">
+              {"Billing"}
+            </Link>
+          </li>
+          <li>
+            <Link to="#">
+              {"Team"}
+            </Link>
+          </li>
+          <li>
+            <Link to="#">
+              {"Project/Services"}
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

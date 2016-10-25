@@ -8,7 +8,7 @@ const ServerProvider = () => {
     >
       <h2>
         <i className="step fi-cloud" />
-          Select Server Provider
+          {"Select Server Provider"}
         </h2>
       <div className="large-3 medium-6 small-6 columns">
         <ul className="selection-table">
@@ -18,7 +18,9 @@ const ServerProvider = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
             </li>
-          <li className="bullet-item">Amazon Web Services</li>
+          <li className="bullet-item">
+            {"Amazon Web Services"}
+          </li>
         </ul>
       </div>
       <div className="large-3 medium-6 small-6 columns">
@@ -29,7 +31,9 @@ const ServerProvider = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
             </li>
-          <li className="bullet-item">Digital Ocean</li>
+          <li className="bullet-item">
+            {"Digital Ocean"}
+          </li>
         </ul>
       </div>
       <div className="large-3 medium-6 small-6 columns end">
@@ -40,7 +44,9 @@ const ServerProvider = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
           </li>
-          <li className="bullet-item">Google Cloud</li>
+          <li className="bullet-item">
+            {"Google Cloud"}
+          </li>
         </ul>
       </div>
       <div className="large-3 medium-6 small-6 columns end">
@@ -51,7 +57,9 @@ const ServerProvider = () => {
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
           </li>
-          <li className="bullet-item">None</li>
+          <li className="bullet-item">
+            {"None"}
+          </li>
         </ul>
       </div>
     </div>

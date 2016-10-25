@@ -5,22 +5,34 @@ import Services from "./Services";
 const Profile = () => {
   return (
     <div>
-      <h2>Profile</h2>
+      <h2>
+        {"Profile"}
+      </h2>
       <img src="http://lorempixel.com/g/200/200/" />
-      <h3>Username</h3>
+      <h3>
+        {"Username"}
+      </h3>
       <div>
         <ul className="user-info">
           <li>
-            <span>email@host.com</span>
+            <span>
+              {"email@host.com"}
+            </span>
           </li>
           <li>
-            <span>Address</span>
+            <span>
+              {"Address"}
+            </span>
           </li>
           <li>
-            <Link to={"/user/id"}>Add/Edit Address</Link>
+            <Link to={"/user/id"}>
+              {"Add/Edit Address"}
+            </Link>
           </li>
           <li>
-            <Link to={"/user/id"}>Edit</Link>
+            <Link to={"/user/id"}>
+              {"Edit"}
+            </Link>
           </li>
         </ul>
       </div>

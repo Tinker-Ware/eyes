@@ -27,7 +27,9 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
   };
   return (
     <div className="row">
-      <h2 className="text-center">Log In</h2>
+      <h2 className="text-center">
+        {"Log In"}
+      </h2>
       <form onSubmit={handleUserSesion}>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
@@ -63,12 +65,21 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center"><Link to="#">Forgot password?</Link></p>
+            <p className="text-center">
+              <Link to="#">
+                {"Forgot password?"}
+              </Link>
+            </p>
           </div>
         </div>
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
-            <p className="text-center">Do not have an account? <Link to="/registrations/new">Sign Up</Link></p>
+            <p className="text-center">
+              {"Do not have an account?"}
+              <Link to="/registrations/new">
+                &nbsp;{"Sign Up"}
+              </Link>
+            </p>
           </div>
         </div>
       </form>

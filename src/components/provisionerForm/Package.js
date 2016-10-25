@@ -8,7 +8,7 @@ const Package = () => {
     >
       <h2>
         <i className="step fi-archive" />
-         Select Package
+         {"Select Package"}
       </h2>
       <div className="large-4 medium-6 small-12 columns">
         <ul className="selection-table active">
@@ -17,7 +17,7 @@ const Package = () => {
                 className="Sinatra"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
-            Sinatra
+            {"Sinatra"}
           </li>
         </ul>
       </div>
@@ -28,7 +28,7 @@ const Package = () => {
                 className="Ruby"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
-            Ruby
+            {"Ruby"}
           </li>
         </ul>
       </div>
@@ -39,7 +39,7 @@ const Package = () => {
                 className="Haskell"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
-            Haskell
+            {"Haskell"}
           </li>
         </ul>
       </div>
@@ -50,7 +50,7 @@ const Package = () => {
                 className="Emacs"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
-            Emacs
+            {"Emacs"}
           </li>
         </ul>
       </div>
@@ -61,7 +61,7 @@ const Package = () => {
                 className="VIM"
                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             />
-            VIM
+            {"VIM"}
           </li>
         </ul>
       </div>
