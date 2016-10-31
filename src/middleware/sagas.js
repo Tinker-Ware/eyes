@@ -24,7 +24,7 @@ export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
     doRequest, process.env.HOST +"/api/v1/cloud/digital_ocean/oauth",
     {
       method:"POST",
-      headers: {"authorization":"Bearer"+ authorization,"Accept":"application/json","Content-Type":"application/json"},
+      headers: {"authorization":"Bearer "+ authorization,"Accept":"application/json","Content-Type":"application/json"},
       body: JSON.stringify({"oauth_request": {"user_id": userAccess.toJS().user_id,"code": userAccess.toJS().code
         }
       }),
@@ -36,7 +36,7 @@ export function* doRequestGetCloudProviderKeys(authorization, user_id) {
     doRequest, process.env.HOST +"/api/v1/users/"+user_id+"/ssh_keys",
     {
       method:"GET",
-      headers: {"authorization":"Bearer"+ authorization
+      headers: {"authorization":"Bearer "+ authorization
       },
       mode:"cors"});
 }
@@ -46,7 +46,7 @@ export function* doRequestGetRepositories(username, authorization) {
     doRequest, process.env.HOST +"/api/v1/repository/github/"+ username +"/repos",
     {
       method:"GET",
-      headers: {"authorization":"Bearer"+ authorization
+      headers: {"authorization":"Bearer "+ authorization
       },
       mode:"cors"});
 }
@@ -56,7 +56,7 @@ export function* doRequestGetRepositoryAccess(authorization, userAccess) {
     doRequest, process.env.HOST +"/api/v1/repository/github/oauth",
     {
       method:"POST",
-      headers: {"authorization":"Bearer"+ authorization,"Accept":"application/json","Content-Type":"application/json"},
+      headers: {"authorization":"Bearer "+ authorization,"Accept":"application/json","Content-Type":"application/json"},
       body: JSON.stringify({"oauth_request": {"user_id": userAccess.toJS().user_id,"code": userAccess.toJS().code,"state": userAccess.toJS().state
         }
       }),
@@ -80,7 +80,7 @@ export function* doRequestGetRefreshSession(authorization) {
     doRequest, process.env.HOST +"/api/v1/users/refresh",
     {
       method:"GET",
-      headers: {"authorization":"Bearer"+ authorization
+      headers: {"authorization":"Bearer "+ authorization
       },
       mode:"cors"});
 }
@@ -90,7 +90,7 @@ export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
     doRequest, process.env.HOST +"/api/v1/users/"+user_id+"/ssh_keys",
     {
       method:"POST",
-      headers: {"authorization":"Bearer"+ authorization,"Content-Type":"application/json"},
+      headers: {"authorization":"Bearer "+ authorization,"Content-Type":"application/json"},
       body: JSON.stringify({"ssh_key": {"user_id": user_id,"key": key.toJS().public_key,"title": key.toJS().name
         }
       }),
@@ -116,7 +116,7 @@ export function* doRequestPostUserProject(userProject, authorization) {
     doRequest, process.env.HOST +"/api/v1/project",
     {
       method:"POST",
-      headers: {"authorization":"Bearer"+ authorization,"Content-Type":"application/json"},
+      headers: {"authorization":"Bearer "+ authorization,"Content-Type":"application/json"},
       body: JSON.stringify({"project": userProject.toJS()
       }),
       mode:"cors"});
