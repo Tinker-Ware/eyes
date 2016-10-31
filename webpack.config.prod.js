@@ -8,7 +8,7 @@ import * as hosts from"./src/constants/Hosts";
 
 export default {
   resolve: {
-   extensions: ["",".js",".jsx",".scss"]
+   extensions: ["",".js",".jsx", ".json", ".scss"]
   },
   debug: true,
   devtool:"source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
@@ -70,6 +70,7 @@ export default {
       {test: /\.ttf(\?v=\d+.\d+.\d+)?$/, loader:"url?limit=10000&mimetype=application/octet-stream&name=[name].[ext]"},
       {test: /\.svg(\?v=\d+.\d+.\d+)?$/, loader:"url?limit=10000&mimetype=image/svg+xml&name=[name].[ext]"},
       {test: /\.(jpe?g|png|gif)$/i, loader:"file?name=[name].[ext]"},
+      {test: /\.json$/, loader: "json"},
       {test: /\.ico$/, loader:"file?name=[name].[ext]"},
       {test: /(\.css|\.scss)$/, loader: ExtractTextPlugin.extract("css?sourceMap!postcss!sass?sourceMap")}
     ]

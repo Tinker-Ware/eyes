@@ -6,7 +6,7 @@ import * as hosts from"./src/constants/Hosts";
 
 export default {
   resolve: {
-   extensions: ["",".js",".jsx",".scss"]
+   extensions: ["",".js",".jsx", ".json", ".scss"]
   },
   debug: true,
   devtool:"eval-source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
@@ -49,6 +49,7 @@ export default {
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader:"url?limit=10000&mimetype=application/octet-stream"},
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader:"url?limit=10000&mimetype=image/svg+xml"},
       {test: /\.(jpe?g|png|gif)$/i, loader:"file?name=[name].[ext]"},
+      {test: /\.json$/, loader: "json"},
       {test: /\.ico$/, loader:"file?name=[name].[ext]"},
       {test: /(\.css|\.scss)$/, loaders: ["style","css?sourceMap","postcss","sass?sourceMap"]}
     ]
