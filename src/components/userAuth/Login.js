@@ -56,7 +56,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         <div className="row">
           <div className="large-6 large-centered medium-6 columns">
             <input
-                className="success button expanded"
+                className="success button expanded" //raised-button ink
                 name="Submit"
                 type="submit"
                 value="Submit"
