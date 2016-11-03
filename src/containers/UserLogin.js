@@ -6,6 +6,7 @@ import { fromJS } from "immutable";
 import cookie from "react-cookie";
 import * as actions from "../actions/userActions";
 import Login from "../components/userAuth/Login";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 export class UserLogin extends Component {
   componentWillMount() {
@@ -23,14 +24,16 @@ export class UserLogin extends Component {
   }
   render() {
     return (
-      <div className="row">
-        <Login
-            requestGetUserSesion={this.props.actions.requestGetUserSesion}
-            setUserSesionEmail={this.props.actions.setUserSesionEmail}
-            setUserSesionPassword={this.props.actions.setUserSesionPassword}
-            userAppState={this.props.userAppState}
-        />
-      </div>
+      <MuiThemeProvider>
+        <div className="small-12 medium-12 large-6 large-centered columns">
+          <Login
+              requestGetUserSesion={this.props.actions.requestGetUserSesion}
+              setUserSesionEmail={this.props.actions.setUserSesionEmail}
+              setUserSesionPassword={this.props.actions.setUserSesionPassword}
+              userAppState={this.props.userAppState}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
