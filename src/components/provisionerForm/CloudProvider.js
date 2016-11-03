@@ -23,7 +23,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
   const handleDigitalOceanLogin = (e) => {
     e.preventDefault();
     if(!e.target.text.includes("Connected")){
-      let win = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=c3e276cc1700efb5dc98d7d5a90643bfe72ecbc10406761c6bc6a6328cfa1077&redirect_uri=http://provision.tinkerware.io/oauth/digitalocean&response_type=code&scope=read+write","Digital Ocean Oauth","height=600,width=850");
+      let win = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id="+process.env.INTEGRATIONS.DIGITALOCEAN.CLIENTID+"&redirect_uri="+process.env.INTEGRATIONS.DIGITALOCEAN.REDIRECTURI+"&response_type=code&scope=read+write","Digital Ocean Oauth","height=600,width=850");
       if (win) win.focus();
     }else{
       setCloudProvider(fromJS({

@@ -5,6 +5,7 @@ import HtmlWebpackPlugin from"html-webpack-plugin";
 import autoprefixer from"autoprefixer";
 import path from"path";
 import * as hosts from"./src/constants/Hosts";
+import * as integrations from"./src/constants/Integrations";
 
 export default {
   resolve: {
@@ -27,10 +28,15 @@ export default {
     new webpack.optimize.OccurenceOrderPlugin(),
 
     // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
-    new webpack.DefinePlugin({"process.env.NODE_ENV": JSON.stringify("production"),
-    "process.env.HOST": JSON.stringify(hosts.PRODUCTION),
-      __DEV__: false
-    }),
+    new webpack.DefinePlugin(
+      {
+        "process.env.HOST": JSON.stringify(hosts.PRODUCTION),
+        "process.env.INTEGRATIONS.DIGITALOCEAN.CLIENTID": JSON.stringify(integrations.DIGITALOCEAN_CLIENTID_PRODUCTION),
+        "process.env.INTEGRATIONS.DIGITALOCEAN.REDIRECTURI": JSON.stringify(integrations.DIGITALOCEAN_REDIRECTURI_PRODUCTION),
+        "process.env.INTEGRATIONS.GITHUB.CLIENTID": JSON.stringify(integrations.GITHUB_CLIENTID_PRODUCTION),
+        "process.env.NODE_ENV": JSON.stringify("production"),
+        __DEV__: false
+      }),
 
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin("[name].[contenthash].css"),
