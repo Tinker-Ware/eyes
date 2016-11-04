@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from"html-webpack-plugin";
 import autoprefixer from"autoprefixer";
 import path from"path";
 import * as hosts from"./src/constants/Hosts";
+import * as integrations from"./src/constants/Integrations";
 
 export default {
   resolve: {
@@ -25,10 +26,15 @@ export default {
     filename:"bundle.js"},
   plugins: [
     // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html
-    new webpack.DefinePlugin({"process.env.NODE_ENV": JSON.stringify("development"),
-    "process.env.HOST": JSON.stringify(hosts.DEVELOPMENT),
-      __DEV__: true
-    }),
+    new webpack.DefinePlugin(
+      {
+        "process.env.HOST": JSON.stringify(hosts.DEVELOPMENT),
+        "process.env.INTEGRATIONS.DIGITALOCEAN.CLIENTID": JSON.stringify(integrations.DIGITALOCEAN_CLIENTID_DEVELOPMENT),
+        "process.env.INTEGRATIONS.DIGITALOCEAN.REDIRECTURI": JSON.stringify(integrations.DIGITALOCEAN_REDIRECTURI_DEVELOPMENT),
+        "process.env.INTEGRATIONS.GITHUB.CLIENTID": JSON.stringify(integrations.GITHUB_CLIENTID_DEVELOPMENT),
+        "process.env.NODE_ENV": JSON.stringify("development"),
+        __DEV__: true
+      }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
