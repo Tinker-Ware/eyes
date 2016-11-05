@@ -2,6 +2,7 @@ import webpack from"webpack";
 import HtmlWebpackPlugin from"html-webpack-plugin";
 import autoprefixer from"autoprefixer";
 import path from"path";
+import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
 import * as hosts from"./src/constants/Hosts";
 import * as integrations from"./src/constants/Integrations";
 
@@ -37,13 +38,19 @@ export default {
       }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
-      template:"src/index.ejs",
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true
-      },
-      inject: true
+    // Create HTML file that includes references to bundled CSS and JS.
+    new HtmlWebpackPlugin(
+      {
+        template:"src/index.ejs",
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        inject: true
+      }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: "bundle_report.html"
     })
   ],
   module: {

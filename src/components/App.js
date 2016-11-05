@@ -7,11 +7,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="row">
-        {props.children}
+        {this.props.children}
       </div>
     );
   }
-};
+}
 
 App.propTypes = {
   children: PropTypes.element
