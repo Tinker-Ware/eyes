@@ -7,7 +7,6 @@ import { Router, browserHistory } from "react-router";
 import routes from "../routes/development";
 import configureStore from "../store/configureStore";
 import { syncHistoryWithStore } from "react-router-redux";
-
 import "../styles/foundation-grid.scss";
 import "../styles/styles.scss";
 // import"../icons/foundation-icons.css";

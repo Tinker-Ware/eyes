@@ -29,9 +29,9 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
     }));
   };
   return (
-    <div className="login-card">
+    <div className="card">
       <Card>
-        <h2 className="text-center">
+        <h2 className="align-center">
           {"Log In"}
         </h2>
         <form>
@@ -62,7 +62,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
               />
           {/* <div className="row">
             <div className="large-6 large-centered medium-6 columns">
-              <p className="text-center">
+              <p className="align-center">
                 <Link to="#">
                   {"Forgot password?"}
                 </Link>
@@ -71,7 +71,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
           </div>
           <div className="row">
             <div className="large-6 large-centered medium-6 columns">
-              <p className="text-center">
+              <p className="align-center">
                 {"Do not have an account?"}
                 <Link to="/registrations/new">
                   &nbsp;{"Sign Up"}
