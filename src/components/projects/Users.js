@@ -75,13 +75,13 @@ const Users = () => {
           <Divider />
           <List>
             <ListItem
-                leftIcon={<FontIcon className="icon icon-person"/>}
+                leftIcon={<FontIcon className="icon icon-time"/>}
                 primaryText={"Alfonso"}
                 rightIcon={<FontIcon className="icon icon-delete"/>}
                 secondaryText={"Devop"}
             />
             <ListItem
-                leftIcon={<FontIcon className="icon icon-person"/>}
+                leftIcon={<FontIcon className="icon icon-push"/>}
                 primaryText={"Antonio"}
                 rightIcon={<FontIcon className="icon icon-delete"/>}
                 secondaryText={"Developer"}

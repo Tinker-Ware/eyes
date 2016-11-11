@@ -11,8 +11,11 @@ $icon-html-five: '\ef43';
 $icon-memory-ram: '\e322';
 $icon-person-add: '\e7fe';
 $icon-person: '\e7fd';
+$icon-push: '\ea36';
 $icon-python: '\e901';
 $icon-react: '\e601';
+$icon-timer: '\e425';
+$icon-trigger: '\ec2b';
 $icon-warning: '\e002';
 
 @font-face {
@@ -96,6 +99,12 @@ $icon-warning: '\e002';
   }
 }
 
+.icon-push {
+  &::before {
+    content: $icon-push;
+  }
+}
+
 .icon-memory-ram {
   &::before {
     content: $icon-memory-ram;
@@ -105,6 +114,18 @@ $icon-warning: '\e002';
 .icon-person-add {
   &::before {
     content: $icon-person-add;
+  }
+}
+
+.icon-timer {
+  &::before {
+    content: $icon-timer;
+  }
+}
+
+.icon-trigger {
+  &::before {
+    content: $icon-trigger;
   }
 }
 

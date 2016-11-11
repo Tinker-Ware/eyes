@@ -3,6 +3,7 @@ import { Route, IndexRoute } from "react-router";
 import App from "../components/App";
 import Profile from "../components/user/Profile";
 import ProvisionerForm from "../containers/ProvisionerForm";
+import Environment from "../containers/Environment";
 import ProjectInfo from "../containers/ProjectInfo";
 import ProjectUsers from "../containers/ProjectUsers";
 import Projects from "../containers/Projects";
@@ -30,6 +31,10 @@ export default (
     <Route
         component={ServiceOAuth}
         path="/oauth/:serviceName"
+    />
+    <Route
+        component={Environment}
+        path="environment"
     />
     <Route
         component={ProjectUsers}

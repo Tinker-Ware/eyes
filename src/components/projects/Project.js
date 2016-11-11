@@ -39,7 +39,7 @@ const Project = () => {
           <RaisedButton
               href="#"
               icon={<FontIcon className="icon icon-edit" />}
-              label="Edit Project"
+              label="Add Environment"
               primary
               style={style.button}
           />
@@ -105,6 +105,13 @@ const Project = () => {
           </List>
         </div>
         <div className="align-left">
+          <RaisedButton
+              href={"#"}
+              icon={<FontIcon className="icon icon-edit" />}
+              label={"Edit"}
+              primary
+              style={style.button}
+          />
           <RaisedButton
               href={"#"}
               icon={<FontIcon className="icon icon-deploy" />}
