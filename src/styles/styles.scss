@@ -1,13 +1,19 @@
 $icomoon-font-path: '../fonts' !default;
 
+$icon-check: '\e5ca';
+$icon-cloud-download: '\ec7a';
+$icon-cpu: '\ea1a';
+$icon-delete: '\e872';
+$icon-deploy: '\e902';
+$icon-edit: '\e254';
 $icon-go: '\e900';
+$icon-html-five: '\ef43';
+$icon-memory-ram: '\e322';
+$icon-person-add: '\e7fe';
+$icon-person: '\e7fd';
 $icon-python: '\e901';
 $icon-react: '\e601';
-$icon-check: '\e5ca';
-$icon-person: '\e7fd';
-$icon-person-add: '\e7fe';
 $icon-warning: '\e002';
-$icon-html-five: '\ef43';
 
 @font-face {
   font-family: 'icomoon';
@@ -30,6 +36,42 @@ $icon-html-five: '\ef43';
   text-transform: none;
 }
 
+.icon-check {
+  &::before {
+    content: $icon-check;
+  }
+}
+
+.icon-cloud-download {
+  &::before {
+    content: $icon-cloud-download;
+  }
+}
+
+.icon-cpu {
+  &::before {
+    content: $icon-cpu;
+  }
+}
+
+.icon-delete {
+  &::before {
+    content: $icon-delete;
+  }
+}
+
+.icon-deploy {
+  &::before {
+    content: $icon-deploy;
+  }
+}
+
+.icon-edit {
+  &::before {
+    content: $icon-edit;
+  }
+}
+
 .icon-go {
   &::before {
     content: $icon-go;
@@ -48,15 +90,15 @@ $icon-html-five: '\ef43';
   }
 }
 
-.icon-check {
-  &::before {
-    content: $icon-check;
-  }
-}
-
 .icon-person {
   &::before {
     content: $icon-person;
+  }
+}
+
+.icon-memory-ram {
+  &::before {
+    content: $icon-memory-ram;
   }
 }
 

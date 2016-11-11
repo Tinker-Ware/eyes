@@ -3,6 +3,8 @@ import { Route, IndexRoute } from "react-router";
 import App from "../components/App";
 import Profile from "../components/user/Profile";
 import ProvisionerForm from "../containers/ProvisionerForm";
+import ProjectInfo from "../containers/ProjectInfo";
+import ProjectUsers from "../containers/ProjectUsers";
 import Projects from "../containers/Projects";
 import UserProfile from "../containers/UserProfile";
 import UserLogin from "../containers/UserLogin";
@@ -28,6 +30,14 @@ export default (
     <Route
         component={ServiceOAuth}
         path="/oauth/:serviceName"
+    />
+    <Route
+        component={ProjectUsers}
+        path="users"
+    />
+    <Route
+        component={ProjectInfo}
+        path="project"
     />
     <Route
         component={Projects}
