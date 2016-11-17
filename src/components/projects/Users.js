@@ -1,10 +1,15 @@
-import React  from "react";
-import FontIcon from "material-ui/FontIcon";
-import { Card } from "material-ui/Card";
-import RaisedButton from "material-ui/RaisedButton";
+import {Card} from "material-ui/Card";
 import {List, ListItem} from "material-ui/List";
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+import AppBar from "material-ui/AppBar";
 import Divider from "material-ui/Divider";
-import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
+import FontIcon from "material-ui/FontIcon";
+import IconButton from "material-ui/IconButton";
+import IconMenu from "material-ui/IconMenu";
+import MenuItem from "material-ui/MenuItem";
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import RaisedButton from "material-ui/RaisedButton";
+import React  from "react";
 import TextField from "material-ui/TextField";
 
 const style = {
@@ -21,19 +26,44 @@ const style = {
    display: "inline-block",
    position: "relative",
   },
+  toolbar: {
+    margin: "-1em -1em 3em -1em",
+  },
+  toolbarTitle: {
+    marginLeft: "1em"
+  }
 };
 
 const Users = () => {
   return (
     <div className="card">
+      <AppBar
+          title="My DevOp"
+          iconElementLeft={<IconButton href="/project/1"><FontIcon className="icon icon-arrow-back"/></IconButton>}
+          iconElementRight={
+            <IconMenu
+              iconButtonElement={
+                <IconButton><MoreVertIcon /></IconButton>
+              }
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            >
+              <MenuItem primaryText="Refresh" />
+              <MenuItem primaryText="Help" />
+              <MenuItem primaryText="Sign out" />
+            </IconMenu>
+          }
+      />
       <Card>
-        <h2 className="align-center">
-          {"Project Users"}
-        </h2>
-        <ListItem
-            primaryText={"Add new Users"}
-            secondaryText={"Select to witch environmet the user will have access"}
-        />
+        <Toolbar style={style.toolbar}>
+          <ToolbarGroup firstChild>
+            <FontIcon className="icon icon-person"/>
+            <ToolbarTitle
+                style={style.toolbarTitle}
+                text="Users"
+            />
+          </ToolbarGroup>
+        </Toolbar>
         <TextField
             floatingLabelText="Name"
             fullWidth
@@ -41,23 +71,6 @@ const Users = () => {
             name="Name"
             type="text"
         />
-        <RadioButtonGroup
-            defaultSelected={"Developer"}
-            name={"shipSpeed"}
-        >
-          <RadioButton
-              label={"Developer"}
-              value={"Developer"}
-          />
-          <RadioButton
-              label={"Tester"}
-              value={"Tester"}
-          />
-          <RadioButton
-              label={"Devop"}
-              value={"Devop"}
-          />
-        </RadioButtonGroup>
         <RaisedButton
             href="#"
             icon={<FontIcon className="icon icon-person-add" />}
@@ -68,6 +81,7 @@ const Users = () => {
         <div>
           <List>
             <ListItem
+                disabled
                 primaryText={"List of Users"}
                 secondaryText={"Modify your project users"}
             />
@@ -75,13 +89,13 @@ const Users = () => {
           <Divider />
           <List>
             <ListItem
-                leftIcon={<FontIcon className="icon icon-time"/>}
+                leftIcon={<FontIcon className="icon icon-person"/>}
                 primaryText={"Alfonso"}
                 rightIcon={<FontIcon className="icon icon-delete"/>}
                 secondaryText={"Devop"}
             />
             <ListItem
-                leftIcon={<FontIcon className="icon icon-push"/>}
+                leftIcon={<FontIcon className="icon icon-person"/>}
                 primaryText={"Antonio"}
                 rightIcon={<FontIcon className="icon icon-delete"/>}
                 secondaryText={"Developer"}

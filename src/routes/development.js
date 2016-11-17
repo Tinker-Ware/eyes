@@ -1,16 +1,16 @@
-import React from "react";
+// import UserSignup from "../containers/UserSignup";
 import { Route, IndexRoute } from "react-router";
 import App from "../components/App";
-import Profile from "../components/user/Profile";
-import ProvisionerForm from "../containers/ProvisionerForm";
 import Environment from "../containers/Environment";
+import Profile from "../components/user/Profile";
 import ProjectInfo from "../containers/ProjectInfo";
-import ProjectUsers from "../containers/ProjectUsers";
 import Projects from "../containers/Projects";
-import UserProfile from "../containers/UserProfile";
-import UserLogin from "../containers/UserLogin";
-// import UserSignup from "../containers/UserSignup";
+import ProjectUsers from "../containers/ProjectUsers";
+import ProvisionerForm from "../containers/ProvisionerForm";
+import React from "react";
 import ServiceOAuth from "../containers/ServiceOAuth";
+import UserLogin from "../containers/UserLogin";
+import UserProfile from "../containers/UserProfile";
 
 export default (
   <Route
@@ -42,7 +42,7 @@ export default (
     />
     <Route
         component={ProjectInfo}
-        path="project"
+        path="project/:projecId"
     />
     <Route
         component={Projects}

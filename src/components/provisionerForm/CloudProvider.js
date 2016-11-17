@@ -1,6 +1,6 @@
 import React, {PropTypes} from "react";
 import {Link} from "react-router";
-import { fromJS } from "immutable";
+import {fromJS} from "immutable";
 import cookie from "react-cookie";
 
 const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {

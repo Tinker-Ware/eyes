@@ -1,13 +1,21 @@
-import React  from "react";
-import FontIcon from "material-ui/FontIcon";
-import { Card } from "material-ui/Card";
-import RaisedButton from "material-ui/RaisedButton";
+import {Card} from "material-ui/Card";
+import {Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
-import Subheader from "material-ui/Subheader";
-import Divider from "material-ui/Divider";
-import RefreshIndicator from "material-ui/RefreshIndicator";
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+import AppBar from "material-ui/AppBar";
 import Avatar from "material-ui/Avatar";
 import Chip from "material-ui/Chip";
+import ContentAdd from "material-ui/svg-icons/content/add";
+import Divider from "material-ui/Divider";
+import FontIcon from "material-ui/FontIcon";
+import IconButton from "material-ui/IconButton";
+import IconMenu from "material-ui/IconMenu";
+import MenuItem from "material-ui/MenuItem";
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import RaisedButton from "material-ui/RaisedButton";
+import React  from "react";
+import RefreshIndicator from "material-ui/RefreshIndicator";
+import Subheader from "material-ui/Subheader";
 
 const style = {
   button: {
@@ -23,34 +31,69 @@ const style = {
     display: "inline-block",
     position: "relative",
   },
+  toolbar: {
+    margin: "-1em -1em 3em -1em",
+  },
+  toolbarTitle: {
+    marginLeft: "1em"
+  }
 };
 
 const Project = () => {
   return (
     <div className="card">
+      <AppBar
+          title="My DevOp"
+          iconElementLeft={<IconButton href="/projects"><FontIcon className="icon icon-arrow-back"/></IconButton>}
+          iconElementRight={
+            <IconMenu
+              iconButtonElement={
+                <IconButton><MoreVertIcon /></IconButton>
+              }
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            >
+              <MenuItem primaryText="Refresh" />
+              <MenuItem primaryText="Help" />
+              <MenuItem primaryText="Sign out" />
+            </IconMenu>
+          }
+      />
       <Card>
-        <h2 className="align-center">
-          {"Project"}
-        </h2>
-        <p className="align-center">
-          {"React"}
-        </p>
-        <div className="align-right">
-          <RaisedButton
-              href="#"
-              icon={<FontIcon className="icon icon-edit" />}
-              label="Add Environment"
-              primary
-              style={style.button}
-          />
-          <RaisedButton
-              href="#"
-              icon={<FontIcon className="icon icon-person-add" />}
-              label="Modify Users"
-              primary
-              style={style.button}
-          />
-        </div>
+        <Toolbar style={style.toolbar}>
+          <ToolbarGroup firstChild>
+            <FontIcon className="icon icon-project"/>
+            <ToolbarTitle
+                style={style.toolbarTitle}
+                text="Project - React"
+            />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ToolbarTitle text="Options" />
+            <ToolbarSeparator />
+            <RaisedButton
+                href={"#"}
+                icon={<FontIcon className="icon icon-edit" />}
+                label={"Edit"}
+                primary
+                style={style.button}
+            />
+            <RaisedButton
+                href={"#"}
+                icon={<FontIcon className="icon icon-deploy" />}
+                label={"Deploy"}
+                primary
+                style={style.button}
+            />
+            <RaisedButton
+                href={"#"}
+                icon={<FontIcon className="icon icon-cloud-download" />}
+                label={"Download"}
+                primary
+                style={style.button}
+            />
+          </ToolbarGroup>
+        </Toolbar>
         <div className="small-12 medium-6 large-6 columns">
           <img
               className="project-example"
@@ -59,9 +102,9 @@ const Project = () => {
         </div>
         <div className="small-12 medium-6 large-6 columns">
           <List>
-            <Subheader>{"Deploys"}</Subheader>
             <ListItem
-                primaryText={"List of Deploys"}
+                disabled
+                primaryText={"Deploy History"}
                 secondaryText={"Check the status of each deploy"}
             />
           </List>
@@ -71,13 +114,13 @@ const Project = () => {
                 leftIcon={<FontIcon className="icon icon-deploy"/>}
                 primaryText={"ID: 11923"}
                 rightIcon={<FontIcon className="icon icon-check"/>}
-                secondaryText={"IP: 192.168.10.11"}
+                secondaryText={"USER: Alfonso"}
             />
             <ListItem
                 leftIcon={<FontIcon className="icon icon-deploy"/>}
                 primaryText={"ID: 12923"}
                 rightIcon={<FontIcon className="icon icon-warning"/>}
-                secondaryText={"IP: 192.168.10.18"}
+                secondaryText={"USER: Antonio"}
             />
             <ListItem
                 leftIcon={<FontIcon className="icon icon-deploy"/>}
@@ -94,35 +137,28 @@ const Project = () => {
                     />
                   </div>
                 }
-                secondaryText={"IP: 192.168.10.21"}
+                secondaryText={"USER: Alfonso"}
             />
             <ListItem
                 leftIcon={<FontIcon className="icon icon-deploy"/>}
                 primaryText={"ID: 15923"}
                 rightIcon={<FontIcon className="icon icon-check"/>}
-                secondaryText={"IP: 192.168.10.31"}
+                secondaryText={"USER: Javier"}
             />
           </List>
         </div>
         <div className="align-left">
           <RaisedButton
-              href={"#"}
-              icon={<FontIcon className="icon icon-edit" />}
-              label={"Edit"}
+              href="/environment"
+              icon={<FontIcon className="icon icon-trigger" />}
+              label="Add Trigger"
               primary
               style={style.button}
           />
           <RaisedButton
-              href={"#"}
-              icon={<FontIcon className="icon icon-deploy" />}
-              label={"Deploy"}
-              primary
-              style={style.button}
-          />
-          <RaisedButton
-              href={"#"}
-              icon={<FontIcon className="icon icon-cloud-download" />}
-              label={"Download"}
+              href="/users"
+              icon={<FontIcon className="icon icon-person-add" />}
+              label="Modify Users"
               primary
               style={style.button}
           />

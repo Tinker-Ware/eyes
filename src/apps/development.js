@@ -7,10 +7,16 @@ import { Router, browserHistory } from "react-router";
 import routes from "../routes/development";
 import configureStore from "../store/configureStore";
 import { syncHistoryWithStore } from "react-router-redux";
-import "../styles/foundation-grid.scss";
-import "../styles/styles.scss";
-// import"../icons/foundation-icons.css";
 require("../favicon.ico");
+
+if(location.pathname == "/"){
+  require("../styles/foundation.css");
+  require("../styles/styles2.scss");
+  require("../icons/foundation-icons.css");
+}else{
+  require("../styles/foundation-grid.scss");
+  require("../styles/styles.scss");
+}
 
 const store = configureStore();
 
