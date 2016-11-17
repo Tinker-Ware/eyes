@@ -1,13 +1,13 @@
 import {Card} from "material-ui/Card";
 import {List, ListItem} from "material-ui/List";
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+import {Toolbar, ToolbarGroup, ToolbarTitle} from "material-ui/Toolbar";
 import AppBar from "material-ui/AppBar";
 import Divider from "material-ui/Divider";
 import FontIcon from "material-ui/FontIcon";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import RaisedButton from "material-ui/RaisedButton";
 import React  from "react";
 import TextField from "material-ui/TextField";
@@ -38,21 +38,37 @@ const Users = () => {
   return (
     <div className="card">
       <AppBar
-          title="My DevOp"
-          iconElementLeft={<IconButton href="/project/1"><FontIcon className="icon icon-arrow-back"/></IconButton>}
+          iconElementLeft={
+            <IconButton href="/project/1">
+              <FontIcon className="icon icon-arrow-back"/>
+            </IconButton>
+          }
           iconElementRight={
             <IconMenu
-              iconButtonElement={
-                <IconButton><MoreVertIcon /></IconButton>
-              }
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={
+                  {
+                    horizontal: 'right',
+                    vertical: 'top'
+                  }
+                }
+                iconButtonElement={
+                  <IconButton>
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                targetOrigin={
+                  {
+                    horizontal: 'right',
+                    vertical: 'top'
+                  }
+                }
             >
               <MenuItem primaryText="Refresh" />
               <MenuItem primaryText="Help" />
               <MenuItem primaryText="Sign out" />
             </IconMenu>
           }
+          title="My DevOp"
       />
       <Card>
         <Toolbar style={style.toolbar}>

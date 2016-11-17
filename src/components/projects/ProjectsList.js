@@ -4,13 +4,11 @@ import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import AppBar from "material-ui/AppBar";
-import ContentAdd from "material-ui/svg-icons/content/add";
-import FloatingActionButton from "material-ui/FloatingActionButton";
 import FontIcon from "material-ui/FontIcon";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import RaisedButton from "material-ui/RaisedButton";
 import React  from "react";
 
@@ -28,14 +26,28 @@ const ProjectsList = () => {
     <div className="card">
       <AppBar
           title="My DevOp"
-          iconElementLeft={<IconButton><FontIcon className="icon icon-home"/></IconButton>}
+          iconElementLeft={
+            <IconButton>
+              <FontIcon className="icon icon-home"/>
+            </IconButton>
+          }
           iconElementRight={
             <IconMenu
-              iconButtonElement={
-                <IconButton><MoreVertIcon /></IconButton>
-              }
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={
+                  {
+                    horizontal: 'right',
+                    vertical: 'top'
+                  }
+                }
+                iconButtonElement={
+                  <IconButton><MoreVertIcon /></IconButton>
+                }
+                targetOrigin={
+                  {
+                    horizontal: 'right',
+                    vertical: 'top'
+                  }
+                }
             >
               <MenuItem primaryText="Refresh" />
               <MenuItem primaryText="Help" />
