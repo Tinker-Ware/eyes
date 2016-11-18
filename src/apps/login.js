@@ -10,7 +10,6 @@ import { syncHistoryWithStore } from "react-router-redux";
 import"../styles/foundation.css";
 import"../styles/styles.scss";
 import"../icons/foundation-icons.css";
-require("../favicon.ico");
 
 const store = configureStore();
 

@@ -41,6 +41,7 @@ export default {
     // Create HTML file that includes references to bundled CSS and JS.
     new HtmlWebpackPlugin(
       {
+        favicon:"src/favicon.ico",
         template:"src/index.ejs",
         minify: {
           removeComments: true,
