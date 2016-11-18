@@ -40,7 +40,6 @@ const Project = () => {
   return (
     <div className="card">
       <AppBar
-          title="My DevOp"
           iconElementLeft={
             <IconButton href="/projects">
               <FontIcon className="icon icon-arrow-back"/>
@@ -48,27 +47,24 @@ const Project = () => {
           }
           iconElementRight={
             <IconMenu
-                anchorOrigin={
-                  {
-                    horizontal: 'right',
-                    vertical: 'top'
-                  }
-                }
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "top"
+                }}
                 iconButtonElement={
                   <IconButton><MoreVertIcon /></IconButton>
                 }
-                targetOrigin={
-                  {
-                    horizontal: 'right',
-                    vertical: 'top'
-                  }
-                }
+                targetOrigin={{
+                  horizontal: "right",
+                  vertical: "top"
+                }}
             >
               <MenuItem primaryText="Refresh" />
               <MenuItem primaryText="Help" />
               <MenuItem primaryText="Sign out" />
             </IconMenu>
           }
+          title="My DevOp"
       />
       <Card>
         <Toolbar style={style.toolbar}>
@@ -108,7 +104,7 @@ const Project = () => {
         <div className="small-12 medium-6 large-6 columns">
           <img
               className="project-example"
-              src="../img/project-example.png"
+              src={require("../../img/project-example.png")}
           />
         </div>
         <div className="small-12 medium-6 large-6 columns">

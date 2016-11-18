@@ -46,21 +46,17 @@ const EnvironmentConfig = () => {
           }
           iconElementRight={
             <IconMenu
-                anchorOrigin={
-                  {
-                    horizontal: "right",
-                    vertical: "top"
-                  }
-                }
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "top"
+                }}
                 iconButtonElement={
                   <IconButton><MoreVertIcon /></IconButton>
                 }
-                targetOrigin={
-                  {
-                    horizontal: "right",
-                    vertical: "top"
-                  }
-                }
+                targetOrigin={{
+                  horizontal: "right",
+                  vertical: "top"
+                }}
             >
               <MenuItem primaryText="Refresh" />
               <MenuItem primaryText="Help" />
@@ -91,7 +87,10 @@ const EnvironmentConfig = () => {
             name="Environment"
             type="text"
         />
-        <RadioButtonGroup name="trigger" defaultSelected="Event">
+        <RadioButtonGroup
+            defaultSelected="Event"
+            name="trigger"
+        >
           <RadioButton
               label={"Time"}
               value={"Time"}

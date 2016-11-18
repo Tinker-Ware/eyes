@@ -50,7 +50,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
                   hintText="password"
                   name="Password"
                   onChange={handleUserSesionPassword}
-                  type="text"
+                  type="password"
                   value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
               />
               <RaisedButton

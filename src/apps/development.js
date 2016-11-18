@@ -7,7 +7,6 @@ import { Router, browserHistory } from "react-router";
 import routes from "../routes/development";
 import configureStore from "../store/configureStore";
 import { syncHistoryWithStore } from "react-router-redux";
-require("../favicon.ico");
 
 if(location.pathname == "/"){
   require("../styles/foundation.css");

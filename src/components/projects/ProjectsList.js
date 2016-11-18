@@ -25,7 +25,6 @@ const ProjectsList = () => {
   return (
     <div className="card">
       <AppBar
-          title="My DevOp"
           iconElementLeft={
             <IconButton>
               <FontIcon className="icon icon-home"/>
@@ -33,27 +32,24 @@ const ProjectsList = () => {
           }
           iconElementRight={
             <IconMenu
-                anchorOrigin={
-                  {
-                    horizontal: 'right',
-                    vertical: 'top'
-                  }
-                }
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "top"
+                }}
                 iconButtonElement={
                   <IconButton><MoreVertIcon /></IconButton>
                 }
-                targetOrigin={
-                  {
-                    horizontal: 'right',
-                    vertical: 'top'
-                  }
-                }
+                targetOrigin={{
+                  horizontal: "right",
+                  vertical: "top"
+                }}
             >
               <MenuItem primaryText="Refresh" />
               <MenuItem primaryText="Help" />
               <MenuItem primaryText="Sign out" />
             </IconMenu>
           }
+          title="My DevOp"
       />
       <Card>
         <Toolbar style={style.toolbar}>
@@ -67,7 +63,11 @@ const ProjectsList = () => {
           <ToolbarGroup>
             <ToolbarTitle text="Options" />
             <ToolbarSeparator />
-            <RaisedButton href="/" label="Create Project" primary={true} />
+            <RaisedButton
+                href="/"
+                label="Create Project"
+                primary
+            />
           </ToolbarGroup>
         </Toolbar>
         <List>

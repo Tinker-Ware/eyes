@@ -34,6 +34,10 @@ $icon-warning: '\e002';
   url('#{$icomoon-font-path}/icomoon.svg#icomoon') format('svg');
 }
 
+input{
+  box-shadow: none !important;
+}
+
 .icon {
   font-family: 'icomoon';
   font-style: normal;
