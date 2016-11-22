@@ -9,16 +9,20 @@ import root from "../middleware/sagas";
 import rootReducer from "../reducers";
 
 export default function configureStore(initialState) {
-  const sagaMiddleware = createSagaMiddleware();
-  const reduxImmutalbeMiddleware = reduxImmutableStateInvariant();
-
-  const store = createStore(rootReducer, applyMiddleware(reduxImmutalbeMiddleware, sagaMiddleware), initialState, compose(
+  const middlewares = [
     // Add other middleware on this line...
-    window.devToolsExtension ? window.devToolsExtension() : f => f //add support for Redux dev tools
+    createSagaMiddleware(),
+    reduxImmutableStateInvariant(),
+  ];
+
+  // add support for Redux dev tools
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
+  const store = createStore(rootReducer, initialState, composeEnhancers(
+    applyMiddleware(...middlewares)
     )
   );
 
-  sagaMiddleware.run(root);
+  middlewares[0].run(root);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
