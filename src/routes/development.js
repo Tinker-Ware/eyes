@@ -11,6 +11,7 @@ import React from "react";
 import ServiceOAuth from "../containers/ServiceOAuth";
 import UserLogin from "../containers/UserLogin";
 import UserProfile from "../containers/UserProfile";
+import UserSubscription from "../containers/UserSubscription";
 
 export default (
   <Route
@@ -24,6 +25,10 @@ export default (
     >
       <IndexRoute component={Profile} />
     </Route>
+    <Route
+        component={UserSubscription}
+        path="/user/subscription"
+    />
     <Route
         component={UserLogin}
         path="login"
