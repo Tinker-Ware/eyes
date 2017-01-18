@@ -7,7 +7,9 @@ $icon-cloud-download: '\ec7a';
 $icon-cpu: '\ea1a';
 $icon-delete: '\e872';
 $icon-deploy: '\e902';
+$icon-digitalocean: '\e903';
 $icon-edit: '\e254';
+$icon-github: '\ef0f';
 $icon-go: '\e900';
 $icon-home: '\e95f';
 $icon-html-five: '\ef43';
@@ -96,9 +98,21 @@ input{
   }
 }
 
+.icon-digitalocean {
+  &::before {
+    content: $icon-digitalocean;
+  }
+}
+
 .icon-edit {
   &::before {
     content: $icon-edit;
+  }
+}
+
+.icon-github {
+  &::before {
+    content: $icon-github;
   }
 }
 
@@ -108,33 +122,10 @@ input{
   }
 }
 
-.icon-python {
-  &::before {
-    content: $icon-python;
-  }
-}
 
 .icon-home {
   &::before {
     content: $icon-home;
-  }
-}
-
-.icon-react {
-  &::before {
-    content: $icon-react;
-  }
-}
-
-.icon-person {
-  &::before {
-    content: $icon-person;
-  }
-}
-
-.icon-push {
-  &::before {
-    content: $icon-push;
   }
 }
 
@@ -144,9 +135,33 @@ input{
   }
 }
 
+.icon-person {
+  &::before {
+    content: $icon-person;
+  }
+}
+
 .icon-person-add {
   &::before {
     content: $icon-person-add;
+  }
+}
+
+.icon-push {
+  &::before {
+    content: $icon-push;
+  }
+}
+
+.icon-python {
+  &::before {
+    content: $icon-python;
+  }
+}
+
+.icon-react {
+  &::before {
+    content: $icon-react;
   }
 }
 

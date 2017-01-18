@@ -5,6 +5,27 @@ import cookie from "react-cookie";
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from "material-ui/FontIcon";
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Checkbox from 'material-ui/Checkbox';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+
+const styles = {
+  block: {
+    maxWidth: 250,
+  },
+  cardText: {
+    height: 400,
+    overflowY: scroll,
+    overflowX: 'hidden',
+  },
+  radioButton: {
+    marginBottom: 16,
+    marginLeft: 16
+  },
+};
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
   if(userAppState.get("user_session")){
@@ -73,95 +94,49 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           <i className="step fi-widget" />
            {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
-    (repositoryAppState.get("integration")) && repositoryAppState.get("repositories") ?
-      repositoryAppState.get("repositories").toJS().map((value, index)=>
-        <div
-            className={repositoryAppState.get("show_repositories")? "large-12 medium-12 small-12 columns" : "large-12 medium-12 small-12 columns hide"}
+    repositoryAppState.get("integration") && repositoryAppState.get("repositories") ?
+      <RadioButtonGroup name="shipSpeed" defaultSelected={repositoryAppState.get("repository").toJS().name}>
+        {repositoryAppState.get("repositories").toJS().map((value, index)=>
+          <RadioButton
             key={index}
-        >
-          <div className="switch large" >
-            <input className="switch-input"
-                id={index}
-                name="exampleSwitch"
-                onClick={(event)=>handleGithubRepos(event, value.full_name)}
-                type="radio"
-            />
-            <label
-                className="switch-paddle"
-                htmlFor={index}
-            >
-              <span className="show-for-sr">
-                {"Do you like me?"}
-              </span>
-              <span
-                  aria-hidden="true"
-                  className="switch-active"
-              >
-                {"Yes"}
-              </span>
-              <span
-                  aria-hidden="true"
-                  className="switch-inactive"
-              >
-                {"No"}
-              </span>
-            </label>
-          </div>
-          <div className="switch-description">
-              <span>{value.full_name}</span>
-          </div>
-        </div> ) :"";
+            value={value.full_name}
+            label={value.full_name}
+            onClick={(event)=>handleGithubRepos(event, value.full_name)}
+            style={styles.radioButton}
+          />
+        )}
+      </RadioButtonGroup> : "";
   return (
     <div className="small-12 medium-6 large-6 columns">
       <Card expanded={repositoryAppState.get("show_repositories")}>
         <CardHeader
           title="Github"
           subtitle="Repository"
-          avatar={<FontIcon className="icon icon-project"/>}
-          showExpandableButton={true}
+          avatar={<FontIcon className="icon icon-github"/>}
+          showExpandableButton
         />
         <CardActions>
           <FlatButton
-              label={(repositoryAppState.get("integration"))? "Connected":"Connect Github"}
+              label={repositoryAppState.get("integration")? "Connected":"Connect Github"}
+              primary
               onClick={(event)=>handleGithubLogin(event, (repositoryAppState.get("integration"))? true : false)}
           />
           <FlatButton
-              label={repositoryAppState.get("show_repositories") ?"Hide Repositories":"Show Repositories"}
+              label={repositoryAppState.get("show_repositories")?"Hide Repositories":"Show Repositories"}
               onClick={handleGithubConfigurationEnable}
+              disabled={repositoryAppState.get("integration")?false:true}
           />
         </CardActions>
-        <CardText expandable={true}>
+        <CardText expandable={true} style={styles.cardText}>
           <div className="row repository-list">
-              {repositoryList}
+            <List>
+              <Subheader>{"Select a repository"}</Subheader>
+            </List>
+            {repositoryList}
           </div>
         </CardText>
       </Card>
     </div>
-    /* <div className="large-6 medium-6 small-12 columns">
-      <ul className="selection-table">
-        <li className="bullet-item">
-          <Link
-              className="button radius btn-connect"
-              href="#"
-              onClick={handleGithubLogin}
-          >
-            <img
-                className="GitHub"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            />
-              {(repositoryAppState.get("integration"))?"Connected:"+repositoryAppState.get("integration").toJS().username :"Connect Github"}
-          </Link>
-          {optionsRepositoryList}
-          {repositoryAppState.get("show_repositories") && (repositoryAppState.get("integration"))?
-            <h5 id="firstModalTitle">
-              {"Select a repository."}
-            </h5> :""}
-          <div className="row repository-list">
-              {repositoryList}
-          </div>
-        </li>
-      </ul>
-    </div> */
   );
 };
 
