@@ -174,8 +174,12 @@ input{
   }
 }
 
-.card {
+.container {
   padding: 2em 0;
+}
+
+.card {
+  padding: 1em;
 
   &[class='card'] > div {
     padding: 1em;

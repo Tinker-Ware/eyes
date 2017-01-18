@@ -2,6 +2,9 @@ import React, { PropTypes } from "react";
 import { Link } from "react-router";
 import { fromJS } from "immutable";
 import cookie from "react-cookie";
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from "material-ui/FontIcon";
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
   if(userAppState.get("user_session")){
@@ -21,9 +24,9 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }
     }, 1000);
   }
-  const handleGithubLogin = (e) => {
+  const handleGithubLogin = (e, isConnected) => {
     e.preventDefault();
-    if(!e.target.text.includes("Connected")){
+    if(!isConnected){
       let win = window.open("https://github.com/login/oauth/authorize?access_type=online&client_id="+process.env.INTEGRATIONS.GITHUB.CLIENTID+"&response_type=cod&state=github&scope=user%3Aemail+repo","Github Oauth","height=600,width=450");
       if (win) win.focus();
     }else{
@@ -109,7 +112,32 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           </div>
         </div> ) :"";
   return (
-    <div className="large-6 medium-6 small-12 columns">
+    <div className="small-12 medium-6 large-6 columns">
+      <Card expanded={repositoryAppState.get("show_repositories")}>
+        <CardHeader
+          title="Github"
+          subtitle="Repository"
+          avatar={<FontIcon className="icon icon-project"/>}
+          showExpandableButton={true}
+        />
+        <CardActions>
+          <FlatButton
+              label={(repositoryAppState.get("integration"))? "Connected":"Connect Github"}
+              onClick={(event)=>handleGithubLogin(event, (repositoryAppState.get("integration"))? true : false)}
+          />
+          <FlatButton
+              label={repositoryAppState.get("show_repositories") ?"Hide Repositories":"Show Repositories"}
+              onClick={handleGithubConfigurationEnable}
+          />
+        </CardActions>
+        <CardText expandable={true}>
+          <div className="row repository-list">
+              {repositoryList}
+          </div>
+        </CardText>
+      </Card>
+    </div>
+    /* <div className="large-6 medium-6 small-12 columns">
       <ul className="selection-table">
         <li className="bullet-item">
           <Link
@@ -133,7 +161,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           </div>
         </li>
       </ul>
-    </div>
+    </div> */
   );
 };
 
