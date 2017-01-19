@@ -88,10 +88,13 @@ export class ServiceForm extends Component {
                     />
                   </ToolbarGroup>
                 </Toolbar>
+                <h2>{'Choose a project name'}</h2>
+                <p>{'Give your Droplets an identifying name you will remember them by.'}</p>
                 <ProjectName
                     projectNameAppState={this.props.projectNameAppState}
                     setProjectName={this.props.actions.setProjectName}
                 />
+                <h2>{'Connect to your Services'}</h2>
                 <div className="row">
                   <GithubService
                       repositoryAppState={this.props.repositoryAppState}
@@ -102,52 +105,6 @@ export class ServiceForm extends Component {
                       setShowRepositories={this.props.actions.setShowRepositories}
                       userAppState={this.props.userAppState}
                   />
-                  <div className="small-12 medium-6 large-6 columns">
-                    <Card>
-                      <CardHeader
-                        title="Without Avatar"
-                        subtitle="Subtitle"
-                        actAsExpander={true}
-                        showExpandableButton={true}
-                      />
-                      <CardActions>
-                        <FlatButton label="Connect" />
-                      </CardActions>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-            </Paper>
-          </div>
-            {/* <div className="row">
-              <div className="large-10 columns">
-                <h1><i className="step fi-clipboard-notes" />
-                  {"Create a Service"}
-                </h1>
-                <ProjectName
-                    projectNameAppState={this.props.projectNameAppState}
-                    setProjectName={this.props.actions.setProjectName}
-                />
-                <div className="row">
-                  <h2>
-                    <i className="step fi-share" />
-                    {"Connect Service(s)"}
-                  </h2>
-                  {(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?
-                    provisionFormOptionsApi.getProvisionFormOptions()[0].services.map((value) =>
-                      (value.identifier =="github") ?
-                        <GithubService
-                            key = {value.identifier}
-                            repositoryAppState={this.props.repositoryAppState}
-                            requestRepositoryAccess={this.props.actions.requestRepositoryAccess}
-                            requestUserRepositories={this.props.actions.requestUserRepositories}
-                            setIntegracion={this.props.actions.setIntegracion}
-                            setRepository={this.props.actions.setRepository}
-                            setShowRepositories={this.props.actions.setShowRepositories}
-                            userAppState={this.props.userAppState}
-                        />
-                      :"")
-                    :""}
                   <CloudProvider
                       clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                       cloudProviderAppState={this.props.cloudProviderAppState}
@@ -156,6 +113,12 @@ export class ServiceForm extends Component {
                       userAppState={this.props.userAppState}
                   />
                 </div>
+                <h2>{'Choose an One-Click Apps'}</h2>
+              </div>
+            </Paper>
+          </div>
+            {/* <div className="row">
+              <div className="large-10 columns">
                 <Application
                     applicationAppState={this.props.applicationAppState}
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application :""}
