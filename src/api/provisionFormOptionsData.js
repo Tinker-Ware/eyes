@@ -15,12 +15,14 @@ module.exports = {
           roles: [
             {"role":"ghost","sudo":"no"}
           ],
+          icon: "ghost",
 					name:"Ghost"},
         {
 					identifier:"Yii",
           roles: [
             {"role":"yii","sudo":"no"}
           ],
+          icon: "yii",
 					name:"Yii"},
         {
 					identifier:"PlainHTML",
@@ -28,6 +30,7 @@ module.exports = {
             {"role":"base","sudo":"yes"},
             {"role":"web","sudo":"no"}
           ],
+          icon: "html-plain",
 					name:"Plain Html"}
 			],
 			packages: [

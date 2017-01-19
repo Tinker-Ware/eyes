@@ -114,16 +114,16 @@ export class ServiceForm extends Component {
                   />
                 </div>
                 <h2>{'Choose an One-Click Apps'}</h2>
-              </div>
-            </Paper>
-          </div>
-            {/* <div className="row">
-              <div className="large-10 columns">
                 <Application
                     applicationAppState={this.props.applicationAppState}
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application :""}
                     setApplication={this.props.actions.setApplication}
                 />
+              </div>
+            </Paper>
+          </div>
+            {/* <div className="row">
+              <div className="large-10 columns">
                 <SSHKeys
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     deleteSSHKey={this.props.actions.deleteSSHKey}

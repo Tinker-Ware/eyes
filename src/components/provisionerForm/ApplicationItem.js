@@ -1,27 +1,55 @@
 import React, { PropTypes } from "react";
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from "material-ui/FontIcon";
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Checkbox from 'material-ui/Checkbox';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
-const ApplicationItem = ( { activeApplication, identifier, roles, handleClick, name, end } ) => {
+const styles = {
+  block: {
+    maxWidth: 250,
+  },
+  radioButton: {
+    marginBottom: 16,
+    marginLeft: 16
+  },
+};
+
+const ApplicationItem = ( { activeApplication, icon, identifier, roles, handleClick, name, end } ) => {
   return (
-    <div className={end ?"large-4 medium-6 small-12 columns end":"large-4 medium-6 small-12 columns"}>
-      <ul className={activeApplication == identifier ?"selection-table active":"selection-table"}>
-        <li
-            className="bullet-item"
-            id={identifier}
-            onClick={(event)=>handleClick(event, roles)}
-        >
-          <img
-              className={identifier}
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+    <div className={'small-12 medium-6 large-6 columns one-click-app '+(end ? 'end':'')}>
+      <Card>
+        <CardHeader
+          title={name}
+          subtitle="One-Click App"
+          avatar={<FontIcon className={'icon icon-'+icon}/>}
+          showExpandableButton
+        />
+        <CardActions>
+          <FlatButton
+              label={'Select'}
+              primary
+              onClick={(event)=>handleClick(event, identifier, roles)}
           />
-          <span>{name}</span>
-        </li>
-      </ul>
+          <FlatButton
+              label={'Configuration'}
+          />
+        </CardActions>
+        <CardText expandable={true}>
+          <p>{JSON.stringify(roles)}</p>
+        </CardText>
+      </Card>
     </div>
   );
 };
 
 ApplicationItem.propTypes = {
   activeApplication: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
   identifier: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
   roles: PropTypes.array.isRequired,
