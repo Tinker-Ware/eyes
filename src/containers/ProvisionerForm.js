@@ -119,11 +119,7 @@ export class ServiceForm extends Component {
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application :""}
                     setApplication={this.props.actions.setApplication}
                 />
-              </div>
-            </Paper>
-          </div>
-            {/* <div className="row">
-              <div className="large-10 columns">
+                <h2>{'Add your SSH keys'}</h2>
                 <SSHKeys
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     deleteSSHKey={this.props.actions.deleteSSHKey}
@@ -144,6 +140,9 @@ export class ServiceForm extends Component {
                     userAppState={this.props.userAppState}
                 />
               </div>
+            </Paper>
+          </div>
+            {/* <div className="row">
               <div className="large-2 columns hide-for-small-only hide-for-medium-only">
                 <ServiceSummary
                     applicationAppState={this.props.applicationAppState}

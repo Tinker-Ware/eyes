@@ -1,6 +1,20 @@
 import React, { PropTypes } from "react";
 import { fromJS } from "immutable";
 import SSHKeysItem from "./SSHKeysItem";
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import Checkbox from 'material-ui/Checkbox';
+
+const styles = {
+  checkbox: {
+    marginLeft: "1em"
+  },
+  flatButton: {
+    width: "100%"
+  }
+};
 
 const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudProviderSSHKey, setSSHKeyContent, cloudProviderAppState, userAppState} ) => {
   const handleSSHKeyClick = (e) => {
@@ -24,20 +38,19 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
     }
   };
   const ShowSSHKeyButtonKeypress = (e) => {
-    e.preventDefault();
     showSSHKey(
       fromJS({
         show_cloud_provider_ssh_key: !cloudProviderAppState.get("show_cloud_provider_ssh_key")
       })
     );
   };
-  const SSHKeyTitleKeypress = (e) => {
+  const SSHKeyTitleKeypress = (e, title) => {
     e.preventDefault();
     setSSHKeyTitle(fromJS({
       name: e.target.value
     }));
   };
-  const SSHKeyContentKeypress = (e) => {
+  const SSHKeyContentKeypress = (e, sshKeyContent) => {
     e.preventDefault();
     setSSHKeyContent(fromJS({
       public_key: e.target.value
@@ -56,110 +69,72 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
             value={value.get("title")}
         />) : "";
 
-  const AddSHHKeyButton =
-    !(cloudProviderAppState.get("show_cloud_provider_ssh_key")) ?
-      <p>
-        <a
-            href="javascript:void(0);"
-            id="show_cloud_provider_ssh_key"
-            onClick={ShowSSHKeyButtonKeypress}
-        >
-          {"+ Add SSH Key"}
-        </a>
-      </p> :
-      <div className="ssh_key_content">
-        <div className="large-offset-9 large-3 medium-9">
-          <p className="right">
-            <a
-                href="javascript:void(0);"
-                id="hide_ssh_key"
-                onClick={ShowSSHKeyButtonKeypress}
-            >
-              {"Close"}
-            </a>
-          </p>
-        </div>
-        <form>
-          <div className="row">
-            <div className="columns">
-              <label className="error">
-                <textarea
-                    cols="50"
-                    id="ssh_key_content_value"
-                    onChange={SSHKeyContentKeypress}
-                    placeholder="SSH Key Content"
-                    rows="5"
-                    value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
-                />
-              </label>
-              <div
-                  className="hide"
-                  id="ssh_key_content_value_error"
-              >
-                <small className="error hide">
-                  {"SSH Key Content can not be blank"}
-                </small>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="columns">
-              <div className="row">
-                <div className="small-9 columns">
-                  <label className="error">
-                    <input
-                        id="ssh_key_content_title"
-                        maxLength="20"
-                        onChange={SSHKeyTitleKeypress}
-                        placeholder="Title"
-                        type="text"
-                        value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
-                    />
-                  </label>
-                  <div
-                      className="hide"
-                      id="ssh_key_content_title_error"
-                  >
-                    <small className="error">
-                      {"SSH Key Title can not be blank"}
-                    </small>
-                  </div>
-                </div>
-                <div className="small-3 columns">
-                  <a
-                      className="button postfix"
-                      href="javascript:void(0);"
-                      id="save_ssh_key"
-                      onClick={StoreSSHKeyKeypress}
-                  >
-                    {"Add SSH Key"}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-        <p>{"Adding an SSH key is a recommended security measure."}</p>
-      </div>;
-
-  const SSHKeyForm =
-    cloudProviderAppState.get("cloud_provider")?
-      <div className="large-12 medium-12 small-12 columns end">
-        {AddSHHKeyButton}
-      </div> : "";
+  const actions = [
+      <RaisedButton
+        label="Add SSH Key"
+        primary
+        onTouchTap={StoreSSHKeyKeypress}
+        style={styles.flatButton}
+      />,
+    ];
 
   return (
-    <div
-        className="row"
-        data-magellan-destination="ssh-keys"
-        id="ssh-keys"
-    >
-      <h2>
-        <i className="step fi-key" />
-        {"Add SSH Keys"}
-      </h2>
-    {PrintSSHKeys}
-    {SSHKeyForm}
+    <div className="row">
+      <div className="small-6 medium-3 large-3 columns">
+        <FlatButton
+            label="New SSH Key"
+            primary
+            onTouchTap={ShowSSHKeyButtonKeypress}
+        />
+      </div>
+      <div className="small-6 medium-3 large-3 columns">
+        <Checkbox
+            label="Leonel"
+            style={styles.checkbox}
+        />
+      </div>
+      <div className="small-6 medium-3 large-3 columns end">
+        <Checkbox
+            label="Antonio"
+            style={styles.checkbox}
+        />
+      </div>
+      {PrintSSHKeys}
+      <Dialog
+        title="New SSH key"
+        actions={actions}
+        modal={false}
+        open={cloudProviderAppState.get("show_cloud_provider_ssh_key")?true:false}
+        onRequestClose={ShowSSHKeyButtonKeypress}
+      >
+        <TextField
+          floatingLabelText="SSH Key Content"
+          fullWidth
+          hintText=
+            "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU
+            GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3
+            Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA
+            t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En
+            mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
+            NrRFi9wrf+M7Q== schacon@mylaptop.local"
+          name="SSHKeyContent"
+          multiLine={true}
+          onChange={SSHKeyContentKeypress}
+          type="text"
+          value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
+          rows={6}
+          rowsMax={6}
+        />
+        <TextField
+            floatingLabelText="Name"
+            fullWidth
+            hintText="Devop Key"
+            name="Name"
+            onChange={SSHKeyTitleKeypress}
+            type="text"
+            value={cloudProviderAppState.get("cloud_provider_ssh_keys_name")?cloudProviderAppState.get("cloud_provider_ssh_keys_name"):""}
+        />
+      </Dialog>
     </div>
   );
 };

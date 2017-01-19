@@ -1,5 +1,15 @@
 import React, { PropTypes } from "react";
 import { fromJS, Map } from "immutable";
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
+
+const style = {
+  button: {
+    margin: 0,
+    padding: '.5em',
+    height: 'auto'
+  }
+};
 
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   const handleCreateUserProject = (e) => {
@@ -65,10 +75,22 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           {"Create Service"}
       </a>;
     return (
-      <div className="large-12 large-centered medium-12 medium-centered small-12 small-centered columns">
-        {btnCreateService}
-      </div>
-  );
+      <RaisedButton
+          icon={<FontIcon className="icon icon-project" />}
+          label={"Create Project"}
+          primary
+          disabled={
+            repositoryAppState.get("integration")&&
+            repositoryAppState.get("repository")&&
+            projectNameAppState.get("project_name")&&
+            applicationAppState.get("application_name")?
+              false:true
+          }
+          onClick={handleCreateUserProject}
+          buttonStyle={style.button}
+          fullWidth
+      />
+    );
 };
 
 CreateService.propTypes = {
