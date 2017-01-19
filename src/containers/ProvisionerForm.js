@@ -63,28 +63,11 @@ export class ServiceForm extends Component {
                     />
                   </ToolbarGroup>
                   <ToolbarGroup>
-                    <ToolbarTitle text="Options" />
                     <ToolbarSeparator />
                     <RaisedButton
-                        href={"#"}
-                        icon={<FontIcon className="icon icon-edit" />}
-                        label={"Edit"}
+                        icon={<FontIcon className="icon icon-project" />}
+                        label={"Create Project"}
                         primary
-                        style={style.button}
-                    />
-                    <RaisedButton
-                        href={"#"}
-                        icon={<FontIcon className="icon icon-deploy" />}
-                        label={"Deploy"}
-                        primary
-                        style={style.button}
-                    />
-                    <RaisedButton
-                        href={"#"}
-                        icon={<FontIcon className="icon icon-cloud-download" />}
-                        label={"Download"}
-                        primary
-                        style={style.button}
                     />
                   </ToolbarGroup>
                 </Toolbar>
@@ -142,18 +125,6 @@ export class ServiceForm extends Component {
               </div>
             </Paper>
           </div>
-            {/* <div className="row">
-              <div className="large-2 columns hide-for-small-only hide-for-medium-only">
-                <ServiceSummary
-                    applicationAppState={this.props.applicationAppState}
-                    cloudProviderAppState={this.props.cloudProviderAppState}
-                    projectNameAppState={this.props.projectNameAppState}
-                    repositoryAppState={this.props.repositoryAppState}
-                    requestPostUserProject={this.props.actions.requestPostUserProject}
-                    userAppState={this.props.userAppState}
-                />
-              </div>
-            </div> */}
             {/* <div className="row">
               <footer>
                 <div className="row">

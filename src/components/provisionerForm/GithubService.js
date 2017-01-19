@@ -95,7 +95,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
            {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
     repositoryAppState.get("integration") && repositoryAppState.get("repositories") ?
-      <RadioButtonGroup name="shipSpeed" defaultSelected={repositoryAppState.get("repository").toJS().name}>
+      <RadioButtonGroup name="repositories" defaultSelected={repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:""}>
         {repositoryAppState.get("repositories").toJS().map((value, index)=>
           <RadioButton
             key={index}
