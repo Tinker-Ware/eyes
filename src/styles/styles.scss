@@ -15,12 +15,15 @@ $icon-go: '\e900';
 $icon-home: '\e95f';
 $icon-html-plain: '\ef43';
 $icon-memory-ram: '\e322';
+$icon-mysql: '\eb60';
+$icon-nginx: '\e615';
 $icon-person-add: '\e7fe';
 $icon-person: '\e7fd';
 $icon-project: '\ec1b';
 $icon-push: '\ea36';
 $icon-python: '\e901';
 $icon-react: '\e601';
+$icon-save: '\ec87';
 $icon-timer: '\e425';
 $icon-trigger: '\ec2b';
 $icon-warning: '\e002';
@@ -143,6 +146,18 @@ input {
 	}
 }
 
+.icon-mysql {
+  &::before {
+    content: $icon-mysql;
+  }
+}
+
+.icon-nginx {
+  &::before {
+    content: $icon-nginx;
+  }
+}
+
 .icon-person {
   &::before {
     content: $icon-person;
@@ -177,6 +192,12 @@ input {
   &::before {
     content: $icon-react;
 	}
+}
+
+.icon-save {
+  &::before {
+    content: $icon-save;
+  }
 }
 
 .icon-timer {
