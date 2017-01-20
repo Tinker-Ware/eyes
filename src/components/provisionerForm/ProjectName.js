@@ -1,5 +1,5 @@
-import React, { PropTypes } from "react";
-import { fromJS } from "immutable";
+import React, {PropTypes} from "react";
+import {fromJS} from "immutable";
 import TextField from "material-ui/TextField";
 
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {
@@ -17,17 +17,17 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
           floatingLabelText="ProjectName.ServerName"
           fullWidth
           name="projectName"
+          onChange={ProjectNameKeypress}
           type="text"
           value={projectNameAppState.project_name}
-          onChange={ProjectNameKeypress}
       />
     </div>
   );
 };
 
 ProjectName.propTypes = {
-  setProjectName: PropTypes.func.isRequired,
-  projectNameAppState: PropTypes.object.isRequired
+  projectNameAppState: PropTypes.object.isRequired,
+  setProjectName: PropTypes.func.isRequired
 };
 
 export default ProjectName;

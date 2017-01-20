@@ -1,11 +1,11 @@
-import React, { PropTypes } from "react";
 import { fromJS } from "immutable";
+import Checkbox from "material-ui/Checkbox";
+import Dialog from "material-ui/Dialog";
+import FlatButton from "material-ui/FlatButton";
+import RaisedButton from "material-ui/RaisedButton";
+import React, { PropTypes } from "react";
 import SSHKeysItem from "./SSHKeysItem";
-import FlatButton from 'material-ui/FlatButton';
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import Checkbox from 'material-ui/Checkbox';
+import TextField from "material-ui/TextField";
 
 const styles = {
   checkbox: {
@@ -37,20 +37,20 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
         public_key:""}));
     }
   };
-  const ShowSSHKeyButtonKeypress = (e) => {
+  const ShowSSHKeyButtonKeypress = () => {
     showSSHKey(
       fromJS({
         show_cloud_provider_ssh_key: !cloudProviderAppState.get("show_cloud_provider_ssh_key")
       })
     );
   };
-  const SSHKeyTitleKeypress = (e, title) => {
+  const SSHKeyTitleKeypress = (e) => {
     e.preventDefault();
     setSSHKeyTitle(fromJS({
       name: e.target.value
     }));
   };
-  const SSHKeyContentKeypress = (e, sshKeyContent) => {
+  const SSHKeyContentKeypress = (e) => {
     e.preventDefault();
     setSSHKeyContent(fromJS({
       public_key: e.target.value
@@ -71,10 +71,11 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
 
   const actions = [
       <RaisedButton
-        label="Add SSH Key"
-        primary
-        onTouchTap={StoreSSHKeyKeypress}
-        style={styles.flatButton}
+          key={1}
+          label="Add SSH Key"
+          onTouchTap={StoreSSHKeyKeypress}
+          primary
+          style={styles.flatButton}
       />,
     ];
 
@@ -83,8 +84,8 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
       <div className="small-6 medium-3 large-3 columns">
         <FlatButton
             label="New SSH Key"
-            primary
             onTouchTap={ShowSSHKeyButtonKeypress}
+            primary
         />
       </div>
       <div className="small-6 medium-3 large-3 columns">
@@ -101,31 +102,33 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
       </div>
       {PrintSSHKeys}
       <Dialog
-        title="New SSH key"
-        actions={actions}
-        modal={false}
-        open={cloudProviderAppState.get("show_cloud_provider_ssh_key")?true:false}
-        onRequestClose={ShowSSHKeyButtonKeypress}
+          actions={actions}
+          modal={false}
+          onRequestClose={ShowSSHKeyButtonKeypress}
+          open={cloudProviderAppState.get("show_cloud_provider_ssh_key")?true:false}
+          title="New SSH key"
       >
         <TextField
-          floatingLabelText="SSH Key Content"
-          fullWidth
-          hintText=
-            "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU
-            GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3
-            Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA
-            t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En
-            mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
-            NrRFi9wrf+M7Q== schacon@mylaptop.local"
-          name="SSHKeyContent"
-          multiLine={true}
-          onChange={SSHKeyContentKeypress}
-          type="text"
-          value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
-          rows={6}
-          rowsMax={6}
+            errorText="This field is required."
+            floatingLabelText="SSH Key Content"
+            fullWidth
+            hintText=
+              "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU
+              GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3
+              Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA
+              t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En
+              mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
+              NrRFi9wrf+M7Q== schacon@mylaptop.local"
+            multiLine
+            name="SSHKeyContent"
+            onChange={SSHKeyContentKeypress}
+            rows={6}
+            rowsMax={6}
+            type="text"
+            value={cloudProviderAppState.get("cloud_provider_ssh_keys_public_key")?cloudProviderAppState.get("cloud_provider_ssh_keys_public_key"):""}
         />
         <TextField
+            errorText="This field is required."
             floatingLabelText="Name"
             fullWidth
             hintText="Devop Key"
@@ -140,12 +143,12 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
 };
 
 SSHKeys.propTypes = {
+  cloudProviderAppState: PropTypes.object.isRequired,
   enableSSHKey: PropTypes.func.isRequired,
   requestPostCloudProviderSSHKey: PropTypes.func.isRequired,
-  showSSHKey: PropTypes.func.isRequired,
-  setSSHKeyTitle: PropTypes.func.isRequired,
   setSSHKeyContent: PropTypes.func.isRequired,
-  cloudProviderAppState: PropTypes.object.isRequired,
+  setSSHKeyTitle: PropTypes.func.isRequired,
+  showSSHKey: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

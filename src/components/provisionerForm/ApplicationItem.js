@@ -1,16 +1,12 @@
-import React, { PropTypes } from "react";
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import React, {PropTypes} from "react";
+import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
+import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Checkbox from 'material-ui/Checkbox';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import {List} from "material-ui/List";
+import Subheader from "material-ui/Subheader";
 import TextField from "material-ui/TextField";
-import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
+import RaisedButton from "material-ui/RaisedButton";
+import Divider from "material-ui/Divider";
 
 const styles = {
   block: {
@@ -24,44 +20,49 @@ const styles = {
 
 const ApplicationItem = ( { activeApplication, configuration, description, icon, identifier, roles, handleClick, name, end } ) => {
   return (
-    <div className={'small-12 medium-6 large-6 columns one-click-app '+(end ? 'end':'')}>
+    <div className={"small-12 medium-6 large-6 columns one-click-app "+(end ? "end":"")}>
       <Card>
         <CardHeader
-          title={name}
-          subtitle={description}
-          avatar={<FontIcon className={'icon icon-'+icon}/>}
-          showExpandableButton
+            avatar={<FontIcon className={"icon icon-"+icon}/>}
+            showExpandableButton
+            subtitle={description}
+            title={name}
         />
         <CardActions>
           <FlatButton
-              label={'Use'}
-              primary
+              label={"Use"}
               onClick={(event)=>handleClick(event, identifier, roles)}
+              primary
           />
           <FlatButton
-              label={'Show Configuration'}
+              label={"Show Configuration"}
           />
         </CardActions>
-        <CardText expandable={true}>
+        <CardText expandable>
           <Divider/>
           <List>
-            <Subheader>{"Configurations"}</Subheader>
+            <Subheader>
+              {"Configurations"}
+            </Subheader>
           </List>
-          <TextField
-              errorText="This field is required."
-              floatingLabelText={configuration.name}
-              fullWidth
-              name={configuration.id}
-              type={configuration.type}
-              // value={projectNameAppState.project_name}
-              // onChange={ProjectNameKeypress}
-          />
+          {configuration.map((value, index) =>
+            <TextField
+                // onChange={ProjectNameKeypress}
+                // value={projectNameAppState.project_name}
+                errorText="This field is required."
+                floatingLabelText={value.name}
+                fullWidth
+                key={index}
+                name={value.id}
+                type={value.type}
+            />
+          )}
           <RaisedButton
+              // onClick={handleCreateUserProject}
+              buttonStyle={styles.button}
               icon={<FontIcon className="icon icon-save" />}
               label={"Save"}
               primary
-              // onClick={handleCreateUserProject}
-              buttonStyle={styles.button}
           />
         </CardText>
       </Card>
@@ -71,7 +72,7 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
 
 ApplicationItem.propTypes = {
   activeApplication: PropTypes.string.isRequired,
-  configuration: PropTypes.object.isRequired,
+  configuration: PropTypes.array.isRequired,
   description: PropTypes.string.isRequired,
   end: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,

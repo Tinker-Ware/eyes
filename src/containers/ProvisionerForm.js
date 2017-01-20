@@ -1,25 +1,23 @@
-import { bindActionCreators } from "redux";
-import { browserHistory } from "react-router";
-import { connect } from "react-redux";
-import { fromJS } from "immutable";
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import {bindActionCreators} from "redux";
+import {browserHistory} from "react-router";
+import {connect} from "react-redux";
+import {fromJS} from "immutable";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import * as actions from "../actions/ServiceFormActions";
 import Application from "../components/provisionerForm/Application";
 import CloudProvider from "../components/provisionerForm/CloudProvider";
 import cookie from "react-cookie";
 import CreateService from "../components/provisionerForm/CreateService";
+import FontIcon from "material-ui/FontIcon";
 import GithubService from "../components/provisionerForm/GithubService";
 import Menu from "../components/provisionerForm/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
 import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
 import ServiceSummary from "../components/provisionerForm/ServiceSummary";
 import SSHKeys from "../components/provisionerForm/SSHKeys";
-import FontIcon from "material-ui/FontIcon";
-import Paper from 'material-ui/Paper';
-import FlatButton from 'material-ui/FlatButton';
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
@@ -71,13 +69,13 @@ export class ServiceForm extends Component {
                     />
                   </ToolbarGroup>
                 </Toolbar>
-                <h2>{'Choose a project name'}</h2>
-                <p>{'Give your Droplets an identifying name you will remember them by.'}</p>
+                <h2>{"Choose a project name"}</h2>
+                <p>{"Give your Droplets an identifying name you will remember them by."}</p>
                 <ProjectName
                     projectNameAppState={this.props.projectNameAppState}
                     setProjectName={this.props.actions.setProjectName}
                 />
-                <h2>{'Connect to your Services'}</h2>
+                <h2>{"Connect to your Services"}</h2>
                 <div className="row">
                   <GithubService
                       repositoryAppState={this.props.repositoryAppState}
@@ -101,7 +99,7 @@ export class ServiceForm extends Component {
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
                     setApplication={this.props.actions.setApplication}
                 />
-                <h2>{'Add your SSH keys'}</h2>
+                <h2>{"Add your SSH keys"}</h2>
                 <SSHKeys
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     deleteSSHKey={this.props.actions.deleteSSHKey}
@@ -143,18 +141,18 @@ export class ServiceForm extends Component {
 
 ServiceForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
-  applicationAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    applicationAppState: state.applicationAppState,
     cloudProviderAppState: state.cloudProviderAppState,
     projectNameAppState: state.projectNameAppState,
-    applicationAppState: state.applicationAppState,
     repositoryAppState: state.repositoryAppState,
     userAppState: state.userAppState
   };

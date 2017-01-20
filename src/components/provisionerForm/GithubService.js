@@ -1,16 +1,12 @@
-import React, { PropTypes } from "react";
-import { Link } from "react-router";
-import { fromJS } from "immutable";
+import React, {PropTypes} from "react";
+import {fromJS} from "immutable";
 import cookie from "react-cookie";
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
+import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Checkbox from 'material-ui/Checkbox';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import {List} from "material-ui/List";
+import Subheader from "material-ui/Subheader";
+import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
 
 const styles = {
   block: {
@@ -19,7 +15,7 @@ const styles = {
   cardText: {
     height: 400,
     overflowY: scroll,
-    overflowX: 'hidden',
+    overflowX: "hidden",
   },
   radioButton: {
     marginBottom: 16,
@@ -95,14 +91,17 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
            {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
     repositoryAppState.get("integration") && repositoryAppState.get("repositories") ?
-      <RadioButtonGroup name="repositories" defaultSelected={repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:""}>
+      <RadioButtonGroup
+          defaultSelected={repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:""}
+          name="repositories"
+      >
         {repositoryAppState.get("repositories").toJS().map((value, index)=>
           <RadioButton
-            key={index}
-            value={value.full_name}
-            label={value.full_name}
-            onClick={(event)=>handleGithubRepos(event, value.full_name)}
-            style={styles.radioButton}
+              key={index}
+              label={value.full_name}
+              onClick={(event)=>handleGithubRepos(event, value.full_name)}
+              style={styles.radioButton}
+              value={value.full_name}
           />
         )}
       </RadioButtonGroup> : "";
@@ -110,24 +109,27 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
     <div className="small-12 medium-6 large-6 columns">
       <Card expanded={repositoryAppState.get("show_repositories")}>
         <CardHeader
-          title="Github"
-          subtitle="Repository"
-          avatar={<FontIcon className="icon icon-github"/>}
-          showExpandableButton
+            avatar={<FontIcon className="icon icon-github"/>}
+            showExpandableButton
+            subtitle="Repository"
+            title="Github"
         />
         <CardActions>
           <FlatButton
               label={repositoryAppState.get("integration")? "Connected":"Connect Github"}
-              primary
               onClick={(event)=>handleGithubLogin(event, (repositoryAppState.get("integration"))? true : false)}
+              primary
           />
           <FlatButton
+              disabled={repositoryAppState.get("integration")?false:true}
               label={repositoryAppState.get("show_repositories")?"Hide Repositories":"Show Repositories"}
               onClick={handleGithubConfigurationEnable}
-              disabled={repositoryAppState.get("integration")?false:true}
           />
         </CardActions>
-        <CardText expandable={true} style={styles.cardText}>
+        <CardText
+            expandable
+            style={styles.cardText}
+        >
           <div className="row repository-list">
             <List>
               <Subheader>{"Select a repository"}</Subheader>
@@ -141,12 +143,12 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
 };
 
 GithubService.propTypes = {
-  setRepository: PropTypes.func.isRequired,
-  setIntegracion: PropTypes.func.isRequired,
-  setShowRepositories: PropTypes.func.isRequired,
+  repositoryAppState: PropTypes.object.isRequired,
   requestRepositoryAccess: PropTypes.func.isRequired,
   requestUserRepositories: PropTypes.func.isRequired,
-  repositoryAppState: PropTypes.object.isRequired,
+  setIntegracion: PropTypes.func.isRequired,
+  setRepository: PropTypes.func.isRequired,
+  setShowRepositories: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

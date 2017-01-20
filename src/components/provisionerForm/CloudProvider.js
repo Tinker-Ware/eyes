@@ -1,16 +1,9 @@
 import React, {PropTypes} from "react";
-import {Link} from "react-router";
 import {fromJS} from "immutable";
 import cookie from "react-cookie";
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardActions, CardHeader} from "material-ui/Card";
+import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Checkbox from 'material-ui/Checkbox';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
 const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {
   if(userAppState.get("user_session")){
@@ -45,15 +38,15 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
     <div className="small-12 medium-6 large-6 columns">
       <Card>
         <CardHeader
-          title="DigitalOcean"
-          subtitle="Cloud Provider"
-          avatar={<FontIcon className="icon icon-digitalocean"/>}
+            avatar={<FontIcon className="icon icon-digitalocean"/>}
+            subtitle="Cloud Provider"
+            title="DigitalOcean"
         />
         <CardActions>
           <FlatButton
               label={cloudProviderAppState.get("cloud_provider")? "Connected":"Connect Digital Ocean"}
-              primary
               onClick={(event)=>handleDigitalOceanLogin(event, cloudProviderAppState.get("cloud_provider")? true : false)}
+              primary
           />
         </CardActions>
       </Card>
@@ -64,9 +57,9 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
 CloudProvider.propTypes = {
   clearCloudProviderSSHKeys: PropTypes.func.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
-  userAppState: PropTypes.object.isRequired,
   requestCloudProviderAccess: PropTypes.func.isRequired,
-  setCloudProvider: PropTypes.func.isRequired
+  setCloudProvider: PropTypes.func.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 export default CloudProvider;
