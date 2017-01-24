@@ -2,10 +2,19 @@ import React, { PropTypes } from "react";
 import { fromJS } from "immutable";
 import ApplicationItem from "./ApplicationItem";
 
-const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
+const Application = ( {applicationsOptions, setApplication, setApplicationOneClick, applicationAppState} ) => {
   const handleApplicationClick = (e, id, role) => {
     e.preventDefault();
     setApplication(fromJS({
+      application: {
+        name: id,
+        roles: role
+      }
+    }));
+  };
+  const handleApplicationOneClick = (e, id, role) => {
+    e.preventDefault();
+    setApplicationOneClick(fromJS({
       application: {
         name: id,
         roles: role
@@ -71,6 +80,7 @@ const Application = ( {applicationsOptions, setApplication, applicationAppState}
 
 Application.propTypes = {
   setApplication: PropTypes.func.isRequired,
+  setApplicationOneClick: PropTypes.func.isRequired,
   applicationsOptions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired
 };

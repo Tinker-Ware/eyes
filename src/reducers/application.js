@@ -13,13 +13,9 @@ export default function application(state = initialState, action) {
     }
     case SET_APPLICATION_ONE_CLICK_APP:
     {
-      return state.set("application_oneclickapp",
-        action.value.get("applications").toSet().union(
-          action.value.get("application").map( value =>
-            value.set("enable", false)
-          )
-        ).toList()
-      );
+      return state.set("application_oneclickapp", action.value.get("applications").filter(value =>
+        value.toJS().id !== action.value.get("application").toJS()[0].id
+      ).toSet().union(action.value.get("application")).toList());
     }
     default:
       return state;

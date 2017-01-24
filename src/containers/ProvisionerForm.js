@@ -98,6 +98,7 @@ export class ServiceForm extends Component {
                     applicationAppState={this.props.applicationAppState}
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
                     setApplication={this.props.actions.setApplication}
+                    setApplicationOneClick={this.props.actions.setApplicationOneClick}
                 />
                 <h2>{"Add your SSH keys"}</h2>
                 <SSHKeys
