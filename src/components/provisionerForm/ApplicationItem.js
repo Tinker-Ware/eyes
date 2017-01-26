@@ -64,6 +64,7 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
               label={"Save"}
               primary
           />
+          {JSON.stringify(roles)}
         </CardText>
       </Card>
     </div>
@@ -79,7 +80,7 @@ ApplicationItem.propTypes = {
   icon: PropTypes.string.isRequired,
   identifier: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  roles: PropTypes.array.isRequired
+  roles: PropTypes.object.isRequired
 };
 
 export default ApplicationItem;

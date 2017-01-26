@@ -26,53 +26,56 @@ const Application = ( {applicationsOptions, setApplication, setApplicationOneCli
       <div className="row">
         <h2>{"Choose an One-Click Apps"}</h2>
         {applicationsOptions.apps.map((value, index) =>
-          <ApplicationItem
-              activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
-              configuration={value.configuration}
-              description={value.description}
-              end={(index == applicationsOptions.apps.length - 1) ? true : false}
-              handleClick={handleApplicationClick}
-              icon={value.icon}
-              identifier={value.identifier}
-              key={value.identifier}
-              name={value.name}
-              roles={value.roles}
-          />)
-        }
+          (value.enabled)?
+            <ApplicationItem
+                activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
+                configuration={value.configuration}
+                description={value.description}
+                end={(index == applicationsOptions.apps.length - 1) ? true : false}
+                handleClick={handleApplicationClick}
+                icon={value.icon}
+                identifier={value.identifier}
+                key={value.identifier}
+                name={value.name}
+                roles={value.roles}
+            /> : ''
+        )}
       </div>
       <div className="row">
         <h2>{"Choose a Database"}</h2>
         {applicationsOptions.databases.map((value, index) =>
-          <ApplicationItem
-              activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
-              configuration={value.configuration}
-              description={value.description}
-              end={(index == applicationsOptions.databases.length - 1) ? true : false}
-              handleClick={handleApplicationClick}
-              icon={value.icon}
-              identifier={value.identifier}
-              key={value.identifier}
-              name={value.name}
-              roles={value.roles}
-          />)
-        }
+          (value.enabled)?
+            <ApplicationItem
+                activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
+                configuration={value.configuration}
+                description={value.description}
+                end={(index == applicationsOptions.databases.length - 1) ? true : false}
+                handleClick={handleApplicationClick}
+                icon={value.icon}
+                identifier={value.identifier}
+                key={value.identifier}
+                name={value.name}
+                roles={value.roles}
+              /> : ''
+          )}
       </div>
       <div className="row">
         <h2>{"Choose a Web Serving Software"}</h2>
         {applicationsOptions.web_serving_softwares.map((value, index) =>
-          <ApplicationItem
-              activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
-              configuration={value.configuration}
-              description={value.description}
-              end={(index == applicationsOptions.web_serving_softwares.length - 1) ? true : false}
-              handleClick={handleApplicationClick}
-              icon={value.icon}
-              identifier={value.identifier}
-              key={value.identifier}
-              name={value.name}
-              roles={value.roles}
-          />)
-        }
+          (value.enabled)?
+            <ApplicationItem
+                activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
+                configuration={value.configuration}
+                description={value.description}
+                end={(index == applicationsOptions.web_serving_softwares.length - 1) ? true : false}
+                handleClick={handleApplicationClick}
+                icon={value.icon}
+                identifier={value.identifier}
+                key={value.identifier}
+                name={value.name}
+                roles={value.roles}
+              /> : ''
+          )}
       </div>
     </div>
   );
