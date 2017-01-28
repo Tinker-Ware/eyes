@@ -34,7 +34,7 @@ module.exports = {
 							},{
 								configuration: [
 									{
-										"id": "user_name",
+										"id": "ghost_user_name",
 										"name": "User Name",
 										"description": "Protects cookie values from being modified",
 										"type": "text"
@@ -102,13 +102,13 @@ module.exports = {
 							{
 								configuration: [
 									{
-										"id": "user_name",
+										"id": "name",
 										"name": "User Name",
 										"description": "Protects cookie values from being modified",
 										"type": "text"
 									},
 									{
-										"id": "user_password",
+										"id": "password",
 										"name": "User Password",
 										"description": "Protects cookie values from being modified",
 										"type": "password"
@@ -120,7 +120,7 @@ module.exports = {
 										"type": "text"
 									},
 									{
-										"id": "database_name",
+										"id": "db_name",
 										"name": "Database Name",
 										"description": "Protects cookie values from being modified",
 										"type": "text"
@@ -134,10 +134,12 @@ module.exports = {
 								roles: {
                   mysql_root_password: "rootpass",
                   mysql_users: [
-                    {name: "ticonsulting"},
-                    {host: "localhost"},
-                    {password: "password"},
-                    {priv: "ti_database.*:ALL"}
+                    {
+                      name: "ticonsulting",
+                      host: "localhost",
+                      password: "password",
+                      priv: "ti_database.*:ALL"
+                    }
                   ],
                   mysql_packages: [
                     "mariadb-client",
@@ -145,9 +147,11 @@ module.exports = {
                     "python-mysqldb"
                   ],
                   mysql_databases: [
-                    {name: "ti_database"},
-                    {encoding: "utf8"},
-                    {collation: "utf8_general_ci"}
+                    {
+                      name: "ti_database",
+                      encoding: "utf8",
+                      collation: "utf8_general_ci"
+                    }
                   ]
                 }
 							}

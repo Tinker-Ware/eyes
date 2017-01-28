@@ -18,7 +18,7 @@ const styles = {
   },
 };
 
-const ApplicationItem = ( { activeApplication, configuration, description, icon, identifier, roles, handleClick, name, end } ) => {
+const ApplicationItem = ( { activeApplication, configuration, description, icon, identifier, roles, handleClick, handleApplicationOneClick, name, end, remplaceRoleValue } ) => {
   return (
     <div className={"small-12 medium-6 large-6 columns one-click-app "+(end ? "end":"")}>
       <Card>
@@ -31,7 +31,7 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
         <CardActions>
           <FlatButton
               label={"Use"}
-              onClick={(event)=>handleClick(event, identifier, roles)}
+              onClick={(event)=>handleApplicationOneClick(event, identifier, roles)}
               primary
           />
           <FlatButton
@@ -47,8 +47,7 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
           </List>
           {configuration.map((value, index) =>
             <TextField
-                // onChange={ProjectNameKeypress}
-                // value={projectNameAppState.project_name}
+                onChange={(event)=>remplaceRoleValue(event, roles, identifier)}
                 errorText="This field is required."
                 floatingLabelText={value.name}
                 fullWidth
@@ -58,13 +57,12 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
             />
           )}
           <RaisedButton
-              // onClick={handleCreateUserProject}
+              // onClick={remplaceRoleValue(roles, identifier)}
               buttonStyle={styles.button}
               icon={<FontIcon className="icon icon-save" />}
               label={"Save"}
               primary
           />
-          {JSON.stringify(roles)}
         </CardText>
       </Card>
     </div>
@@ -76,10 +74,12 @@ ApplicationItem.propTypes = {
   configuration: PropTypes.array.isRequired,
   description: PropTypes.string.isRequired,
   end: PropTypes.bool.isRequired,
+  handleApplicationOneClick: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
   identifier: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  remplaceRoleValue: PropTypes.func.isRequired,
   roles: PropTypes.object.isRequired
 };
 
