@@ -3,24 +3,6 @@ import {expect} from "chai";
 import plainHtml from "../../reducers/roles/plainHtml";
 
 describe("reducer", () => {
-  it("handles SET_SERVER_USER", () => {
-    const initialState = Map();
-    const action = {type:"SET_SERVER_USER", value: fromJS({
-      server_user:"user"})};
-    const nextState = plainHtml(initialState, action);
-
-    expect(nextState).to.equal(fromJS({
-      server_user:"user"}));
-  });
-  it("handles SET_SERVER_GROUP", () => {
-    const initialState = Map();
-    const action = {type:"SET_SERVER_GROUP", value: fromJS({
-      server_group:"group"})};
-    const nextState = plainHtml(initialState, action);
-
-    expect(nextState).to.equal(fromJS({
-      server_group:"group"}));
-  });
   it("handles SET_SERVER_NAME", () => {
     const initialState = Map();
     const action = {type:"SET_SERVER_NAME", value: fromJS({
