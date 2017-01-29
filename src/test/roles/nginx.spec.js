@@ -56,6 +56,24 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_SHOW_NGINX", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_NGINX", value: fromJS({
+      show_nginx:true})};
+    const nextState = nginx(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      show_nginx:true}));
+  });
+  it("handles SET_REQUEST_ACTIVE_NGINX", () => {
+    const initialState = Map();
+    const action = {type:"SET_REQUEST_ACTIVE_NGINX", value: fromJS({
+      request_active_nginx:true})};
+    const nextState = nginx(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      request_active_nginx:true}));
+  });
   it("handles DEFAULT", () => {
     const initialState = Map();
     const action = {type:""};

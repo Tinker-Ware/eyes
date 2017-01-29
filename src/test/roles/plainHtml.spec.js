@@ -30,6 +30,24 @@ describe("reducer", () => {
     expect(nextState).to.equal(fromJS({
       github_repo:"git@github.com:bussiness/reponame.git"}));
   });
+  it("handles SET_SHOW_PLAINHTML", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_PLAINHTML", value: fromJS({
+      show_plainhtml:true})};
+    const nextState = plainHtml(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      show_plainhtml:true}));
+  });
+  it("handles SET_REQUEST_ACTIVE_PLAINHTML", () => {
+    const initialState = Map();
+    const action = {type:"SET_REQUEST_ACTIVE_PLAINHTML", value: fromJS({
+      request_active_plainhtml:true})};
+    const nextState = plainHtml(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      request_active_plainhtml:true}));
+  });
   it("handles DEFAULT", () => {
     const initialState = Map();
     const action = {type:""};

@@ -1,4 +1,4 @@
-import {SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES} from "../../constants/Roles";
+import {SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -30,6 +30,14 @@ export default function mysql(state = initialState, action) {
           action.value.get("mysql_database")
         ).toList()
       );
+    }
+    case SET_SHOW_MYSQL:
+    {
+      return state.set("show_mysql", action.value.get("show_mysql"));
+    }
+    case SET_REQUEST_ACTIVE_MYSQL:
+    {
+      return state.set("request_active_mysql", action.value.get("request_active_mysql"));
     }
     default:
       return state;

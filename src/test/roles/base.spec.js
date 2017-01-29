@@ -75,6 +75,24 @@ describe("reducer", () => {
     expect(nextState).to.equal(fromJS({
       server_user:"server user"}));
   });
+  it("handles SET_SHOW_BASE", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_BASE", value: fromJS({
+      show_base:true})};
+    const nextState = base(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      show_base:true}));
+  });
+  it("handles SET_REQUEST_ACTIVE_BASE", () => {
+    const initialState = Map();
+    const action = {type:"SET_REQUEST_ACTIVE_BASE", value: fromJS({
+      request_active_base:true})};
+    const nextState = base(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      request_active_base:true}));
+  });
   it("handles SET_SERVER_GROUP", () => {
     const initialState = Map();
     const action = {type:"SET_SERVER_GROUP", value: fromJS({

@@ -97,6 +97,24 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_SHOW_MYSQL", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_MYSQL", value: fromJS({
+      show_mysql:true})};
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      show_mysql:true}));
+  });
+  it("handles SET_REQUEST_ACTIVE_MYSQL", () => {
+    const initialState = Map();
+    const action = {type:"SET_REQUEST_ACTIVE_MYSQL", value: fromJS({
+      request_active_mysql:true})};
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      request_active_mysql:true}));
+  });
   it("handles DEFAULT", () => {
     const initialState = Map();
     const action = {type:""};

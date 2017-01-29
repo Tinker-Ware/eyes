@@ -103,6 +103,24 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_SHOW_GHOST", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_GHOST", value: fromJS({
+      show_ghost:true})};
+    const nextState = ghost(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      show_ghost:true}));
+  });
+  it("handles SET_REQUEST_ACTIVE_GHOST", () => {
+    const initialState = Map();
+    const action = {type:"SET_REQUEST_ACTIVE_GHOST", value: fromJS({
+      request_active_ghost:true})};
+    const nextState = ghost(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      request_active_ghost:true}));
+  });
   it("handles DEFAULT", () => {
     const initialState = Map();
     const action = {type:""};

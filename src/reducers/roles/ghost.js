@@ -1,4 +1,4 @@
-import {SET_NODEJS_VERSION, SET_GHOST_NODEJS_ENABLED, SET_GHOST_NGINX_ENABLED, SET_GHOST_INSTALL_DIR, SET_GHOST_USER_NAME, SET_GHOST_USER_GROUP, SET_GHOST_REPO, SET_GHOST_CONFIG_URL, SET_GHOST_CONFIG_DATABASE} from "../../constants/Roles";
+import {SET_NODEJS_VERSION, SET_GHOST_NODEJS_ENABLED, SET_GHOST_NGINX_ENABLED, SET_GHOST_INSTALL_DIR, SET_GHOST_USER_NAME, SET_GHOST_USER_GROUP, SET_GHOST_REPO, SET_GHOST_CONFIG_URL, SET_GHOST_CONFIG_DATABASE, SET_SHOW_GHOST, SET_REQUEST_ACTIVE_GHOST} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -46,6 +46,14 @@ export default function ghost(state = initialState, action) {
           action.value.get("database")
         ).toList()
       );
+    }
+    case SET_SHOW_GHOST:
+    {
+      return state.set("show_ghost", action.value.get("show_ghost"));
+    }
+    case SET_REQUEST_ACTIVE_GHOST:
+    {
+      return state.set("request_active_ghost", action.value.get("request_active_ghost"));
     }
     default:
       return state;

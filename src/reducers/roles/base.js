@@ -1,4 +1,4 @@
-import {SET_USER,SET_SSH,SET_SSH_KEY_PATH,SET_USER_EMAIL,SET_USER_NAME,SET_SERVER_USER,SET_SERVER_GROUP,SET_USERS,SET_CRONJOBS,SET_PRIVATE_KEY,SET_PRIVATE_KEY_NAME} from "../../constants/Roles";
+import {SET_USER,SET_SSH,SET_SSH_KEY_PATH,SET_USER_EMAIL,SET_USER_NAME,SET_SERVER_USER,SET_SERVER_GROUP,SET_USERS,SET_CRONJOBS,SET_PRIVATE_KEY,SET_PRIVATE_KEY_NAME,SET_SHOW_BASE,SET_REQUEST_ACTIVE_BASE} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -42,6 +42,14 @@ export default function git(state = initialState, action) {
     case SET_SERVER_GROUP:
     {
       return state.set("server_group", action.value.get("server_group"));
+    }
+    case SET_SHOW_BASE:
+    {
+      return state.set("show_base", action.value.get("show_base"));
+    }
+    case SET_REQUEST_ACTIVE_BASE:
+    {
+      return state.set("request_active_base", action.value.get("request_active_base"));
     }
     case SET_USERS:
     {
