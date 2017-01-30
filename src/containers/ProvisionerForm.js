@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import * as actions from "../actions/ServiceFormActions";
+import * as RolesActions from "../actions/rolesActions";
 import Application from "../components/provisionerForm/Application";
 import CloudProvider from "../components/provisionerForm/CloudProvider";
 import cookie from "react-cookie";

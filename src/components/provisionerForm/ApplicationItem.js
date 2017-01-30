@@ -6,6 +6,7 @@ import {List} from "material-ui/List";
 import Subheader from "material-ui/Subheader";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
+import Dialog from 'material-ui/Dialog';
 import Divider from "material-ui/Divider";
 
 const styles = {
@@ -19,6 +20,19 @@ const styles = {
 };
 
 const ApplicationItem = ( { activeApplication, configuration, description, icon, identifier, roles, handleClick, handleApplicationOneClick, name, end, remplaceRoleValue } ) => {
+  const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        // onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        // onTouchTap={this.handleClose}
+      />,
+    ];
   return (
     <div className={"small-12 medium-6 large-6 columns one-click-app "+(end ? "end":"")}>
       <Card>
@@ -64,6 +78,15 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
               primary
           />
         </CardText>
+        <Dialog
+          title="Dialog With Actions"
+          actions={actions}
+          modal={false}
+          open={true}
+          // onRequestClose={true}
+        >
+          The actions in this window were passed in as an array of React objects.
+        </Dialog>
       </Card>
     </div>
   );
