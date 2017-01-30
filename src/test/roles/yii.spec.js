@@ -21,6 +21,15 @@ describe("reducer", () => {
     expect(nextState).to.equal(fromJS({
       yii_git_repo:"git@github.com:bussiness/reponame.git"}));
   });
+  it("handles SET_ENABLE_YII", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_YII", value: fromJS({
+      enable_yii:true})};
+    const nextState = yii(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_yii:true}));
+  });
   it("handles SET_SHOW_YII", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_YII", value: fromJS({

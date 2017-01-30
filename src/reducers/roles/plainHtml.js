@@ -1,4 +1,4 @@
-import {SET_SERVER_NAME,SET_REPO_PATH,SET_GITHUB_REPO,SET_SHOW_PLAINHTML,SET_REQUEST_ACTIVE_PLAINHTML} from "../../constants/Roles";
+import {SET_SERVER_NAME,SET_REPO_PATH,SET_GITHUB_REPO,SET_ENABLE_PLAINHTML,SET_SHOW_PLAINHTML,SET_REQUEST_ACTIVE_PLAINHTML} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -18,6 +18,10 @@ export default function plainHtml(state = initialState, action) {
     case SET_GITHUB_REPO:
     {
       return state.set("github_repo", action.value.get("github_repo"));
+    }
+    case SET_ENABLE_PLAINHTML:
+    {
+      return state.set("enable_plainhtml", action.value.get("enable_plainhtml"));
     }
     case SET_SHOW_PLAINHTML:
     {

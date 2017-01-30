@@ -75,6 +75,15 @@ describe("reducer", () => {
     expect(nextState).to.equal(fromJS({
       server_user:"server user"}));
   });
+  it("handles SET_ENABLE_BASE", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_BASE", value: fromJS({
+      enable_base:true})};
+    const nextState = base(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_base:true}));
+  });
   it("handles SET_SHOW_BASE", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_BASE", value: fromJS({

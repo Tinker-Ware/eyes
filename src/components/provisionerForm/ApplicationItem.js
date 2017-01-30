@@ -82,7 +82,7 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
           title="Dialog With Actions"
           actions={actions}
           modal={false}
-          open={true}
+          open={false}
           // onRequestClose={true}
         >
           The actions in this window were passed in as an array of React objects.

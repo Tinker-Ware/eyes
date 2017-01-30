@@ -30,6 +30,15 @@ describe("reducer", () => {
     expect(nextState).to.equal(fromJS({
       github_repo:"git@github.com:bussiness/reponame.git"}));
   });
+  it("handles SET_ENABLE_PLAINHTML", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_PLAINHTML", value: fromJS({
+      enable_plainhtml:true})};
+    const nextState = plainHtml(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_plainhtml:true}));
+  });
   it("handles SET_SHOW_PLAINHTML", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_PLAINHTML", value: fromJS({

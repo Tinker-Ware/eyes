@@ -1,8 +1,9 @@
 import React, { PropTypes } from "react";
 import { fromJS } from "immutable";
 import ApplicationItem from "./ApplicationItem";
+import YiiRole from "./roles/YiiRole";
 
-const Application = ( {applicationsOptions, setApplication, setApplicationOneClick, applicationAppState} ) => {
+const Application = ( {applicationsOptions, setApplication, setApplicationOneClick, applicationAppState, rolesActions, yiiAppState} ) => {
   const findAndReplace = (object, value, replacevalue) => {
     for(var x in object){
       if(typeof object[x] == typeof {}){
@@ -49,6 +50,13 @@ const Application = ( {applicationsOptions, setApplication, setApplicationOneCli
     <div className="small-12 medium-12 large-12">
       <div className="row">
         <h2>{"Choose an One-Click Apps"}</h2>
+        <YiiRole
+            end
+            setCookieValidationKey={rolesActions.setCookieValidationKey}
+            setEnableYii={rolesActions.setEnableYii}
+            setShowYii={rolesActions.setShowYii}
+            yiiAppState={yiiAppState}
+        />
         {applicationsOptions.apps.map((value, index) =>
           (value.enabled)?
             <ApplicationItem
@@ -116,7 +124,9 @@ Application.propTypes = {
   setApplication: PropTypes.func.isRequired,
   setApplicationOneClick: PropTypes.func.isRequired,
   applicationsOptions: PropTypes.object.isRequired,
-  applicationAppState: PropTypes.object.isRequired
+  applicationAppState: PropTypes.object.isRequired,
+  rolesActions: PropTypes.object.isRequired,
+  yiiAppState: PropTypes.object.isRequired,
 };
 
 export default Application;

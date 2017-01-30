@@ -103,6 +103,15 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_ENABLE_GHOST", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_GHOST", value: fromJS({
+      enable_ghost:true})};
+    const nextState = ghost(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_ghost:true}));
+  });
   it("handles SET_SHOW_GHOST", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_GHOST", value: fromJS({

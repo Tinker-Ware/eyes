@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import * as actions from "../actions/ServiceFormActions";
-import * as RolesActions from "../actions/rolesActions";
+import * as rolesActions from "../actions/rolesActions";
 import Application from "../components/provisionerForm/Application";
 import CloudProvider from "../components/provisionerForm/CloudProvider";
 import cookie from "react-cookie";
@@ -98,8 +98,10 @@ export class ServiceForm extends Component {
                 <Application
                     applicationAppState={this.props.applicationAppState}
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
+                    rolesActions={this.props.rolesActions}
                     setApplication={this.props.actions.setApplication}
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}
+                    yiiAppState={this.props.yiiAppState}
                 />
                 <h2>{"Add your SSH keys"}</h2>
                 <SSHKeys
@@ -144,25 +146,39 @@ export class ServiceForm extends Component {
 ServiceForm.propTypes = {
   actions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
+  baseAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  ghostAppState: PropTypes.object.isRequired,
+  mysqlAppState: PropTypes.object.isRequired,
+  nginxAppState: PropTypes.object.isRequired,
+  plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
-  userAppState: PropTypes.object.isRequired
+  rolesActions: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired,
+  yiiAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     applicationAppState: state.applicationAppState,
+    baseAppState: state.baseAppState,
     cloudProviderAppState: state.cloudProviderAppState,
+    ghostAppState: state.ghostAppState,
+    mysqlAppState: state.mysqlAppState,
+    nginxAppState: state.nginxAppState,
+    plainHtmlAppState: state.plainHtmlAppState,
     projectNameAppState: state.projectNameAppState,
     repositoryAppState: state.repositoryAppState,
-    userAppState: state.userAppState
+    userAppState: state.userAppState,
+    yiiAppState: state.yiiAppState
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    rolesActions: bindActionCreators(rolesActions, dispatch)
   };
 }
 

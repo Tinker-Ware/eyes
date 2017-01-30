@@ -97,6 +97,15 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_ENABLE_MYSQL", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_MYSQL", value: fromJS({
+      enable_mysql:true})};
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_mysql:true}));
+  });
   it("handles SET_SHOW_MYSQL", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_MYSQL", value: fromJS({

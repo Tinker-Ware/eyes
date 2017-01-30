@@ -56,6 +56,15 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_ENABLE_NGINX", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_NGINX", value: fromJS({
+      enable_nginx:true})};
+    const nextState = nginx(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_nginx:true}));
+  });
   it("handles SET_SHOW_NGINX", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_NGINX", value: fromJS({

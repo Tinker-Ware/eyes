@@ -128,12 +128,20 @@ export function setShowBase(value) {
   return { type: types.SET_SHOW_BASE, value };
 }
 
+export function setEnableBase(value) {
+  return { type: types.SET_ENABLE_BASE, value };
+}
+
 export function setRequestActiveBase(value) {
   return { type: types.SET_REQUEST_ACTIVE_BASE, value };
 }
 
 export function setShowGhost(value) {
   return { type: types.SET_SHOW_GHOST, value };
+}
+
+export function setEnableGhost(value) {
+  return { type: types.SET_ENABLE_GHOST, value };
 }
 
 export function setRequestActiveGhost(value) {
@@ -144,12 +152,20 @@ export function setShowMysql(value) {
   return { type: types.SET_SHOW_MYSQL, value };
 }
 
+export function setEnableMysql(value) {
+  return { type: types.SET_ENABLE_MYSQL, value };
+}
+
 export function setRequestActiveMysql(value) {
   return { type: types.SET_REQUEST_ACTIVE_MYSQL, value };
 }
 
 export function setShowNginx(value) {
   return { type: types.SET_SHOW_NGINX, value };
+}
+
+export function setEnableNginx(value) {
+  return { type: types.SET_ENABLE_NGINX, value };
 }
 
 export function setRequestActiveNginx(value) {
@@ -160,12 +176,20 @@ export function setShowPlainhtml(value) {
   return { type: types.SET_SHOW_PLAINHTML, value };
 }
 
+export function setEnablePlainhtml(value) {
+  return { type: types.SET_ENABLE_PLAINHTML, value };
+}
+
 export function setRequestActivePlainhtml(value) {
   return { type: types.SET_REQUEST_ACTIVE_PLAINHTML, value };
 }
 
 export function setShowYii(value) {
   return { type: types.SET_SHOW_YII, value };
+}
+
+export function setEnableYii(value) {
+  return { type: types.SET_ENABLE_YII, value };
 }
 
 export function setRequestActiveYii(value) {
