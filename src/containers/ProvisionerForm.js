@@ -119,10 +119,12 @@ export class ServiceForm extends Component {
                 <CreateService
                     applicationAppState={this.props.applicationAppState}
                     cloudProviderAppState={this.props.cloudProviderAppState}
+                    mysqlAppState={this.props.mysqlAppState}
                     projectNameAppState={this.props.projectNameAppState}
                     repositoryAppState={this.props.repositoryAppState}
                     requestPostUserProject={this.props.actions.requestPostUserProject}
                     userAppState={this.props.userAppState}
+                    yiiAppState={this.props.yiiAppState}
                 />
               </div>
             </Paper>

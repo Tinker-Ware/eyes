@@ -53,10 +53,9 @@ const Application = ( {applicationsOptions, setApplication, setApplicationOneCli
             updateMysqlUsers={rolesActions.updateMysqlUsers}
         />
       </div>
-      <div className="row">
+      {/* <div className="row">
         <h2>{"Choose a Web Serving Software"}</h2>
-
-      </div>
+      </div> */}
     </div>
   );
 };

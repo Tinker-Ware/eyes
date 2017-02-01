@@ -11,28 +11,64 @@ const style = {
   }
 };
 
-const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
+const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject, mysqlAppState, yiiAppState} ) => {
+  const configurationJson = () => {
+    return {
+      //BASE ROLE
+      "server_user": "tinkerware",
+      "server_group": "tinkerware",
+      "users": [
+        {
+          "name":"tinkerware",
+          "group":"tinkerware",
+          "generate_ssh_key":true,
+          "groups":"sudo",
+          "password":"$6$PqQH1UMx7L$C8.JjzOlMbLVed7DMizT9XGKzTaLsucv/pYzFhBjIUVmBffq.WyhcwfIjLiBDe4drT7iHOy8W0em0MKLaK2bR.",
+          "authorized_keys":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDZ7DLbiAQ680hZlapMm7hsvuslplUd9PvDx1eoXjCHkDvMZPf2N6nH0ziOYWt9Z3h1GRGHu+3mfQ/FR12uQUqxLir+p0FoN4YUmN38LUrz/nlpqE8I1/izqXuiwId63p28logIM3Grb19w+5a0ubV248TAT+L0ch0IG60bCyrDYZ2gdpdxAnuObpSTEi+bQ3fSM2lF/h3tCrgprhlCUSH6SKvBeYAjovwjY+dJ4ZM2IOdpeSIoZc6yGA16jTKg6lVB926GeboqAO2MsUerHw8T2OPC0975oEpiUDh4TUVoMScP2eWdV4KsR0d11rYqIuEkSzeUfLVR2pP9oRxm2JkLQUqk5H/SqRxhw2NKMSzaC8vmTXWCD2l2Gm4y2X+fsGdjsTpfNXF+ayCFaKV+0pE0jBBjalXeAHi1/W1OJCWjl0ZUc9zSv+bn+GypxH4/g9vK8GMPjq7M4TjtEMexVGTntcpH44G3Tj1ziIcsidoj3UqD1HX+UWpEIRATyAKLd/d2lnQBWOvmuztuRghxGaMyNkEXowd6s/pfQii2/aU6lH50WsDlY+5Bwa/k6dN5iir4hSStK0SO0Zx6j969Zz6wLbITzZoq1ThW73ErWFwjuxdx1bcYzyCvTQx6Ck9wgrv5zZGJmYD6Dg2d730odHKwnWKRpEa97usQ/HwWMXH2UQ== tinkerware@ansible1"
+        }
+      ],
+      "private_key": true,
+      "private_key_name": "ansible_id_rs",
+      "gitconfig":{
+        "user":"user",
+        "ssh":true,
+        "ssh_key_path":"/home/tinkerware/.ssh/ansible_id_rsa",
+        "option":{
+          "user_email":"user@ticonsulting.com",
+          "user_name":"username"
+        }
+      },
+      "cronjobs":{},
+      //YII ROLE
+      "cookie_validation_key":yiiAppState.get("cookie_validation_key"),
+      "yii_git_repo":"https://github.com/"+repositoryAppState.get("repository").toJS().name, //https o ssh
+      //MYSQL ROLE
+      "mysql_root_password":mysqlAppState.get("mysql_root_password"),
+      "mysql_users":mysqlAppState.get("mysql_users").toJS(),
+      "mysql_packages": [
+        "mariadb-client",
+        "mariadb-server",
+        "python-mysqldb"
+      ],
+      "mysql_databases": [
+        {
+          "name": "ti_database",
+          "encoding": "utf8",
+          "collation": "utf8_general_ci"
+        }
+      ]
+    }
+  };
   const handleCreateUserProject = (e) => {
-    requestPostUserProject(fromJS({
+    //requestPostUserProject(fromJS({
+    console.log({
       "authorization": userAppState.get("user_session").toJS().token,
       "user_project":{
         "user_id": userAppState.get("user_session").toJS().id,
         "project_name": projectNameAppState.get("project_name"),
-        "roles": applicationAppState.get("application_name").toJS().roles,
+        // "roles": applicationAppState.get("application_name").toJS().roles,
         "server_provider": "digital_ocean",
-        "configuration": (applicationAppState.get("application_name").toJS().name=="Ghost")?
-        {
-          "server_name": projectNameAppState.get("project_name"),
-          "ghost_user_name": projectNameAppState.get("project_name").split(".")[0],
-          "ghost_user_group": projectNameAppState.get("project_name").split(".")[0],
-          "ghost_repo": "https://github.com/"+repositoryAppState.get("repository").toJS().name
-        }: {
-          "server_name": projectNameAppState.get("project_name"),
-          "nginx_remove_default_vhost": "true",
-          "server_user": projectNameAppState.get("project_name").split(".")[0],
-          "server_group": projectNameAppState.get("project_name").split(".")[0],
-          "github_repo": "https://github.com/"+repositoryAppState.get("repository").toJS().name
-        },
+        "configuration": configurationJson(),
         "repository": {
           "provider": repositoryAppState.get("repository").toJS().provider,
           "name": repositoryAppState.get("repository").toJS().name
@@ -48,31 +84,9 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           })
         ).toJS()
       }
-    }));
+    // })
+    });
   };
-  const btnCreateService =
-    repositoryAppState.get("integration")&&
-    repositoryAppState.get("repository")&&
-    projectNameAppState.get("project_name")?
-    // && applicationAppState.get("application_name") ?
-      <a
-          className="button radius expanded"
-          href="javascript:void(0);"
-          id="btn-create_service"
-          onClick={handleCreateUserProject}
-      >
-          <i className="step fi-power" />
-           {"Create Service"}
-      </a> :
-      <a
-          className="button radius expanded disabled"
-          href="javascript:void(0);"
-          id="btn-create_service"
-          onClick={handleCreateUserProject}
-      >
-          <i className="step fi-power" />
-          {"Create Service"}
-      </a>;
     return (
       <RaisedButton
           buttonStyle={style.button}
@@ -93,12 +107,14 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
 };
 
 CreateService.propTypes = {
+  applicationAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  mysqlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
-  applicationAppState: PropTypes.object.isRequired,
+  requestPostUserProject: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired,
-  requestPostUserProject: PropTypes.func.isRequired
+  yiiAppState: PropTypes.object.isRequired
 };
 
 export default CreateService;
