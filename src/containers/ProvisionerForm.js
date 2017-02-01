@@ -63,11 +63,11 @@ export class ServiceForm extends Component {
                   </ToolbarGroup>
                   <ToolbarGroup>
                     <ToolbarSeparator />
-                    <RaisedButton
+                    {/* <RaisedButton
                         icon={<FontIcon className="icon icon-project" />}
                         label={"Create Project"}
                         primary
-                    />
+                    /> */}
                   </ToolbarGroup>
                 </Toolbar>
                 <h2>{"Choose a project name"}</h2>
@@ -97,7 +97,8 @@ export class ServiceForm extends Component {
                 </div>
                 <Application
                     applicationAppState={this.props.applicationAppState}
-                    applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?  provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
+                    applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?   provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
+                    mysqlAppState={this.props.mysqlAppState}
                     rolesActions={this.props.rolesActions}
                     setApplication={this.props.actions.setApplication}
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}

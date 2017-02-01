@@ -1,3 +1,4 @@
+import { fromJS } from "immutable";
 import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
 import {List} from "material-ui/List";
 import Dialog from 'material-ui/Dialog';
@@ -8,7 +9,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
 import Subheader from "material-ui/Subheader";
 import TextField from "material-ui/TextField";
-import { fromJS } from "immutable";
+import Toggle from 'material-ui/Toggle';
 
 const styles = {
   block: {
@@ -54,7 +55,7 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
       />
     ];
   return (
-    <div className={"small-12 medium-6 large-6 columns one-click-app "+(end ? "end":"")}>
+    <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
       <Card>
         <CardHeader
             avatar={<FontIcon className={"icon icon-yii"}/>}
@@ -62,13 +63,14 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
             title={"Yii"}
         />
         <CardActions>
-          <FlatButton
-              label={"Use"}
-              onTouchTap={handleEnable}
-              primary
+          <Toggle
+            toggled={yiiAppState.get("enable_yii")?true:false}
+            onToggle={handleEnable}
+            labelPosition="right"
+            label="Enabled"
           />
           <FlatButton
-              label={"Show Configuration"}
+              label={"Configuration"}
               onTouchTap={handleShowConfiguration}
           />
         </CardActions>

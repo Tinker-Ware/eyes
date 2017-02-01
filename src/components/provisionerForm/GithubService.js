@@ -110,7 +110,6 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       <Card expanded={repositoryAppState.get("show_repositories")}>
         <CardHeader
             avatar={<FontIcon className="icon icon-github"/>}
-            showExpandableButton
             subtitle="Repository"
             title="Github"
         />

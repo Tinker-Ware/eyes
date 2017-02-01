@@ -19,6 +19,7 @@ describe("reducer", () => {
       value: fromJS({
         mysql_users:
           [{
+            id: 1,
             name: "username",
             host: "localhost",
             password: "password",
@@ -36,11 +37,13 @@ describe("reducer", () => {
 
     expect(nextState).to.equal(fromJS({
       mysql_users: [{
+        id: 1,
         name: "username",
         host: "localhost",
         password: "password",
         priv: "ti_database.*:ALL"
       },{
+        id: 2,
         name: "username2",
         host: "localhost2",
         password: "password",
@@ -123,6 +126,40 @@ describe("reducer", () => {
 
     expect(nextState).to.equal(fromJS({
       request_active_mysql:true}));
+  });
+  it("handles UPDATE_MYSQL_USERS", () => {
+    const initialState = Map();
+    const action = {
+      type:"UPDATE_MYSQL_USERS",
+      value: fromJS({
+        mysql_users:
+          [{
+            id: 1,
+            name: "username",
+            host: "localhost",
+            password: "password",
+            priv: "ti_database.*:ALL"
+          }],
+        mysql_user: [{
+          id: 1,
+          name: "username2",
+          host: "localhost2",
+          password: "password",
+          priv: "ti_database.*:ALL"
+        }]
+      })
+    };
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      mysql_users: [{
+        id: 1,
+        name: "username2",
+        host: "localhost2",
+        password: "password",
+        priv: "ti_database.*:ALL"
+      }]
+    }));
   });
   it("handles DEFAULT", () => {
     const initialState = Map();

@@ -195,3 +195,7 @@ export function setEnableYii(value) {
 export function setRequestActiveYii(value) {
   return { type: types.SET_REQUEST_ACTIVE_YII, value };
 }
+
+export function updateMysqlUsers(value) {
+  return { type: types.UPDATE_MYSQL_USERS, value };
+}

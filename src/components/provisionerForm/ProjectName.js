@@ -5,7 +5,6 @@ import TextField from "material-ui/TextField";
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {
 
   const ProjectNameKeypress = (e) => {
-    e.preventDefault();
     setProjectName(fromJS({
       name: e.target.value
     }));
@@ -14,7 +13,8 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
   return (
     <div>
       <TextField
-          floatingLabelText="ProjectName.ServerName"
+          errorText="This field is required."
+          floatingLabelText="ProjectName"
           fullWidth
           name="projectName"
           onChange={ProjectNameKeypress}

@@ -13,7 +13,6 @@ const style = {
 
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   const handleCreateUserProject = (e) => {
-    e.preventDefault();
     requestPostUserProject(fromJS({
       "authorization": userAppState.get("user_session").toJS().token,
       "user_project":{
@@ -54,8 +53,8 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
   const btnCreateService =
     repositoryAppState.get("integration")&&
     repositoryAppState.get("repository")&&
-    projectNameAppState.get("project_name")&&
-    applicationAppState.get("application_name") ?
+    projectNameAppState.get("project_name")?
+    // && applicationAppState.get("application_name") ?
       <a
           className="button radius expanded"
           href="javascript:void(0);"
@@ -80,8 +79,8 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           disabled={
             repositoryAppState.get("integration")&&
             repositoryAppState.get("repository")&&
-            projectNameAppState.get("project_name")&&
-            applicationAppState.get("application_name")?
+            projectNameAppState.get("project_name")?
+            // &&applicationAppState.get("application_name")?
               false:true
           }
           fullWidth
