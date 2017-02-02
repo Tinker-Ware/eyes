@@ -12,8 +12,8 @@ const style = {
 };
 
 const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject, mysqlAppState, yiiAppState} ) => {
-  const configurationJson = () => {
-    return {
+  const getBaseConfiguration =
+    {
       //BASE ROLE
       "server_user": "tinkerware",
       "server_group": "tinkerware",
@@ -38,25 +38,44 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
           "user_name":"username"
         }
       },
-      "cronjobs":{},
-      //YII ROLE
-      "cookie_validation_key":yiiAppState.get("cookie_validation_key"),
-      "yii_git_repo":"https://github.com/"+repositoryAppState.get("repository").toJS().name, //https o ssh
-      //MYSQL ROLE
-      "mysql_root_password":mysqlAppState.get("mysql_root_password"),
-      "mysql_users":mysqlAppState.get("mysql_users").toJS(),
-      "mysql_packages": [
-        "mariadb-client",
-        "mariadb-server",
-        "python-mysqldb"
-      ],
-      "mysql_databases": [
-        {
-          "name": "ti_database",
-          "encoding": "utf8",
-          "collation": "utf8_general_ci"
-        }
-      ]
+      "cronjobs":{}
+    }
+  ;
+  const getYiiConfiguration =
+    yiiAppState.get("enable_yii")?
+      {
+        //YII ROLE
+        "cookie_validation_key":yiiAppState.get("cookie_validation_key"),
+        "yii_git_repo":"https://github.com/"+repositoryAppState.get("repository").toJS().name
+      } //https o ssh
+      :"";
+  ;
+  const getMysqlConfiguration =
+    yiiAppState.get("enable_mysql")?
+      {
+        //MYSQL ROLE
+        "mysql_root_password":mysqlAppState.get("mysql_root_password"),
+        "mysql_users":mysqlAppState.get("mysql_users").toJS(),
+        "mysql_packages": [
+          "mariadb-client",
+          "mariadb-server",
+          "python-mysqldb"
+        ],
+        "mysql_databases": [
+          {
+            "name": "ti_database",
+            "encoding": "utf8",
+            "collation": "utf8_general_ci"
+          }
+        ]
+      }
+      :"";
+  ;
+  const configuration = () => {
+    return {
+      "general":Object.assign({}, getBaseConfiguration, getYiiConfiguration),
+      "development":{},
+      "production":{}
     }
   };
   const handleCreateUserProject = (e) => {
@@ -68,7 +87,8 @@ const CreateService = ( {cloudProviderAppState, projectNameAppState, repositoryA
         "project_name": projectNameAppState.get("project_name"),
         // "roles": applicationAppState.get("application_name").toJS().roles,
         "server_provider": "digital_ocean",
-        "configuration": configurationJson(),
+        "operating_system": "debian",
+        "configuration": configuration(),
         "repository": {
           "provider": repositoryAppState.get("repository").toJS().provider,
           "name": repositoryAppState.get("repository").toJS().name

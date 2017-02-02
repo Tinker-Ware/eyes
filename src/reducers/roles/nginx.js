@@ -2,7 +2,12 @@ import {SET_NGINX_REMOVE_DEFAULT_VHOST,SET_NGINX_VHOSTS,SET_ENABLE_NGINX,SET_SHO
 import {Map} from "immutable";
 
 const initialState = Map({
-  cookie_validation_key: ""
+  cookie_validation_key: "",
+  roles: [
+    {
+      role: "nginx", sudo: true, tags: "nginx"
+    }
+  ]
 });
 
 export default function nginx(state = initialState, action) {

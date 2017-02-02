@@ -2,7 +2,13 @@ import {SET_USER,SET_SSH,SET_SSH_KEY_PATH,SET_USER_EMAIL,SET_USER_NAME,SET_SERVE
 import {Map} from "immutable";
 
 const initialState = Map({
-  cookie_validation_key: ""
+  cookie_validation_key: "",
+  enable_base:true,
+  roles: [
+    {
+      role: "base", sudo: true
+    }
+  ]
 });
 
 export default function git(state = initialState, action) {

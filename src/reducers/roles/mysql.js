@@ -3,7 +3,12 @@ import {Map} from "immutable";
 import cookie from "react-cookie";
 
 const initialState = Map({
-  cookie_validation_key: ""
+  cookie_validation_key: "",
+  roles: [
+    {
+      role: "mysql", sudo: true
+    }
+  ]
 });
 
 const getId = (store) => {
