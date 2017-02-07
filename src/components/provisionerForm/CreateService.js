@@ -96,7 +96,8 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         "configuration": configuration(),
         "repository": {
           "provider": repositoryAppState.get("repository").toJS().provider,
-          "name": repositoryAppState.get("repository").toJS().name
+          "name": repositoryAppState.get("repository").toJS().name,
+          "username": repositoryAppState.get("integration").toJS().username
         },
         "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys").filter(value=>
           value.get("enable") == true
