@@ -5,7 +5,7 @@ const initialState = Map({
   cookie_validation_key: "",
   roles: {
     role: "nginx",
-    sudo: true,
+    sudo: "yes",
     tags: "nginx"
   }
 });

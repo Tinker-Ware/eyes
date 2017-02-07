@@ -5,7 +5,7 @@ import cookie from "react-cookie";
 const initialState = Map({
   roles: {
     role: "mysql",
-    sudo: true
+    sudo: "yes"
   }
 });
 

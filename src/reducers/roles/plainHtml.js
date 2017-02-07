@@ -4,7 +4,7 @@ import {Map} from "immutable";
 const initialState = Map({
   roles: {
     role: "web",
-    sudo: false
+    sudo: "no"
   }
 });
 

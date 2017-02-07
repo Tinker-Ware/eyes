@@ -5,7 +5,7 @@ const initialState = Map({
   enable_base:true,
   roles: {
       role: "base",
-      sudo: true
+      sudo: "yes"
   }
 });
 

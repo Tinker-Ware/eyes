@@ -27,16 +27,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
           }
         ],
         "private_key": true,
-        "private_key_name": "ansible_id_rs",
-        "gitconfig":{
-          "user":"user",
-          "ssh":true,
-          "ssh_key_path":"/home/tinkerware/.ssh/ansible_id_rsa",
-          "option":{
-            "user_email":"user@ticonsulting.com",
-            "user_name":"username"
-          }
-        },
+        "private_key_name": "ansible_id_rsa",
         "cronjobs":{}
       };
   };
