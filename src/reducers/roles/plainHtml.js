@@ -2,12 +2,10 @@ import {SET_SERVER_NAME,SET_REPO_PATH,SET_GITHUB_REPO,SET_ENABLE_PLAINHTML,SET_S
 import {Map} from "immutable";
 
 const initialState = Map({
-  cookie_validation_key: "",
-  roles: [
-    {
-      role: "web", sudo: false
-    }
-  ]
+  roles: {
+    role: "web",
+    sudo: false
+  }
 });
 
 export default function plainHtml(state = initialState, action) {

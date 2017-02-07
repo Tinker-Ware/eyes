@@ -1,14 +1,10 @@
-import { fromJS } from "immutable";
-import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
-import {List} from "material-ui/List";
+import {fromJS} from "immutable";
+import {Card, CardActions, CardHeader} from "material-ui/Card";
 import cookie from "react-cookie";
-import Dialog from 'material-ui/Dialog';
-import Divider from "material-ui/Divider";
+import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
-import Subheader from "material-ui/Subheader";
 import TextField from "material-ui/TextField";
 import Toggle from "material-ui/Toggle";
 
@@ -79,6 +75,7 @@ const MysqlRole = ( {end, setMysqlPackages, setMysqlUsers, setMysqlRootPassword,
   const actions = [
       <FlatButton
           icon={<FontIcon className="icon icon-cancel" />}
+          key
           label={"Close"}
           onTouchTap={handleShowConfiguration}
           secondary
@@ -99,10 +96,10 @@ const MysqlRole = ( {end, setMysqlPackages, setMysqlUsers, setMysqlRootPassword,
         />
         <CardActions>
           <Toggle
-            toggled={mysqlAppState.get("enable_mysql")?true:false}
-            onToggle={handleEnable}
-            labelPosition="right"
-            label="Enabled"
+              label="Enabled"
+              labelPosition="right"
+              onToggle={handleEnable}
+              toggled={mysqlAppState.get("enable_mysql")?true:false}
           />
           <FlatButton
               label={"Configuration"}
@@ -110,13 +107,13 @@ const MysqlRole = ( {end, setMysqlPackages, setMysqlUsers, setMysqlRootPassword,
           />
         </CardActions>
         <Dialog
-          actions={actions}
-          actionsContainerStyle={styles.button}
-          autoScrollBodyContent={true}
-          modal={false}
-          onRequestClose={handleShowConfiguration}
-          open={mysqlAppState.get("show_mysql")?true:false}
-          title="Configurations"
+            actions={actions}
+            actionsContainerStyle={styles.button}
+            autoScrollBodyContent
+            modal={false}
+            onRequestClose={handleShowConfiguration}
+            open={mysqlAppState.get("show_mysql")?true:false}
+            title="Configurations"
         >
           {"All the changes are autosaved"}
           <TextField

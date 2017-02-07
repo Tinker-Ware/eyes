@@ -2,12 +2,10 @@ import {SET_COOKIE_VALIDATION_KEY, SET_YII_GIT_REPO,SET_ENABLE_YII,SET_SHOW_YII,
 import {Map} from "immutable";
 
 const initialState = Map({
-  cookie_validation_key: "",
-  roles: [
-    {
-      role: "yii", sudo: false
-    }
-  ]
+  roles: {
+    role: "yii",
+    sudo: false
+  }
 });
 
 export default function yii(state = initialState, action) {

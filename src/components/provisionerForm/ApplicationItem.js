@@ -6,7 +6,7 @@ import {List} from "material-ui/List";
 import Subheader from "material-ui/Subheader";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
-import Dialog from 'material-ui/Dialog';
+import Dialog from "material-ui/Dialog";
 import Divider from "material-ui/Divider";
 
 const styles = {
@@ -19,18 +19,20 @@ const styles = {
   },
 };
 
-const ApplicationItem = ( { activeApplication, configuration, description, icon, identifier, roles, handleClick, handleApplicationOneClick, name, end, remplaceRoleValue } ) => {
+const ApplicationItem = ( { configuration, description, icon, identifier, roles, handleApplicationOneClick, name, end, remplaceRoleValue } ) => {
   const actions = [
       <FlatButton
-        label="Cancel"
-        primary={true}
-        // onTouchTap={this.handleClose}
+          // onTouchTap={this.handleClose}
+          key={1}
+          label={"Cancel"}
+          primary
       />,
       <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        // onTouchTap={this.handleClose}
+          // onTouchTap={this.handleClose}
+          key={2}
+          keyboardFocused
+          label={"Submit"}
+          primary
       />,
     ];
   return (
@@ -61,12 +63,12 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
           </List>
           {configuration.map((value, index) =>
             <TextField
-                onChange={(event)=>remplaceRoleValue(event, roles, identifier)}
                 errorText="This field is required."
                 floatingLabelText={value.name}
                 fullWidth
                 key={index}
                 name={value.id}
+                onChange={(event)=>remplaceRoleValue(event, roles, identifier)}
                 type={value.type}
             />
           )}
@@ -79,13 +81,13 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
           />
         </CardText>
         <Dialog
-          title="Dialog With Actions"
-          actions={actions}
-          modal={false}
-          open={false}
-          // onRequestClose={true}
+            // onRequestClose={true}
+            actions={actions}
+            modal={false}
+            open={false}
+            title={"Dialog With Actions"}
         >
-          The actions in this window were passed in as an array of React objects.
+          {"The actions in this window were passed in as an array of React objects."}
         </Dialog>
       </Card>
     </div>
@@ -93,12 +95,10 @@ const ApplicationItem = ( { activeApplication, configuration, description, icon,
 };
 
 ApplicationItem.propTypes = {
-  activeApplication: PropTypes.string.isRequired,
   configuration: PropTypes.array.isRequired,
   description: PropTypes.string.isRequired,
   end: PropTypes.bool.isRequired,
   handleApplicationOneClick: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
   identifier: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

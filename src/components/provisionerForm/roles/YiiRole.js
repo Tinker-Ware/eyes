@@ -1,15 +1,11 @@
 import { fromJS } from "immutable";
-import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
-import {List} from "material-ui/List";
-import Dialog from 'material-ui/Dialog';
-import Divider from "material-ui/Divider";
+import {Card, CardActions, CardHeader} from "material-ui/Card";
+import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
-import Subheader from "material-ui/Subheader";
 import TextField from "material-ui/TextField";
-import Toggle from 'material-ui/Toggle';
+import Toggle from "material-ui/Toggle";
 
 const styles = {
   block: {
@@ -49,6 +45,7 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
   const actions = [
       <FlatButton
           icon={<FontIcon className="icon icon-cancel" />}
+          key
           label={"Close"}
           onTouchTap={handleShowConfiguration}
           secondary
@@ -64,10 +61,10 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
         />
         <CardActions>
           <Toggle
-            toggled={yiiAppState.get("enable_yii")?true:false}
-            onToggle={handleEnable}
-            labelPosition="right"
-            label="Enabled"
+              label="Enabled"
+              labelPosition="right"
+              onToggle={handleEnable}
+              toggled={yiiAppState.get("enable_yii")?true:false}
           />
           <FlatButton
               label={"Configuration"}
@@ -75,12 +72,12 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
           />
         </CardActions>
         <Dialog
-          title="Configurations"
-          actions={actions}
-          modal={false}
-          open={yiiAppState.get("show_yii")?true:false}
-          onRequestClose={handleShowConfiguration}
-          actionsContainerStyle={styles.button}
+            actions={actions}
+            actionsContainerStyle={styles.button}
+            modal={false}
+            onRequestClose={handleShowConfiguration}
+            open={yiiAppState.get("show_yii")?true:false}
+            title="Configurations"
         >
           {"All the changes are autosaved"}
           <TextField

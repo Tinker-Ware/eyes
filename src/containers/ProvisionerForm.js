@@ -15,9 +15,7 @@ import Menu from "../components/provisionerForm/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
-import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
-import ServiceSummary from "../components/provisionerForm/ServiceSummary";
 import SSHKeys from "../components/provisionerForm/SSHKeys";
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
@@ -119,6 +117,7 @@ export class ServiceForm extends Component {
                 <CreateService
                     applicationAppState={this.props.applicationAppState}
                     cloudProviderAppState={this.props.cloudProviderAppState}
+                    baseAppState={this.props.baseAppState}
                     mysqlAppState={this.props.mysqlAppState}
                     projectNameAppState={this.props.projectNameAppState}
                     repositoryAppState={this.props.repositoryAppState}

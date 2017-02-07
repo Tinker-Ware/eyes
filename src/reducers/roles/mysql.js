@@ -3,16 +3,14 @@ import {Map} from "immutable";
 import cookie from "react-cookie";
 
 const initialState = Map({
-  cookie_validation_key: "",
-  roles: [
-    {
-      role: "mysql", sudo: true
-    }
-  ]
+  roles: {
+    role: "mysql",
+    sudo: true
+  }
 });
 
 const getId = (store) => {
-  return store.toJS().reduce((maxId, todo, id) => Math.max(todo.id?todo.id:0, maxId), 0) + 1
+  return store.toJS().reduce((maxId, todo) => Math.max(todo.id? todo.id : 0, maxId), 0) + 1;
 };
 
 export default function mysql(state = initialState, action) {

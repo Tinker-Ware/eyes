@@ -80,15 +80,6 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }));
     }
   };
-  const optionsRepositoryList=
-    (repositoryAppState.get("integration"))?
-      <a
-          className="button success radius btn-config"
-          href="#"
-          onClick={handleGithubConfigurationEnable}
-      >
-          <i className="step fi-widget" />
-           {repositoryAppState.get("show_repositories") ?"Hide Repositories":"Select Repository"}</a> :"";
   const repositoryList =
     repositoryAppState.get("integration") && repositoryAppState.get("repositories") ?
       <RadioButtonGroup

@@ -2,12 +2,10 @@ import {SET_NODEJS_VERSION, SET_GHOST_NODEJS_ENABLED, SET_GHOST_NGINX_ENABLED, S
 import {Map} from "immutable";
 
 const initialState = Map({
-  cookie_validation_key: "",
-  roles: [
-    {
-      role: "ghost", sudo: false
-    }
-  ]
+  roles: {
+    role: "ghost",
+    sudo: false
+  }
 });
 
 export default function ghost(state = initialState, action) {
