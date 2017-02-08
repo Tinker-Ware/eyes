@@ -16,6 +16,10 @@ export function setApplication(value) {
   return { type: types.SET_APPLICATION, value };
 }
 
+export function setApplicationOneClick(value) {
+  return { type: types.SET_APPLICATION_ONE_CLICK_APP, value };
+}
+
 export function setRepositories(value) {
   return { type: types.SET_REPOSITORIES, value };
 }

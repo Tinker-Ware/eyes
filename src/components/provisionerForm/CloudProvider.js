@@ -1,7 +1,9 @@
 import React, {PropTypes} from "react";
-import {Link} from "react-router";
 import {fromJS} from "immutable";
 import cookie from "react-cookie";
+import {Card, CardActions, CardHeader} from "material-ui/Card";
+import FlatButton from "material-ui/FlatButton";
+import FontIcon from "material-ui/FontIcon";
 
 const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {
   if(userAppState.get("user_session")){
@@ -20,9 +22,9 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
       }
     }, 1000);
   }
-  const handleDigitalOceanLogin = (e) => {
+  const handleDigitalOceanLogin = (e, isConnected) => {
     e.preventDefault();
-    if(!e.target.text.includes("Connected")){
+    if(!isConnected){
       let win = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id="+process.env.INTEGRATIONS.DIGITALOCEAN.CLIENTID+"&redirect_uri="+process.env.INTEGRATIONS.DIGITALOCEAN.REDIRECTURI+"&response_type=code&scope=read+write","Digital Ocean Oauth","height=600,width=850");
       if (win) win.focus();
     }else{
@@ -33,22 +35,21 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
     }
   };
   return (
-    <div className="large-6 medium-6 small-12 columns">
-      <ul className="selection-table">
-        <li className="bullet-item">
-          <Link
-              className="button radius btn-connect"
-              href="#"
-              onClick={handleDigitalOceanLogin}
-          >
-            <img
-                className="DigitalOcean"
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-            />
-            {(cloudProviderAppState.get("cloud_provider")) ?"Connected:"+ cloudProviderAppState.get("cloud_provider").toJS().username :"Connect Digital Ocean"}
-          </Link>
-        </li>
-      </ul>
+    <div className="small-12 medium-6 large-6 columns">
+      <Card>
+        <CardHeader
+            avatar={<FontIcon className="icon icon-digitalocean"/>}
+            subtitle="Cloud Provider"
+            title="DigitalOcean"
+        />
+        <CardActions>
+          <FlatButton
+              label={cloudProviderAppState.get("cloud_provider")? "Connected":"Connect Digital Ocean"}
+              onClick={(event)=>handleDigitalOceanLogin(event, cloudProviderAppState.get("cloud_provider")? true : false)}
+              primary
+          />
+        </CardActions>
+      </Card>
     </div>
   );
 };
@@ -56,9 +57,9 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
 CloudProvider.propTypes = {
   clearCloudProviderSSHKeys: PropTypes.func.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
-  userAppState: PropTypes.object.isRequired,
   requestCloudProviderAccess: PropTypes.func.isRequired,
-  setCloudProvider: PropTypes.func.isRequired
+  setCloudProvider: PropTypes.func.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 export default CloudProvider;

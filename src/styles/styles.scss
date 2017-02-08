@@ -2,25 +2,33 @@ $icomoon-font-path: '../fonts' !default;
 
 $icon-arrow-back: '\e5c4';
 $icon-box: '\ea84';
+$icon-cancel: '\ed6a';
 $icon-check: '\e5ca';
 $icon-cloud-download: '\ec7a';
 $icon-cpu: '\ea1a';
 $icon-delete: '\e872';
 $icon-deploy: '\e902';
+$icon-digitalocean: '\e903';
 $icon-edit: '\e254';
+$icon-ghost: '\e904';
+$icon-github: '\ef0f';
 $icon-go: '\e900';
 $icon-home: '\e95f';
-$icon-html-five: '\ef43';
+$icon-html-plain: '\ef43';
 $icon-memory-ram: '\e322';
+$icon-mysql: '\eb60';
+$icon-nginx: '\e615';
 $icon-person-add: '\e7fe';
 $icon-person: '\e7fd';
 $icon-project: '\ec1b';
 $icon-push: '\ea36';
 $icon-python: '\e901';
 $icon-react: '\e601';
+$icon-save: '\ec87';
 $icon-timer: '\e425';
 $icon-trigger: '\ec2b';
 $icon-warning: '\e002';
+$icon-yii: '\ec02';
 
 @font-face {
   // sass-lint:disable-block no-duplicate-properties
@@ -34,7 +42,8 @@ $icon-warning: '\e002';
   url('#{$icomoon-font-path}/icomoon.svg#icomoon') format('svg');
 }
 
-input{
+input {
+  // sass-lint:disable-block no-important
   box-shadow: none !important;
 }
 
@@ -51,131 +60,184 @@ input{
 .icon-arrow-back {
   &::before {
     content: $icon-arrow-back;
-  }
+	}
 }
 
 .icon-box {
   &::before {
     content: $icon-box;
-  }
+	}
 }
 
-.icon-project {
+.icon-cancel {
   &::before {
-    content: $icon-project;
+    content: $icon-cancel;
   }
 }
 
 .icon-check {
   &::before {
     content: $icon-check;
-  }
+	}
 }
 
 .icon-cloud-download {
   &::before {
     content: $icon-cloud-download;
-  }
+	}
 }
 
 .icon-cpu {
   &::before {
     content: $icon-cpu;
-  }
+	}
 }
 
 .icon-delete {
   &::before {
     content: $icon-delete;
-  }
+	}
 }
 
 .icon-deploy {
   &::before {
     content: $icon-deploy;
-  }
+	}
+}
+
+.icon-digitalocean {
+  &::before {
+    content: $icon-digitalocean;
+	}
 }
 
 .icon-edit {
   &::before {
     content: $icon-edit;
-  }
+	}
+}
+
+.icon-ghost {
+  &::before {
+    content: $icon-ghost;
+	}
+}
+
+.icon-github {
+  &::before {
+    content: $icon-github;
+	}
 }
 
 .icon-go {
   &::before {
     content: $icon-go;
-  }
-}
-
-.icon-python {
-  &::before {
-    content: $icon-python;
-  }
+	}
 }
 
 .icon-home {
   &::before {
     content: $icon-home;
+	}
+}
+
+.icon-html-plain {
+  &::before {
+    content: $icon-html-plain;
+	}
+}
+
+.icon-memory-ram {
+  &::before {
+    content: $icon-memory-ram;
+	}
+}
+
+.icon-mysql {
+  &::before {
+    content: $icon-mysql;
   }
 }
 
-.icon-react {
+.icon-nginx {
   &::before {
-    content: $icon-react;
+    content: $icon-nginx;
   }
 }
 
 .icon-person {
   &::before {
     content: $icon-person;
-  }
-}
-
-.icon-push {
-  &::before {
-    content: $icon-push;
-  }
-}
-
-.icon-memory-ram {
-  &::before {
-    content: $icon-memory-ram;
-  }
+	}
 }
 
 .icon-person-add {
   &::before {
     content: $icon-person-add;
+	}
+}
+
+.icon-project {
+  &::before {
+    content: $icon-project;
+	}
+}
+
+.icon-push {
+  &::before {
+    content: $icon-push;
+	}
+}
+
+.icon-python {
+  &::before {
+    content: $icon-python;
+	}
+}
+
+.icon-react {
+  &::before {
+    content: $icon-react;
+	}
+}
+
+.icon-save {
+  &::before {
+    content: $icon-save;
   }
 }
 
 .icon-timer {
   &::before {
     content: $icon-timer;
-  }
+	}
 }
 
 .icon-trigger {
   &::before {
     content: $icon-trigger;
-  }
+	}
 }
 
 .icon-warning {
   &::before {
     content: $icon-warning;
-  }
+	}
 }
 
-.icon-html-five {
+.icon-yii {
   &::before {
-    content: $icon-html-five;
-  }
+    content: $icon-yii;
+	}
+}
+
+
+.container {
+  padding: 2em 0;
 }
 
 .card {
-  padding: 2em 0;
+  padding: 1em;
 
   &[class='card'] > div {
     padding: 1em;
@@ -196,4 +258,8 @@ input{
 
 .align-right {
   text-align: right;
+}
+
+.one-click-app {
+  margin-bottom: 1em;
 }

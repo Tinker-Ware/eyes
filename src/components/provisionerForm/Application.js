@@ -1,51 +1,45 @@
 import React, { PropTypes } from "react";
-import { fromJS } from "immutable";
-import ApplicationItem from "./ApplicationItem";
+import YiiRole from "./roles/YiiRole";
+import MysqlRole from "./roles/MysqlRole";
 
-const Application = ( {applicationsOptions, setApplication, applicationAppState} ) => {
-  const handleApplicationClick = (e, role) => {
-    e.preventDefault();
-    if( e.target.nodeName.toLowerCase()=="span" || e.target.nodeName.toLowerCase()=="img" ){
-      setApplication(fromJS({
-        application: {
-          name: e.target.parentNode.id,
-          roles: role
-        }
-      }));
-    }else{
-      setApplication(fromJS({
-        application: {
-          name: e.target.id,
-          roles: role
-        }
-      }));
-    }
-  };
+const Application = ( {rolesActions, yiiAppState, mysqlAppState} ) => {
   return (
-    <div className="row">
-      <h2>
-        <i className="step fi-social-dropbox" />
-         {"Select Application"}
-      </h2>
-      {applicationsOptions.map((value, index) =>
-        <ApplicationItem
-            activeApplication={applicationAppState.get("application_name")?applicationAppState.get("application_name").toJS().name:""}
-            end={(index == applicationsOptions.length - 1) ? true : false}
-            handleClick={handleApplicationClick}
-            identifier={value.identifier}
-            key={value.identifier}
-            name={value.name}
-            roles={value.roles}
-        />)
-      }
+    <div className="small-12 medium-12 large-12">
+      <div className="row">
+        <h2>{"Choose an One-Click Apps"}</h2>
+        <YiiRole
+            end
+            setCookieValidationKey={rolesActions.setCookieValidationKey}
+            setEnableYii={rolesActions.setEnableYii}
+            setShowYii={rolesActions.setShowYii}
+            yiiAppState={yiiAppState}
+        />
+      </div>
+      <div className="row">
+        <h2>{"Choose a Database"}</h2>
+        <MysqlRole
+            end
+            mysqlAppState={mysqlAppState}
+            setEnableMysql={rolesActions.setEnableMysql}
+            setMysqlDatabases={rolesActions.setMysqlDatabases}
+            setMysqlPackages={rolesActions.setMysqlPackages}
+            setMysqlRootPassword={rolesActions.setMysqlRootPassword}
+            setMysqlUsers={rolesActions.setMysqlUsers}
+            setShowMysql={rolesActions.setShowMysql}
+            updateMysqlUsers={rolesActions.updateMysqlUsers}
+        />
+      </div>
+      {/* <div className="row">
+        <h2>{"Choose a Web Serving Software"}</h2>
+      </div> */}
     </div>
   );
 };
 
 Application.propTypes = {
-  setApplication: PropTypes.func.isRequired,
-  applicationsOptions: PropTypes.array.isRequired,
-  applicationAppState: PropTypes.object.isRequired
+  mysqlAppState: PropTypes.object.isRequired,
+  rolesActions: PropTypes.object.isRequired,
+  yiiAppState: PropTypes.object.isRequired
 };
 
 export default Application;
