@@ -84,6 +84,15 @@ export function* doRequestGetRefreshSession(authorization) {
       },
       mode:"cors"});
 }
+export function* doRequestGetUserProjects(authorization) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project",
+    {
+      method:"GET",
+      headers: {"authorization":"Bearer "+ authorization
+      },
+      mode:"cors"});
+}
 
 export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
   return yield call(
@@ -158,6 +167,18 @@ export function* getRepositoryAccess(userAccess) {
     yield put(actions.receiveRepositoryAccess(fromJS({"integration": repositoryAccess.callback
       }))
     );
+  }
+  catch(error) {
+  }
+}
+
+export function* getUserProjects(userAccess) {
+  try {
+    const userProjects = yield call(doRequestGetUserProjects, userAccess.value.get("authorization"));
+    console.log(userProjects);
+    yield call(SET_USER_PROJECTS, fromJS({
+      user_projects: userProjects
+    }));
   }
   catch(error) {
   }
@@ -271,6 +292,7 @@ export default function* root() {
     takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
+    takeLatest(types.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)

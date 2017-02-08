@@ -15,6 +15,7 @@ import Menu from "../components/provisionerForm/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
+import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
 import SSHKeys from "../components/provisionerForm/SSHKeys";
 
@@ -61,11 +62,12 @@ export class ServiceForm extends Component {
                   </ToolbarGroup>
                   <ToolbarGroup>
                     <ToolbarSeparator />
-                    {/* <RaisedButton
-                        icon={<FontIcon className="icon icon-project" />}
-                        label={"Create Project"}
+                    <RaisedButton
+                        href="/projects"
+                        icon={<FontIcon className="icon icon-box" />}
+                        label={"Projects"}
                         primary
-                    /> */}
+                    />
                   </ToolbarGroup>
                 </Toolbar>
                 <h2>{"Choose a project name"}</h2>
@@ -116,8 +118,8 @@ export class ServiceForm extends Component {
                 />
                 <CreateService
                     applicationAppState={this.props.applicationAppState}
-                    cloudProviderAppState={this.props.cloudProviderAppState}
                     baseAppState={this.props.baseAppState}
+                    cloudProviderAppState={this.props.cloudProviderAppState}
                     mysqlAppState={this.props.mysqlAppState}
                     projectNameAppState={this.props.projectNameAppState}
                     repositoryAppState={this.props.repositoryAppState}

@@ -21,7 +21,7 @@ export default (
     <IndexRoute component={ProvisionerForm} />
     <Route
         component={UserProfile}
-        path="/user"
+        path="user"
     >
       <IndexRoute component={Profile} />
     </Route>

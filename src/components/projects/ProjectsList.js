@@ -3,12 +3,7 @@ import {Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
-import AppBar from "material-ui/AppBar";
 import FontIcon from "material-ui/FontIcon";
-import IconButton from "material-ui/IconButton";
-import IconMenu from "material-ui/IconMenu";
-import MenuItem from "material-ui/MenuItem";
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import RaisedButton from "material-ui/RaisedButton";
 import React  from "react";
 
@@ -23,35 +18,7 @@ const style = {
 
 const ProjectsList = () => {
   return (
-    <div className="card">
-      <AppBar
-          iconElementLeft={
-            <IconButton>
-              <FontIcon className="icon icon-home"/>
-            </IconButton>
-          }
-          iconElementRight={
-            <IconMenu
-                anchorOrigin={{
-                  horizontal: "right",
-                  vertical: "top"
-                }}
-                iconButtonElement={
-                  <IconButton><MoreVertIcon /></IconButton>
-                }
-                targetOrigin={{
-                  horizontal: "right",
-                  vertical: "top"
-                }}
-            >
-              <MenuItem primaryText="Refresh" />
-              <MenuItem primaryText="Help" />
-              <MenuItem primaryText="Sign out" />
-            </IconMenu>
-          }
-          title="My DevOp"
-      />
-      <Card>
+      <div className="card">
         <Toolbar style={style.toolbar}>
           <ToolbarGroup firstChild>
             <FontIcon className="icon icon-box"/>
@@ -61,10 +28,10 @@ const ProjectsList = () => {
             />
           </ToolbarGroup>
           <ToolbarGroup>
-            <ToolbarTitle text="Options" />
             <ToolbarSeparator />
             <RaisedButton
                 href="/"
+                icon={<FontIcon className="icon icon-project" />}
                 label="Create Project"
                 primary
             />
@@ -133,7 +100,7 @@ const ProjectsList = () => {
             </TableRow>
             <TableRow>
               <TableRowColumn>
-                <FontIcon className="icon icon-html-five"/>
+                <FontIcon className="icon icon-html-plain"/>
               </TableRowColumn>
               <TableRowColumn>{"Users service"}</TableRowColumn>
               <TableRowColumn>
@@ -147,8 +114,7 @@ const ProjectsList = () => {
             </TableRow>
           </TableBody>
         </Table>
-      </Card>
-    </div>
+      </div>
   );
 };
 

@@ -1,10 +1,10 @@
 import AppBar from "material-ui/AppBar";
+import FontIcon from "material-ui/FontIcon";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import React, {PropTypes} from "react";
-import FontIcon from "material-ui/FontIcon";
 
 const Menu = ( { userAppState } ) => {
   return (
@@ -29,10 +29,12 @@ const Menu = ( { userAppState } ) => {
               }}
           >
             <MenuItem
-                href="/user"
-                primaryText="User Information"
+                href="/projects"
+                primaryText="Dashboard"
             />
-            <MenuItem primaryText="Help" />
+            <MenuItem
+                href="/user"
+                primaryText="User Profile" />
             <MenuItem primaryText="Sign out" />
           </IconMenu>
         }

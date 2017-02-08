@@ -35,6 +35,13 @@ export function setCloudProviderSshKeys(cloudProviderSshKeys){
 //   };
 // }
 
+export function requestUserProjects(userAccess){
+  return{
+    type: types.REQUEST_USER_PROJECTS,
+    value: userAccess
+  };
+}
+
 export function requestPostProviderKey(cloudProviderSshKey){
   return{
     type: types.REQUEST_POST_CLOUD_PROVIDER_KEY,
