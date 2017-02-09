@@ -5,6 +5,12 @@ const initialState = Map({
   roles: {
     role: "ghost",
     sudo: "no"
+  },
+  nginx: {
+    "server_name": "blog.tinkerware.io",
+    "listen": "80",
+    "extra_parameters": "location / { proxy_set_header Host $http_host; proxy_set_header    X-Real-IP $remote_addr; proxy_pass http://127.0.0.1:2368; }",
+    "root": "{{ ghost_install_dir }}"
   }
 });
 

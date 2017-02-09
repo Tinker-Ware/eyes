@@ -87,13 +87,13 @@ export class ServiceForm extends Component {
                       setShowRepositories={this.props.actions.setShowRepositories}
                       userAppState={this.props.userAppState}
                   />
-                  <CloudProvider
+                  {/* <CloudProvider
                       clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                       cloudProviderAppState={this.props.cloudProviderAppState}
                       requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
                       setCloudProvider={this.props.actions.setCloudProvider}
                       userAppState={this.props.userAppState}
-                  />
+                  /> */}
                 </div>
                 <Application
                     applicationAppState={this.props.applicationAppState}
@@ -104,7 +104,7 @@ export class ServiceForm extends Component {
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}
                     yiiAppState={this.props.yiiAppState}
                 />
-                <h2>{"Add your SSH keys"}</h2>
+                {/* <h2>{"Add your SSH keys"}</h2>
                 <SSHKeys
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     deleteSSHKey={this.props.actions.deleteSSHKey}
@@ -115,7 +115,7 @@ export class ServiceForm extends Component {
                     setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
                     showSSHKey={this.props.actions.showSSHKey}
                     userAppState={this.props.userAppState}
-                />
+                /> */}
                 <CreateService
                     applicationAppState={this.props.applicationAppState}
                     baseAppState={this.props.baseAppState}

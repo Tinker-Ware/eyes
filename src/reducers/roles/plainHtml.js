@@ -5,6 +5,11 @@ const initialState = Map({
   roles: {
     role: "web",
     sudo: "no"
+  },
+  nginx: {
+    "server_name": "tinkerware.io",
+    "listen": "80",
+    "root": "{{ repo_path }}/{{ server_name }}"
   }
 });
 

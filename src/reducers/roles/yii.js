@@ -5,6 +5,15 @@ const initialState = Map({
   roles: {
     role: "yii",
     sudo: "no"
+  },
+  nginx: {
+    "nginx_remove_default_vhost": "yes",
+    "nginx_vhosts": {
+        "server_name": "_",
+        "listen": "80",
+        "extra_parameters": "location / {  proxy_set_header Host $http_host; proxy_set_header X-Real-IP $remote_addr; proxy_pass http://127.0.0.1:8080; }",
+        "root": "_"
+    }
   }
 });
 
