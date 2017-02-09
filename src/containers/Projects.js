@@ -3,8 +3,7 @@ import {browserHistory} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import * as actions from "../actions/ServiceFormActions";
-/* eslint-disable import/no-unresolved */
-import * as projectsActionTypes from "../actions/ProjectsActions";
+import * as projectsActions from "../actions/projectsActions";
 import AppBar from "material-ui/AppBar";
 import cookie from "react-cookie";
 import FontIcon from "material-ui/FontIcon";
@@ -22,7 +21,7 @@ export class Projects extends Component {
     if (!cookie.load("user_session"))
       browserHistory.push("/login");
     if(cookie.load("user_session"))
-      this.props.projectsActionTypes.requestGetUserProjects(fromJS({
+      this.props.projectsActions.requestGetUserProjects(fromJS({
         "authorization": cookie.load("user_session").token
       }));
   }
@@ -84,7 +83,7 @@ export class Projects extends Component {
 
 Projects.propTypes = {
   actions: PropTypes.object.isRequired,
-  projectsActionTypes: PropTypes.object.isRequired,
+  projectsActions: PropTypes.object.isRequired,
   projectsAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
@@ -100,7 +99,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
-    projectsActionTypes: bindActionCreators(projectsActionTypes, dispatch)
+    projectsActions: bindActionCreators(projectsActions, dispatch)
   };
 }
 
