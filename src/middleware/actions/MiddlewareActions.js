@@ -1,4 +1,5 @@
 import * as types from "../../constants/ActionTypes";
+import * as projectsActionTypes from "../../constants/Projects";
 
 export function receiveRepositoryAccess(integration){
   return {
@@ -35,10 +36,10 @@ export function setCloudProviderSshKeys(cloudProviderSshKeys){
 //   };
 // }
 
-export function requestUserProjects(userAccess){
+export function setUserProjects(userProjects){
   return{
-    type: types.REQUEST_USER_PROJECTS,
-    value: userAccess
+    type: projectsActionTypes.SET_USER_PROJECTS,
+    value: userProjects
   };
 }
 

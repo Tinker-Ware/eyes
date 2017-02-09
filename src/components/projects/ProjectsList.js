@@ -1,11 +1,12 @@
 import {Card} from "material-ui/Card";
+import {fromJS} from "immutable";
 import {Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import FontIcon from "material-ui/FontIcon";
 import RaisedButton from "material-ui/RaisedButton";
-import React  from "react";
+import React, {PropTypes} from "react";
 
 const style = {
   toolbar: {
@@ -16,7 +17,33 @@ const style = {
   }
 };
 
-const ProjectsList = () => {
+const ProjectsList = ({projectsAppState}) => {
+  const TableRows =
+    projectsAppState.get("user_projects")?
+      projectsAppState.get("user_projects").toJS().map((value, index) =>
+        <TableRow key={index}>
+          <TableRowColumn>
+            {value.roles.map((value2, index) =>
+              (value2.role != "base")?
+                <FontIcon
+                    key={index}
+                    className={"icon icon-"+value2.role}
+                />:''
+            )}
+          </TableRowColumn>
+          <TableRowColumn>
+            {value.project_name}
+          </TableRowColumn>
+          <TableRowColumn>
+            <FontIcon className="icon icon-check"/>
+          </TableRowColumn>
+          <TableRowColumn>
+            <Link href="/project/1">
+              <FontIcon className="icon icon-edit"/>
+            </Link>
+          </TableRowColumn>
+        </TableRow>
+      ):"";
   return (
       <div className="card">
         <Toolbar style={style.toolbar}>
@@ -54,68 +81,15 @@ const ProjectsList = () => {
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
-            <TableRow>
-              <TableRowColumn>
-                <FontIcon className="icon icon-go"/>
-              </TableRowColumn>
-              <TableRowColumn>
-                {"Ghost-blog"}
-              </TableRowColumn>
-              <TableRowColumn>
-                <FontIcon className="icon icon-check"/>
-              </TableRowColumn>
-              <TableRowColumn>
-                <Link href="/project/1">
-                  <FontIcon className="icon icon-edit"/>
-                </Link>
-              </TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>
-                <FontIcon className="icon icon-python"/>
-              </TableRowColumn>
-              <TableRowColumn>{"Landingapage"}</TableRowColumn>
-              <TableRowColumn>
-                <FontIcon className="icon icon-warning"/>
-              </TableRowColumn>
-              <TableRowColumn>
-                <Link href="/project/2">
-                  <FontIcon className="icon icon-edit"/>
-                </Link>
-              </TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>
-                <FontIcon className="icon icon-react"/>
-              </TableRowColumn>
-              <TableRowColumn>{"Oauth service"}</TableRowColumn>
-              <TableRowColumn>
-                <FontIcon className="icon icon-check"/>
-              </TableRowColumn>
-              <TableRowColumn>
-                <Link href="/project/3">
-                  <FontIcon className="icon icon-edit"/>
-                </Link>
-              </TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>
-                <FontIcon className="icon icon-html-plain"/>
-              </TableRowColumn>
-              <TableRowColumn>{"Users service"}</TableRowColumn>
-              <TableRowColumn>
-                <FontIcon className="icon icon-check"/>
-              </TableRowColumn>
-              <TableRowColumn>
-                <Link href="/project/4">
-                  <FontIcon className="icon icon-edit"/>
-                </Link>
-              </TableRowColumn>
-            </TableRow>
+            {TableRows}
           </TableBody>
         </Table>
       </div>
   );
+};
+
+ProjectsList.propTypes = {
+  projectsAppState: PropTypes.object.isRequired
 };
 
 export default ProjectsList;

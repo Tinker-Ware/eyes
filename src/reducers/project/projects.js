@@ -1,4 +1,4 @@
-import { SET_USER_PROJECTS } from "../../constants/ActionTypes";
+import { SET_USER_PROJECTS } from "../../constants/Projects";
 import { Map } from "immutable";
 
 const initialState = Map({

@@ -1,6 +1,6 @@
 import { Map, fromJS } from "immutable";
 import { expect } from "chai";
-import project from "../../reducers/project/project.js";
+import projects from "../../reducers/project/projects.js";
 
 describe("reducer", () => {
   it("handles SET_USER_PROJECTS", () => {
@@ -28,7 +28,7 @@ describe("reducer", () => {
         }
       }
     )};
-    const nextState = project(initialState, action);
+    const nextState = projects(initialState, action);
 
     expect(nextState).to.equal(fromJS(
       {
@@ -58,7 +58,7 @@ describe("reducer", () => {
   it("handles DEFAULT", () => {
     const initialState = Map();
     const action = {type:""};
-    const nextState = project(initialState, action);
+    const nextState = projects(initialState, action);
 
     expect(nextState).to.equal(fromJS({
     }));
