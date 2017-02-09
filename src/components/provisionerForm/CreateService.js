@@ -37,8 +37,14 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         //YII ROLE
         "cookie_validation_key":yiiAppState.get("cookie_validation_key"),
         "yii_git_repo":"https://github.com/"+repositoryAppState.get("repository").toJS().name
-      } //https o ssh
+      }
       :"";
+  };
+  const getNginxConfiguration = () => {
+    return {
+        //NGINX ROLE
+        "nginx_vhosts": nginx()
+      };
   };
   const getMysqlConfiguration = () => {
     return mysqlAppState.get("enable_mysql")?
@@ -63,10 +69,15 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   };
   const configuration = () => {
     return {
-      "general":{...getBaseConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration()},
+      "general":{...getBaseConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration(), ...getNginxConfiguration()},
       "development":{},
       "production":{}
     };
+  };
+  const nginx = () => {
+    let nginxArray = [];
+    if(yiiAppState.get("enable_yii")) nginxArray.push(yiiAppState.get("nginx"));
+    return nginxArray;
   };
   const roles = () => {
     let rolesArray = [];
