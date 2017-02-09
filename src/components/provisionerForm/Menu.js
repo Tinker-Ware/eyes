@@ -4,9 +4,9 @@ import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-import React, {PropTypes} from "react";
+import React from "react";
 
-const Menu = ( { userAppState } ) => {
+const Menu = () => {
   return (
     <AppBar
         iconElementLeft={
@@ -34,7 +34,8 @@ const Menu = ( { userAppState } ) => {
             />
             <MenuItem
                 href="/user"
-                primaryText="User Profile" />
+                primaryText="User Profile"
+            />
             <MenuItem primaryText="Sign out" />
           </IconMenu>
         }
@@ -44,7 +45,6 @@ const Menu = ( { userAppState } ) => {
 };
 
 Menu.propTypes = {
-  userAppState: PropTypes.object.isRequired
 };
 
 export default Menu;

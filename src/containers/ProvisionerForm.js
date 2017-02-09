@@ -6,7 +6,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui
 import * as actions from "../actions/ServiceFormActions";
 import * as rolesActions from "../actions/rolesActions";
 import Application from "../components/provisionerForm/Application";
-import CloudProvider from "../components/provisionerForm/CloudProvider";
+// import CloudProvider from "../components/provisionerForm/CloudProvider";
 import cookie from "react-cookie";
 import CreateService from "../components/provisionerForm/CreateService";
 import FontIcon from "material-ui/FontIcon";
@@ -17,7 +17,7 @@ import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
 import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
-import SSHKeys from "../components/provisionerForm/SSHKeys";
+// import SSHKeys from "../components/provisionerForm/SSHKeys";
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
@@ -50,7 +50,7 @@ export class ServiceForm extends Component {
         <div className="small-12 medium-12 large-12 large-centered columns">
           <div className="container">
             <Paper zDepth={4}>
-              <Menu userAppState={this.props.userAppState} />
+              <Menu/>
               <div className="card">
                 <Toolbar style={style.toolbar}>
                   <ToolbarGroup firstChild>

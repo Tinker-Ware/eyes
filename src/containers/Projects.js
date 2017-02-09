@@ -3,6 +3,7 @@ import {browserHistory} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import * as actions from "../actions/ServiceFormActions";
+/* eslint-disable import/no-unresolved */
 import * as projectsActionTypes from "../actions/ProjectsActions";
 import AppBar from "material-ui/AppBar";
 import cookie from "react-cookie";

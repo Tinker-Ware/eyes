@@ -21,7 +21,7 @@ const styles = {
   },
 };
 
-const MysqlRole = ( {end, setMysqlPackages, setMysqlUsers, setMysqlRootPassword, setMysqlDatabases, setEnableMysql, setShowMysql, mysqlAppState, updateMysqlUsers} ) => {
+const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, setShowMysql, mysqlAppState, updateMysqlUsers} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
     cookie.load("mysql_users-id")?
@@ -162,8 +162,6 @@ MysqlRole.propTypes = {
   end: PropTypes.bool.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   setEnableMysql: PropTypes.func.isRequired,
-  setMysqlDatabases: PropTypes.func.isRequired,
-  setMysqlPackages: PropTypes.func.isRequired,
   setMysqlRootPassword: PropTypes.func.isRequired,
   setMysqlUsers: PropTypes.func.isRequired,
   setShowMysql: PropTypes.func.isRequired,

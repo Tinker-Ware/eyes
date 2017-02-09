@@ -1,5 +1,3 @@
-import {Card} from "material-ui/Card";
-import {fromJS} from "immutable";
 import {Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
@@ -26,9 +24,9 @@ const ProjectsList = ({projectsAppState}) => {
             {value.roles.map((value2, index) =>
               (value2.role != "base")?
                 <FontIcon
-                    key={index}
                     className={"icon icon-"+value2.role}
-                />:''
+                    key={index}
+                />:""
             )}
           </TableRowColumn>
           <TableRowColumn>

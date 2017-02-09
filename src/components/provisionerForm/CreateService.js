@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject, mysqlAppState, yiiAppState} ) => {
+const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, yiiAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -121,7 +121,6 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
             repositoryAppState.get("integration")&&
             repositoryAppState.get("repository")&&
             projectNameAppState.get("project_name")?
-            // &&applicationAppState.get("application_name")?
               false:true
           }
           fullWidth
@@ -134,7 +133,6 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
 };
 
 CreateService.propTypes = {
-  applicationAppState: PropTypes.object.isRequired,
   baseAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,

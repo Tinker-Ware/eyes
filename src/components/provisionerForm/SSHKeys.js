@@ -1,5 +1,5 @@
 import { fromJS } from "immutable";
-import Checkbox from "material-ui/Checkbox";
+// import Checkbox from "material-ui/Checkbox";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
