@@ -88,7 +88,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
             primary
         />
       </div>
-      <div className="small-6 medium-3 large-3 columns">
+      {/* <div className="small-6 medium-3 large-3 columns">
         <Checkbox
             label="Leonel"
             style={styles.checkbox}
@@ -99,7 +99,7 @@ const SSHKeys = ( { enableSSHKey, showSSHKey, setSSHKeyTitle, requestPostCloudPr
             label="Antonio"
             style={styles.checkbox}
         />
-      </div>
+      </div> */}
       {PrintSSHKeys}
       <Dialog
           actions={actions}

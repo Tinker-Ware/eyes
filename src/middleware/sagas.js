@@ -1,9 +1,10 @@
 import { takeLatest } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
-import"whatwg-fetch";
+import "whatwg-fetch";
 import * as actions from "./actions/MiddlewareActions";
 import * as types from "../constants/ActionTypes";
+import * as projectsActionTypes from "../constants/Projects";
 import cookie from "react-cookie";
 
 /* eslint-disable no-empty */
@@ -84,6 +85,15 @@ export function* doRequestGetRefreshSession(authorization) {
       },
       mode:"cors"});
 }
+export function* doRequestGetUserProjects(authorization) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project",
+    {
+      method:"GET",
+      headers: {"authorization":"Bearer "+ authorization
+      },
+      mode:"cors"});
+}
 
 export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
   return yield call(
@@ -156,6 +166,18 @@ export function* getRepositoryAccess(userAccess) {
   try {
     const repositoryAccess = yield call(doRequestGetRepositoryAccess, userAccess.value.get("authorization"), userAccess.value.get("oauth_request"));
     yield put(actions.receiveRepositoryAccess(fromJS({"integration": repositoryAccess.callback
+      }))
+    );
+  }
+  catch(error) {
+  }
+}
+
+export function* getUserProjects(userAccess) {
+  try {
+    const userProjects = yield call(doRequestGetUserProjects, userAccess.value.get("authorization"));
+    yield put(actions.setUserProjects(fromJS({
+        user_projects: userProjects.projects
       }))
     );
   }
@@ -271,6 +293,7 @@ export default function* root() {
     takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
+    takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)

@@ -15,6 +15,7 @@ import Menu from "../components/provisionerForm/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
+import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
 import SSHKeys from "../components/provisionerForm/SSHKeys";
 
@@ -61,11 +62,12 @@ export class ServiceForm extends Component {
                   </ToolbarGroup>
                   <ToolbarGroup>
                     <ToolbarSeparator />
-                    {/* <RaisedButton
-                        icon={<FontIcon className="icon icon-project" />}
-                        label={"Create Project"}
+                    <RaisedButton
+                        href="/projects"
+                        icon={<FontIcon className="icon icon-box" />}
+                        label={"Projects"}
                         primary
-                    /> */}
+                    />
                   </ToolbarGroup>
                 </Toolbar>
                 <h2>{"Choose a project name"}</h2>
@@ -85,13 +87,13 @@ export class ServiceForm extends Component {
                       setShowRepositories={this.props.actions.setShowRepositories}
                       userAppState={this.props.userAppState}
                   />
-                  <CloudProvider
+                  {/* <CloudProvider
                       clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                       cloudProviderAppState={this.props.cloudProviderAppState}
                       requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
                       setCloudProvider={this.props.actions.setCloudProvider}
                       userAppState={this.props.userAppState}
-                  />
+                  /> */}
                 </div>
                 <Application
                     applicationAppState={this.props.applicationAppState}
@@ -102,7 +104,7 @@ export class ServiceForm extends Component {
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}
                     yiiAppState={this.props.yiiAppState}
                 />
-                <h2>{"Add your SSH keys"}</h2>
+                {/* <h2>{"Add your SSH keys"}</h2>
                 <SSHKeys
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     deleteSSHKey={this.props.actions.deleteSSHKey}
@@ -113,11 +115,11 @@ export class ServiceForm extends Component {
                     setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
                     showSSHKey={this.props.actions.showSSHKey}
                     userAppState={this.props.userAppState}
-                />
+                /> */}
                 <CreateService
                     applicationAppState={this.props.applicationAppState}
-                    cloudProviderAppState={this.props.cloudProviderAppState}
                     baseAppState={this.props.baseAppState}
+                    cloudProviderAppState={this.props.cloudProviderAppState}
                     mysqlAppState={this.props.mysqlAppState}
                     projectNameAppState={this.props.projectNameAppState}
                     repositoryAppState={this.props.repositoryAppState}
