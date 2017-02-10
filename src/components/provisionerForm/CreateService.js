@@ -101,16 +101,17 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
           "name": repositoryAppState.get("repository").toJS().name,
           "username": repositoryAppState.get("integration").toJS().username
         },
-        "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys").filter(value=>
-          value.get("enable") == true
-        ).map(value=>
-          Map({
-            user_id: userAppState.get("user_session").toJS().id,
-            title: value.get("title"),
-            fingerprint: value.get("fingerprint"),
-            key: value.get("key")
-          })
-        ).toJS()
+        "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys")?
+          cloudProviderAppState.get("cloud_provider_ssh_keys").filter(value=>
+            value.get("enable") == true
+          ).map(value=>
+            Map({
+              user_id: userAppState.get("user_session").toJS().id,
+              title: value.get("title"),
+              fingerprint: value.get("fingerprint"),
+              key: value.get("key")
+            })
+          ).toJS():{}
       }
     }));
   };
