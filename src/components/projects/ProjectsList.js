@@ -36,7 +36,7 @@ const ProjectsList = ({projectsAppState}) => {
             <FontIcon className="icon icon-check"/>
           </TableRowColumn>
           <TableRowColumn>
-            <Link href="/project/1">
+            <Link href={"/project/"+value.id}>
               <FontIcon className="icon icon-edit"/>
             </Link>
           </TableRowColumn>

@@ -1,10 +1,11 @@
-import { takeLatest } from "redux-saga";
+import "whatwg-fetch";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
-import "whatwg-fetch";
+import { takeLatest } from "redux-saga";
+import {browserHistory} from "react-router";
 import * as actions from "./actions/MiddlewareActions";
-import * as types from "../constants/ActionTypes";
 import * as projectsActionTypes from "../constants/Projects";
+import * as types from "../constants/ActionTypes";
 import cookie from "react-cookie";
 
 /* eslint-disable no-empty */
@@ -228,7 +229,8 @@ export function* postUser(user) {
 
 export function* postUserProject(project) {
   try {
-    yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
+    const userProject = yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
+    browserHistory.push("/project/"+userProject.project.id);
   }
   catch(error) {
     // yield put(actions.requestPostUserProjectError(fromJS({
