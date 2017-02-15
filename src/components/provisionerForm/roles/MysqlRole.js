@@ -24,30 +24,30 @@ const styles = {
 const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, setShowMysql, mysqlAppState, updateMysqlUsers} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
-    cookie.load("mysql_users-id")?
-    updateMysqlUsers(
-      fromJS({
-        mysql_users: mysqlAppState.get("mysql_users"),
-        mysql_user: [{
-          id: cookie.load("mysql_users-id") ? cookie.load("mysql_users-id") : 0,
-          name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-          host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
-          password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-          priv: "ti_database.*:ALL"
-        }]
-      })
-    ):setMysqlUsers(
-      fromJS({
-        mysql_users:[],
-        mysql_user: [{
-          name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-          host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
-          password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-          priv: "ti_database.*:ALL"
-        }]
-      })
-    );
-    cookie.remove("mysql_users-id");
+    // cookie.load("mysql_users-id")?
+    // updateMysqlUsers(
+    //   fromJS({
+    //     mysql_users: mysqlAppState.get("mysql_users"),
+    //     mysql_user: [{
+    //       id: cookie.load("mysql_users-id") ? cookie.load("mysql_users-id") : 0,
+    //       name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
+    //       host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
+    //       password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
+    //       priv: "ti_database.*:ALL"
+    //     }]
+    //   })
+    // ):setMysqlUsers(
+    //   fromJS({
+    //     mysql_users:[],
+    //     mysql_user: [{
+    //       name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
+    //       host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
+    //       password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
+    //       priv: "ti_database.*:ALL"
+    //     }]
+    //   })
+    // );
+    // cookie.remove("mysql_users-id");
   };
   const handleSetMysqlRootPassword = (e) => {
     setMysqlRootPassword(
@@ -69,8 +69,20 @@ const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, s
         show_mysql: !mysqlAppState.get("show_mysql")
       })
     );
-    if(!mysqlAppState.get("show_mysql"))
-      removeCookies();
+    setMysqlUsers(
+      fromJS({
+        mysql_users:[],
+        mysql_user: [{
+          name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
+          host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
+          password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
+          priv: "ti_database.*:ALL"
+        }]
+      })
+    );
+    cookie.remove("mysql_users-host");
+    cookie.remove("mysql_users-name");
+    cookie.remove("mysql_users-password");
   };
   const actions = [
       <FlatButton
@@ -132,7 +144,6 @@ const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, s
               name={"mysql_user_name"}
               onChange={(event)=> handleSetMysqlUsers(event, "name")}
               type={"text"}
-              value={mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS()[0].name:""}
           />
           <TextField
               errorText="This field is required."
@@ -141,7 +152,6 @@ const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, s
               name={"mysql_user_host"}
               onChange={(event)=> handleSetMysqlUsers(event, "host")}
               type={"text"}
-              value={mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS()[0].host:""}
           />
           <TextField
               errorText="This field is required."
@@ -150,7 +160,6 @@ const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, s
               name={"mysql_user_password"}
               onChange={(event)=> handleSetMysqlUsers(event, "password")}
               type={"password"}
-              value={mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS()[0].password:""}
           />
         </Dialog>
       </Card>
