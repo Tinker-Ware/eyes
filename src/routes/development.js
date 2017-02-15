@@ -18,7 +18,7 @@ export default (
       component={App}
       path="/"
   >
-    <IndexRoute component={ProvisionerForm} />
+    <IndexRoute component={Projects} />
     <Route
         component={UserProfile}
         path="user"
@@ -46,15 +46,19 @@ export default (
         path="users"
     />
     <Route
+        component={ProvisionerForm}
+        path="project/new/"
+    />
+    <Route
+        component={ProvisionerForm}
+        path="project/edit/:projecId"
+    />
+    <Route
         component={ProjectInfo}
         path="project/:projecId"
     />
     <Route
         component={Projects}
-        path="projects"
-    />
-    <Route
-        component={ProvisionerForm}
         path="*"
         status={404}
     />

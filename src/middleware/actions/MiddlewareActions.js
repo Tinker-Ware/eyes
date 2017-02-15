@@ -36,10 +36,24 @@ export function setCloudProviderSshKeys(cloudProviderSshKeys){
 //   };
 // }
 
+export function setUserProject(userProject){
+  return{
+    type: projectsActionTypes.SET_USER_PROJECT,
+    value: userProject
+  };
+}
+
 export function setUserProjects(userProjects){
   return{
     type: projectsActionTypes.SET_USER_PROJECTS,
     value: userProjects
+  };
+}
+
+export function setUserProjectDevEnvironment(userProjectDevEnvironment){
+  return{
+    type: projectsActionTypes.SET_USER_PROJECT_DEV_ENVIRONMENT,
+    value: userProjectDevEnvironment
   };
 }
 

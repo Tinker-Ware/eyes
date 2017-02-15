@@ -55,9 +55,9 @@ const ProjectsList = ({projectsAppState}) => {
           <ToolbarGroup>
             <ToolbarSeparator />
             <RaisedButton
-                href="/"
+                href="/project/new/"
                 icon={<FontIcon className="icon icon-project" />}
-                label="Create Project"
+                label="Create New Project"
                 primary
             />
           </ToolbarGroup>
