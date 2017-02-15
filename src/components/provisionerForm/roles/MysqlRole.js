@@ -21,33 +21,9 @@ const styles = {
   },
 };
 
-const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, setShowMysql, mysqlAppState, updateMysqlUsers} ) => {
+const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, setShowMysql, mysqlAppState} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
-    // cookie.load("mysql_users-id")?
-    // updateMysqlUsers(
-    //   fromJS({
-    //     mysql_users: mysqlAppState.get("mysql_users"),
-    //     mysql_user: [{
-    //       id: cookie.load("mysql_users-id") ? cookie.load("mysql_users-id") : 0,
-    //       name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-    //       host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
-    //       password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-    //       priv: "ti_database.*:ALL"
-    //     }]
-    //   })
-    // ):setMysqlUsers(
-    //   fromJS({
-    //     mysql_users:[],
-    //     mysql_user: [{
-    //       name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-    //       host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
-    //       password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-    //       priv: "ti_database.*:ALL"
-    //     }]
-    //   })
-    // );
-    // cookie.remove("mysql_users-id");
   };
   const handleSetMysqlRootPassword = (e) => {
     setMysqlRootPassword(
@@ -93,11 +69,6 @@ const MysqlRole = ( {end, setMysqlUsers, setMysqlRootPassword, setEnableMysql, s
           secondary
       />
     ];
-  const removeCookies = () => {
-    cookie.remove("mysql_users-host");
-    cookie.remove("mysql_users-name");
-    cookie.remove("mysql_users-password");
-  };
   return (
     <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
       <Card>
@@ -173,8 +144,7 @@ MysqlRole.propTypes = {
   setEnableMysql: PropTypes.func.isRequired,
   setMysqlRootPassword: PropTypes.func.isRequired,
   setMysqlUsers: PropTypes.func.isRequired,
-  setShowMysql: PropTypes.func.isRequired,
-  updateMysqlUsers: PropTypes.func.isRequired
+  setShowMysql: PropTypes.func.isRequired
 };
 
 export default MysqlRole;
