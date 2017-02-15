@@ -1,18 +1,11 @@
-import {Card} from "material-ui/Card";
 import {List, ListItem} from "material-ui/List";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
-import AppBar from "material-ui/AppBar";
 import Avatar from "material-ui/Avatar";
 import Chip from "material-ui/Chip";
 import Divider from "material-ui/Divider";
 import FontIcon from "material-ui/FontIcon";
-import IconButton from "material-ui/IconButton";
-import IconMenu from "material-ui/IconMenu";
-import MenuItem from "material-ui/MenuItem";
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
-import RefreshIndicator from "material-ui/RefreshIndicator";
 
 const style = {
   button: {
@@ -50,11 +43,11 @@ const Project = ({projectsAppState}) => {
         <ToolbarGroup>
           <ToolbarSeparator />
           <RaisedButton
-                href={projectsAppState.get("user_project")?"/project/edit/"+projectsAppState.get("user_project").toJS().id:"#"}
-                icon={<FontIcon className="icon icon-edit" />}
-                label={"Edit"}
-                primary
-                style={style.button}
+              href={projectsAppState.get("user_project")?"/project/edit/"+projectsAppState.get("user_project").toJS().id:"#"}
+              icon={<FontIcon className="icon icon-edit" />}
+              label={"Edit"}
+              primary
+              style={style.button}
           />
           {/* <RaisedButton
               href={"#"}
@@ -64,7 +57,7 @@ const Project = ({projectsAppState}) => {
               style={style.button}
           /> */}
           <RaisedButton
-              href={projectsAppState.get("user_project_dev_environment")?"http://"+projectsAppState.get("user_project_dev_environment").toJS()[0].path:"#"}
+              href={projectsAppState.get("user_project_dev_environment")?projectsAppState.get("user_project_dev_environment").toJS()[0].path:"#"}
               icon={<FontIcon className="icon icon-cloud-download" />}
               label={"Download"}
               primary
@@ -95,7 +88,7 @@ const Project = ({projectsAppState}) => {
         </List>
         <Divider />
         <List>
-          <ListItem
+          {/* <ListItem
               leftIcon={<FontIcon className="icon icon-deploy"/>}
               primaryText={"ID: 11923"}
               rightIcon={<FontIcon className="icon icon-check"/>}
@@ -129,7 +122,7 @@ const Project = ({projectsAppState}) => {
               primaryText={"ID: 15923"}
               rightIcon={<FontIcon className="icon icon-check"/>}
               secondaryText={"USER: Javier"}
-          />
+          /> */}
         </List>
       </div>
       {/* <div className="align-left">
