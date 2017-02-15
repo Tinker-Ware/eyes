@@ -1,10 +1,11 @@
-import { takeLatest } from "redux-saga";
+import "whatwg-fetch";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
-import "whatwg-fetch";
+import { takeLatest } from "redux-saga";
+import {browserHistory} from "react-router";
 import * as actions from "./actions/MiddlewareActions";
-import * as types from "../constants/ActionTypes";
 import * as projectsActionTypes from "../constants/Projects";
+import * as types from "../constants/ActionTypes";
 import cookie from "react-cookie";
 
 /* eslint-disable no-empty */
@@ -85,6 +86,27 @@ export function* doRequestGetRefreshSession(authorization) {
       },
       mode:"cors"});
 }
+
+export function* doRequestGetUserProjectDevEnvironment(authorization, id) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+id+"/dev_environment",
+    {
+      method:"GET",
+      headers: {"authorization":"Bearer "+ authorization
+      },
+      mode:"cors"});
+}
+
+export function* doRequestGetUserProject(authorization, id) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+id,
+    {
+      method:"GET",
+      headers: {"authorization":"Bearer "+ authorization
+      },
+      mode:"cors"});
+}
+
 export function* doRequestGetUserProjects(authorization) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/project",
@@ -173,6 +195,23 @@ export function* getRepositoryAccess(userAccess) {
   }
 }
 
+export function* getUserProject(userAccess) {
+  try {
+    const userProject = yield call(doRequestGetUserProject, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
+    yield put(actions.setUserProject(fromJS({
+        user_project: userProject.project
+      }))
+    );
+    const userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
+    yield put(actions.setUserProjectDevEnvironment(fromJS({
+        user_project_dev_environment: userProjectDevEnvironment.development_environments
+      })
+    ));
+  }
+  catch(error) {
+  }
+}
+
 export function* getUserProjects(userAccess) {
   try {
     const userProjects = yield call(doRequestGetUserProjects, userAccess.value.get("authorization"));
@@ -228,7 +267,8 @@ export function* postUser(user) {
 
 export function* postUserProject(project) {
   try {
-    yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
+    const userProject = yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
+    browserHistory.push("/project/"+userProject.project.id);
   }
   catch(error) {
     // yield put(actions.requestPostUserProjectError(fromJS({
@@ -294,6 +334,7 @@ export default function* root() {
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
+    takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)

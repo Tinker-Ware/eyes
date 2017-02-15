@@ -36,7 +36,7 @@ const ProjectsList = ({projectsAppState}) => {
             <FontIcon className="icon icon-check"/>
           </TableRowColumn>
           <TableRowColumn>
-            <Link href="/project/1">
+            <Link href={"/project/"+value.id}>
               <FontIcon className="icon icon-edit"/>
             </Link>
           </TableRowColumn>
@@ -55,9 +55,9 @@ const ProjectsList = ({projectsAppState}) => {
           <ToolbarGroup>
             <ToolbarSeparator />
             <RaisedButton
-                href="/"
+                href="/project/new/"
                 icon={<FontIcon className="icon icon-project" />}
-                label="Create Project"
+                label="Create New Project"
                 primary
             />
           </ToolbarGroup>

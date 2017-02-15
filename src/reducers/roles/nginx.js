@@ -7,6 +7,9 @@ const initialState = Map({
     role: "nginx",
     sudo: "yes",
     tags: "nginx"
+  },
+  nginx: {
+    "nginx_remove_default_vhost": "yes"
   }
 });
 

@@ -42,6 +42,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   const getNginxConfiguration = () => {
     return {
         //NGINX ROLE
+        "nginx_remove_default_vhost": "yes",
         "nginx_vhosts": nginx()
       };
   };
