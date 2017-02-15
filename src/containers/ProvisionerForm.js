@@ -121,6 +121,7 @@ export class ServiceForm extends Component {
                     baseAppState={this.props.baseAppState}
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     mysqlAppState={this.props.mysqlAppState}
+                    nginxAppState={this.props.nginxAppState}
                     projectNameAppState={this.props.projectNameAppState}
                     repositoryAppState={this.props.repositoryAppState}
                     requestPostUserProject={this.props.actions.requestPostUserProject}

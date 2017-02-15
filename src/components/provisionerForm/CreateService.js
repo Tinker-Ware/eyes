@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, yiiAppState} ) => {
+const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -42,7 +42,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   const getNginxConfiguration = () => {
     return {
         //NGINX ROLE
-        "nginx_remove_default_vhost": "yes",
+        "nginx_remove_default_vhost": true,
         "nginx_vhosts": nginx()
       };
   };
@@ -82,6 +82,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   const roles = () => {
     let rolesArray = [];
     if(baseAppState.get("enable_base")) rolesArray.push(baseAppState.get("roles"));
+    if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
     if(mysqlAppState.get("enable_mysql")) rolesArray.push(mysqlAppState.get("roles"));
     return rolesArray;
@@ -137,6 +138,7 @@ CreateService.propTypes = {
   baseAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
+  nginxAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   requestPostUserProject: PropTypes.func.isRequired,

@@ -1,5 +1,5 @@
 import {bindActionCreators} from "redux";
-import {browserHistory} from "react-router";
+import {browserHistory, Link} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import * as actions from "../actions/ServiceFormActions";
@@ -15,6 +15,12 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import Project from "../components/projects/Project";
 import React, { Component, PropTypes } from "react";
+
+const style = {
+  iconColor: {
+    color: "#fff"
+  }
+};
 
 export class ProjectInfo extends Component {
   componentWillMount() {
@@ -41,7 +47,12 @@ export class ProjectInfo extends Component {
               <AppBar
                   iconElementLeft={
                     <IconButton>
-                      <FontIcon className="icon icon-home"/>
+                      <Link to={"/projects"}>
+                        <FontIcon
+                            className="icon icon-arrow-back"
+                            style={style.iconColor}
+                        />
+                      </Link>
                     </IconButton>
                   }
                   iconElementRight={

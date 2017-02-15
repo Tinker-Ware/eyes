@@ -21,6 +21,13 @@ export const doRequest = (url, options) => {
     });
 };
 
+function delay(millis) {
+    const promise = new Promise(resolve => {
+        setTimeout(() => resolve(true), millis);
+    });
+    return promise;
+}
+
 export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/cloud/digital_ocean/oauth",
@@ -202,7 +209,11 @@ export function* getUserProject(userAccess) {
         user_project: userProject.project
       }))
     );
-    const userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
+    let userProjectDevEnvironment = {"development_environments":[]};
+    while (userProjectDevEnvironment.development_environments.length == 0) {
+      yield call(delay, 2000);
+      userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
+    }
     yield put(actions.setUserProjectDevEnvironment(fromJS({
         user_project_dev_environment: userProjectDevEnvironment.development_environments
       })
