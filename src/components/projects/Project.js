@@ -146,13 +146,13 @@ const Project = ({projectsAppState}) => {
             style={style.chip}
         >
           <Avatar icon={<FontIcon className="icon icon-cpu" />} />
-          {"CPU: 80 %"}
+          {"CPU: 60 %"}
         </Chip>
         <Chip
             style={style.chip}
         >
           <Avatar icon={<FontIcon className="icon icon-memory-ram" />} />
-          {"RAM: 559 MB"}
+          {"RAM: 1024 MB"}
         </Chip>
       </div>
     </div>
