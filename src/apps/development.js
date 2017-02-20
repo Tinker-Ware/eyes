@@ -1,23 +1,25 @@
 /*eslint-disable import/default*/
 
-import React from "react";
-import {render} from "react-dom";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
-import routes from "../routes/development";
-import configureStore from "../store/configureStore";
 import { syncHistoryWithStore } from "react-router-redux";
+import {render} from "react-dom";
+import configureStore from "../store/configureStore";
+import React from "react";
+import ReactGA from "react-ga";
+import routes from "../routes/development";
 
-// if(location.pathname == "/"){
-//   require("../styles/foundation.css");
-//   require("../styles/styles2.scss");
-//   require("../icons/foundation-icons.css");
-// }else{
-  require("../styles/foundation-grid.scss");
-  require("../styles/styles.scss");
-// }
+require("../styles/foundation-grid.scss");
+require("../styles/styles.scss");
+
+ReactGA.initialize("UA-92305954-1");
 
 const store = configureStore();
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
 
 const injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
@@ -29,6 +31,7 @@ render(
   <Provider store={store}>
     <Router
         history={history}
+        onUpdate={logPageView}
         routes={routes}
     />
   </Provider>, document.getElementById("app")
