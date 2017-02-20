@@ -35,7 +35,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
       {
         //YII ROLE
         "cookie_validation_key":yiiAppState.get("cookie_validation_key"),
-        "yii_git_repo":"https://github.com/"+repositoryAppState.get("repository").toJS().name
+        "yii_git_repo":repositoryAppState.get("repository")?"https://github.com/"+repositoryAppState.get("repository").toJS().name:"https://github.com/Tinker-Ware/yii2-crud"
       }
       :"";
   };
@@ -98,8 +98,8 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         "operating_system": "debian/contrib-jessie64",
         "configuration": configuration(),
         "repository": {
-          "provider": repositoryAppState.get("repository").toJS().provider,
-          "name": repositoryAppState.get("repository").toJS().name,
+          "provider": repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().provider:"github",
+          "name": repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:"Tinker-Ware/reponame",
           "username": repositoryAppState.get("integration").toJS().username
         },
         "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys")?
@@ -121,7 +121,6 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
           buttonStyle={style.button}
           disabled={
             repositoryAppState.get("integration")&&
-            repositoryAppState.get("repository")&&
             projectNameAppState.get("project_name")?
               false:true
           }
