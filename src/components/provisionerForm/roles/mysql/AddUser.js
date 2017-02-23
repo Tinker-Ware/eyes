@@ -17,8 +17,6 @@ const styles = {
   },
 };
 
-let index2 = 0;
-
 const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppState, setMysqlDatabaseIndex} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
@@ -100,8 +98,8 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
       />
       <SelectField
           floatingLabelText="Database?"
-          value={mysqlAppState.get("mysql_database_index")}
           onChange={handleSelectDatabase}
+          value={mysqlAppState.get("mysql_database_index")}
       >
         <MenuItem
             primaryText=""
