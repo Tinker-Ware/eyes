@@ -18,19 +18,21 @@ const Application = ( {applicationAppState, rolesActions, yiiAppState, mysqlAppS
       <div className="row">
         <h2>{"Choose a Database"}</h2>
         <MysqlRole
+            applicationAppState={applicationAppState}
             end
             environments={applicationAppState.get("application_evironments")?applicationAppState.get("application_evironments"):[]}
             mysqlAppState={mysqlAppState}
-            applicationAppState={applicationAppState}
-            setEnableMysql={rolesActions.setEnableMysql}
-            setMysqlRootPassword={rolesActions.setMysqlRootPassword}
+            removeMysqlDatabase={rolesActions.removeMysqlDatabase}
+            removeMysqlUser={rolesActions.removeMysqlUser}
             setActiveEnvironment={setActiveEnvironment}
+            setEnableMysql={rolesActions.setEnableMysql}
+            setMysqlDatabases={rolesActions.setMysqlDatabases}
+            setMysqlRootPassword={rolesActions.setMysqlRootPassword}
             setMysqlUser={rolesActions.setMysqlUser}
             setShowMysql={rolesActions.setShowMysql}
-            setShowMysqlUser={rolesActions.setShowMysqlUser}
             setShowMysqlDatabase={rolesActions.setShowMysqlDatabase}
+            setShowMysqlUser={rolesActions.setShowMysqlUser}
             updateMysqlUser={rolesActions.updateMysqlUser}
-            removeMysqlUser={rolesActions.removeMysqlUser}
         />
       </div>
       {/* <div className="row">

@@ -1,4 +1,4 @@
-import {REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, UPDATE_MYSQL_USERS, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
+import {REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, UPDATE_MYSQL_USERS, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -51,11 +51,21 @@ export default function mysql(state = initialState, action) {
     }
     case SET_MYSQL_DATABASES:
     {
-      return state.set("mysql_databases",
-        action.value.get("mysql_databases").toSet().union(
-          action.value.get("mysql_database")
-        ).toList()
-      );
+      if(action.value.get("mysql_database").toJS()[0].id)
+        return state.set("mysql_databases",
+          action.value.get("mysql_databases").map(value=>
+            value.get("id") === action.value.get("mysql_database").toJS()[0].id ?
+              action.value.get("mysql_database").first() : value
+          )
+        );
+      else
+        return state.set("mysql_databases",
+          action.value.get("mysql_databases").toSet().union(
+            action.value.get("mysql_database").map(value=>
+              value.set("id", getId(action.value.get("mysql_databases")))
+            )
+          ).toList()
+        );
     }
     case SET_SHOW_MYSQL:
     {
@@ -92,6 +102,13 @@ export default function mysql(state = initialState, action) {
       return state.set("mysql_users", action.value.get("mysql_users").filter(value=>
         value.get("id") !== action.value.get("mysql_user").get("id") &&
         value.get("environment") !== action.value.get("mysql_user").get("environment")
+      ));
+    }
+    case REMOVE_MYSQL_DATABASE:
+    {
+      return state.set("mysql_databases", action.value.get("mysql_databases").filter(value=>
+        value.get("id") !== action.value.get("mysql_database").get("id") &&
+        value.get("environment") !== action.value.get("mysql_database").get("environment")
       ));
     }
     default:

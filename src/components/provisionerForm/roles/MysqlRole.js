@@ -12,6 +12,7 @@ import React, {PropTypes} from "react";
 import SwipeableViews from "react-swipeable-views";
 import Toggle from "material-ui/Toggle";
 import AddUser from "./mysql/AddUser";
+import AddDatabase from "./mysql/AddDatabase";
 
 const styles = {
   block: {
@@ -36,7 +37,7 @@ const styles = {
   }
 };
 
-const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setShowMysql, mysqlAppState, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase} ) => {
+const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setMysqlDatabases, setShowMysql, mysqlAppState, removeMysqlDatabase, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase} ) => {
   const handleRemoveUser = (e, value) => {
     removeMysqlUser(
       fromJS({
@@ -45,10 +46,25 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
       })
     );
   };
+  const handleRemoveDatabase = (e, value) => {
+    removeMysqlDatabase(
+      fromJS({
+        mysql_databases: mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS():[],
+        mysql_database: value
+      })
+    );
+  };
   const handleShowAddUser = () => {
     setShowMysqlUser(
       fromJS({
         show_mysql_user: !mysqlAppState.get("show_mysql_user")
+      })
+    );
+  };
+  const handleShowDatabase = () => {
+    setShowMysqlDatabase(
+      fromJS({
+        show_mysql_database: !mysqlAppState.get("show_mysql_database")
       })
     );
   };
@@ -64,7 +80,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
       })
     );
   };
-  const handleShowConfiguration = () => {
+  const handleSaveConfigurations = () => {
     if(mysqlAppState.get("show_mysql")){
       setMysqlUser(
         fromJS({
@@ -116,7 +132,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           icon={<FontIcon className="icon icon-save" />}
           key
           label={"Save"}
-          onTouchTap={handleShowConfiguration}
+          onTouchTap={handleSaveConfigurations}
           secondary
       />
     ];
@@ -128,6 +144,21 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           // onTouchTap={handleClick}
           key={index}
           onRequestDelete={(event)=>handleRemoveUser(event, value)}
+          style={styles.chip}
+      >
+        <Avatar icon={<FontIcon className="icon icon-person" />} />
+        {value.name}
+      </Chip>
+    ):"";
+  };
+  const databases = () => {
+    return mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
+      value.get("environment") === environments[applicationAppState.get("active_environment")].id
+    ).toJS().map((value,index)=>
+      <Chip
+          // onTouchTap={handleClick}
+          key={index}
+          onRequestDelete={(event)=>handleRemoveDatabase(event, value)}
           style={styles.chip}
       >
         <Avatar icon={<FontIcon className="icon icon-person" />} />
@@ -152,7 +183,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           />
           <FlatButton
               label={"Configuration"}
-              onTouchTap={handleShowConfiguration}
+              onTouchTap={handleSaveConfigurations}
           />
         </CardActions>
         <Dialog
@@ -161,7 +192,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
             autoScrollBodyContent
             bodyStyle={styles.body}
             modal={false}
-            onRequestClose={handleShowConfiguration}
+            onRequestClose={handleSaveConfigurations}
             open={mysqlAppState.get("show_mysql")?true:false}
             title="Configurations"
         >
@@ -169,6 +200,13 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
               activeEnvironment={environments[applicationAppState.get("active_environment")].id}
               mysqlAppState={mysqlAppState}
               setMysqlUser={setMysqlUser}
+              setShowMysqlDatabase={setShowMysqlDatabase}
+              setShowMysqlUser={setShowMysqlUser}
+          />
+          <AddDatabase
+              activeEnvironment={environments[applicationAppState.get("active_environment")].id}
+              mysqlAppState={mysqlAppState}
+              setMysqlDatabases={setMysqlDatabases}
               setShowMysqlDatabase={setShowMysqlDatabase}
               setShowMysqlUser={setShowMysqlUser}
           />
@@ -200,7 +238,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
                 />
                 <h2>{"Users"}</h2>
                 <div style={styles.wrapper}>
-                  {users}
+                  {users()}
                   <Chip
                       onTouchTap={handleShowAddUser}
                       style={styles.chip}
@@ -211,18 +249,10 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
                 </div>
                 <h2>{"DataBases"}</h2>
                 <div style={styles.wrapper}>
+                  {databases()}
                   <Chip
                       style={styles.chip}
-                      // onTouchTap={handleClick}
-                      // onRequestDelete={handleRemove}
-                  >
-                    <Avatar icon={<FontIcon className="icon icon-person" />} />
-                    {"TinkerWare"}
-                  </Chip>
-                  <Chip
-                      style={styles.chip}
-                      // onTouchTap={handleClick}
-                      // onRequestDelete={handleRemove}
+                      onTouchTap={handleShowDatabase}
                   >
                     <Avatar icon={<FontIcon className="icon icon-person" />} />
                     {"Add Database"}
@@ -242,11 +272,13 @@ MysqlRole.propTypes = {
   end: PropTypes.bool.isRequired,
   environments: PropTypes.array.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
+  removeMysqlDatabase: PropTypes.func.isRequired,
   removeMysqlUser: PropTypes.func.isRequired,
   setActiveEnvironment: PropTypes.func.isRequired,
   setEnableMysql: PropTypes.func.isRequired,
   setMysqlRootPassword: PropTypes.func.isRequired,
   setMysqlUser: PropTypes.func.isRequired,
+  setMysqlDatabases: PropTypes.func.isRequired,
   setShowMysql: PropTypes.func.isRequired,
   setShowMysqlDatabase: PropTypes.func.isRequired,
   setShowMysqlUser: PropTypes.func.isRequired

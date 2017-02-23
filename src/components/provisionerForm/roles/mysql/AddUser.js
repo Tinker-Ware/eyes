@@ -3,7 +3,9 @@ import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
+import MenuItem from "material-ui/MenuItem";
 import React, {PropTypes} from "react";
+import SelectField from "material-ui/SelectField";
 import TextField from "material-ui/TextField";
 
 const styles = {
@@ -15,7 +17,7 @@ const styles = {
   },
 };
 
-const MysqlRole = ( {activeEnvironment, setMysqlUser, setShowMysqlDatabase, setShowMysqlUser, mysqlAppState} ) => {
+const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppState} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
   };
@@ -37,9 +39,9 @@ const MysqlRole = ( {activeEnvironment, setMysqlUser, setShowMysqlDatabase, setS
         show_mysql_user: !mysqlAppState.get("show_mysql_user")
       })
     );
-    cookie.remove("mysql_users-host", { path: '/' });
-    cookie.remove("mysql_users-name", { path: '/' });
-    cookie.remove("mysql_users-password", { path: '/' });
+    cookie.remove("mysql_users-host", { path: "/" });
+    cookie.remove("mysql_users-name", { path: "/" });
+    cookie.remove("mysql_users-password", { path: "/" });
   };
   const actions = [
       <FlatButton
@@ -50,12 +52,27 @@ const MysqlRole = ( {activeEnvironment, setMysqlUser, setShowMysqlDatabase, setS
           secondary
       />
     ];
+  const databases = () => {
+    return <SelectField
+                floatingLabelText="Database?"
+                value={0}
+                // onChange={this.handleChange}
+            >
+      <MenuItem value={null} primaryText="" />
+      mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
+        value.get("environment") === activeEnvironment
+      ).length>0?mysqlAppState.get("mysql_databases").filter(value=>
+        value.get("environment") === activeEnvironment
+      ).toJS().map((value,index)=>
+        <MenuItem value={value.id} primaryText={value.name} />
+      ):"":""</SelectField>;
+  };
   return (
     <Dialog
         actions={actions}
         actionsContainerStyle={styles.button}
-        bodyStyle={styles.body}
         autoScrollBodyContent
+        bodyStyle={styles.body}
         modal={false}
         onRequestClose={handleShowAddUser}
         open={mysqlAppState.get("show_mysql_user")?true:false}
@@ -85,16 +102,31 @@ const MysqlRole = ( {activeEnvironment, setMysqlUser, setShowMysqlDatabase, setS
           onChange={(event)=> handleSetMysqlUsers(event, "password")}
           type={"password"}
       />
+      <SelectField
+          floatingLabelText="Database?"
+          value={null}
+          // onChange={this.handleChange}
+      >
+        <MenuItem value={null} primaryText="" />
+        { mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
+          value.get("environment") === activeEnvironment
+        ).toJS().map((value,index)=>
+          <MenuItem
+              key={index}
+              primaryText={value.name}
+              value={value.id}
+          />
+        ):""}
+      </SelectField>
     </Dialog>
   );
 };
 
-MysqlRole.propTypes = {
+AddUser.propTypes = {
   activeEnvironment: PropTypes.number.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   setMysqlUser: PropTypes.func.isRequired,
-  setShowMysqlDatabase: PropTypes.func.isRequired,
   setShowMysqlUser: PropTypes.func.isRequired
 };
 
-export default MysqlRole;
+export default AddUser;

@@ -124,14 +124,17 @@ describe("reducer", () => {
       value: fromJS({
         mysql_databases:
           [{
+            id: 1,
             name: "database_name",
             encoding: "utf8",
-            collation: "utf8_general_ci"
+            collation: "utf8_general_ci",
+            mariaDB: "false"
           }],
         mysql_database: [{
           name: "database_name2",
           encoding: "utf8",
-          collation: "utf8_general_ci"
+          collation: "utf8_general_ci",
+          mariaDB: "true"
         }]
       })
     };
@@ -139,13 +142,17 @@ describe("reducer", () => {
 
     expect(nextState).to.equal(fromJS({
       mysql_databases: [{
+        id: 1,
         name: "database_name",
         encoding: "utf8",
-        collation: "utf8_general_ci"
+        collation: "utf8_general_ci",
+        mariaDB: "false"
       },{
+        id: 2,
         name: "database_name2",
         encoding: "utf8",
-        collation: "utf8_general_ci"
+        collation: "utf8_general_ci",
+        mariaDB: "true"
       }]
     }));
   });

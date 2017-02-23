@@ -208,6 +208,10 @@ export function updateMysqlUser(value) {
   return { type: types.UPDATE_MYSQL_USERS, value };
 }
 
+export function removeMysqlDatabase(value) {
+  return { type: types.REMOVE_MYSQL_DATABASE, value };
+}
+
 export function removeMysqlUser(value) {
   return { type: types.REMOVE_MYSQL_USER, value };
 }
