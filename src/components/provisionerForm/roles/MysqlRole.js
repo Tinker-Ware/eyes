@@ -10,7 +10,6 @@ import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
 import React, {PropTypes} from "react";
 import SwipeableViews from "react-swipeable-views";
-import TextField from "material-ui/TextField";
 import Toggle from "material-ui/Toggle";
 import AddUser from "./mysql/AddUser";
 
@@ -32,12 +31,12 @@ const styles = {
     marginLeft: 16
   },
   wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap",
   }
 };
 
-const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setShowMysql, mysqlAppState, updateMysqlUser, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase} ) => {
+const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setShowMysql, mysqlAppState, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase} ) => {
   const handleRemoveUser = (e, value) => {
     removeMysqlUser(
       fromJS({
@@ -57,9 +56,6 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
     setActiveEnvironment(fromJS({
       active_environment:value
     }));
-  };
-  const handleSetMysqlUsers = (e, attribute) => {
-    cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
   };
   const handleEnable = () => {
     setEnableMysql(
@@ -81,32 +77,33 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           }]
         })
       );
-      environments.map((value,index)=>
-        // cookie.load("mysql_root_password-"+activeEnvironment, JSON.stringify(event), { path:"/"});
-        console.log(cookie.load("mysql_root_password-"+value.id))
-        let mysql_root_password;
-        if(value.id)
-          mysql_root_password={
-            id: cookie.load("mysql_root_password-"+value.id).id,
-            environment: cookie.load("mysql_root_password-"+value.id).environment,
-            password: cookie.load("mysql_root_password-"+value.id).password
-          }
-        else
-          mysql_root_password={
-            environment: cookie.load("mysql_root_password-"+value.id).environment,
-            password: cookie.load("mysql_root_password-"+value.id).password
-          }
-        setMysqlRootPassword(
-          fromJS({
-            mysql_root_passwords: mysqlAppState.get("mysql_root_password")?mysqlAppState.get("mysql_root_password").toJS():[],
-            mysql_root_password: [event]
-          })
-        );
-      )
-
-      cookie.remove("mysql_users-host", { path: '/' });
-      cookie.remove("mysql_users-name", { path: '/' });
-      cookie.remove("mysql_users-password", { path: '/' });
+      let mysqlRootPasswordArray = [];
+      environments.map((value,index)=>{
+        if(cookie.load("mysql_root_password-"+index)){
+          if(cookie.load("mysql_root_password-"+index).id)
+            mysqlRootPasswordArray.push({
+              id: cookie.load("mysql_root_password-"+index).id,
+              environment: cookie.load("mysql_root_password-"+index).environment,
+              password: cookie.load("mysql_root_password-"+index).password
+            });
+          else
+            mysqlRootPasswordArray.push({
+              environment: cookie.load("mysql_root_password-"+index).environment,
+              password: cookie.load("mysql_root_password-"+index).password
+            });
+          cookie.remove("mysql_root_password-"+index, { path: "/" });
+        }
+      });
+      if(mysqlRootPasswordArray.length>0)
+      setMysqlRootPassword(
+        fromJS({
+          mysql_root_passwords: mysqlAppState.get("mysql_root_password")?mysqlAppState.get("mysql_root_password").toJS():[],
+          mysql_root_password: mysqlRootPasswordArray
+        })
+      );
+      cookie.remove("mysql_users-host", { path: "/" });
+      cookie.remove("mysql_users-name", { path: "/" });
+      cookie.remove("mysql_users-password", { path: "/" });
     }
     setShowMysql(
       fromJS({
@@ -123,6 +120,21 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           secondary
       />
     ];
+  const users = () => {
+    return mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").filter(value=>
+      value.get("environment") === environments[applicationAppState.get("active_environment")].id
+    ).toJS().map((value,index)=>
+      <Chip
+          // onTouchTap={handleClick}
+          key={index}
+          onRequestDelete={(event)=>handleRemoveUser(event, value)}
+          style={styles.chip}
+      >
+        <Avatar icon={<FontIcon className="icon icon-person" />} />
+        {value.name}
+      </Chip>
+    ):"";
+  };
   return (
     <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
       <Card>
@@ -146,8 +158,8 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
         <Dialog
             actions={actions}
             actionsContainerStyle={styles.button}
-            bodyStyle={styles.body}
             autoScrollBodyContent
+            bodyStyle={styles.body}
             modal={false}
             onRequestClose={handleShowConfiguration}
             open={mysqlAppState.get("show_mysql")?true:false}
@@ -166,8 +178,8 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           >
             {environments.map((value, index)=>
               <Tab
-                  label={value.name}
                   key={index}
+                  label={value.name}
                   value={index}
               />
             )}
@@ -176,104 +188,48 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
               index={applicationAppState.get("active_environment")}
               onChangeIndex={handleChangeEnvironment}
           >
-            <div className={"small-12 medium-12 large-12 columns"}>
-              <Base
-                  activeEnvironment={environments[applicationAppState.get("active_environment")].id}
-                  mysqlAppState={mysqlAppState}
-                  setMysqlRootPassword={setMysqlRootPassword}
-              />
-              <h2>{"Users"}</h2>
-              <div style={styles.wrapper}>
-                {mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").filter(value=>
-                  value.get("environment") === environments[applicationAppState.get("active_environment")].id
-                ).toJS().map((value,index)=>
+            {environments.map((value, index)=>
+              <div
+                  className={"small-12 medium-12 large-12 columns"}
+                  key={index}
+              >
+                <Base
+                    activeEnvironment={environments[applicationAppState.get("active_environment")].id}
+                    mysqlAppState={mysqlAppState}
+                    setMysqlRootPassword={setMysqlRootPassword}
+                />
+                <h2>{"Users"}</h2>
+                <div style={styles.wrapper}>
+                  {users}
+                  <Chip
+                      onTouchTap={handleShowAddUser}
+                      style={styles.chip}
+                  >
+                    <Avatar icon={<FontIcon className="icon icon-person-add" />} />
+                    {"Add User"}
+                  </Chip>
+                </div>
+                <h2>{"DataBases"}</h2>
+                <div style={styles.wrapper}>
                   <Chip
                       style={styles.chip}
                       // onTouchTap={handleClick}
-                      key={index}
-                      onRequestDelete={(event)=>handleRemoveUser(event, value)}
+                      // onRequestDelete={handleRemove}
                   >
                     <Avatar icon={<FontIcon className="icon icon-person" />} />
-                    {value.name}
+                    {"TinkerWare"}
                   </Chip>
-                ):""}
-                <Chip
-                    style={styles.chip}
-                    onTouchTap={handleShowAddUser}
-                >
-                  <Avatar icon={<FontIcon className="icon icon-person-add" />} />
-                  {"Add User"}
-                </Chip>
-              </div>
-              <h2>{"DataBases"}</h2>
-              <div style={styles.wrapper}>
-                <Chip
-                    style={styles.chip}
-                    // onTouchTap={handleClick}
-                    // onRequestDelete={handleRemove}
-                >
-                  <Avatar icon={<FontIcon className="icon icon-person" />} />
-                  {"TinkerWare"}
-                </Chip>
-                <Chip
-                    style={styles.chip}
-                    // onTouchTap={handleClick}
-                    // onRequestDelete={handleRemove}
-                >
-                  <Avatar icon={<FontIcon className="icon icon-person" />} />
-                  {"Add Database"}
-                </Chip>
-              </div>
-            </div>
-            <div className={"small-12 medium-12 large-12 columns"}>
-              <Base
-                  activeEnvironment={environments[applicationAppState.get("active_environment")].id}
-                  setMysqlRootPassword={setMysqlRootPassword}
-                  mysqlAppState={mysqlAppState}
-              />
-              <h2>{"Users"}</h2>
-              <div style={styles.wrapper}>
-                {mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").filter(value=>
-                  value.get("environment") === environments[applicationAppState.get("active_environment")].id
-                ).toJS().map((value,index)=>
                   <Chip
                       style={styles.chip}
                       // onTouchTap={handleClick}
-                      key={index}
-                      onRequestDelete={(event)=>handleRemoveUser(event, value)}
+                      // onRequestDelete={handleRemove}
                   >
                     <Avatar icon={<FontIcon className="icon icon-person" />} />
-                    {value.name}
+                    {"Add Database"}
                   </Chip>
-                ):""}
-                <Chip
-                    style={styles.chip}
-                    onTouchTap={handleShowAddUser}
-                >
-                  <Avatar icon={<FontIcon className="icon icon-person-add" />} />
-                  {"Add User"}
-                </Chip>
+                </div>
               </div>
-              <h2>{"DataBases"}</h2>
-              <div style={styles.wrapper}>
-                <Chip
-                    style={styles.chip}
-                    // onTouchTap={handleClick}
-                    // onRequestDelete={handleRemove}
-                >
-                  <Avatar icon={<FontIcon className="icon icon-person" />} />
-                  {"TinkerWare"}
-                </Chip>
-                <Chip
-                    style={styles.chip}
-                    // onTouchTap={handleClick}
-                    // onRequestDelete={handleRemove}
-                >
-                  <Avatar icon={<FontIcon className="icon icon-person" />} />
-                  {"Add Database"}
-                </Chip>
-              </div>
-            </div>
+            )}
           </SwipeableViews>
         </Dialog>
       </Card>
@@ -293,8 +249,7 @@ MysqlRole.propTypes = {
   setMysqlUser: PropTypes.func.isRequired,
   setShowMysql: PropTypes.func.isRequired,
   setShowMysqlDatabase: PropTypes.func.isRequired,
-  setShowMysqlUser: PropTypes.func.isRequired,
-  updateMysqlUser: PropTypes.func.isRequired
+  setShowMysqlUser: PropTypes.func.isRequired
 };
 
 export default MysqlRole;
