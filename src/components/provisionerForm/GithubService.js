@@ -36,7 +36,7 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
             "state": cookie.load("github_oauth").state
           }
         }));
-        cookie.remove("github_oauth");
+        cookie.remove("github_oauth", { path: '/' });
         clearInterval(timer);
       }
     }, 1000);
