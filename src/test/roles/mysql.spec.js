@@ -156,6 +156,15 @@ describe("reducer", () => {
       }]
     }));
   });
+  it("handles SET_MYSQL_DATABASE_INDEX", () => {
+    const initialState = Map();
+    const action = {type:"SET_MYSQL_DATABASE_INDEX", value: fromJS({
+      mysql_database_index:"1"})};
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      mysql_database_index:"1"}));
+  });
   it("handles SET_ENABLE_MYSQL", () => {
     const initialState = Map();
     const action = {type:"SET_ENABLE_MYSQL", value: fromJS({

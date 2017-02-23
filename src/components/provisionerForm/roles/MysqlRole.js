@@ -37,7 +37,7 @@ const styles = {
   }
 };
 
-const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setMysqlDatabases, setShowMysql, mysqlAppState, removeMysqlDatabase, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase} ) => {
+const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setMysqlDatabases, setShowMysql, mysqlAppState, removeMysqlDatabase, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase, setMysqlDatabaseIndex} ) => {
   const handleRemoveUser = (e, value) => {
     removeMysqlUser(
       fromJS({
@@ -199,6 +199,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
           <AddUser
               activeEnvironment={environments[applicationAppState.get("active_environment")].id}
               mysqlAppState={mysqlAppState}
+              setMysqlDatabaseIndex={setMysqlDatabaseIndex}
               setMysqlUser={setMysqlUser}
               setShowMysqlDatabase={setShowMysqlDatabase}
               setShowMysqlUser={setShowMysqlUser}
@@ -276,9 +277,10 @@ MysqlRole.propTypes = {
   removeMysqlUser: PropTypes.func.isRequired,
   setActiveEnvironment: PropTypes.func.isRequired,
   setEnableMysql: PropTypes.func.isRequired,
+  setMysqlDatabaseIndex: PropTypes.func.isRequired,
+  setMysqlDatabases: PropTypes.func.isRequired,
   setMysqlRootPassword: PropTypes.func.isRequired,
   setMysqlUser: PropTypes.func.isRequired,
-  setMysqlDatabases: PropTypes.func.isRequired,
   setShowMysql: PropTypes.func.isRequired,
   setShowMysqlDatabase: PropTypes.func.isRequired,
   setShowMysqlUser: PropTypes.func.isRequired

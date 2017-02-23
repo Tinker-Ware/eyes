@@ -26,6 +26,7 @@ const Application = ( {applicationAppState, rolesActions, yiiAppState, mysqlAppS
             removeMysqlUser={rolesActions.removeMysqlUser}
             setActiveEnvironment={setActiveEnvironment}
             setEnableMysql={rolesActions.setEnableMysql}
+            setMysqlDatabaseIndex={rolesActions.setMysqlDatabaseIndex}
             setMysqlDatabases={rolesActions.setMysqlDatabases}
             setMysqlRootPassword={rolesActions.setMysqlRootPassword}
             setMysqlUser={rolesActions.setMysqlUser}

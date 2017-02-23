@@ -24,6 +24,10 @@ export function setMysqlDatabases(value) {
   return { type: types.SET_MYSQL_DATABASES, value };
 }
 
+export function setMysqlDatabaseIndex(value) {
+  return { type: types.SET_MYSQL_DATABASE_INDEX, value };
+}
+
 export function setNginxRemoveDefaultVhost(value) {
   return { type: types.SET_NGINX_REMOVE_DEFAULT_VHOST, value };
 }

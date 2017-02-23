@@ -1,4 +1,4 @@
-import {REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, UPDATE_MYSQL_USERS, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
+import {SET_MYSQL_DATABASE_INDEX, REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, UPDATE_MYSQL_USERS, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -8,7 +8,8 @@ const initialState = Map({
   },
   show_mysql: false,
   show_mysql_user: false,
-  show_mysql_database: false
+  show_mysql_database: false,
+  mysql_database_index: 0
 });
 
 const getId = (store) => {
@@ -78,6 +79,10 @@ export default function mysql(state = initialState, action) {
     case SET_SHOW_MYSQL_DATABASE:
     {
       return state.set("show_mysql_database", action.value.get("show_mysql_database"));
+    }
+    case SET_MYSQL_DATABASE_INDEX:
+    {
+      return state.set("mysql_database_index", action.value.get("mysql_database_index"));
     }
     case SET_ENABLE_MYSQL:
     {

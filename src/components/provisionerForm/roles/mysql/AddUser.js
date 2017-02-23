@@ -17,9 +17,19 @@ const styles = {
   },
 };
 
-const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppState} ) => {
+let index2 = 0;
+
+const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppState, setMysqlDatabaseIndex} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
+  };
+  const handleSelectDatabase = (e, index, value) => {
+    if(value){
+      cookie.save("mysql_users-database", value, { path:"/"});
+      setMysqlDatabaseIndex(fromJS({
+        mysql_database_index:value
+      }));
+    }
   };
   const handleShowAddUser = () => {
     setMysqlUser(
@@ -30,7 +40,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
           name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
           host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
           password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-          priv: "ti_database.*:ALL"
+          priv: cookie.load("mysql_users-database")?cookie.load("mysql_users-database")+".*:ALL":""
         }]
       })
     );
@@ -42,6 +52,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
     cookie.remove("mysql_users-host", { path: "/" });
     cookie.remove("mysql_users-name", { path: "/" });
     cookie.remove("mysql_users-password", { path: "/" });
+    cookie.remove("mysql_users-database", { path: "/" });
   };
   const actions = [
       <FlatButton
@@ -52,21 +63,6 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
           secondary
       />
     ];
-  const databases = () => {
-    return <SelectField
-                floatingLabelText="Database?"
-                value={0}
-                // onChange={this.handleChange}
-            >
-      <MenuItem value={null} primaryText="" />
-      mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
-        value.get("environment") === activeEnvironment
-      ).length>0?mysqlAppState.get("mysql_databases").filter(value=>
-        value.get("environment") === activeEnvironment
-      ).toJS().map((value,index)=>
-        <MenuItem value={value.id} primaryText={value.name} />
-      ):"":""</SelectField>;
-  };
   return (
     <Dialog
         actions={actions}
@@ -104,17 +100,20 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
       />
       <SelectField
           floatingLabelText="Database?"
-          value={null}
-          // onChange={this.handleChange}
+          value={mysqlAppState.get("mysql_database_index")}
+          onChange={handleSelectDatabase}
       >
-        <MenuItem value={null} primaryText="" />
+        <MenuItem
+            primaryText=""
+            value={null}
+        />
         { mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
           value.get("environment") === activeEnvironment
         ).toJS().map((value,index)=>
           <MenuItem
               key={index}
               primaryText={value.name}
-              value={value.id}
+              value={value.name}
           />
         ):""}
       </SelectField>
@@ -125,6 +124,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
 AddUser.propTypes = {
   activeEnvironment: PropTypes.number.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
+  setMysqlDatabaseIndex: PropTypes.func.isRequired,
   setMysqlUser: PropTypes.func.isRequired,
   setShowMysqlUser: PropTypes.func.isRequired
 };
