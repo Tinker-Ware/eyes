@@ -14,11 +14,29 @@ const initialState = Map({
   }
 });
 
+const getId = (store) => {
+  return store.toJS().reduce((maxId, todo) => Math.max(todo.id? todo.id : 0, maxId), 0) + 1;
+};
+
 export default function yii(state = initialState, action) {
   switch (action.type) {
     case SET_COOKIE_VALIDATION_KEY:
     {
-      return state.set("cookie_validation_key", action.value.get("cookie_validation_key"));
+      if(action.value.get("cookie_validation_key").toJS()[0].id)
+        return state.set("cookie_validation_key",
+          action.value.get("cookie_validation_keys").map(value=>
+            value.get("id") === action.value.get("cookie_validation_key").toJS()[0].id ?
+              action.value.get("cookie_validation_key").first() : value
+          )
+        );
+      else
+        return state.set("cookie_validation_key",
+          action.value.get("cookie_validation_keys").toSet().union(
+            action.value.get("cookie_validation_key").map(value=>
+              value.set("id", getId(action.value.get("cookie_validation_keys")))
+            )
+          ).toList()
+        );
     }
     case SET_YII_GIT_REPO:
     {

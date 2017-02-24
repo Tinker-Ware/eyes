@@ -1,10 +1,13 @@
 import { fromJS } from "immutable";
 import {Card, CardActions, CardHeader} from "material-ui/Card";
+import {Tabs, Tab} from "material-ui/Tabs";
+import Base from "./yii/Base";
+import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
 import React, {PropTypes} from "react";
-import TextField from "material-ui/TextField";
+import SwipeableViews from "react-swipeable-views";
 import Toggle from "material-ui/Toggle";
 
 const styles = {
@@ -20,7 +23,12 @@ const styles = {
   },
 };
 
-const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiAppState} ) => {
+const YiiRole = ( {end, environments, applicationAppState, setActiveEnvironment, setCookieValidationKey, setEnableYii, setShowYii, yiiAppState} ) => {
+  const handleChangeEnvironment = (value) => {
+    setActiveEnvironment(fromJS({
+      active_environment:value
+    }));
+  };
   const handleEnable = () => {
     setEnableYii(
       fromJS({
@@ -28,17 +36,36 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
       })
     );
   };
-  const handleShowConfiguration = () => {
+  const handleSaveConfiguration = () => {
+    if(yiiAppState.get("show_yii")){
+      let yiiCookieValidationKey = [];
+      environments.map((value,index)=>{
+        if(cookie.load("cookie_validation_key-"+index)){
+          if(cookie.load("cookie_validation_key-"+index).id)
+            yiiCookieValidationKey.push({
+              id: cookie.load("cookie_validation_key-"+index).id,
+              environment: cookie.load("cookie_validation_key-"+index).environment,
+              cookie_validation_key: cookie.load("cookie_validation_key-"+index).cookie_validation_key
+            });
+          else
+            yiiCookieValidationKey.push({
+              environment: cookie.load("cookie_validation_key-"+index).environment,
+              cookie_validation_key: cookie.load("cookie_validation_key-"+index).cookie_validation_key
+            });
+          cookie.remove("cookie_validation_key-"+index, { path: "/" });
+        }
+      });
+      if(yiiCookieValidationKey.length>0)
+      setCookieValidationKey(
+        fromJS({
+          cookie_validation_keys: yiiAppState.get("cookie_validation_key")?yiiAppState.get("cookie_validation_key").toJS():[],
+          cookie_validation_key: yiiCookieValidationKey
+        })
+      );
+    }
     setShowYii(
       fromJS({
         show_yii: !yiiAppState.get("show_yii")
-      })
-    );
-  };
-  const handleSetCookieVaidationKey = (e) => {
-    setCookieValidationKey(
-      fromJS({
-        cookie_validation_key: e.target.value
       })
     );
   };
@@ -47,7 +74,7 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
           icon={<FontIcon className="icon icon-cancel" />}
           key
           label={"Close"}
-          onTouchTap={handleShowConfiguration}
+          onTouchTap={handleSaveConfiguration}
           secondary
       />
     ];
@@ -68,27 +95,45 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
           />
           <FlatButton
               label={"Configuration"}
-              onTouchTap={handleShowConfiguration}
+              onTouchTap={handleSaveConfiguration}
           />
         </CardActions>
         <Dialog
             actions={actions}
             actionsContainerStyle={styles.button}
             modal={false}
-            onRequestClose={handleShowConfiguration}
+            onRequestClose={handleSaveConfiguration}
             open={yiiAppState.get("show_yii")?true:false}
             title="Configurations"
         >
-          {"All the changes are autosaved"}
-          <TextField
-              errorText="This field is required."
-              floatingLabelText={"Cookie validation key"}
-              fullWidth
-              name={"cookie_validation_key"}
-              onChange={handleSetCookieVaidationKey}
-              type={"password"}
-              value={yiiAppState.get("cookie_validation_key")}
-          />
+          <Tabs
+              onChange={handleChangeEnvironment}
+              value={applicationAppState.get("active_environment")}
+          >
+            {environments.map((value, index)=>
+              <Tab
+                  key={index}
+                  label={value.name}
+                  value={index}
+              />
+            )}
+          </Tabs>
+          <SwipeableViews
+              index={applicationAppState.get("active_environment")}
+              onChangeIndex={handleChangeEnvironment}
+          >
+            {environments.map((value, index)=>
+              <div
+                  className={"small-12 medium-12 large-12 columns"}
+                  key={index}
+              >
+                <Base
+                    activeEnvironment={environments[applicationAppState.get("active_environment")].id}
+                    yiiAppState={yiiAppState}
+                />
+              </div>
+            )}
+          </SwipeableViews>
         </Dialog>
       </Card>
     </div>
@@ -96,7 +141,10 @@ const YiiRole = ( {end, setCookieValidationKey, setEnableYii, setShowYii, yiiApp
 };
 
 YiiRole.propTypes = {
+  applicationAppState: PropTypes.object.isRequired,
   end: PropTypes.bool.isRequired,
+  environments: PropTypes.array.isRequired,
+  setActiveEnvironment: PropTypes.func.isRequired,
   setCookieValidationKey: PropTypes.func.isRequired,
   setEnableYii: PropTypes.func.isRequired,
   setShowYii: PropTypes.func.isRequired,
