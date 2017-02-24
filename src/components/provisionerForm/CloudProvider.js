@@ -17,7 +17,7 @@ const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userA
             "code": cookie.load("digitalocean_oauth").code
           }
         }));
-        cookie.remove("digitalocean_oauth");
+        cookie.remove("digitalocean_oauth", { path: '/' });
         clearInterval(timer);
       }
     }, 1000);

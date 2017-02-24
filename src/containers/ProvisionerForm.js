@@ -101,6 +101,7 @@ export class ServiceForm extends Component {
                     mysqlAppState={this.props.mysqlAppState}
                     rolesActions={this.props.rolesActions}
                     setApplication={this.props.actions.setApplication}
+                    setActiveEnvironment={this.props.actions.setActiveEnvironment}
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}
                     yiiAppState={this.props.yiiAppState}
                 />

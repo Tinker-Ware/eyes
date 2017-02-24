@@ -13,6 +13,37 @@ describe("reducer", () => {
     expect(nextState).to.equal(fromJS({
       application_name:"ghost"}));
   });
+  it("handles SET_ACTIVE_ENVIRONMENT", () => {
+    const initialState = Map();
+    const action = {type:"SET_ACTIVE_ENVIRONMENT", value: fromJS({
+        active_environment:1})
+    };
+    const nextState = application(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      active_environment:1}));
+  });
+  it("handles ADD_ENVIRONMENT", () => {
+    const initialState = Map();
+    const action = {
+      type:"ADD_ENVIRONMENT",
+      value: fromJS({
+        evironments: [
+          {name:"developmet"},
+          {name:"production"}
+        ],
+        evironment: [{name:"stage"}]
+      })
+    };
+    const nextState = application(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      application_evironments: [
+        {name:"developmet"},
+        {name:"production"},
+        {name:"stage"}]
+    }));
+  });
   it("handles SET_APPLICATION_ONE_CLICK_APP when exist SSHKeys", () => {
     const initialState = Map();
     const action = {

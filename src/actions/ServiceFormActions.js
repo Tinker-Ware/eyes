@@ -8,6 +8,10 @@ export function setProjectName(value) {
   return { type: types.SET_PROJECT_NAME, value };
 }
 
+export function setActiveEnvironment(value) {
+  return { type: types.SET_ACTIVE_ENVIRONMENT, value };
+}
+
 export function setCloudProvider(value) {
   return { type: types.SET_CLOUD_PROVIDER, value };
 }

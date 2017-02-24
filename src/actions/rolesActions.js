@@ -12,7 +12,7 @@ export function setMysqlRootPassword(value) {
   return { type: types.SET_MYSQL_ROOT_PASSWORD, value };
 }
 
-export function setMysqlUsers(value) {
+export function setMysqlUser(value) {
   return { type: types.SET_MYSQL_USERS, value };
 }
 
@@ -22,6 +22,10 @@ export function setMysqlPackages(value) {
 
 export function setMysqlDatabases(value) {
   return { type: types.SET_MYSQL_DATABASES, value };
+}
+
+export function setMysqlDatabaseIndex(value) {
+  return { type: types.SET_MYSQL_DATABASE_INDEX, value };
 }
 
 export function setNginxRemoveDefaultVhost(value) {
@@ -152,6 +156,14 @@ export function setShowMysql(value) {
   return { type: types.SET_SHOW_MYSQL, value };
 }
 
+export function setShowMysqlUser(value) {
+  return { type: types.SET_SHOW_MYSQL_USER, value };
+}
+
+export function setShowMysqlDatabase(value) {
+  return { type: types.SET_SHOW_MYSQL_DATABASE, value };
+}
+
 export function setEnableMysql(value) {
   return { type: types.SET_ENABLE_MYSQL, value };
 }
@@ -196,6 +208,14 @@ export function setRequestActiveYii(value) {
   return { type: types.SET_REQUEST_ACTIVE_YII, value };
 }
 
-export function updateMysqlUsers(value) {
+export function updateMysqlUser(value) {
   return { type: types.UPDATE_MYSQL_USERS, value };
+}
+
+export function removeMysqlDatabase(value) {
+  return { type: types.REMOVE_MYSQL_DATABASE, value };
+}
+
+export function removeMysqlUser(value) {
+  return { type: types.REMOVE_MYSQL_USER, value };
 }
