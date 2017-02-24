@@ -235,7 +235,6 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
                 <Base
                     activeEnvironment={environments[applicationAppState.get("active_environment")].id}
                     mysqlAppState={mysqlAppState}
-                    setMysqlRootPassword={setMysqlRootPassword}
                 />
                 <h2>{"Users"}</h2>
                 <div style={styles.wrapper}>
@@ -252,8 +251,8 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
                 <div style={styles.wrapper}>
                   {databases()}
                   <Chip
-                      style={styles.chip}
                       onTouchTap={handleShowDatabase}
+                      style={styles.chip}
                   >
                     <Avatar icon={<FontIcon className="icon icon-person" />} />
                     {"Add Database"}

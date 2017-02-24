@@ -100,8 +100,8 @@ export class ServiceForm extends Component {
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?   provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
                     mysqlAppState={this.props.mysqlAppState}
                     rolesActions={this.props.rolesActions}
-                    setApplication={this.props.actions.setApplication}
                     setActiveEnvironment={this.props.actions.setActiveEnvironment}
+                    setApplication={this.props.actions.setApplication}
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}
                     yiiAppState={this.props.yiiAppState}
                 />

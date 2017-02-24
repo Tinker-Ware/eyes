@@ -6,11 +6,30 @@ describe("reducer", () => {
   it("handles SET_COOKIE_VALIDATION_KEY", () => {
     const initialState = Map();
     const action = {type:"SET_COOKIE_VALIDATION_KEY", value: fromJS({
-      cookie_validation_key:"pass"})};
+      cookie_validation_keys:
+        [{
+          id: 1,
+          environment: 1,
+          cookie_validation_key: "username"
+        }],
+      cookie_validation_key: [{
+        environment: 2,
+        cookie_validation_key: "username"
+      }]})};
     const nextState = yii(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      cookie_validation_key:"pass"}));
+      cookie_validation_key:[{
+        id: 1,
+        environment: 1,
+        cookie_validation_key: "username"
+      },
+      {
+        id: 2,
+        environment: 2,
+        cookie_validation_key: "username"
+      }]
+    }));
   });
   it("handles SET_YII_GIT_REPO", () => {
     const initialState = Map();

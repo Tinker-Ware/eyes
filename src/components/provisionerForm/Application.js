@@ -8,7 +8,10 @@ const Application = ( {applicationAppState, rolesActions, yiiAppState, mysqlAppS
       <div className="row">
         <h2>{"Choose an One-Click Apps"}</h2>
         <YiiRole
+            applicationAppState={applicationAppState}
             end
+            environments={applicationAppState.get("application_evironments")?applicationAppState.get("application_evironments"):[]}
+            setActiveEnvironment={setActiveEnvironment}
             setCookieValidationKey={rolesActions.setCookieValidationKey}
             setEnableYii={rolesActions.setEnableYii}
             setShowYii={rolesActions.setShowYii}
