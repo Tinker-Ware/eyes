@@ -82,17 +82,6 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
   };
   const handleSaveConfigurations = () => {
     if(mysqlAppState.get("show_mysql")){
-      setMysqlUser(
-        fromJS({
-          mysql_users:[],
-          mysql_user: [{
-            name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-            host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
-            password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-            priv: "ti_database.*:ALL"
-          }]
-        })
-      );
       let mysqlRootPasswordArray = [];
       environments.map((value,index)=>{
         if(cookie.load("mysql_root_password-"+index)){

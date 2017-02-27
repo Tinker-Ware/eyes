@@ -30,14 +30,20 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         "cronjobs":[]
       };
   };
-  const getYiiConfiguration = () => {
-    return yiiAppState.get("enable_yii")?
-      {
-        //YII ROLE
-        "cookie_validation_key":yiiAppState.get("cookie_validation_key"),
-        "yii_git_repo":repositoryAppState.get("repository")?"https://github.com/"+repositoryAppState.get("repository").toJS().name:"https://github.com/Tinker-Ware/yii2-crud"
-      }
-      :"";
+  const getYiiConfiguration = (environment=-1) => {
+    if(yiiAppState.get("enable_yii")){
+      let config;
+      if(environment==-1)
+        config={
+          "yii_git_repo":repositoryAppState.get("repository")?"https://github.com/"+repositoryAppState.get("repository").toJS().name:"https://github.com/Tinker-Ware/yii2-crud"
+        };
+      else
+        yiiAppState.get("cookie_validation_key").toJS().map(value=>{
+          if(value.environment == environment)
+            config = {"cookie_validation_key":value.cookie_validation_key};
+        })
+      return config;
+    }
   };
   const getNginxConfiguration = () => {
     return {
@@ -46,32 +52,53 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         "nginx_vhosts": nginx()
       };
   };
-  const getMysqlConfiguration = () => {
-    return mysqlAppState.get("enable_mysql")?
-      {
-        //MYSQL ROLE
-        "mysql_root_password":mysqlAppState.get("mysql_root_password"),
-        "mysql_users":mysqlAppState.get("mysql_users").toJS(),
-        "mysql_packages": [
-          "mariadb-client",
-          "mariadb-server",
-          "python-mysqldb"
-        ],
-        "mysql_databases": [
-          {
-            "name": "ti_database",
-            "encoding": "utf8",
-            "collation": "utf8_general_ci"
-          }
-        ]
+  const getMysqlConfiguration = (environment) => {
+    if(mysqlAppState.get("enable_mysql")){
+      let config;
+      if(environment==-1)
+        config={
+          "mysql_packages": [
+            "mariadb-client",
+            "mariadb-server",
+            "python-mysqldb"
+          ]
+        };
+      else{
+        let databases = [];
+        let users = [];
+        let cookieValidationKey;
+        if(mysqlAppState.get("mysql_users")){
+          mysqlAppState.get("mysql_users").toJS().map(value=>{
+            if(value.environment == environment)
+              users.push(value);
+          });
+        }
+        if(mysqlAppState.get("mysql_databases")){
+          mysqlAppState.get("mysql_databases").toJS().map(value=>{
+            if(value.environment == environment)
+              databases.push(value);
+          });
+        }
+        if(mysqlAppState.get("cookie_validation_key")){
+          mysqlAppState.get("cookie_validation_key").toJS().map(value=>{
+            if(value.environment == environment)
+              cookieValidationKey=value;
+          });
+        }
+        config = {
+          "mysql_root_password":cookieValidationKey,
+          "mysql_users":users,
+          "mysql_databases":databases
+        };
       }
-      :"";
+      return config;
+    }
   };
   const configuration = () => {
     return {
-      "general":{...getBaseConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration(), ...getNginxConfiguration()},
-      "development":{},
-      "production":{}
+      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration()},
+      "development":{...getYiiConfiguration(0), ...getMysqlConfiguration(0)},
+      "production":{...getYiiConfiguration(1), ...getMysqlConfiguration(1)}
     };
   };
   const nginx = () => {
