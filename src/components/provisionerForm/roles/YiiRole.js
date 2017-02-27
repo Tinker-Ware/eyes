@@ -69,13 +69,30 @@ const YiiRole = ( {end, environments, applicationAppState, setActiveEnvironment,
       })
     );
   };
+  const handleCancelSaveConfiguration = () => {
+    environments.map((value,index)=>{
+      cookie.remove("cookie_validation_key-"+index, { path: "/" });
+    });
+    setShowYii(
+      fromJS({
+        show_yii: !yiiAppState.get("show_yii")
+      })
+    );
+  };
   const actions = [
       <FlatButton
           icon={<FontIcon className="icon icon-cancel" />}
-          key
-          label={"Close"}
-          onTouchTap={handleSaveConfiguration}
+          key={2}
+          label={"Cancel"}
+          onTouchTap={handleCancelSaveConfiguration}
           secondary
+      />,
+      <FlatButton
+          icon={<FontIcon className="icon icon-cancel" />}
+          key={1}
+          label={"Save"}
+          onTouchTap={handleSaveConfiguration}
+          primary
       />
     ];
   return (
@@ -102,7 +119,7 @@ const YiiRole = ( {end, environments, applicationAppState, setActiveEnvironment,
             actions={actions}
             actionsContainerStyle={styles.button}
             modal={false}
-            onRequestClose={handleSaveConfiguration}
+            onRequestClose={handleCancelSaveConfiguration}
             open={yiiAppState.get("show_yii")?true:false}
             title="Configurations"
         >

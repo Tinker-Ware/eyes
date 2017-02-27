@@ -28,18 +28,28 @@ const AddDatabase = ( {activeEnvironment, setMysqlDatabases, setShowMysqlDatabas
       cookie.save("mysql_databases-packages", e.target.checked, { path:"/"});
   };
   const handleSaveDatabase = () => {
-    setMysqlDatabases(
+    if(mysqlAppState.get("show_mysql_database"))
+      setMysqlDatabases(
+        fromJS({
+          mysql_databases: mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").toJS():[],
+          mysql_database: [{
+            name: cookie.load("mysql_databases-name"),
+            encoding: "utf8",
+            collation: "utf8_general_ci",
+            environment: activeEnvironment,
+            mariaDB: cookie.load("mysql_databases-packages")?true:false
+          }]
+        })
+      );
+    setShowMysqlDatabase(
       fromJS({
-        mysql_databases: mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").toJS():[],
-        mysql_database: [{
-          name: cookie.load("mysql_databases-name"),
-          encoding: "utf8",
-          collation: "utf8_general_ci",
-          environment: activeEnvironment,
-          mariaDB: cookie.load("mysql_databases-packages")?true:false
-        }]
+        show_mysql_database: !mysqlAppState.get("show_mysql_database")
       })
     );
+    cookie.remove("mysql_databases-name", { path: "/" });
+    cookie.remove("mysql_databases-packages", { path: "/" });
+  };
+  const handleCanelAddDatabase = () => {
     setShowMysqlDatabase(
       fromJS({
         show_mysql_database: !mysqlAppState.get("show_mysql_database")
@@ -50,11 +60,18 @@ const AddDatabase = ( {activeEnvironment, setMysqlDatabases, setShowMysqlDatabas
   };
   const actions = [
     <FlatButton
+        icon={<FontIcon className="icon icon-cancel" />}
+        key={2}
+        label={"Cancel"}
+        onTouchTap={handleCanelAddDatabase}
+        secondary
+    />,
+    <FlatButton
         icon={<FontIcon className="icon icon-save" />}
-        key
+        key={1}
         label={"Save"}
         onTouchTap={handleSaveDatabase}
-        secondary
+        primary
     />
   ];
   return (
@@ -64,7 +81,7 @@ const AddDatabase = ( {activeEnvironment, setMysqlDatabases, setShowMysqlDatabas
         autoScrollBodyContent
         bodyStyle={styles.body}
         modal={false}
-        onRequestClose={handleSaveDatabase}
+        onRequestClose={handleCanelAddDatabase}
         open={mysqlAppState.get("show_mysql_database")?true:false}
         title="Add Database"
     >

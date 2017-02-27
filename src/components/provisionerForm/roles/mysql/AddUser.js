@@ -29,19 +29,31 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
       }));
     }
   };
-  const handleShowAddUser = () => {
-    setMysqlUser(
+  const handleSaveUser = () => {
+    if(mysqlAppState.get("show_mysql_user"))
+      setMysqlUser(
+        fromJS({
+          mysql_users: mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS():[],
+          mysql_user: [{
+            environment:activeEnvironment,
+            name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
+            host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
+            password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
+            priv: cookie.load("mysql_users-database")?cookie.load("mysql_users-database")+".*:ALL":""
+          }]
+        })
+      );
+    setShowMysqlUser(
       fromJS({
-        mysql_users: mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS():[],
-        mysql_user: [{
-          environment:activeEnvironment,
-          name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-          host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
-          password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-          priv: cookie.load("mysql_users-database")?cookie.load("mysql_users-database")+".*:ALL":""
-        }]
+        show_mysql_user: !mysqlAppState.get("show_mysql_user")
       })
     );
+    cookie.remove("mysql_users-host", { path: "/" });
+    cookie.remove("mysql_users-name", { path: "/" });
+    cookie.remove("mysql_users-password", { path: "/" });
+    cookie.remove("mysql_users-database", { path: "/" });
+  };
+  const handleCancelAddUser = () => {
     setShowMysqlUser(
       fromJS({
         show_mysql_user: !mysqlAppState.get("show_mysql_user")
@@ -54,11 +66,18 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
   };
   const actions = [
       <FlatButton
-          icon={<FontIcon className="icon icon-save" />}
-          key
-          label={"Save"}
-          onTouchTap={handleShowAddUser}
+          icon={<FontIcon className="icon icon-cancel" />}
+          key={2}
+          label={"Cancel"}
+          onTouchTap={handleCancelAddUser}
           secondary
+      />,
+      <FlatButton
+          icon={<FontIcon className="icon icon-save" />}
+          key={1}
+          label={"Save"}
+          onTouchTap={handleSaveUser}
+          primary
       />
     ];
   return (
@@ -68,7 +87,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
         autoScrollBodyContent
         bodyStyle={styles.body}
         modal={false}
-        onRequestClose={handleShowAddUser}
+        onRequestClose={handleCancelAddUser}
         open={mysqlAppState.get("show_mysql_user")?true:false}
         title="Add User"
     >

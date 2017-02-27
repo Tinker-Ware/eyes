@@ -116,13 +116,33 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
       })
     );
   };
+  const handleCancelSaveConfigurations = () => {
+    environments.map((value,index)=>{
+      cookie.remove("mysql_root_password-"+index, { path: "/" });
+    });
+    cookie.remove("mysql_users-host", { path: "/" });
+    cookie.remove("mysql_users-name", { path: "/" });
+    cookie.remove("mysql_users-password", { path: "/" });
+    setShowMysql(
+      fromJS({
+        show_mysql: !mysqlAppState.get("show_mysql")
+      })
+    );
+  };
   const actions = [
       <FlatButton
+          icon={<FontIcon className="icon icon-cancel" />}
+          key={2}
+          label={"Cancel"}
+          onTouchTap={handleCancelSaveConfigurations}
+          secondary
+      />,
+      <FlatButton
           icon={<FontIcon className="icon icon-save" />}
-          key
+          key={1}
           label={"Save"}
           onTouchTap={handleSaveConfigurations}
-          secondary
+          primary
       />
     ];
   const users = () => {
@@ -181,7 +201,7 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
             autoScrollBodyContent
             bodyStyle={styles.body}
             modal={false}
-            onRequestClose={handleSaveConfigurations}
+            onRequestClose={handleCancelSaveConfigurations}
             open={mysqlAppState.get("show_mysql")?true:false}
             title="Configurations"
         >

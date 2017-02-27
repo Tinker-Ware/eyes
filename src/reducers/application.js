@@ -6,7 +6,7 @@ const initialState = Map({
   application_evironments:[
     {
       id:0,
-      name:"developmet"
+      name:"development"
     },
     {
       id:1,
