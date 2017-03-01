@@ -41,7 +41,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         yiiAppState.get("cookie_validation_key").toJS().map(value=>{
           if(value.environment == environment)
             config = {"cookie_validation_key":value.cookie_validation_key};
-        })
+        });
       return config;
     }
   };

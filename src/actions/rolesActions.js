@@ -24,10 +24,6 @@ export function setMysqlDatabases(value) {
   return { type: types.SET_MYSQL_DATABASES, value };
 }
 
-export function setMysqlDatabaseIndex(value) {
-  return { type: types.SET_MYSQL_DATABASE_INDEX, value };
-}
-
 export function setNginxRemoveDefaultVhost(value) {
   return { type: types.SET_NGINX_REMOVE_DEFAULT_VHOST, value };
 }
@@ -206,10 +202,6 @@ export function setEnableYii(value) {
 
 export function setRequestActiveYii(value) {
   return { type: types.SET_REQUEST_ACTIVE_YII, value };
-}
-
-export function updateMysqlUser(value) {
-  return { type: types.UPDATE_MYSQL_USERS, value };
 }
 
 export function removeMysqlDatabase(value) {

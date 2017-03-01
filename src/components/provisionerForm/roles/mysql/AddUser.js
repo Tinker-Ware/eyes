@@ -3,9 +3,7 @@ import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import MenuItem from "material-ui/MenuItem";
 import React, {PropTypes} from "react";
-import SelectField from "material-ui/SelectField";
 import TextField from "material-ui/TextField";
 
 const styles = {
@@ -17,32 +15,27 @@ const styles = {
   },
 };
 
-const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppState, setMysqlDatabaseIndex} ) => {
+const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppState} ) => {
   const handleSetMysqlUsers = (e, attribute) => {
     cookie.save("mysql_users-"+attribute, e.target.value, { path:"/"});
   };
-  const handleSelectDatabase = (e, index, value) => {
-    if(value){
-      cookie.save("mysql_users-database", value, { path:"/"});
-      setMysqlDatabaseIndex(fromJS({
-        mysql_database_index:value
-      }));
-    }
-  };
   const handleSaveUser = () => {
-    if(mysqlAppState.get("show_mysql_user"))
+    if(mysqlAppState.get("show_mysql_user")){
       setMysqlUser(
         fromJS({
+          update: false,
           mysql_users: mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS():[],
           mysql_user: [{
             environment:activeEnvironment,
             name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
-            host: cookie.load("mysql_users-host") ? cookie.load("mysql_users-host") : "",
+            host: "%",
             password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-            priv: cookie.load("mysql_users-database")?cookie.load("mysql_users-database")+".*:ALL":""
+            priv: cookie.load("mysql_databases-name")?cookie.load("mysql_databases-name")+".*:ALL":""
           }]
         })
       );
+      cookie.save("mysql_databases-oldname", cookie.load("mysql_databases-name"), { path:"/"});
+    }
     setShowMysqlUser(
       fromJS({
         show_mysql_user: !mysqlAppState.get("show_mysql_user")
@@ -89,7 +82,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
         modal={false}
         onRequestClose={handleCancelAddUser}
         open={mysqlAppState.get("show_mysql_user")?true:false}
-        title="Add User"
+        title="Add Authorized User"
     >
       <TextField
           errorText="This field is required."
@@ -101,39 +94,12 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
       />
       <TextField
           errorText="This field is required."
-          floatingLabelText={"Host"}
-          fullWidth
-          name={"mysql_user_host"}
-          onChange={(event)=> handleSetMysqlUsers(event, "host")}
-          type={"text"}
-      />
-      <TextField
-          errorText="This field is required."
           floatingLabelText={"User Password"}
           fullWidth
           name={"mysql_user_password"}
           onChange={(event)=> handleSetMysqlUsers(event, "password")}
           type={"password"}
       />
-      <SelectField
-          floatingLabelText="Database?"
-          onChange={handleSelectDatabase}
-          value={mysqlAppState.get("mysql_database_index")}
-      >
-        <MenuItem
-            primaryText=""
-            value={null}
-        />
-        { mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
-          value.get("environment") === activeEnvironment
-        ).toJS().map((value,index)=>
-          <MenuItem
-              key={index}
-              primaryText={value.name}
-              value={value.name}
-          />
-        ):""}
-      </SelectField>
     </Dialog>
   );
 };
@@ -141,7 +107,6 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
 AddUser.propTypes = {
   activeEnvironment: PropTypes.number.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
-  setMysqlDatabaseIndex: PropTypes.func.isRequired,
   setMysqlUser: PropTypes.func.isRequired,
   setShowMysqlUser: PropTypes.func.isRequired
 };

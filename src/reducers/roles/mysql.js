@@ -1,4 +1,4 @@
-import {SET_MYSQL_DATABASE_INDEX, REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, UPDATE_MYSQL_USERS, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
+import {REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -38,13 +38,24 @@ export default function mysql(state = initialState, action) {
     }
     case SET_MYSQL_USERS:
     {
-      return state.set("mysql_users",
-        action.value.get("mysql_users").toSet().union(
-          action.value.get("mysql_user").map(value=>
-            value.set("id", getId(action.value.get("mysql_users")))
-          )
-        ).toList()
-      );
+      if(action.value.get("update")){
+        let users = action.value.get("mysql_users");
+        action.value.get("mysql_user").forEach((newUser) =>
+          users = users.map(user=>
+            newUser.get("id") === user.get("id") ?
+              newUser : user
+            )
+        );
+        return state.set("mysql_users", users);
+      }else{
+        return state.set("mysql_users",
+            action.value.get("mysql_users").concat(
+              action.value.get("mysql_user").map(value=>
+                value.set("id", getId(action.value.get("mysql_users")))
+              )
+            )
+          );
+      }
     }
     case SET_MYSQL_PACKAGES:
     {
@@ -80,10 +91,6 @@ export default function mysql(state = initialState, action) {
     {
       return state.set("show_mysql_database", action.value.get("show_mysql_database"));
     }
-    case SET_MYSQL_DATABASE_INDEX:
-    {
-      return state.set("mysql_database_index", action.value.get("mysql_database_index"));
-    }
     case SET_ENABLE_MYSQL:
     {
       return state.set("enable_mysql", action.value.get("enable_mysql"));
@@ -91,16 +98,6 @@ export default function mysql(state = initialState, action) {
     case SET_REQUEST_ACTIVE_MYSQL:
     {
       return state.set("request_active_mysql", action.value.get("request_active_mysql"));
-    }
-    case UPDATE_MYSQL_USERS:
-    {
-      return state.set("mysql_users",
-        action.value.get("mysql_users").map(value=>
-          value.get("id") === action.value.get("mysql_user").get("id") &&
-          value.get("environment") === action.value.get("mysql_user").get("environment") ?
-            action.value.get("mysql_user") : value
-        )
-      );
     }
     case REMOVE_MYSQL_USER:
     {

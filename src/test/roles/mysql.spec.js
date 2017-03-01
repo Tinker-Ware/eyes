@@ -57,11 +57,91 @@ describe("reducer", () => {
       }]
     }));
   });
-  it("handles SET_MYSQL_USERS", () => {
+  it("handles update MYSQL_USERS", () => {
     const initialState = Map();
     const action = {
       type:"SET_MYSQL_USERS",
       value: fromJS({
+        update: true,
+        mysql_users:
+          [{
+            id: 3,
+            environment: 1,
+            name: "username",
+            host: "localhost",
+            password: "password",
+            priv: "ti_database.*:ALL"
+          },
+          {
+            id: 2,
+            environment: 1,
+            name: "username2",
+            host: "localhost2",
+            password: "password",
+            priv: "ti_database.*:ALL"
+          },
+          {
+            id: 1,
+            environment: 0,
+            name: "username2",
+            host: "localhost2",
+            password: "password",
+            priv: "ti_db.*:ALL"
+          }],
+        mysql_user: [{
+          id: 1,
+          environment: 1,
+          name: "username",
+          host: "localhost",
+          password: "password",
+          priv: "ti_database2.*:ALL"
+        },
+        {
+          id: 2,
+          environment: 1,
+          name: "username2",
+          host: "localhost",
+          password: "password",
+          priv: "ti_database2.*:ALL"
+        }]
+      })
+    };
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      mysql_users: [
+        {
+          id: 3,
+          environment: 1,
+          name: "username",
+          host: "localhost",
+          password: "password",
+          priv: "ti_database.*:ALL"
+        },
+        {
+          id: 2,
+          environment: 1,
+          name: "username2",
+          host: "localhost",
+          password: "password",
+          priv: "ti_database2.*:ALL"
+        },
+        {
+          id: 1,
+          environment: 1,
+          name: "username",
+          host: "localhost",
+          password: "password",
+          priv: "ti_database2.*:ALL"
+      }]
+    }));
+  });
+  it("handles set MYSQL_USERS", () => {
+    const initialState = Map();
+    const action = {
+      type:"SET_MYSQL_USERS",
+      value: fromJS({
+        update: false,
         mysql_users:
           [{
             id: 1,
@@ -72,11 +152,12 @@ describe("reducer", () => {
             priv: "ti_database.*:ALL"
           }],
         mysql_user: [{
-          environment: 2,
+          id: 2,
+          environment: 1,
           name: "username2",
           host: "localhost2",
           password: "password",
-          priv: "ti_database.*:ALL"
+          priv: "ti_database2.*:ALL"
         }]
       })
     };
@@ -92,11 +173,11 @@ describe("reducer", () => {
         priv: "ti_database.*:ALL"
       },{
         id: 2,
-        environment: 2,
+        environment: 1,
         name: "username2",
         host: "localhost2",
         password: "password",
-        priv: "ti_database.*:ALL"
+        priv: "ti_database2.*:ALL"
       }]
     }));
   });
@@ -155,15 +236,6 @@ describe("reducer", () => {
         mariaDB: "true"
       }]
     }));
-  });
-  it("handles SET_MYSQL_DATABASE_INDEX", () => {
-    const initialState = Map();
-    const action = {type:"SET_MYSQL_DATABASE_INDEX", value: fromJS({
-      mysql_database_index:"1"})};
-    const nextState = mysql(initialState, action);
-
-    expect(nextState).to.equal(fromJS({
-      mysql_database_index:"1"}));
   });
   it("handles SET_ENABLE_MYSQL", () => {
     const initialState = Map();
@@ -238,43 +310,6 @@ describe("reducer", () => {
 
     expect(nextState).to.equal(fromJS({
       mysql_users: []
-    }));
-  });
-  it("handles UPDATE_MYSQL_USERS", () => {
-    const initialState = Map();
-    const action = {
-      type:"UPDATE_MYSQL_USERS",
-      value: fromJS({
-        mysql_users:
-          [{
-            id: 1,
-            environment: "development",
-            name: "username",
-            host: "localhost",
-            password: "password",
-            priv: "ti_database.*:ALL"
-          }],
-        mysql_user: {
-          id: 1,
-          environment: "development",
-          name: "username2",
-          host: "localhost2",
-          password: "password",
-          priv: "ti_database.*:ALL"
-        }
-      })
-    };
-    const nextState = mysql(initialState, action);
-
-    expect(nextState).to.equal(fromJS({
-      mysql_users: [{
-        id: 1,
-        environment: "development",
-        name: "username2",
-        host: "localhost2",
-        password: "password",
-        priv: "ti_database.*:ALL"
-      }]
     }));
   });
   it("handles DEFAULT", () => {
