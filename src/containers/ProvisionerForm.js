@@ -6,7 +6,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui
 import * as actions from "../actions/ServiceFormActions";
 import * as rolesActions from "../actions/rolesActions";
 import Application from "../components/provisionerForm/Application";
-// import CloudProvider from "../components/provisionerForm/CloudProvider";
+import CloudProvider from "../components/provisionerForm/CloudProvider";
 import cookie from "react-cookie";
 import CreateService from "../components/provisionerForm/CreateService";
 import FontIcon from "material-ui/FontIcon";
@@ -87,13 +87,13 @@ export class ServiceForm extends Component {
                       setShowRepositories={this.props.actions.setShowRepositories}
                       userAppState={this.props.userAppState}
                   />
-                  {/* <CloudProvider
+                  <CloudProvider
                       clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
                       cloudProviderAppState={this.props.cloudProviderAppState}
                       requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
                       setCloudProvider={this.props.actions.setCloudProvider}
                       userAppState={this.props.userAppState}
-                  /> */}
+                  />
                 </div>
                 <Application
                     applicationAppState={this.props.applicationAppState}
