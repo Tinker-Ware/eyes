@@ -25,7 +25,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
             "password":"$6$PqQH1UMx7L$C8.JjzOlMbLVed7DMizT9XGKzTaLsucv/pYzFhBjIUVmBffq.WyhcwfIjLiBDe4drT7iHOy8W0em0MKLaK2bR."
           }
         ],
-        "private_key": false,
+        "private_key": true,
         "private_key_name": "ansible_id_rsa",
         "cronjobs":[]
       };
@@ -35,7 +35,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
       let config;
       if(environment==-1)
         config={
-          "yii_git_repo":repositoryAppState.get("repository")?"https://github.com/"+repositoryAppState.get("repository").toJS().name:"https://github.com/Tinker-Ware/yii2-crud"
+          "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:"https://github.com/Tinker-Ware/yii2-crud"
         };
       else
         yiiAppState.get("cookie_validation_key").toJS().map(value=>{
