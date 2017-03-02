@@ -168,8 +168,6 @@ export function* getCloudProviderAccess(userAccess) {
         cloud_provider: cloudProviderAccess.callback
       }))
     );
-    yield put(actions.requestPostProviderKey(fromJS({"authorization": userAccess.value.get("authorization"),"user_id": userAccess.value.get("oauth_request").toJS().user_id,"sshKeys": [],"sshKey": {"name":"deploy_key","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCtmlfAafr14dY5WPFtZV7GpVwgp6/atw7eonjhWfWZfHFmx2TTpUGUbH4o+Z6VI+9GImcpnk+8S/OLSCIT0ueQ6xxqnP6tdREaSZAMyB0f7vGxnuOv3n/sqyFlio1rzaysQv11AFML2QmxR0mNqjODAkwqDGPvbD1qyUDXT33YW9xRf5TJ7oJ4GnRXVArAvQdTa7tWOYCseQsUSkmsJXzcOkEAGfUkJSrvpss8FlfksVV2M4OL5qeNWMfuqY8sKyTcxCBpbpeBClIx2Z7l9iNxPyTXyo7Ma+65SwPVYCUNM5vRy77miGZhLuZDVwdXqD1VnlTCQhppPUh1R9+IxWMRbomNCxPOJtuj2Q7dB5oY990Heg58yLCv2LdVhY7OM+2lUksBoTrQkpjMMMfPxwU/6l9Eiq4KiX0BIZIPQFbbE33yfaLmKEwOcVBYflS3t/yJAFDUecPC3j488HpY23yMPXiredRaGebbXGiVBKOp6zjftFJzes1PvWmP+XiAq52uGiTH2mzlMrlzd4Jpfegy6uGl4r58LkLJOInl89XWYsxHlzC+1pPhSbmYCJvv//0P4O8afSUgjlRBBfiyOo1+mE9m5BcgEGd6ZbtF7mVAAoqgXx2kSdMglt9+WV0/X+TF/G0QBCpMeBqvrWKTwDDtaWlcEeBE/C5ObIledyKpjw== tinkerwareio@gmail.com"}
-      })));
     yield put(actions.requestCloudProviderKeys(fromJS({
         authorization: userAccess.value.get("authorization"),
         user_id: userAccess.value.get("oauth_request").get("user_id")
