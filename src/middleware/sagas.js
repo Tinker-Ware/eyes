@@ -28,6 +28,24 @@ function delay(millis) {
     return promise;
 }
 
+export function* doRequestDeployProject(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys",
+    {
+      method:"POST",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization"),
+        "Accept":"application/json","Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        "deploy": {
+          "user_id": data.get("user_id"),
+          "project_id": data.get("project_id")
+        }
+      }),
+      mode:"cors"});
+}
+
 export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/cloud/digital_ocean/oauth",
@@ -159,6 +177,18 @@ export function* doRequestPostUserProject(userProject, authorization) {
       body: JSON.stringify({"project": userProject.toJS()
       }),
       mode:"cors"});
+}
+
+export function* deployProject(data) {
+  try {
+    const deploy = yield call(doRequestDeployProject, data.value);
+    yield put(actions.setProjectDeploy(fromJS({
+        deploy: deploy.callback
+      }))
+    );
+  }
+  catch(error) {
+  }
 }
 
 export function* getCloudProviderAccess(userAccess) {
@@ -344,6 +374,7 @@ export default function* root() {
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
+    takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)
