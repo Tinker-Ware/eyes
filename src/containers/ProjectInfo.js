@@ -83,7 +83,9 @@ export class ProjectInfo extends Component {
                   title="My DevOp"
               />
               <Project
+                  deployProject={this.props.projectsActions.deployProject}
                   projectsAppState={this.props.projectsAppState}
+                  userAppState={this.props.userAppState}
               />
             </Paper>
           </div>

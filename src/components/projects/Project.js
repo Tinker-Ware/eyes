@@ -1,3 +1,4 @@
+import {fromJS} from "immutable";
 import {List, ListItem} from "material-ui/List";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import Avatar from "material-ui/Avatar";
@@ -29,7 +30,16 @@ const style = {
   }
 };
 
-const Project = ({projectsAppState}) => {
+const Project = ({deployProject, projectsAppState, userAppState}) => {
+  const handleProjectDeploy = () => {
+    deployProject(
+      fromJS({
+        "authorization": userAppState.get("user_session").toJS().token,
+        "project_id": projectsAppState.getIn("project","id"),
+        "user_id": projectsAppState.getIn("project","user_id")
+      })
+    );
+  };
   return (
     <div className="card">
       <Toolbar style={style.toolbar}>
@@ -49,13 +59,14 @@ const Project = ({projectsAppState}) => {
               primary
               style={style.button}
           />
-          {/* <RaisedButton
+          <RaisedButton
               href={"#"}
               icon={<FontIcon className="icon icon-deploy" />}
               label={"Deploy"}
+              onClick={handleProjectDeploy}
               primary
               style={style.button}
-          /> */}
+          />
           <RaisedButton
               href={projectsAppState.get("user_project_dev_environment")?projectsAppState.get("user_project_dev_environment").toJS()[0].path:"#"}
               icon={<FontIcon className="icon icon-cloud-download" />}
@@ -160,7 +171,9 @@ const Project = ({projectsAppState}) => {
 };
 
 Project.propTypes = {
-  projectsAppState: PropTypes.object.isRequired
+  deployProject: PropTypes.func.isRequired,
+  projectsAppState: PropTypes.object.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 export default Project;
