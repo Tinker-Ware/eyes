@@ -1,16 +1,21 @@
-import React, {PropTypes} from "react";
+import {Card, CardActions, CardHeader} from "material-ui/Card";
 import {fromJS} from "immutable";
+import {List} from "material-ui/List";
+import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
 import cookie from "react-cookie";
-import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
+import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import {List} from "material-ui/List";
+import React, {PropTypes} from "react";
+import RefreshIndicator from "material-ui/RefreshIndicator";
 import Subheader from "material-ui/Subheader";
-import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
 
 const styles = {
   block: {
     maxWidth: 250,
+  },
+  button: {
+    padding: 12,
   },
   cardText: {
     height: 400,
@@ -21,6 +26,10 @@ const styles = {
     marginBottom: 16,
     marginLeft: 16
   },
+  refresh: {
+    display: "inline-block",
+    position: "relative",
+  }
 };
 
 const GithubService = ( {repositoryAppState, userAppState, setRepository, setIntegracion, requestRepositoryAccess, requestUserRepositories, setShowRepositories} ) => {
@@ -56,16 +65,16 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }));
     }
   };
-  const handleGithubRepos = (e, full_name) => {
+  const handleGithubRepos = (repository) => {
     setRepository(fromJS({
       repository: {
         provider: "github",
-        name: full_name
+        name: repository.full_name,
+        ssh_url: repository.ssh_url
       }
     }));
   };
-  const handleGithubConfigurationEnable = (e) => {
-    e.preventDefault();
+  const handleGithubConfigurationEnable = () => {
     if (!repositoryAppState.get("show_repositories")){
       setShowRepositories(fromJS({
         show: true
@@ -80,6 +89,22 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
       }));
     }
   };
+  const actions = [
+      <FlatButton
+          icon={<FontIcon className="icon icon-cancel" />}
+          key={2}
+          label={"Cancel"}
+          onTouchTap={handleGithubConfigurationEnable}
+          secondary
+      />,
+      <FlatButton
+          icon={<FontIcon className="icon icon-cancel" />}
+          key={1}
+          label={"Save"}
+          onTouchTap={handleGithubConfigurationEnable}
+          primary
+      />
+    ];
   const repositoryList =
     repositoryAppState.get("integration") && repositoryAppState.get("repositories") ?
       <RadioButtonGroup
@@ -90,15 +115,22 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
           <RadioButton
               key={index}
               label={value.full_name}
-              onClick={(event)=>handleGithubRepos(event, value.full_name)}
+              onClick={()=>handleGithubRepos(value)}
               style={styles.radioButton}
               value={value.full_name}
           />
         )}
-      </RadioButtonGroup> : "";
+      </RadioButtonGroup> :
+      <RefreshIndicator
+          left={10}
+          size={40}
+          status="loading"
+          style={styles.refresh}
+          top={0}
+      />;
   return (
     <div className="small-12 medium-6 large-6 columns">
-      <Card expanded={repositoryAppState.get("show_repositories")}>
+      <Card>
         <CardHeader
             avatar={<FontIcon className="icon icon-github"/>}
             subtitle="Repository"
@@ -116,18 +148,23 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
               onClick={handleGithubConfigurationEnable}
           />
         </CardActions>
-        <CardText
-            expandable
-            style={styles.cardText}
-        >
-          <div className="row repository-list">
-            <List>
-              <Subheader>{"Select a repository"}</Subheader>
-            </List>
-            {repositoryList}
-          </div>
-        </CardText>
       </Card>
+      <Dialog
+          actions={actions}
+          actionsContainerStyle={styles.button}
+          autoScrollBodyContent
+          modal={false}
+          onRequestClose={handleGithubConfigurationEnable}
+          open={repositoryAppState.get("show_repositories")?true:false}
+          title="Repositories"
+      >
+        <div className="row repository-list">
+          <List>
+            <Subheader>{"Select a repository"}</Subheader>
+          </List>
+          {repositoryList}
+        </div>
+      </Dialog>
     </div>
   );
 };
