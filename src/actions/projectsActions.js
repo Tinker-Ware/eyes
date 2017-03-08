@@ -13,15 +13,15 @@ export function requestGetUserProjects(value) {
 }
 
 export function requestProjectServers(value) {
-  return { type: types.SET_PROJECT_SERVERS, value };
+  return { type: types.REQUEST_PROJECT_SERVERS, value };
 }
 
 export function setUserProject(value) {
   return { type: types.SET_USER_PROJECT, value };
 }
 
-export function setProjectDeploys(value) {
-  return { type: types.SET_PROJECT_DEPLOYS, value };
+export function setProjectServers(value) {
+  return { type: types.SET_PROJECT_SERVERS, value };
 }
 
 export function setUserProjectDevEnvironment(value) {

@@ -41,7 +41,7 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
     );
   };
   const servers = () => {
-    return mysqlAppState.get("project_servers")?mysqlAppState.get("project_servers").toJS().map((value,index)=>
+    return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((value,index)=>
       <ListItem
           key={index}
           leftIcon={<FontIcon className="icon icon-deploy"/>}
