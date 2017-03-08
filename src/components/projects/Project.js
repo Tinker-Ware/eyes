@@ -35,10 +35,21 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
     deployProject(
       fromJS({
         "authorization": userAppState.get("user_session").toJS().token,
-        "project_id": projectsAppState.getIn("project","id"),
-        "user_id": projectsAppState.getIn("project","user_id")
+        "project_id": projectsAppState.getIn(["user_project","id"]),
+        "user_id": projectsAppState.getIn(["user_project","user_id"])
       })
     );
+  };
+  const servers = () => {
+    return mysqlAppState.get("project_servers")?mysqlAppState.get("project_servers").toJS().map((value,index)=>
+      <ListItem
+          key={index}
+          leftIcon={<FontIcon className="icon icon-deploy"/>}
+          primaryText={"ID: "+value.id}
+          rightIcon={<FontIcon className="icon icon-check"/>}
+          secondaryText={"IP: "+value.ip}
+      />
+    ):"";
   };
   return (
     <div className="card">
@@ -99,6 +110,7 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
         </List>
         <Divider />
         <List>
+          {servers()}
           {/* <ListItem
               leftIcon={<FontIcon className="icon icon-deploy"/>}
               primaryText={"ID: 11923"}

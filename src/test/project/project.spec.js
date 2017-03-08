@@ -87,35 +87,44 @@ describe("reducer", () => {
       }
     ));
   });
-  it("handles SET_PROJECT_DEPLOY", () => {
+  it("handles SET_PROJECT_SERVERS", () => {
     const initialState = Map();
-    const action = {type:"SET_PROJECT_DEPLOY", value: fromJS(
+    const action = {type:"SET_PROJECT_SERVERS", value: fromJS(
       {
-        "deploy": {
-          "id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
-          "user_id": 1,
-          "project_id": "507f1f77bcf86cd799439011",
-          "deployed_at": "2014-04-17T14:00:00.030Z",
-          "note": "nightly build",
-          "commit": "fc5e502cfc908db401394337548131cc739e777f",
-          "status": "Pending"
-        }
+        "project_servers": [
+            {
+                "id": "5xOQluuygRCrGFn7QcT1zDiS",
+                "deploy_id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
+                "project_id": "507f1f77bcf86cd799439011",
+                "ip": "192.168.1.1",
+                "operating_system": "debian-8-x64",
+                "instance_name": "521mb",
+                "region": "nyc1",
+                "hostname": "tinkerware.com",
+                "status": "not created",
+                "provider": "digital_ocean"
+            }
+        ]
       }
     )};
     const nextState = projects(initialState, action);
 
     expect(nextState).to.equal(fromJS(
       {
-        deploy:
-        {
-          "id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
-          "user_id": 1,
-          "project_id": "507f1f77bcf86cd799439011",
-          "deployed_at": "2014-04-17T14:00:00.030Z",
-          "note": "nightly build",
-          "commit": "fc5e502cfc908db401394337548131cc739e777f",
-          "status": "Pending"
-        }
+        project_servers:[
+            {
+                "id": "5xOQluuygRCrGFn7QcT1zDiS",
+                "deploy_id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
+                "project_id": "507f1f77bcf86cd799439011",
+                "ip": "192.168.1.1",
+                "operating_system": "debian-8-x64",
+                "instance_name": "521mb",
+                "region": "nyc1",
+                "hostname": "tinkerware.com",
+                "status": "not created",
+                "provider": "digital_ocean"
+            }
+        ]
       }
     ));
   });

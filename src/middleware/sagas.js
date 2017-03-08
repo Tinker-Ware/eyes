@@ -68,6 +68,17 @@ export function* doRequestGetCloudProviderKeys(authorization, user_id) {
       mode:"cors"});
 }
 
+export function* doRequestGetProjectServers(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/servers",
+    {
+      method:"GET",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization")
+      },
+      mode:"cors"});
+}
+
 export function* doRequestGetRepositories(username, authorization) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/repository/github/"+ username +"/repos",
@@ -181,11 +192,7 @@ export function* doRequestPostUserProject(userProject, authorization) {
 
 export function* deployProject(data) {
   try {
-    const deploy = yield call(doRequestDeployProject, data.value);
-    yield put(actions.setProjectDeploy(fromJS({
-        deploy: deploy.callback
-      }))
-    );
+    yield call(doRequestDeployProject, data.value);
   }
   catch(error) {
   }
@@ -214,6 +221,18 @@ export function* getCloudProviderKeys(userAccess) {
       sshKeys: [],
       sshKey: cloudProviderKeys.ssh_keys
     })));
+  }
+  catch(error) {
+  }
+}
+
+export function* getProjectServers(data) {
+  try {
+    const project_servers = yield call(doRequestGetProjectServers, data.value);
+    yield put(actions.setProjectServers(fromJS({
+        servers: project_servers.callback
+      }))
+    );
   }
   catch(error) {
   }
@@ -375,6 +394,7 @@ export default function* root() {
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
     takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectServers),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)

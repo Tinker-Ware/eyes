@@ -26,11 +26,16 @@ export class ProjectInfo extends Component {
   componentWillMount() {
     if (!cookie.load("user_session"))
       browserHistory.push("/login");
-    if(cookie.load("user_session"))
+    if(cookie.load("user_session")){
       this.props.projectsActions.requestGetUserProject(fromJS({
         "authorization": cookie.load("user_session").token,
         "projectId": this.props.params.projecId
       }));
+      this.props.projectsActions.requestProjectServers(fromJS({
+        "authorization": cookie.load("user_session").token,
+        "project_id": this.props.params.projecId
+      }));
+    }
   }
   render() {
     if(!this.props.userAppState.get("user_session") && cookie.load("user_session")){
