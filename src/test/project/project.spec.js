@@ -87,6 +87,47 @@ describe("reducer", () => {
       }
     ));
   });
+  it("handles SET_PROJECT_SERVERS", () => {
+    const initialState = Map();
+    const action = {type:"SET_PROJECT_SERVERS", value: fromJS(
+      {
+        "project_servers": [
+            {
+                "id": "5xOQluuygRCrGFn7QcT1zDiS",
+                "deploy_id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
+                "project_id": "507f1f77bcf86cd799439011",
+                "ip": "192.168.1.1",
+                "operating_system": "debian-8-x64",
+                "instance_name": "521mb",
+                "region": "nyc1",
+                "hostname": "tinkerware.com",
+                "status": "not created",
+                "provider": "digital_ocean"
+            }
+        ]
+      }
+    )};
+    const nextState = projects(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      {
+        project_servers:[
+            {
+                "id": "5xOQluuygRCrGFn7QcT1zDiS",
+                "deploy_id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
+                "project_id": "507f1f77bcf86cd799439011",
+                "ip": "192.168.1.1",
+                "operating_system": "debian-8-x64",
+                "instance_name": "521mb",
+                "region": "nyc1",
+                "hostname": "tinkerware.com",
+                "status": "not created",
+                "provider": "digital_ocean"
+            }
+        ]
+      }
+    ));
+  });
   it("handles SET_USER_PROJECTS", () => {
     const initialState = Map();
     const action = {type:"SET_USER_PROJECTS", value: fromJS(
