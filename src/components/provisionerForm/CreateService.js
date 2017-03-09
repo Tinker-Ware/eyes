@@ -37,11 +37,8 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
         config={
           "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:"https://github.com/Tinker-Ware/yii2-crud"
         };
-      else
-        yiiAppState.get("cookie_validation_key").toJS().map(value=>{
-          if(value.environment == environment)
-            config = {"cookie_validation_key":value.cookie_validation_key};
-        });
+      else if(environment==1)
+        config = {"yii_extra_flags": "--no-dev"};
       return config;
     }
   };
@@ -57,11 +54,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
       let config;
       if(environment==-1)
         config={
-          "mysql_packages": [
-            "mariadb-client",
-            "mariadb-server",
-            "python-mysqldb"
-          ]
+          "mysql_packages": []
         };
       else{
         let databases = [];
