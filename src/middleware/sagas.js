@@ -28,6 +28,24 @@ function delay(millis) {
     return promise;
 }
 
+export function* doRequestDeployProject(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys",
+    {
+      method:"POST",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization"),
+        "Accept":"application/json","Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        "deploy": {
+          "user_id": data.get("user_id"),
+          "project_id": data.get("project_id")
+        }
+      }),
+      mode:"cors"});
+}
+
 export function* doRequestGetCloudProviderAccess(authorization, userAccess) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/cloud/digital_ocean/oauth",
@@ -46,6 +64,17 @@ export function* doRequestGetCloudProviderKeys(authorization, user_id) {
     {
       method:"GET",
       headers: {"authorization":"Bearer "+ authorization
+      },
+      mode:"cors"});
+}
+
+export function* doRequestGetProjectServers(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/servers",
+    {
+      method:"GET",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization")
       },
       mode:"cors"});
 }
@@ -161,6 +190,14 @@ export function* doRequestPostUserProject(userProject, authorization) {
       mode:"cors"});
 }
 
+export function* deployProject(data) {
+  try {
+    yield call(doRequestDeployProject, data.value);
+  }
+  catch(error) {
+  }
+}
+
 export function* getCloudProviderAccess(userAccess) {
   try {
     const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess, userAccess.value.get("authorization"), userAccess.value.get("oauth_request"));
@@ -184,6 +221,18 @@ export function* getCloudProviderKeys(userAccess) {
       sshKeys: [],
       sshKey: cloudProviderKeys.ssh_keys
     })));
+  }
+  catch(error) {
+  }
+}
+
+export function* getProjectServers(data) {
+  try {
+    const project_servers = yield call(doRequestGetProjectServers, data.value);
+    yield put(actions.setProjectServers(fromJS({
+        servers: project_servers.callback
+      }))
+    );
   }
   catch(error) {
   }
@@ -344,6 +393,8 @@ export default function* root() {
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
+    takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectServers),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)
