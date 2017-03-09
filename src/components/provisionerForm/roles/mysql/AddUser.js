@@ -30,7 +30,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
             name: cookie.load("mysql_users-name") ? cookie.load("mysql_users-name") : "",
             host: "%",
             password: cookie.load("mysql_users-password") ? cookie.load("mysql_users-password") : "",
-            priv: cookie.load("mysql_databases-name")?cookie.load("mysql_databases-name")+".*:ALL":""
+            priv: cookie.load("mysql_databases-name")?cookie.load("mysql_databases-name")+".*:ALL/*.*:SUPER":""
           }]
         })
       );

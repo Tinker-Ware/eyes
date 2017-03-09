@@ -45,9 +45,9 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
       );
       let users = [];
       mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").filter(user=>
-        user.get("environment") === environments[applicationAppState.get("active_environment")].id &&   user.get("priv") === cookie.load("mysql_databases-oldname")+".*:ALL"
+        user.get("environment") === environments[applicationAppState.get("active_environment")].id &&   user.get("priv") === cookie.load("mysql_databases-oldname")+".*:ALL/*.*:SUPER"
       ).toJS().map((user)=>{
-        user.priv = cookie.load("mysql_databases-name")+".*:ALL";
+        user.priv = cookie.load("mysql_databases-name")+".*:ALL/*.*:SUPER";
         users.push(user);
       }):"";
       setMysqlUser(
@@ -108,7 +108,7 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
   };
   const users = () => {
     return mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").filter(value=>
-      value.get("environment") === environments[applicationAppState.get("active_environment")].id &&   value.get("priv") === cookie.load("mysql_databases-name")+".*:ALL"
+      value.get("environment") === environments[applicationAppState.get("active_environment")].id &&   value.get("priv") === cookie.load("mysql_databases-name")+".*:ALL/*.*:SUPER"
     ).toJS().map((value,index)=>
       <Chip
           // onTouchTap={handleClick}
