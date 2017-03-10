@@ -102,9 +102,9 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   const roles = () => {
     let rolesArray = [];
     if(baseAppState.get("enable_base")) rolesArray.push(baseAppState.get("roles"));
-    if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
     if(mysqlAppState.get("enable_mysql")) rolesArray.push(mysqlAppState.get("roles"));
+    if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     return rolesArray;
   };
   const handleCreateUserProject = () => {
