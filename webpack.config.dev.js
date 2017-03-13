@@ -7,11 +7,9 @@ import * as integrations from"./src/constants/Integrations";
 
 export default {
   resolve: {
-   extensions: ["",".js",".jsx", ".json", ".scss"]
+   extensions: ["*",".js",".jsx", ".json", ".scss"]
   },
-  debug: true,
   devtool:"eval-source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
-  noInfo: true, // set to false to see a list of every file being bundled.
   entry: ["babel-polyfill","whatwg-fetch","./src/webpack-public-path","webpack-hot-middleware/client?reload=true",
     path.resolve(__dirname,"./src/apps/development.js") // Defining path seems necessary for this to work consistently on Windows machines.
   ],
@@ -47,7 +45,19 @@ export default {
           collapseWhitespace: true
         },
         inject: true
-      })
+      }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false,
+      debug: true,
+      noInfo: true, // set to false to see a list of every file being bundled.
+      options: {
+        sassLoader: {
+          includePaths: [path.resolve(__dirname, "src", "scss")]
+        },
+        context: "/",
+        postcss: () => [autoprefixer],
+      }
+    })
   ],
   module: {
     loaders: [
@@ -62,6 +72,5 @@ export default {
       {test: /\.ico$/, loader:"file?name=[name].[ext]"},
       {test: /(\.css|\.scss)$/, loaders: ["style","css?sourceMap","postcss","sass?sourceMap"]}
     ]
-  },
-  postcss: ()=> [autoprefixer]
+  }
 };
