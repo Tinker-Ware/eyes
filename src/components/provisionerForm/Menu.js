@@ -1,4 +1,6 @@
+import {browserHistory} from "react-router";
 import AppBar from "material-ui/AppBar";
+import cookie from "react-cookie";
 import FontIcon from "material-ui/FontIcon";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
@@ -7,6 +9,13 @@ import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import React from "react";
 
 const Menu = () => {
+  const signOut = () => {
+    cookie.remove("user_session", { path: "/" });
+    browserHistory.push("/login");
+  };
+  const showProjects = () => {
+    browserHistory.push("/projects");
+  };
   return (
     <AppBar
         iconElementLeft={
@@ -30,13 +39,17 @@ const Menu = () => {
           >
             <MenuItem
                 href="/projects"
-                primaryText="Dashboard"
+                onClick={showProjects}
+                primaryText="Projects"
             />
-            <MenuItem
+            {/* <MenuItem
                 href="/user"
                 primaryText="User Profile"
+            /> */}
+            <MenuItem
+                onClick={signOut}
+                primaryText="Sign out"
             />
-            <MenuItem primaryText="Sign out" />
           </IconMenu>
         }
         title="My DevOp"
