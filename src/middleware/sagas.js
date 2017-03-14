@@ -1,7 +1,6 @@
 import "whatwg-fetch";
-import { call, put } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { fromJS } from "immutable";
-import { takeLatest } from "redux-saga";
 import {browserHistory} from "react-router";
 import * as actions from "./actions/MiddlewareActions";
 import * as projectsActionTypes from "../constants/Projects";

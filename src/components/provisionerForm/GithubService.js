@@ -107,27 +107,30 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
     ];
   const repositoryList =
     repositoryAppState.get("integration") && repositoryAppState.get("repositories") ?
-      <RadioButtonGroup
-          defaultSelected={repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:""}
-          name="repositories"
-      >
-        {repositoryAppState.get("repositories").toJS().map((value, index)=>
-          <RadioButton
-              key={index}
-              label={value.full_name}
-              onClick={()=>handleGithubRepos(value)}
-              style={styles.radioButton}
-              value={value.full_name}
-          />
-        )}
-      </RadioButtonGroup> :
-      <RefreshIndicator
-          left={10}
-          size={40}
-          status="loading"
-          style={styles.refresh}
-          top={0}
-      />;
+      (
+        <RadioButtonGroup
+            defaultSelected={repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:""}
+            name="repositories"
+        >
+          {repositoryAppState.get("repositories").toJS().map((value, index)=>
+            <RadioButton
+                key={index}
+                label={value.full_name}
+                onClick={()=>handleGithubRepos(value)}
+                style={styles.radioButton}
+                value={value.full_name}
+            />
+          )}
+        </RadioButtonGroup>
+      ):(
+        <RefreshIndicator
+            left={10}
+            size={40}
+            status="loading"
+            style={styles.refresh}
+            top={0}
+        />
+      );
   return (
     <div className="small-12 medium-6 large-6 columns">
       <Card>

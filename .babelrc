@@ -1,6 +1,5 @@
 {
   "presets": [
-    "latest",
     "react",
     "stage-0",
     "stage-1"
@@ -8,13 +7,26 @@
   "env": {
     "development": {
       "presets": [
+        "latest",
         "react-hmre"
       ]
     },
     "production": {
+      "presets": [
+        ["latest", {
+          "es2015": {
+            "modules": false
+          }
+        }]
+      ],
       "plugins": [
         "transform-react-constant-elements",
         "transform-react-remove-prop-types"
+      ]
+    },
+    "test": {
+      "presets": [
+        "latest"
       ]
     }
   }

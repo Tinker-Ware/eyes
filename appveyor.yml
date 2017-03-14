@@ -14,7 +14,7 @@ install:
   - yarn
 
 cache:
-  - "%LOCALAPPDATA%/Yarn"
+  - "%LOCALAPPDATA%\\Yarn"
 
 # Post-install test scripts.
 test_script:
@@ -22,7 +22,7 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test
+  - npm run test:CI
 
 # Don't actually build.
 build: off

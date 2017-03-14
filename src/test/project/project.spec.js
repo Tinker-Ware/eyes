@@ -1,6 +1,6 @@
 import { Map, fromJS } from "immutable";
 import { expect } from "chai";
-import projects from "../../reducers/project/projects.js";
+import projects from "../../reducers/project/projects";
 
 describe("reducer", () => {
   it("handles SET_USER_PROJECT", () => {
