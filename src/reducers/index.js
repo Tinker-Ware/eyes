@@ -8,7 +8,7 @@ import mysqlAppState from "./roles/mysql";
 import nginxAppState from "./roles/nginx";
 import plainHtmlAppState from "./roles/plainHtml";
 import projectNameAppState from "./projectName";
-import projectsAppState from "./project/projects.js";
+import projectsAppState from "./project/projects";
 import repositoryAppState from "./repository";
 import userAppState from "./user";
 import userProjectAppState from "./userProject";
