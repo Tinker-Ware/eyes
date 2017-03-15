@@ -27,6 +27,11 @@ function delay(millis) {
     return promise;
 }
 
+function fibonacci(num) {
+  if (num <= 1) return 1;
+  return fibonacci(num - 1) + fibonacci(num - 2);
+}
+
 export function* doRequestDeployProject(data) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys",
@@ -256,9 +261,11 @@ export function* getUserProject(userAccess) {
       }))
     );
     let userProjectDevEnvironment = {"development_environments":[]};
-    while (userProjectDevEnvironment.development_environments.length == 0) {
-      yield call(delay, 2000);
+    let time = 1;
+    while (time == 12 || userProjectDevEnvironment.development_environments.length == 0) {
+      yield call(delay, fibonacci(time)*1000);
       userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
+      time++;
     }
     yield put(actions.setUserProjectDevEnvironment(fromJS({
         user_project_dev_environment: userProjectDevEnvironment.development_environments

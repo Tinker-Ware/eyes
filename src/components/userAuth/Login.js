@@ -45,6 +45,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         </h2>
         <form>
               <TextField
+                  errorText={userAppState.get("user_sesion_email")?"":"Email field is required."}
                   floatingLabelText="Email Address"
                   fullWidth
                   hintText="correo@empresa.com"
@@ -55,6 +56,7 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
                   value={userAppState.get("user_sesion_email")?userAppState.get("user_sesion_email"):""}
               />
               <TextField
+                  errorText={userAppState.get("user_sesion_password")?"":"Password field is required."}
                   floatingLabelText="Password"
                   fullWidth
                   hintText="password"
