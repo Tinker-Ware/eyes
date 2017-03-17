@@ -31,7 +31,7 @@ export class ProjectInfo extends Component {
         "authorization": cookie.load("user_session").token,
         "projectId": this.props.params.projecId
       }));
-      this.props.projectsActions.requestProjectServers(fromJS({
+      this.props.projectsActions.requestProjectDeploys(fromJS({
         "authorization": cookie.load("user_session").token,
         "project_id": this.props.params.projecId
       }));
@@ -90,6 +90,8 @@ export class ProjectInfo extends Component {
               <Project
                   deployProject={this.props.projectsActions.deployProject}
                   projectsAppState={this.props.projectsAppState}
+                  requestProjectDeployServers={this.props.projectsActions.requestProjectDeployServers}
+                  setShowProjectServers={this.props.projectsActions.setShowProjectServers}
                   userAppState={this.props.userAppState}
               />
             </Paper>

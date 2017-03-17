@@ -128,6 +128,21 @@ describe("reducer", () => {
       }
     ));
   });
+  it("handles SET_SHOW_PROJECT_SERVERS", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_PROJECT_SERVERS", value: fromJS(
+      {
+        "show_project_servers": true
+      }
+    )};
+    const nextState = projects(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      {
+        show_project_servers: true
+      }
+    ));
+  });
   it("handles SET_USER_PROJECTS", () => {
     const initialState = Map();
     const action = {type:"SET_USER_PROJECTS", value: fromJS(
