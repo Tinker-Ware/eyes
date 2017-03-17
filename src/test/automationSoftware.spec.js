@@ -2,7 +2,7 @@ import { Map, fromJS } from "immutable";
 import { expect } from "chai";
 import automationSoftware from "../reducers/automationSoftware";
 
-describe("reducer", () => {
+describe("automation software", () => {
   it("handles SET_AUTOMATION_SOFTWARE", () => {
     const initialState = Map();
     const action = {type:"SET_AUTOMATION_SOFTWARE", value:"ansible"};

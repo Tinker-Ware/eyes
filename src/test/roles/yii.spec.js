@@ -2,7 +2,7 @@ import {Map, fromJS} from "immutable";
 import {expect} from "chai";
 import yii from "../../reducers/roles/yii";
 
-describe("reducer", () => {
+describe("yii role", () => {
   it("handles SET_COOKIE_VALIDATION_KEY", () => {
     const initialState = Map();
     const action = {type:"SET_COOKIE_VALIDATION_KEY", value: fromJS({

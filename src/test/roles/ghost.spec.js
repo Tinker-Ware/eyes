@@ -2,7 +2,7 @@ import {Map, fromJS} from "immutable";
 import {expect} from "chai";
 import ghost from "../../reducers/roles/ghost";
 
-describe("reducer", () => {
+describe("ghost role", () => {
   it("handles SET_NODEJS_VERSION", () => {
     const initialState = Map();
     const action = {type:"SET_NODEJS_VERSION", value: fromJS({

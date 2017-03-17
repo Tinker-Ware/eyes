@@ -2,7 +2,7 @@ import { Map, fromJS } from "immutable";
 import { expect } from "chai";
 import projectName from "../reducers/projectName";
 
-describe("reducer", () => {
+describe("project name", () => {
   it("handles SET_PROJECT_NAME", () => {
     const initialState = Map();
     const action = {type:"SET_PROJECT_NAME", value: fromJS({

@@ -2,7 +2,7 @@ import {Map, fromJS} from "immutable";
 import {expect} from "chai";
 import plainHtml from "../../reducers/roles/plainHtml";
 
-describe("reducer", () => {
+describe("plainHtml role", () => {
   it("handles SET_SERVER_NAME", () => {
     const initialState = Map();
     const action = {type:"SET_SERVER_NAME", value: fromJS({

@@ -2,7 +2,7 @@ import { Map, fromJS } from "immutable";
 import { expect } from "chai";
 import cloudProvider from "../reducers/cloudProvider";
 
-describe("reducer", () => {
+describe("cloud provider", () => {
   it("handles CLEAR_CLOUD_PROVIDER_SSH_KEYS", () => {
     const initialState = Map();
     const action = {

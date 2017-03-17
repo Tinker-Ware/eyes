@@ -258,12 +258,12 @@ export function* getProjectDeployServers(data) {
   try {
     let time = 3;
     while (time < 15) {
-      yield call(delay, fibonacci(time)*1000);
       const project_servers = yield call(doRequestGetProjectServers, data.value);
       yield put(actions.setProjectServers(fromJS({
           project_servers: project_servers.servers
         }))
       );
+      yield call(delay, fibonacci(time)*1000);
       time++;
     }
   }

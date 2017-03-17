@@ -110,9 +110,6 @@ describe("sagas middleware", () => {
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
-      call(delay, fibonacci)
-    );
-    expect(generator.next().value).to.deep.equal(
       call(doRequestGetProjectServers, fromJS({
         "authorization": data.authorization,
         "project_id": data.project_id
@@ -122,6 +119,9 @@ describe("sagas middleware", () => {
       put(actions.setProjectServers(fromJS({
         project_servers: servers.servers
       })))
+    );
+    expect(generator.next().value).to.deep.equal(
+      call(delay, fibonacci)
     );
   });
 it("handles REQUEST_CLOUD_PROVIDER_ACCESS", () => {

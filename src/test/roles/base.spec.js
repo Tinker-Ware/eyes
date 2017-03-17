@@ -2,7 +2,7 @@ import {Map, fromJS} from "immutable";
 import {expect} from "chai";
 import base from "../../reducers/roles/base";
 
-describe("reducer", () => {
+describe("base role", () => {
   it("handles SET_USER", () => {
     const initialState = Map();
     const action = {type:"SET_USER", value: fromJS({
