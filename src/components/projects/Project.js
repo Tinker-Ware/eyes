@@ -1,5 +1,4 @@
 import {fromJS} from "immutable";
-import {Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
@@ -88,25 +87,23 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
       />
     ):"";
   };
-  const serverRows = () => {
-    return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((server,index)=>
-    <TableRow key={index}>
-      <TableRowColumn>
-
-      </TableRowColumn>
-      <TableRowColumn>
-        {value.project_name}
-      </TableRowColumn>
-      <TableRowColumn>
-        <FontIcon className="icon icon-check"/>
-      </TableRowColumn>
-      <TableRowColumn>
-        <Link href={"/project/"+server.id}>
-          <FontIcon className="icon icon-edit"/>
-        </Link>
-      </TableRowColumn>
-    </TableRow>
-    ):"";
+  const deploys = () => {
+    return projectsAppState.get("project_deploys")?projectsAppState.get("project_deploys").toJS().map((deploy,index)=>
+        <TableRow key={index}>
+          <TableRowColumn>
+            <FontIcon className="icon icon-deploy"/>
+          </TableRowColumn>
+          <TableRowColumn>
+            {deploy.id}
+          </TableRowColumn>
+          <TableRowColumn>
+            {deploy.deployed_at}
+          </TableRowColumn>
+          <TableRowColumn>
+            {deploy.status}
+          </TableRowColumn>
+        </TableRow>
+      ):"";
   };
   return (
     <div className="card">
@@ -180,7 +177,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
         <Divider />
         <List>
           <Table
-            onCellClick={handleGetDeployServers}
+              onCellClick={handleGetDeployServers}
           >
             <TableHeader displaySelectAll={false}>
               <TableRow>
@@ -191,22 +188,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
-              {projectsAppState.get("project_deploys")?projectsAppState.get("project_deploys").toJS().map((deploy,index)=>
-                <TableRow key={deploy.id}>
-                  <TableRowColumn>
-                    <FontIcon className="icon icon-deploy"/>
-                  </TableRowColumn>
-                  <TableRowColumn>
-                    {deploy.id}
-                  </TableRowColumn>
-                  <TableRowColumn>
-                    {deploy.deployed_at}
-                  </TableRowColumn>
-                  <TableRowColumn>
-                    {deploy.status}
-                  </TableRowColumn>
-                </TableRow>
-              ):""}
+              {deploys()}
             </TableBody>
           </Table>
           {/* <ListItem
@@ -284,6 +266,7 @@ Project.propTypes = {
   deployProject: PropTypes.func.isRequired,
   projectsAppState: PropTypes.object.isRequired,
   requestProjectDeployServers: PropTypes.func.isRequired,
+  setShowProjectServers: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

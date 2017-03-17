@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
 import * as actions from "../actions/MiddlewareActions";
-import { doRequestDeployProject, doRequestGetCloudProviderAccess, deployProject, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetProjectServers, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getProjectServers, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from "../sagas";
+import { doRequestDeployProject, doRequestGetCloudProviderAccess, deployProject, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetProjectServers, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getProjectDeployServers, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from "../sagas";
 
 describe("sagas middleware", () => {
   it("handles DEPLOY_PROJECT", () => {
@@ -52,7 +52,7 @@ describe("sagas middleware", () => {
         }
       ]
     };
-    const generator = getProjectServers(
+    const generator = getProjectDeployServers(
       {"value":
         fromJS({
           "authorization": data.authorization,

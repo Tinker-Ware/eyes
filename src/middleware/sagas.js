@@ -256,7 +256,7 @@ export function* getProjectDeploys(data) {
 
 export function* getProjectDeployServers(data) {
   try {
-    let time = 1;
+    let time = 3;
     while (time < 15) {
       yield call(delay, fibonacci(time)*1000);
       const project_servers = yield call(doRequestGetProjectServers, data.value);
@@ -290,7 +290,7 @@ export function* getUserProject(userAccess) {
       }))
     );
     let userProjectDevEnvironment = {"development_environments":[]};
-    let time = 1;
+    let time = 3;
     while (time == 12 || userProjectDevEnvironment.development_environments.length == 0) {
       yield call(delay, fibonacci(time)*1000);
       userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
