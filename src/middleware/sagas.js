@@ -20,7 +20,7 @@ export const doRequest = (url, options) => {
     });
 };
 
-function delay(millis) {
+export function delay(millis) {
     const promise = new Promise(resolve => {
         setTimeout(() => resolve(true), millis);
     });

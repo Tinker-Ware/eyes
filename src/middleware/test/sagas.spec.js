@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
 import * as actions from "../actions/MiddlewareActions";
-import { doRequestDeployProject, doRequestGetCloudProviderAccess, deployProject, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetProjectServers, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getProjectDeployServers, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from "../sagas";
+import { doRequestDeployProject, doRequestGetCloudProviderAccess, deployProject, doRequestPostUser, doRequestPostUserProject, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetCloudProviderKeys, doRequestGetProjectDeploys, doRequestGetProjectServers, doRequestGetUserSesion, doRequestPostCloudProviderKey, getCloudProviderAccess, getCloudProviderKeys, getProjectDeploys, getProjectDeployServers, getRepositoryAccess, getUserSesion, getUserRepositories, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion, delay } from "../sagas";
 
 describe("sagas middleware", () => {
   it("handles DEPLOY_PROJECT", () => {
@@ -31,13 +31,14 @@ describe("sagas middleware", () => {
       }))
     );
   });
-  it("handles PROJECT_SERVERS", () => {
+  it("handles REQUEST_PROJECT_DEPLOYS", () => {
     const data = {
       "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
+      "deploy_id": 1,
       "project_id": 1
     };
-    const servers = {
-      "callback":[
+    const deploys = {
+      "deploys":[
         {
           "id": "5xOQluuygRCrGFn7QcT1zDiS",
           "deploy_id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
@@ -52,6 +53,52 @@ describe("sagas middleware", () => {
         }
       ]
     };
+    const generator = getProjectDeploys(
+      {"value":
+        fromJS({
+          "authorization": data.authorization,
+          "deploy_id": data.deploy_id,
+          "project_id": data.project_id
+        })
+      });
+    const err = new ReferenceError("404");
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+    expect(generator.next().value).to.deep.equal(
+      call(doRequestGetProjectDeploys, fromJS({
+        "authorization": data.authorization,
+        "deploy_id": data.deploy_id,
+        "project_id": data.project_id
+      }))
+    );
+    expect(generator.next(deploys).value).to.deep.equal(
+      put(actions.setProjectDeploys(fromJS({
+        project_deploys: deploys.deploys
+      })))
+    );
+  });
+  it("handles REQUEST_PROJECT_SERVERS", () => {
+    const data = {
+      "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
+      "project_id": 1
+    };
+    const servers = {
+      "servers":[
+        {
+          "id": "5xOQluuygRCrGFn7QcT1zDiS",
+          "deploy_id": "a3hk4lf2g0n1vxny5mninv8fsqwzqf",
+          "project_id": "507f1f77bcf86cd799439011",
+          "ip": "192.168.1.1",
+          "operating_system": "debian-8-x64",
+          "instance_name": "521mb",
+          "region": "nyc1",
+          "hostname": "tinkerware.com",
+          "status": "not created",
+          "provider": "digital_ocean"
+        }
+      ]
+    };
+    const fibonacci = 3000;
     const generator = getProjectDeployServers(
       {"value":
         fromJS({
@@ -63,6 +110,9 @@ describe("sagas middleware", () => {
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
+      call(delay, fibonacci)
+    );
+    expect(generator.next().value).to.deep.equal(
       call(doRequestGetProjectServers, fromJS({
         "authorization": data.authorization,
         "project_id": data.project_id
@@ -70,7 +120,7 @@ describe("sagas middleware", () => {
     );
     expect(generator.next(servers).value).to.deep.equal(
       put(actions.setProjectServers(fromJS({
-        servers: servers.callback
+        project_servers: servers.servers
       })))
     );
   });
