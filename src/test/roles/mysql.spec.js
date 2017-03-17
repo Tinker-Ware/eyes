@@ -2,7 +2,7 @@ import {Map, fromJS} from "immutable";
 import {expect} from "chai";
 import mysql from "../../reducers/roles/mysql";
 
-describe("reducer", () => {
+describe("mysql role", () => {
   it("handles SET_MYSQL_ROOT_PASSWORD", () => {
     const initialState = Map();
     const action = {type:"SET_MYSQL_ROOT_PASSWORD", value: fromJS({

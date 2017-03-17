@@ -2,7 +2,7 @@ import { Map, fromJS } from "immutable";
 import { expect } from "chai";
 import repository from "../reducers/repository";
 
-describe("reducer", () => {
+describe("repository", () => {
   it("handles SET_REPOSITORIES", () => {
     const initialState = Map();
     const action = {type:"SET_REPOSITORIES", value: fromJS({

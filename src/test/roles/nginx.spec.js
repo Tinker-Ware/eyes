@@ -2,7 +2,7 @@ import {Map, fromJS} from "immutable";
 import {expect} from "chai";
 import nginx from "../../reducers/roles/nginx";
 
-describe("reducer", () => {
+describe("nginx role", () => {
   it("handles SET_NGINX_REMOVE_DEFAULT_VHOST", () => {
     const initialState = Map();
     const action = {type:"SET_NGINX_REMOVE_DEFAULT_VHOST", value: fromJS({

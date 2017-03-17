@@ -2,7 +2,7 @@ import { Map, fromJS } from "immutable";
 import { expect } from "chai";
 import user from "../reducers/user";
 
-describe("reducer", () => {
+describe("user", () => {
   it("handles SET_USER", () => {
     const initialState = Map();
     const action = {type:"SET_USER", value: fromJS({
