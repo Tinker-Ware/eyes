@@ -80,10 +80,10 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
       <ListItem
           key={index}
           leftIcon={<FontIcon className="icon icon-deploy"/>}
-          primaryText={"ID: "+server.id}
+          primaryText={"IP: "+server.networks.v4[0].ip_address}
           rightIcon={<FontIcon className="icon icon-check"/>}
           // onChange={handleGetDeployServers(server.id)}
-          secondaryText={"IP: "+server.networks.v4[0].ip_address}
+          secondaryText={"Provider: "+server.provider}
       />
     ):"";
   };
@@ -94,7 +94,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
             <FontIcon className="icon icon-deploy"/>
           </TableRowColumn>
           <TableRowColumn>
-            {deploy.id}
+            {index+1}
           </TableRowColumn>
           <TableRowColumn>
             {deploy.deployed_at}
@@ -181,8 +181,8 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           >
             <TableHeader displaySelectAll={false}>
               <TableRow>
-                <TableHeaderColumn>{""}</TableHeaderColumn>
-                <TableHeaderColumn>{"ID"}</TableHeaderColumn>
+                <TableHeaderColumn>{"Deploy"}</TableHeaderColumn>
+                <TableHeaderColumn>{"#"}</TableHeaderColumn>
                 <TableHeaderColumn>{"Deployed At"}</TableHeaderColumn>
                 <TableHeaderColumn>{"Status"}</TableHeaderColumn>
               </TableRow>

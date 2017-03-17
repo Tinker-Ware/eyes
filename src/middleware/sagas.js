@@ -208,7 +208,7 @@ export function* doRequestPostUserProject(userProject, authorization) {
 export function* deployProject(data) {
   try {
     yield call(doRequestDeployProject, data.value);
-    yield call(getProjectDeploys, data.value);
+    yield call(getProjectDeploys, data);
   }
   catch(error) {
   }
