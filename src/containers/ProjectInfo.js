@@ -1,27 +1,15 @@
 import {bindActionCreators} from "redux";
-import {browserHistory, Link} from "react-router";
+import {browserHistory} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import * as actions from "../actions/ServiceFormActions";
 import * as projectsActions from "../actions/projectsActions";
-import AppBar from "material-ui/AppBar";
 import cookie from "react-cookie";
-import FontIcon from "material-ui/FontIcon";
-import IconButton from "material-ui/IconButton";
-import IconMenu from "material-ui/IconMenu";
 import Menu from "../components/Menu";
-import MenuItem from "material-ui/MenuItem";
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import Project from "../components/projects/Project";
 import React, { Component, PropTypes } from "react";
-
-const style = {
-  iconColor: {
-    color: "#fff"
-  }
-};
 
 export class ProjectInfo extends Component {
   componentWillMount() {
