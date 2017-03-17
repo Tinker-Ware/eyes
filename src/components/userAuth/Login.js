@@ -16,14 +16,23 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         }
       })) :"";
   };
+  const handleKeyPress = (e) => {
+    if(e.key == "Enter"){
+      !userAppState.get("user_session")?
+        requestGetUserSesion(fromJS({
+          "user_session": {
+            "email": userAppState.get("user_sesion_email"),
+            "password": userAppState.get("user_sesion_password")
+          }
+        })) :"";
+    }
+  };
   const handleUserSesionEmail = (e) => {
-    e.preventDefault();
     setUserSesionEmail(fromJS({
       "user_sesion_email": e.target.value
     }));
   };
   const handleUserSesionPassword = (e) => {
-    e.preventDefault();
     setUserSesionPassword(fromJS({
       "user_sesion_password": e.target.value
     }));
@@ -36,20 +45,24 @@ const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPasswor
         </h2>
         <form>
               <TextField
+                  errorText={userAppState.get("user_sesion_email")?"":"Email field is required."}
                   floatingLabelText="Email Address"
                   fullWidth
                   hintText="correo@empresa.com"
                   name="Email Address"
                   onChange={handleUserSesionEmail}
+                  onKeyPress={handleKeyPress}
                   type="text"
                   value={userAppState.get("user_sesion_email")?userAppState.get("user_sesion_email"):""}
               />
               <TextField
+                  errorText={userAppState.get("user_sesion_password")?"":"Password field is required."}
                   floatingLabelText="Password"
                   fullWidth
                   hintText="password"
                   name="Password"
                   onChange={handleUserSesionPassword}
+                  onKeyPress={handleKeyPress}
                   type="password"
                   value={userAppState.get("user_sesion_password")?userAppState.get("user_sesion_password"):""}
               />

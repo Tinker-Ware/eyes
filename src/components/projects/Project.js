@@ -1,16 +1,25 @@
 import {fromJS} from "immutable";
 import {List, ListItem} from "material-ui/List";
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import Avatar from "material-ui/Avatar";
 import Chip from "material-ui/Chip";
+import Dialog from "material-ui/Dialog";
 import Divider from "material-ui/Divider";
+import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
 import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
 
-const style = {
+const styles = {
+  body: {
+    padding: 0
+  },
   button: {
     margin: 12,
+  },
+  dialogButton: {
+    padding: 12
   },
   chip: {
     margin: 4,
@@ -30,7 +39,24 @@ const style = {
   }
 };
 
-const Project = ({deployProject, projectsAppState, userAppState}) => {
+const Project = ({deployProject, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
+  const handleGetDeployServers = (e) => {
+    if(projectsAppState.get("project_deploys")){
+      requestProjectDeployServers(fromJS({
+        "authorization": userAppState.get("user_session").toJS().token,
+        "deploy_id": projectsAppState.get("project_deploys").toJS()[e].id,
+        "project_id": projectsAppState.getIn(["user_project","id"])
+      }));
+      handleShowProjectsDeployServers();
+    }
+  };
+  const handleShowProjectsDeployServers = () => {
+    setShowProjectServers(
+      fromJS({
+        show_project_servers: !projectsAppState.get("show_project_servers")
+      })
+    );
+  };
   const handleProjectDeploy = () => {
     deployProject(
       fromJS({
@@ -40,24 +66,52 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
       })
     );
   };
+  const actions = [
+      <FlatButton
+          icon={<FontIcon className="icon icon-cancel" />}
+          key={1}
+          label={"Close"}
+          onTouchTap={handleShowProjectsDeployServers}
+          secondary
+      />
+    ];
   const servers = () => {
-    return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((value,index)=>
+    return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((server,index)=>
       <ListItem
           key={index}
           leftIcon={<FontIcon className="icon icon-deploy"/>}
-          primaryText={"ID: "+value.id}
+          primaryText={"ID: "+server.id}
           rightIcon={<FontIcon className="icon icon-check"/>}
-          secondaryText={"IP: "+value.ip}
+          // onChange={handleGetDeployServers(server.id)}
+          secondaryText={"IP: "+server.networks.v4[0].ip_address}
       />
     ):"";
   };
+  const deploys = () => {
+    return projectsAppState.get("project_deploys")?projectsAppState.get("project_deploys").toJS().map((deploy,index)=>
+        <TableRow key={index}>
+          <TableRowColumn>
+            <FontIcon className="icon icon-deploy"/>
+          </TableRowColumn>
+          <TableRowColumn>
+            {deploy.id}
+          </TableRowColumn>
+          <TableRowColumn>
+            {deploy.deployed_at}
+          </TableRowColumn>
+          <TableRowColumn>
+            {deploy.status}
+          </TableRowColumn>
+        </TableRow>
+      ):"";
+  };
   return (
     <div className="card">
-      <Toolbar style={style.toolbar}>
+      <Toolbar style={styles.toolbar}>
         <ToolbarGroup firstChild>
           <FontIcon className="icon icon-project"/>
           <ToolbarTitle
-              style={style.toolbarTitle}
+              style={styles.toolbarTitle}
               text="Project"
           />
         </ToolbarGroup>
@@ -68,7 +122,7 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
               icon={<FontIcon className="icon icon-edit" />}
               label={"Edit"}
               primary
-              style={style.button}
+              style={styles.button}
           />
           <RaisedButton
               href={"#"}
@@ -76,17 +130,29 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
               label={"Deploy"}
               onClick={handleProjectDeploy}
               primary
-              style={style.button}
+              style={styles.button}
           />
           <RaisedButton
               href={projectsAppState.get("user_project_dev_environment")?projectsAppState.get("user_project_dev_environment").toJS()[0].path:"#"}
               icon={<FontIcon className="icon icon-cloud-download" />}
               label={"Download"}
               primary
-              style={style.button}
+              style={styles.button}
           />
         </ToolbarGroup>
       </Toolbar>
+      <Dialog
+          actions={actions}
+          actionsContainerStyle={styles.dialogButton}
+          autoScrollBodyContent
+          bodyStyle={styles.body}
+          modal={false}
+          onRequestClose={handleShowProjectsDeployServers}
+          open={projectsAppState.get("show_project_servers")?true:false}
+          title="Servers"
+      >
+        {servers()}
+      </Dialog>
       <List>
         <ListItem
             disabled
@@ -110,7 +176,21 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
         </List>
         <Divider />
         <List>
-          {servers()}
+          <Table
+              onCellClick={handleGetDeployServers}
+          >
+            <TableHeader displaySelectAll={false}>
+              <TableRow>
+                <TableHeaderColumn>{""}</TableHeaderColumn>
+                <TableHeaderColumn>{"ID"}</TableHeaderColumn>
+                <TableHeaderColumn>{"Deployed At"}</TableHeaderColumn>
+                <TableHeaderColumn>{"Status"}</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+              {deploys()}
+            </TableBody>
+          </Table>
           {/* <ListItem
               leftIcon={<FontIcon className="icon icon-deploy"/>}
               primaryText={"ID: 11923"}
@@ -127,13 +207,13 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
               leftIcon={<FontIcon className="icon icon-deploy"/>}
               primaryText={"ID: 13923"}
               rightIcon={
-                <div style={style.container}>
+                <div style={styles.container}>
                   <RefreshIndicator
                       left={0}
                       loadingColor={"#777"}
                       size={30}
                       status={"loading"}
-                      style={style.refresh}
+                      style={styles.refresh}
                       top={0}
                   />
                 </div>
@@ -154,25 +234,25 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
             icon={<FontIcon className="icon icon-trigger" />}
             label="Add Trigger"
             primary
-            style={style.button}
+            style={styles.button}
         />
         <RaisedButton
             href="/users"
             icon={<FontIcon className="icon icon-person-add" />}
             label="Modify Users"
             primary
-            style={style.button}
+            style={styles.button}
         />
       </div> */}
       <div className="align-right">
         <Chip
-            style={style.chip}
+            style={styles.chip}
         >
           <Avatar icon={<FontIcon className="icon icon-cpu" />} />
           {"CPU: 60 %"}
         </Chip>
         <Chip
-            style={style.chip}
+            style={styles.chip}
         >
           <Avatar icon={<FontIcon className="icon icon-memory-ram" />} />
           {"RAM: 1024 MB"}
@@ -185,6 +265,8 @@ const Project = ({deployProject, projectsAppState, userAppState}) => {
 Project.propTypes = {
   deployProject: PropTypes.func.isRequired,
   projectsAppState: PropTypes.object.isRequired,
+  requestProjectDeployServers: PropTypes.func.isRequired,
+  setShowProjectServers: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

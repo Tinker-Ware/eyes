@@ -20,11 +20,16 @@ export const doRequest = (url, options) => {
     });
 };
 
-function delay(millis) {
+export function delay(millis) {
     const promise = new Promise(resolve => {
         setTimeout(() => resolve(true), millis);
     });
     return promise;
+}
+
+function fibonacci(num) {
+  if (num <= 1) return 1;
+  return fibonacci(num - 1) + fibonacci(num - 2);
 }
 
 export function* doRequestDeployProject(data) {
@@ -67,9 +72,20 @@ export function* doRequestGetCloudProviderKeys(authorization, user_id) {
       mode:"cors"});
 }
 
+export function* doRequestGetProjectDeploys(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys",
+    {
+      method:"GET",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization")
+      },
+      mode:"cors"});
+}
+
 export function* doRequestGetProjectServers(data) {
   return yield call(
-    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/servers",
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys/"+data.get("deploy_id")+"/servers",
     {
       method:"GET",
       headers: {
@@ -192,6 +208,7 @@ export function* doRequestPostUserProject(userProject, authorization) {
 export function* deployProject(data) {
   try {
     yield call(doRequestDeployProject, data.value);
+    yield call(getProjectDeploys, data.value);
   }
   catch(error) {
   }
@@ -225,13 +242,30 @@ export function* getCloudProviderKeys(userAccess) {
   }
 }
 
-export function* getProjectServers(data) {
+export function* getProjectDeploys(data) {
   try {
-    const project_servers = yield call(doRequestGetProjectServers, data.value);
-    yield put(actions.setProjectServers(fromJS({
-        servers: project_servers.callback
+    const project_deploys = yield call(doRequestGetProjectDeploys, data.value);
+    yield put(actions.setProjectDeploys(fromJS({
+        project_deploys: project_deploys.deploys
       }))
     );
+  }
+  catch(error) {
+  }
+}
+
+export function* getProjectDeployServers(data) {
+  try {
+    let time = 3;
+    while (time < 15) {
+      yield call(delay, fibonacci(time)*1000);
+      const project_servers = yield call(doRequestGetProjectServers, data.value);
+      yield put(actions.setProjectServers(fromJS({
+          project_servers: project_servers.servers
+        }))
+      );
+      time++;
+    }
   }
   catch(error) {
   }
@@ -256,9 +290,11 @@ export function* getUserProject(userAccess) {
       }))
     );
     let userProjectDevEnvironment = {"development_environments":[]};
-    while (userProjectDevEnvironment.development_environments.length == 0) {
-      yield call(delay, 2000);
+    let time = 3;
+    while (time == 12 || userProjectDevEnvironment.development_environments.length == 0) {
+      yield call(delay, fibonacci(time)*1000);
       userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
+      time++;
     }
     yield put(actions.setUserProjectDevEnvironment(fromJS({
         user_project_dev_environment: userProjectDevEnvironment.development_environments
@@ -393,7 +429,8 @@ export default function* root() {
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
     takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
-    takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectServers),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_DEPLOYS, getProjectDeploys),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectDeployServers),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)

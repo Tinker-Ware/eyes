@@ -23,9 +23,9 @@
     "build": "babel-node tools/build.js && node tools/distServer.js",
     "test-server": "npm-run-all --parallel mock-server test:watch open:test lint:watch",
     "mock-server": "node_modules/drakov/drakov -f \"api/tinkerware-blueprint/*.apib\" \"api/tinkerware-blueprint/\" -p 3100 --watch --autoOptions --header authorization --header provider-token --body key",
-    "test": "mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
-    "test:CI": "babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js src/**/*.spec.js",
-    "test:cover": "babel-node node_modules/isparta/bin/isparta cover --root src --report html mocha -- --require ./tools/testSetup.js src/**/*.spec.js --reporter progress",
+    "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
+    "test:CI": "babel-node node_modules/isparta/bin/isparta cover --root src --report lcovonly _mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\"",
+    "test:cover": "babel-node node_modules/isparta/bin/isparta cover --root src --report html mocha -- --require ./tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
     "test:cover:CI": "npm run test:CI --reporter progress && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "open:cover": "npm run test:cover && open coverage/index.html"
@@ -128,6 +128,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tinker-Ware/provisioning-webpage"
+    "url": "https://github.com/Tinker-Ware/eyes"
   }
 }

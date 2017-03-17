@@ -36,6 +36,13 @@ export function setCloudProviderSshKeys(cloudProviderSshKeys){
 //   };
 // }
 
+export function setProjectDeploys(ProjectDeploys){
+  return{
+    type: projectsActionTypes.SET_PROJECT_DEPLOYS,
+    value: ProjectDeploys
+  };
+}
+
 export function setProjectServers(ProjectServers){
   return{
     type: projectsActionTypes.SET_PROJECT_SERVERS,

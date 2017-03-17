@@ -9,17 +9,16 @@ const ProjectName = ( {setProjectName, projectNameAppState} ) => {
       name: e.target.value
     }));
   };
-
   return (
     <div>
       <TextField
-          errorText="This field is required."
+          errorText={projectNameAppState.get("project_name")?"":"This field is required."}
           floatingLabelText="ProjectName"
           fullWidth
           name="projectName"
           onChange={ProjectNameKeypress}
           type="text"
-          value={projectNameAppState.project_name}
+          value={projectNameAppState.get("project_name")}
       />
     </div>
   );

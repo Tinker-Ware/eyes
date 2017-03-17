@@ -12,7 +12,11 @@ export function requestGetUserProjects(value) {
   return { type: types.REQUEST_USER_PROJECTS, value };
 }
 
-export function requestProjectServers(value) {
+export function requestProjectDeploys(value) {
+  return { type: types.REQUEST_PROJECT_DEPLOYS, value };
+}
+
+export function requestProjectDeployServers(value) {
   return { type: types.REQUEST_PROJECT_SERVERS, value };
 }
 
@@ -20,8 +24,16 @@ export function setUserProject(value) {
   return { type: types.SET_USER_PROJECT, value };
 }
 
+export function setProjectDeploys(value) {
+  return { type: types.SET_PROJECT_DEPLOYS, value };
+}
+
 export function setProjectServers(value) {
   return { type: types.SET_PROJECT_SERVERS, value };
+}
+
+export function setShowProjectServers(value) {
+  return { type: types.SET_SHOW_PROJECT_SERVERS, value };
 }
 
 export function setUserProjectDevEnvironment(value) {
