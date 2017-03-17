@@ -9,6 +9,7 @@ import cookie from "react-cookie";
 import FontIcon from "material-ui/FontIcon";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
+import Menu from "../components/Menu";
 import MenuItem from "material-ui/MenuItem";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -49,44 +50,7 @@ export class ProjectInfo extends Component {
         <div className="small-12 medium-12 large-12 large-centered columns">
           <div className="container">
             <Paper zDepth={4}>
-              <AppBar
-                  iconElementLeft={
-                    <IconButton>
-                      <Link to={"/projects"}>
-                        <FontIcon
-                            className="icon icon-arrow-back"
-                            style={style.iconColor}
-                        />
-                      </Link>
-                    </IconButton>
-                  }
-                  iconElementRight={
-                    <IconMenu
-                        anchorOrigin={{
-                          horizontal: "right",
-                          vertical: "top"
-                        }}
-                        iconButtonElement={
-                          <IconButton><MoreVertIcon /></IconButton>
-                        }
-                        targetOrigin={{
-                          horizontal: "right",
-                          vertical: "top"
-                        }}
-                    >
-                      <MenuItem
-                          href="/projects"
-                          primaryText="Dashboard"
-                      />
-                      <MenuItem
-                          href="/user"
-                          primaryText="User Profile"
-                      />
-                      <MenuItem primaryText="Sign out" />
-                    </IconMenu>
-                  }
-                  title="My DevOp"
-              />
+              <Menu setUserSesion={this.props.actions.setUserSesion}/>
               <Project
                   deployProject={this.props.projectsActions.deployProject}
                   projectsAppState={this.props.projectsAppState}

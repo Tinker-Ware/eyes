@@ -11,7 +11,7 @@ import cookie from "react-cookie";
 import CreateService from "../components/provisionerForm/CreateService";
 import FontIcon from "material-ui/FontIcon";
 import GithubService from "../components/provisionerForm/GithubService";
-import Menu from "../components/provisionerForm/Menu";
+import Menu from "../components/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
@@ -50,7 +50,7 @@ export class ServiceForm extends Component {
         <div className="small-12 medium-12 large-12 large-centered columns">
           <div className="container">
             <Paper zDepth={4}>
-              <Menu/>
+              <Menu setUserSesion={this.props.actions.setUserSesion}/>
               <div className="card">
                 <Toolbar style={style.toolbar}>
                   <ToolbarGroup firstChild>
