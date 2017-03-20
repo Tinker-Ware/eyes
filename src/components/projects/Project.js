@@ -123,6 +123,13 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           />
         </ToolbarGroup>
         <ToolbarGroup>
+          <RaisedButton
+              href={projectsAppState.get("user_project")?"/projects/":"#"}
+              icon={<FontIcon className="icon icon-box" />}
+              label={"Show Projects"}
+              primary
+              style={styles.button}
+          />
           <ToolbarSeparator />
           <RaisedButton
               href={projectsAppState.get("user_project")?"/project/edit/"+projectsAppState.get("user_project").toJS().id:"#"}
