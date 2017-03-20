@@ -1,4 +1,5 @@
 import {fromJS} from "immutable";
+import {Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
@@ -79,10 +80,13 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
     return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((server,index)=>
       <ListItem
           key={index}
-          leftIcon={<FontIcon className="icon icon-deploy"/>}
+          leftIcon={
+            <Link href={"http://"+server.networks.v4[0].ip_address} target="_blank">
+              <FontIcon className="icon icon-edit"/>
+            </Link>
+          }
           primaryText={"IP: "+server.networks.v4[0].ip_address}
           rightIcon={<FontIcon className="icon icon-check"/>}
-          // onChange={handleGetDeployServers(server.id)}
           secondaryText={"Provider: "+server.provider}
       />
     ):"";
@@ -112,7 +116,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           <FontIcon className="icon icon-project"/>
           <ToolbarTitle
               style={styles.toolbarTitle}
-              text="Project"
+              text="Project Information"
           />
         </ToolbarGroup>
         <ToolbarGroup>
@@ -149,7 +153,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           modal={false}
           onRequestClose={handleShowProjectsDeployServers}
           open={projectsAppState.get("show_project_servers")?true:false}
-          title="Servers"
+          title="Your Deploy Servers"
       >
         {servers()}
       </Dialog>
