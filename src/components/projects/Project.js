@@ -1,5 +1,5 @@
 import {fromJS} from "immutable";
-import {Link} from "react-router";
+import {grey400} from "material-ui/styles/colors";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
@@ -9,6 +9,10 @@ import Dialog from "material-ui/Dialog";
 import Divider from "material-ui/Divider";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
+import IconButton from "material-ui/IconButton";
+import IconMenu from "material-ui/IconMenu";
+import MenuItem from "material-ui/MenuItem";
+import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
 
@@ -28,6 +32,9 @@ const styles = {
   container: {
     position: "fixed",
   },
+  list:{
+    margin: "2em 0"
+  },
   refresh: {
     display: "inline-block",
     position: "relative",
@@ -41,6 +48,9 @@ const styles = {
 };
 
 const Project = ({deployProject, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
+  const handlOpenURL = (url) => {
+    window.open(url, "_blank");
+  };
   const handleGetDeployServers = (e) => {
     if(projectsAppState.get("project_deploys")){
       requestProjectDeployServers(fromJS({
@@ -68,29 +78,39 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
     );
   };
   const actions = [
-      <FlatButton
-          icon={<FontIcon className="icon icon-cancel" />}
-          key={1}
-          label={"Close"}
-          onTouchTap={handleShowProjectsDeployServers}
-          secondary
-      />
-    ];
+    <FlatButton
+        icon={<FontIcon className="icon icon-cancel" />}
+        key={1}
+        label={"Close"}
+        onTouchTap={handleShowProjectsDeployServers}
+        secondary
+    />
+  ];
   const servers = () => {
     return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((server,index)=>
       <ListItem
           key={index}
           leftIcon={
-            <Link
-                href={"http://"+server.networks.v4[0].ip_address}
-                target="_blank"
-            >
-              <FontIcon className="icon icon-edit"/>
-            </Link>
+            <FontIcon className="icon icon-check"/>
           }
           primaryText={"IP: "+server.networks.v4[0].ip_address}
-          rightIcon={<FontIcon className="icon icon-check"/>}
+          rightIconButton={
+            <IconMenu iconButtonElement={
+                <IconButton
+                    tooltip="Enable Popups"
+                    tooltipPosition="bottom-left"
+                    touch
+                >
+                  <MoreVertIcon color={grey400} />
+                </IconButton>
+              }
+            >
+              <MenuItem onClick={() => handlOpenURL("http://"+server.networks.v4[0].ip_address)}>{"Show Server"}</MenuItem>
+              <MenuItem>{"Delete"}</MenuItem>
+            </IconMenu>
+          }
           secondaryText={"Provider: "+server.provider}
+          style={styles.list}
       />
     ):"";
   };
@@ -166,6 +186,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           title="Your Deploy Servers"
       >
         {servers()}
+        <p/>
       </Dialog>
       <List>
         <ListItem
