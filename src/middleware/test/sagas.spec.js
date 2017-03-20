@@ -12,6 +12,9 @@ describe("sagas middleware", () => {
       "user_id": 1,
       "project_id": 1
     };
+    const deploy = {
+      "id": "12321343143214"
+    };
     const generator = deployProject(
       {"value":
         fromJS({
@@ -30,6 +33,30 @@ describe("sagas middleware", () => {
         "user_id": data.user_id
       }))
     );
+    expect(generator.next().value).to.deep.equal(
+      call(getProjectDeploys, {"value":
+        fromJS({
+          "authorization": data.authorization,
+          "project_id": data.project_id,
+          "user_id": data.user_id
+        })
+      })
+    );
+    expect(generator.next().value).to.deep.equal(
+      put(actions.setShowProjectServers(fromJS({
+        show_project_servers: true
+      })))
+    );
+    // expect(generator.next(deploy).value).to.deep.equal(
+    //   call(getProjectDeployServers, {"value":
+    //     fromJS({
+    //       "authorization": data.authorization,
+    //       "project_id": data.project_id,
+    //       "user_id": data.user_id,
+    //       "deploy_id": deploy.id
+    //     })
+    //   })
+    // );
   });
   it("handles REQUEST_PROJECT_DEPLOYS", () => {
     const data = {
@@ -448,19 +475,19 @@ it("handles REQUEST_USER_SESION", () => {
     "user_session": {"email":"some@email.com",
     "token": "GSjtfp4Gdrb5OovWSrVEwy78fe2IhbHmGcaYmSN8IQp5dxeJcH4wH8qDt3ut2Ulu"
   }
-};
-const generator = getUserSesion({"value": fromJS({
-  "user_session": userAccess.user_session
-})
-});
-const err = new ReferenceError("404");
-const generatorError = function () { throw err; };
-expect(generatorError).to.throw(err);
-expect(generator.next().value).to.deep.equal(
-  call(doRequestGetUserSesion, fromJS(userAccess.user_session))
-);
-expect(generator.next(userAccess.user_session).value).to.deep.equal(
-  call(refreshUserSesion, userAccess.user_session)
-);
+  };
+  const generator = getUserSesion({"value": fromJS({
+    "user_session": userAccess.user_session
+  })
+  });
+  const err = new ReferenceError("404");
+  const generatorError = function () { throw err; };
+  expect(generatorError).to.throw(err);
+  expect(generator.next().value).to.deep.equal(
+    call(doRequestGetUserSesion, fromJS(userAccess.user_session))
+  );
+  expect(generator.next(userAccess.user_session).value).to.deep.equal(
+    call(refreshUserSesion, userAccess.user_session)
+  );
 });
 });

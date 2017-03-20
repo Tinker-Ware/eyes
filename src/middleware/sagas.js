@@ -207,8 +207,14 @@ export function* doRequestPostUserProject(userProject, authorization) {
 
 export function* deployProject(data) {
   try {
-    yield call(doRequestDeployProject, data.value);
+    const deploy = yield call(doRequestDeployProject, data.value);
     yield call(getProjectDeploys, data);
+    yield put(actions.setShowProjectServers(fromJS({
+      "show_project_servers": true
+    })));
+    yield call(getProjectDeployServers, {
+      "value": data.value.set("deploy_id",deploy.deploy.id)
+    });
   }
   catch(error) {
   }
@@ -222,9 +228,9 @@ export function* getCloudProviderAccess(userAccess) {
       }))
     );
     yield put(actions.requestCloudProviderKeys(fromJS({
-        authorization: userAccess.value.get("authorization"),
-        user_id: userAccess.value.get("oauth_request").get("user_id")
-      })));
+      authorization: userAccess.value.get("authorization"),
+      user_id: userAccess.value.get("oauth_request").get("user_id")
+    })));
   }
   catch(error) {
   }

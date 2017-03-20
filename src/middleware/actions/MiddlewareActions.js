@@ -50,6 +50,13 @@ export function setProjectServers(ProjectServers){
   };
 }
 
+export function setShowProjectServers(show){
+  return{
+    type: projectsActionTypes.SET_SHOW_PROJECT_SERVERS,
+    value: show
+  };
+}
+
 export function setUserProject(userProject){
   return{
     type: projectsActionTypes.SET_USER_PROJECT,

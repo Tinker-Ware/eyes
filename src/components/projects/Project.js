@@ -81,7 +81,10 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
       <ListItem
           key={index}
           leftIcon={
-            <Link href={"http://"+server.networks.v4[0].ip_address} target="_blank">
+            <Link
+                href={"http://"+server.networks.v4[0].ip_address}
+                target="_blank"
+            >
               <FontIcon className="icon icon-edit"/>
             </Link>
           }
