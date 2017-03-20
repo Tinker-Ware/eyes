@@ -12,9 +12,6 @@ describe("sagas middleware", () => {
       "user_id": 1,
       "project_id": 1
     };
-    const deploy = {
-      "id": "12321343143214"
-    };
     const generator = deployProject(
       {"value":
         fromJS({

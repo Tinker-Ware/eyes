@@ -104,7 +104,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
             {index+1}
           </TableRowColumn>
           <TableRowColumn>
-            {deploy.deployed_at}
+            {new Date(deploy.deployed_at).toLocaleDateString()}
           </TableRowColumn>
           <TableRowColumn>
             {deploy.status}
