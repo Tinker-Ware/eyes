@@ -40,6 +40,7 @@ export class ProjectInfo extends Component {
             <Paper zDepth={4}>
               <Menu setUserSesion={this.props.actions.setUserSesion}/>
               <Project
+                  deleteProjectServer={this.props.projectsActions.deleteProjectServer}
                   deployProject={this.props.projectsActions.deployProject}
                   projectsAppState={this.props.projectsAppState}
                   requestProjectDeployServers={this.props.projectsActions.requestProjectDeployServers}

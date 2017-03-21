@@ -32,9 +32,6 @@ const styles = {
   container: {
     position: "fixed",
   },
-  list:{
-    margin: "2em 0"
-  },
   refresh: {
     display: "inline-block",
     position: "relative",
@@ -47,7 +44,7 @@ const styles = {
   }
 };
 
-const Project = ({deployProject, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
+const Project = ({deployProject, deleteProjectServer, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
   const handlOpenURL = (url) => {
     window.open(url, "_blank");
   };
@@ -59,6 +56,16 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
         "project_id": projectsAppState.getIn(["user_project","id"])
       }));
       handleShowProjectsDeployServers();
+    }
+  };
+  const handleDeleteDeployServers = (deployID, serverID) => {
+    if(projectsAppState.get("project_deploys")){
+      deleteProjectServer(fromJS({
+        "authorization": userAppState.get("user_session").toJS().token,
+        "project_id": projectsAppState.getIn(["user_project","id"]),
+        "deploy_id": deployID,
+        "server_id": serverID
+      }));
     }
   };
   const handleShowProjectsDeployServers = () => {
@@ -97,7 +104,6 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           rightIconButton={
             <IconMenu iconButtonElement={
                 <IconButton
-                    tooltip="Enable Popups"
                     tooltipPosition="bottom-left"
                     touch
                 >
@@ -106,11 +112,10 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
               }
             >
               <MenuItem onClick={() => handlOpenURL("http://"+server.networks.v4[0].ip_address)}>{"Show Server"}</MenuItem>
-              <MenuItem>{"Delete"}</MenuItem>
+              <MenuItem onClick={() => handleDeleteDeployServers(server.deploy_id, server.id)}>{"Delete"}</MenuItem>
             </IconMenu>
           }
           secondaryText={"Provider: "+server.provider}
-          style={styles.list}
       />
     ):"";
   };
@@ -151,13 +156,13 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
               style={styles.button}
           />
           <ToolbarSeparator />
-          <RaisedButton
+          {/* <RaisedButton
               href={projectsAppState.get("user_project")?"/project/edit/"+projectsAppState.get("user_project").toJS().id:"#"}
               icon={<FontIcon className="icon icon-edit" />}
               label={"Edit"}
               primary
               style={styles.button}
-          />
+          /> */}
           <RaisedButton
               href={"#"}
               icon={<FontIcon className="icon icon-deploy" />}
@@ -186,7 +191,6 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           title="Your Deploy Servers"
       >
         {servers()}
-        <p/>
       </Dialog>
       <List>
         <ListItem
@@ -195,12 +199,6 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
             secondaryText={"Modify each project as you need"}
         />
       </List>
-      {/* <div className="small-12 medium-6 large-6 columns">
-        <img
-            className="project-example"
-            src={require("../../img/project-example.png")}
-        />
-      </div> */}
       <div className="small-12 medium-12 large-12 columns">
         <List>
           <ListItem
@@ -226,41 +224,6 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
               {deploys()}
             </TableBody>
           </Table>
-          {/* <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 11923"}
-              rightIcon={<FontIcon className="icon icon-check"/>}
-              secondaryText={"USER: Alfonso"}
-          />
-          <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 12923"}
-              rightIcon={<FontIcon className="icon icon-warning"/>}
-              secondaryText={"USER: Antonio"}
-          />
-          <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 13923"}
-              rightIcon={
-                <div style={styles.container}>
-                  <RefreshIndicator
-                      left={0}
-                      loadingColor={"#777"}
-                      size={30}
-                      status={"loading"}
-                      style={styles.refresh}
-                      top={0}
-                  />
-                </div>
-              }
-              secondaryText={"USER: Alfonso"}
-          />
-          <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 15923"}
-              rightIcon={<FontIcon className="icon icon-check"/>}
-              secondaryText={"USER: Javier"}
-          /> */}
         </List>
       </div>
       {/* <div className="align-left">
@@ -298,6 +261,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
 };
 
 Project.propTypes = {
+  deleteProjectServer: PropTypes.func.isRequired,
   deployProject: PropTypes.func.isRequired,
   projectsAppState: PropTypes.object.isRequired,
   requestProjectDeployServers: PropTypes.func.isRequired,

@@ -4,6 +4,10 @@ export function deployProject(value) {
   return { type: types.REQUEST_DEPLOY_PROJECT, value };
 }
 
+export function deleteProjectServer(value) {
+  return { type: types.DELETE_PROJECT_SERVERS, value };
+}
+
 export function requestGetUserProject(value) {
   return { type: types.REQUEST_USER_PROJECT, value };
 }
