@@ -1,4 +1,5 @@
 import {fromJS} from "immutable";
+import {grey400} from "material-ui/styles/colors";
 import {List, ListItem} from "material-ui/List";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
@@ -8,6 +9,10 @@ import Dialog from "material-ui/Dialog";
 import Divider from "material-ui/Divider";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
+import IconButton from "material-ui/IconButton";
+import IconMenu from "material-ui/IconMenu";
+import MenuItem from "material-ui/MenuItem";
+import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import RaisedButton from "material-ui/RaisedButton";
 import React, {PropTypes} from "react";
 
@@ -39,7 +44,10 @@ const styles = {
   }
 };
 
-const Project = ({deployProject, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
+const Project = ({deployProject, deleteProjectServer, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
+  const handlOpenURL = (url) => {
+    window.open(url, "_blank");
+  };
   const handleGetDeployServers = (e) => {
     if(projectsAppState.get("project_deploys")){
       requestProjectDeployServers(fromJS({
@@ -48,6 +56,16 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
         "project_id": projectsAppState.getIn(["user_project","id"])
       }));
       handleShowProjectsDeployServers();
+    }
+  };
+  const handleDeleteDeployServers = (deployID, serverID) => {
+    if(projectsAppState.get("project_deploys")){
+      deleteProjectServer(fromJS({
+        "authorization": userAppState.get("user_session").toJS().token,
+        "project_id": projectsAppState.getIn(["user_project","id"]),
+        "deploy_id": deployID,
+        "server_id": serverID
+      }));
     }
   };
   const handleShowProjectsDeployServers = () => {
@@ -67,22 +85,36 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
     );
   };
   const actions = [
-      <FlatButton
-          icon={<FontIcon className="icon icon-cancel" />}
-          key={1}
-          label={"Close"}
-          onTouchTap={handleShowProjectsDeployServers}
-          secondary
-      />
-    ];
+    <FlatButton
+        icon={<FontIcon className="icon icon-cancel" />}
+        key={1}
+        label={"Close"}
+        onTouchTap={handleShowProjectsDeployServers}
+        secondary
+    />
+  ];
   const servers = () => {
     return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((server,index)=>
       <ListItem
           key={index}
-          leftIcon={<FontIcon className="icon icon-deploy"/>}
+          leftIcon={
+            <FontIcon className="icon icon-check"/>
+          }
           primaryText={"IP: "+server.networks.v4[0].ip_address}
-          rightIcon={<FontIcon className="icon icon-check"/>}
-          // onChange={handleGetDeployServers(server.id)}
+          rightIconButton={
+            <IconMenu iconButtonElement={
+                <IconButton
+                    tooltipPosition="bottom-left"
+                    touch
+                >
+                  <MoreVertIcon color={grey400} />
+                </IconButton>
+              }
+            >
+              <MenuItem onClick={() => handlOpenURL("http://"+server.networks.v4[0].ip_address)}>{"Show Server"}</MenuItem>
+              <MenuItem onClick={() => handleDeleteDeployServers(server.deploy_id, server.id)}>{"Delete"}</MenuItem>
+            </IconMenu>
+          }
           secondaryText={"Provider: "+server.provider}
       />
     ):"";
@@ -97,7 +129,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
             {index+1}
           </TableRowColumn>
           <TableRowColumn>
-            {deploy.deployed_at}
+            {new Date(deploy.deployed_at).toLocaleDateString()}
           </TableRowColumn>
           <TableRowColumn>
             {deploy.status}
@@ -112,18 +144,25 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           <FontIcon className="icon icon-project"/>
           <ToolbarTitle
               style={styles.toolbarTitle}
-              text="Project"
+              text="Project Information"
           />
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarSeparator />
           <RaisedButton
+              href={projectsAppState.get("user_project")?"/projects/":"#"}
+              icon={<FontIcon className="icon icon-box" />}
+              label={"Show Projects"}
+              primary
+              style={styles.button}
+          />
+          <ToolbarSeparator />
+          {/* <RaisedButton
               href={projectsAppState.get("user_project")?"/project/edit/"+projectsAppState.get("user_project").toJS().id:"#"}
               icon={<FontIcon className="icon icon-edit" />}
               label={"Edit"}
               primary
               style={styles.button}
-          />
+          /> */}
           <RaisedButton
               href={"#"}
               icon={<FontIcon className="icon icon-deploy" />}
@@ -149,7 +188,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
           modal={false}
           onRequestClose={handleShowProjectsDeployServers}
           open={projectsAppState.get("show_project_servers")?true:false}
-          title="Servers"
+          title="Your Deployed Servers"
       >
         {servers()}
       </Dialog>
@@ -160,12 +199,6 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
             secondaryText={"Modify each project as you need"}
         />
       </List>
-      {/* <div className="small-12 medium-6 large-6 columns">
-        <img
-            className="project-example"
-            src={require("../../img/project-example.png")}
-        />
-      </div> */}
       <div className="small-12 medium-12 large-12 columns">
         <List>
           <ListItem
@@ -191,41 +224,6 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
               {deploys()}
             </TableBody>
           </Table>
-          {/* <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 11923"}
-              rightIcon={<FontIcon className="icon icon-check"/>}
-              secondaryText={"USER: Alfonso"}
-          />
-          <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 12923"}
-              rightIcon={<FontIcon className="icon icon-warning"/>}
-              secondaryText={"USER: Antonio"}
-          />
-          <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 13923"}
-              rightIcon={
-                <div style={styles.container}>
-                  <RefreshIndicator
-                      left={0}
-                      loadingColor={"#777"}
-                      size={30}
-                      status={"loading"}
-                      style={styles.refresh}
-                      top={0}
-                  />
-                </div>
-              }
-              secondaryText={"USER: Alfonso"}
-          />
-          <ListItem
-              leftIcon={<FontIcon className="icon icon-deploy"/>}
-              primaryText={"ID: 15923"}
-              rightIcon={<FontIcon className="icon icon-check"/>}
-              secondaryText={"USER: Javier"}
-          /> */}
         </List>
       </div>
       {/* <div className="align-left">
@@ -263,6 +261,7 @@ const Project = ({deployProject, projectsAppState, requestProjectDeployServers, 
 };
 
 Project.propTypes = {
+  deleteProjectServer: PropTypes.func.isRequired,
   deployProject: PropTypes.func.isRequired,
   projectsAppState: PropTypes.object.isRequired,
   requestProjectDeployServers: PropTypes.func.isRequired,

@@ -32,6 +32,17 @@ function fibonacci(num) {
   return fibonacci(num - 1) + fibonacci(num - 2);
 }
 
+export function* doRequestDeleteProjectServer(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys/"+data.get("deploy_id")+"/servers/"+data.get("server_id"),
+    {
+      method:"DELETE",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization")
+      },
+      mode:"cors"});
+}
+
 export function* doRequestDeployProject(data) {
   return yield call(
     doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys",
@@ -205,10 +216,24 @@ export function* doRequestPostUserProject(userProject, authorization) {
       mode:"cors"});
 }
 
+export function* deleteProjectServer(data) {
+  try {
+    yield call(doRequestDeleteProjectServer, data.value);
+  }
+  catch(error) {
+  }
+}
+
 export function* deployProject(data) {
   try {
-    yield call(doRequestDeployProject, data.value);
+    const deploy = yield call(doRequestDeployProject, data.value);
     yield call(getProjectDeploys, data);
+    yield put(actions.setShowProjectServers(fromJS({
+      "show_project_servers": true
+    })));
+    yield call(getProjectDeployServers, {
+      "value": data.value.set("deploy_id",deploy.deploy.id)
+    });
   }
   catch(error) {
   }
@@ -222,9 +247,9 @@ export function* getCloudProviderAccess(userAccess) {
       }))
     );
     yield put(actions.requestCloudProviderKeys(fromJS({
-        authorization: userAccess.value.get("authorization"),
-        user_id: userAccess.value.get("oauth_request").get("user_id")
-      })));
+      authorization: userAccess.value.get("authorization"),
+      user_id: userAccess.value.get("oauth_request").get("user_id")
+    })));
   }
   catch(error) {
   }
@@ -420,17 +445,18 @@ export function* refreshIntegrations(userSession) {
 
 export default function* root() {
   yield[
+    takeLatest(projectsActionTypes.DELETE_PROJECT_SERVERS, deleteProjectServer),
+    takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_DEPLOYS, getProjectDeploys),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectDeployServers),
+    takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
+    takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_ACCESS, getCloudProviderAccess),
     takeLatest(types.REQUEST_CLOUD_PROVIDER_KEYS, getCloudProviderKeys),
     takeLatest(types.REQUEST_GITHUB_ACCESS, getRepositoryAccess),
     takeLatest(types.REQUEST_GITHUB_REPOSITORIES, getUserRepositories),
     takeLatest(types.REQUEST_POST_CLOUD_PROVIDER_KEY, postCloudProviderKey),
     takeLatest(types.REQUEST_POST_USER_PROJECT, postUserProject),
-    takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
-    takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
-    takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
-    takeLatest(projectsActionTypes.REQUEST_PROJECT_DEPLOYS, getProjectDeploys),
-    takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectDeployServers),
     takeLatest(types.REQUEST_POST_USER, postUser),
     takeLatest(types.REQUEST_REFRESH_USER_SESSION, refreshSession),
     takeLatest(types.REQUEST_USER_SESION, getUserSesion)
