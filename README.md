@@ -1,5 +1,14 @@
 # Tinkerware Eyes
 
+[![Build status: Linux](https://travis-ci.org/Tinker-Ware/eyes.svg?branch=developmet)](https://travis-ci.org/Tinker-Ware/eyes)
+[![Dependency Status](https://david-dm.org/Tinker-Ware/eyes.svg?style=flat-square)](https://david-dm.org/Tinker-Ware/eyes)
+[![Coverage Status](https://coveralls.io/repos/github/Tinker-Ware/eyes/badge.svg?branch=developmet)](https://coveralls.io/github/Tinker-Ware/eyes?branch=developmet)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
+[![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Tinker-Ware/eyes.svg)](http://isitmaintained.com/project/Tinker-Ware/eyes "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/Tinker-Ware/eyes.svg)](http://isitmaintained.com/project/Tinker-Ware/eyes "Percentage of issues still open")
+
 ##Initial Machine Setup
  1. **Install [Node 4.0.0 or greater](https://nodejs.org)** - (5.0 or greater is recommended for optimal build performance). Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm).
  2. **Install [Git](https://git-scm.com/downloads)**. 
