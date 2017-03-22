@@ -188,7 +188,7 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
           modal={false}
           onRequestClose={handleShowProjectsDeployServers}
           open={projectsAppState.get("show_project_servers")?true:false}
-          title="Your Deploy Servers"
+          title="Your Deployed Servers"
       >
         {servers()}
       </Dialog>
