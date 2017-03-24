@@ -1,14 +1,14 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import { fromJS } from "immutable";
-import cookie from "react-cookie";
 import * as actions from "../actions/userActions";
 import * as applicationActions from "../actions/ApplicationActions";
+import cookie from "react-cookie";
 import Login from "../components/userAuth/Login";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Snackbar from 'material-ui/Snackbar';
+import Notification from "../components/Notification.js";
+import React, { Component, PropTypes } from "react";
 
 export class UserLogin extends Component {
   componentWillMount() {
@@ -25,10 +25,6 @@ export class UserLogin extends Component {
     }
   }
   render() {
-    const handleNotificationClose = () => {
-      this.props.applicationActions.setNotification(fromJS({
-        "notifications":""}));
-    };
     return (
       <MuiThemeProvider>
         <div className="small-12 medium-12 large-6 large-centered columns">
@@ -38,11 +34,9 @@ export class UserLogin extends Component {
               setUserSesionPassword={this.props.actions.setUserSesionPassword}
               userAppState={this.props.userAppState}
           />
-          <Snackbar
-            onRequestClose={handleNotificationClose}
-            autoHideDuration={3000}
-            message={this.props.applicationAppState.get("notification")?this.props.applicationAppState.get("notification"):""}
-            open={this.props.applicationAppState.get("notification")?true:false}
+          <Notification
+            setNotification={this.props.applicationActions.setNotification}
+            message={this.props.applicationAppState.get("notification")}
           />
         </div>
       </MuiThemeProvider>
@@ -52,8 +46,8 @@ export class UserLogin extends Component {
 
 UserLogin.propTypes = {
   actions: PropTypes.object.isRequired,
-  applicationAppState: PropTypes.object.isRequired,
   applicationActions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

@@ -92,15 +92,8 @@ const GithubService = ( {repositoryAppState, userAppState, setRepository, setInt
   const actions = [
       <FlatButton
           icon={<FontIcon className="icon icon-cancel" />}
-          key={2}
-          label={"Cancel"}
-          onTouchTap={handleGithubConfigurationEnable}
-          secondary
-      />,
-      <FlatButton
-          icon={<FontIcon className="icon icon-cancel" />}
           key={1}
-          label={"Save"}
+          label={"Close"}
           onTouchTap={handleGithubConfigurationEnable}
           primary
       />

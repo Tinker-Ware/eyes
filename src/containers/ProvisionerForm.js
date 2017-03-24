@@ -1,9 +1,11 @@
+// import SSHKeys from "../components/provisionerForm/SSHKeys";
 import {bindActionCreators} from "redux";
 import {browserHistory} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 import * as actions from "../actions/ServiceFormActions";
+import * as applicationActions from "../actions/ApplicationActions";
 import * as rolesActions from "../actions/rolesActions";
 import Application from "../components/provisionerForm/Application";
 import CloudProvider from "../components/provisionerForm/CloudProvider";
@@ -13,11 +15,11 @@ import FontIcon from "material-ui/FontIcon";
 import GithubService from "../components/provisionerForm/GithubService";
 import Menu from "../components/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Notification from "../components/Notification.js";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
 import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
-// import SSHKeys from "../components/provisionerForm/SSHKeys";
 
 const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
 
@@ -132,6 +134,10 @@ export class ServiceForm extends Component {
               </div>
             </Paper>
           </div>
+          <Notification
+            setNotification={this.props.applicationActions.setNotification}
+            message={this.props.applicationAppState.get("notification")}
+          />
             {/* <div className="row">
               <footer>
                 <div className="row">
@@ -184,6 +190,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
+    applicationActions: bindActionCreators(applicationActions, dispatch),
     rolesActions: bindActionCreators(rolesActions, dispatch)
   };
 }

@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
+import { connect } from "react-redux";
 import { fromJS } from "immutable";
-import cookie from "react-cookie";
 import * as actions from "../actions/userActions";
+import * as applicationActions from "../actions/ApplicationActions";
+import cookie from "react-cookie";
+import Notification from "../components/Notification.js";
+import React, { Component, PropTypes } from "react";
 import Signup from "../components/userAuth/Signup";
 
 export class UserSignup extends Component {
@@ -30,6 +32,10 @@ export class UserSignup extends Component {
             setUserSesionPassword={this.props.actions.setUserSesionPassword}
             userAppState={this.props.userAppState}
         />
+        <Notification
+          setNotification={this.props.applicationActions.setNotification}
+          message={this.props.applicationAppState.get("notification")}
+        />
       </div>
     );
   }
@@ -37,18 +43,21 @@ export class UserSignup extends Component {
 
 UserSignup.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    applicationAppState: state.applicationAppState,
     userAppState: state.userAppState
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    applicationActions: bindActionCreators(applicationActions, dispatch)
   };
 }
 

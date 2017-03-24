@@ -3,10 +3,12 @@ import {browserHistory} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import * as actions from "../actions/ServiceFormActions";
+import * as applicationActions from "../actions/ApplicationActions";
 import * as projectsActions from "../actions/projectsActions";
 import cookie from "react-cookie";
 import Menu from "../components/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Notification from "../components/Notification.js";
 import Paper from "material-ui/Paper";
 import Project from "../components/projects/Project";
 import React, { Component, PropTypes } from "react";
@@ -49,6 +51,10 @@ export class ProjectInfo extends Component {
               />
             </Paper>
           </div>
+          <Notification
+            setNotification={this.props.applicationActions.setNotification}
+            message={this.props.applicationAppState.get("notification")}
+          />
         </div>
       </MuiThemeProvider>
     );
@@ -57,6 +63,7 @@ export class ProjectInfo extends Component {
 
 ProjectInfo.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   projectsActions: PropTypes.object.isRequired,
   projectsAppState: PropTypes.object.isRequired,
@@ -74,6 +81,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
+    applicationActions: bindActionCreators(applicationActions, dispatch),
     projectsActions: bindActionCreators(projectsActions, dispatch)
   };
 }
