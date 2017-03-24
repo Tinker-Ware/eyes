@@ -1,4 +1,5 @@
 import { ADD_ENVIRONMENT, SET_ACTIVE_ENVIRONMENT, SET_APPLICATION, SET_APPLICATION_ONE_CLICK_APP } from "../constants/ActionTypes";
+import { SET_NOTIFICATION } from "../constants/ApplicationActionTypes";
 import { Map } from "immutable";
 
 const initialState = Map({
@@ -37,6 +38,10 @@ export default function application(state = initialState, action) {
       return state.set("application_evironments", action.value.get("evironments").filter(value =>
         value.toJS().name !== action.value.get("evironment").toJS()[0].name
       ).toSet().union(action.value.get("evironment")).toList());
+    }
+    case SET_NOTIFICATION:
+    {
+      return state.set("notification", action.value.get("notification"));
     }
     default:
       return state;

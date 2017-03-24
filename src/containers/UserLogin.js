@@ -5,8 +5,10 @@ import { browserHistory } from "react-router";
 import { fromJS } from "immutable";
 import cookie from "react-cookie";
 import * as actions from "../actions/userActions";
+import * as applicationActions from "../actions/ApplicationActions";
 import Login from "../components/userAuth/Login";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Snackbar from 'material-ui/Snackbar';
 
 export class UserLogin extends Component {
   componentWillMount() {
@@ -23,6 +25,10 @@ export class UserLogin extends Component {
     }
   }
   render() {
+    const handleNotificationClose = () => {
+      this.props.applicationActions.setNotification(fromJS({
+        "notifications":""}));
+    };
     return (
       <MuiThemeProvider>
         <div className="small-12 medium-12 large-6 large-centered columns">
@@ -32,6 +38,12 @@ export class UserLogin extends Component {
               setUserSesionPassword={this.props.actions.setUserSesionPassword}
               userAppState={this.props.userAppState}
           />
+          <Snackbar
+            onRequestClose={handleNotificationClose}
+            autoHideDuration={3000}
+            message={this.props.applicationAppState.get("notification")?this.props.applicationAppState.get("notification"):""}
+            open={this.props.applicationAppState.get("notification")?true:false}
+          />
         </div>
       </MuiThemeProvider>
     );
@@ -40,18 +52,22 @@ export class UserLogin extends Component {
 
 UserLogin.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    applicationAppState: state.applicationAppState,
     userAppState: state.userAppState
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    applicationActions: bindActionCreators(applicationActions, dispatch)
   };
 }
 

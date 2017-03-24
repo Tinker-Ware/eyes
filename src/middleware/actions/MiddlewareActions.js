@@ -1,4 +1,5 @@
 import * as types from "../../constants/ActionTypes";
+import * as applicationTypes from "../../constants/ApplicationActionTypes";
 import * as projectsActionTypes from "../../constants/Projects";
 
 export function receiveRepositoryAccess(integration){
@@ -96,6 +97,13 @@ export function setUser(user){
   return{
     type: types.SET_USER_SESION,
     value: user
+  };
+}
+
+export function setNotification(notification){
+  return{
+    type: applicationTypes.SET_NOTIFICATION,
+    value: notification
   };
 }
 

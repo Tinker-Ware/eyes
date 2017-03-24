@@ -11,20 +11,19 @@ import cookie from "react-cookie";
 
 export const doRequest = (url, options) => {
   return fetch(url, options)
-    .then(function(response) {
-      if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response.json());
-      } else {
-        return Promise.reject(new Error(response.statusText));
-      }
-    });
+    .then(response => {
+      if (!response.ok) throw response.statusText;
+      return response.json();
+    })
+    .then(response => Promise.resolve(response))
+    .catch(error => Promise.reject(error));
 };
 
 export function delay(millis) {
-    const promise = new Promise(resolve => {
-        setTimeout(() => resolve(true), millis);
-    });
-    return promise;
+  const promise = new Promise(resolve => {
+    setTimeout(() => resolve(true), millis);
+  });
+  return promise;
 }
 
 function fibonacci(num) {
@@ -221,6 +220,9 @@ export function* deleteProjectServer(data) {
     yield call(doRequestDeleteProjectServer, data.value);
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -236,6 +238,9 @@ export function* deployProject(data) {
     });
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -252,6 +257,9 @@ export function* getCloudProviderAccess(userAccess) {
     })));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -264,6 +272,9 @@ export function* getCloudProviderKeys(userAccess) {
     })));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -276,6 +287,9 @@ export function* getProjectDeploys(data) {
     );
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -293,6 +307,9 @@ export function* getProjectDeployServers(data) {
     }
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -304,6 +321,9 @@ export function* getRepositoryAccess(userAccess) {
     );
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -327,6 +347,9 @@ export function* getUserProject(userAccess) {
     ));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -339,6 +362,9 @@ export function* getUserProjects(userAccess) {
     );
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -348,6 +374,9 @@ export function* getUserSesion(userLogin) {
     yield call(refreshUserSesion, userSession);
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -359,6 +388,9 @@ export function* getUserRepositories(userAccess) {
     })));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -369,6 +401,9 @@ export function* postCloudProviderKey(cloudProviderKeys) {
     })));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -380,6 +415,9 @@ export function* postUser(user) {
     })));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -401,6 +439,9 @@ export function* refreshSession(userAccess) {
     yield call(refreshUserSesion, userSession);
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -413,6 +454,9 @@ export function* refreshUserSesion(userSession) {
     })));
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 
@@ -440,6 +484,9 @@ export function* refreshIntegrations(userSession) {
       );
   }
   catch(error) {
+    yield put(actions.setNotification(fromJS({
+      notification: error
+    })));
   }
 }
 

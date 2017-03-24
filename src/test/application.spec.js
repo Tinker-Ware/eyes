@@ -117,6 +117,16 @@ describe("application", () => {
       }]
     }));
   });
+  it("handles SET_NOTIFICATION", () => {
+    const initialState = Map();
+    const action = {type:"SET_NOTIFICATION", value: fromJS({
+        notification:"bad credentials"})
+    };
+    const nextState = application(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      notification:"bad credentials"}));
+  });
   it("handles DEFAULT", () => {
     const initialState = Map();
     const action = {type:""};

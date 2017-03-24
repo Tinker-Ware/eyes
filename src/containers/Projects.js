@@ -10,6 +10,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Paper from "material-ui/Paper";
 import ProjectsList from "../components/projects/ProjectsList";
 import React, { Component, PropTypes } from "react";
+import Snackbar from 'material-ui/Snackbar';
 
 export class Projects extends Component {
   componentWillMount() {
@@ -38,6 +39,12 @@ export class Projects extends Component {
               />
             </Paper>
           </div>
+          <Snackbar
+            // onRequestClose={this.handleRequestClose}
+            autoHideDuration={3000}
+            message={"hello"}
+            open
+          />
         </div>
       </MuiThemeProvider>
     );
