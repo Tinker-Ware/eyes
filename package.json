@@ -20,7 +20,7 @@
     "remove-dist": "rimraf ./dist",
     "production": "node tools/distServer.js",
     "prebuild": "npm run clean-dist && npm run lint && npm run test",
-    "build": "babel-node tools/build.js && node tools/distServer.js",
+    "build": "babel-node tools/build.js",
     "test-server": "npm-run-all --parallel mock-server test:watch open:test lint:watch",
     "mock-server": "node_modules/drakov/drakov -f \"api/tinkerware-blueprint/*.apib\" \"api/tinkerware-blueprint/\" -p 3100 --watch --autoOptions --header authorization --header provider-token --body key",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
