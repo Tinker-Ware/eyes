@@ -1,6 +1,6 @@
 import { fromJS } from "immutable";
 import React, {PropTypes} from "react";
-import Snackbar from 'material-ui/Snackbar';
+import Snackbar from "material-ui/Snackbar";
 
 const Notification = ( {setNotification, message} ) => {
   const handleNotificationClose = () => {
@@ -9,10 +9,10 @@ const Notification = ( {setNotification, message} ) => {
   };
   return (
     <Snackbar
-      onRequestClose={handleNotificationClose}
-      autoHideDuration={3000}
-      message={message?message:""}
-      open={message?true:false}
+        autoHideDuration={3000}
+        message={message?message:""}
+        onRequestClose={handleNotificationClose}
+        open={message?true:false}
     />
   );
 };

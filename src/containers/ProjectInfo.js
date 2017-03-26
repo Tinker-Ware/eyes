@@ -8,7 +8,7 @@ import * as projectsActions from "../actions/projectsActions";
 import cookie from "react-cookie";
 import Menu from "../components/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Notification from "../components/Notification.js";
+import Notification from "../components/Notification";
 import Paper from "material-ui/Paper";
 import Project from "../components/projects/Project";
 import React, { Component, PropTypes } from "react";
@@ -52,8 +52,8 @@ export class ProjectInfo extends Component {
             </Paper>
           </div>
           <Notification
-            setNotification={this.props.applicationActions.setNotification}
-            message={this.props.applicationAppState.get("notification")}
+              message={this.props.applicationAppState.get("notification")}
+              setNotification={this.props.applicationActions.setNotification}
           />
         </div>
       </MuiThemeProvider>
@@ -63,6 +63,7 @@ export class ProjectInfo extends Component {
 
 ProjectInfo.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   projectsActions: PropTypes.object.isRequired,

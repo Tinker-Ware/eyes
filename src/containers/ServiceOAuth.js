@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions/userActions";
 import * as applicationActions from "../actions/ApplicationActions";
 import cookie from "react-cookie";
-import Notification from "../components/Notification.js";
+import Notification from "../components/Notification";
 import React, { Component, PropTypes } from "react";
 
 export class ServiceOAuth extends Component {
@@ -24,8 +24,8 @@ export class ServiceOAuth extends Component {
     return (
       <div>
         <Notification
-          setNotification={this.props.applicationActions.setNotification}
-          message={this.props.applicationAppState.get("notification")}
+            message={this.props.applicationAppState.get("notification")}
+            setNotification={this.props.applicationActions.setNotification}
         />
       </div>
     );
@@ -34,6 +34,7 @@ export class ServiceOAuth extends Component {
 
 ServiceOAuth.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired
 };
@@ -52,5 +53,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
+  mapStateToProps,
   mapDispatchToProps
 )(ServiceOAuth);

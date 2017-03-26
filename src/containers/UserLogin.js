@@ -7,7 +7,7 @@ import * as applicationActions from "../actions/ApplicationActions";
 import cookie from "react-cookie";
 import Login from "../components/userAuth/Login";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Notification from "../components/Notification.js";
+import Notification from "../components/Notification";
 import React, { Component, PropTypes } from "react";
 
 export class UserLogin extends Component {
@@ -35,8 +35,8 @@ export class UserLogin extends Component {
               userAppState={this.props.userAppState}
           />
           <Notification
-            setNotification={this.props.applicationActions.setNotification}
-            message={this.props.applicationAppState.get("notification")}
+              message={this.props.applicationAppState.get("notification")}
+              setNotification={this.props.applicationActions.setNotification}
           />
         </div>
       </MuiThemeProvider>

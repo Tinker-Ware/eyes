@@ -5,7 +5,7 @@ import { fromJS } from "immutable";
 import * as actions from "../actions/userActions";
 import * as applicationActions from "../actions/ApplicationActions";
 import cookie from "react-cookie";
-import Notification from "../components/Notification.js";
+import Notification from "../components/Notification";
 import React, { Component, PropTypes } from "react";
 import Signup from "../components/userAuth/Signup";
 
@@ -33,8 +33,8 @@ export class UserSignup extends Component {
             userAppState={this.props.userAppState}
         />
         <Notification
-          setNotification={this.props.applicationActions.setNotification}
-          message={this.props.applicationAppState.get("notification")}
+            message={this.props.applicationAppState.get("notification")}
+            setNotification={this.props.applicationActions.setNotification}
         />
       </div>
     );
@@ -43,6 +43,7 @@ export class UserSignup extends Component {
 
 UserSignup.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
 };

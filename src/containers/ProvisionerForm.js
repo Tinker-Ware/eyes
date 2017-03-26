@@ -15,7 +15,7 @@ import FontIcon from "material-ui/FontIcon";
 import GithubService from "../components/provisionerForm/GithubService";
 import Menu from "../components/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Notification from "../components/Notification.js";
+import Notification from "../components/Notification";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
 import RaisedButton from "material-ui/RaisedButton";
@@ -135,8 +135,8 @@ export class ServiceForm extends Component {
             </Paper>
           </div>
           <Notification
-            setNotification={this.props.applicationActions.setNotification}
-            message={this.props.applicationAppState.get("notification")}
+              message={this.props.applicationAppState.get("notification")}
+              setNotification={this.props.applicationActions.setNotification}
           />
             {/* <div className="row">
               <footer>
@@ -157,6 +157,7 @@ export class ServiceForm extends Component {
 
 ServiceForm.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   baseAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
