@@ -178,13 +178,13 @@ export function* doRequestGetUserProjects(authorization) {
       mode:"cors"});
 }
 
-export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
+export function* doRequestPostCloudProviderKey(data) {
   return yield call(
-    doRequest, process.env.HOST +"/api/v1/users/"+user_id+"/ssh_keys",
+    doRequest, process.env.HOST +"/api/v1/users/"+data.get("user_id")+"/ssh_keys",
     {
       method:"POST",
-      headers: {"authorization":"Bearer "+ authorization,"Content-Type":"application/json"},
-      body: JSON.stringify({"ssh_key": {"user_id": user_id,"key": key.toJS().public_key,"title": key.toJS().name
+      headers: {"authorization":"Bearer "+ data.get("authorization"),"Content-Type":"application/json"},
+      body: JSON.stringify({"ssh_key": {"user_id": user_id,"key": data.get("sshKeys").toJS().public_key,"title": data.get("sshKeys").toJS().name
         }
       }),
       mode:"cors"});
@@ -232,16 +232,19 @@ export function* deleteProjectServer(data) {
 }
 
 export function* deployProject(data) {
-  try {
+  try{
     const deploy = yield call(doRequestDeployProject, data.value);
-    yield call(setNotification, fromJS({"notification": "Deploy Created"}));
+    yield[
+      call(getProjectDeployServers, fromJS({
+        "authorization": data.value.get("authorization"),
+        "project_id": data.value.get("project_id"),
+        "user_id": data.value.get("user_id"),
+        "deploy_id": deploy.deploy.id
+      })),
+      call(setNotification, fromJS({"notification": "Deploy Created"}))
+    ];
     yield call(getProjectDeploys, data);
-    yield put(actions.setShowProjectServers(fromJS({
-      "show_project_servers": true
-    })));
-    yield call(getProjectDeployServers, {
-      "value": data.value.set("deploy_id",deploy.deploy.id)
-    });
+    yield put(actions.setShowProjectServers(fromJS({"show_project_servers": true})));
   }
   catch(error) {
     yield call(setNotification, error);
@@ -251,11 +254,13 @@ export function* deployProject(data) {
 export function* getCloudProviderAccess(userAccess) {
   try {
     const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess, userAccess.value.get("authorization"), userAccess.value.get("oauth_request"));
-    yield call(setNotification, fromJS({"notification": "Connected With DigitalOcean"}));
-    yield put(actions.setCloudProviderAccess(fromJS({
-        cloud_provider: cloudProviderAccess.callback
-      }))
-    );
+    yield [
+      put(actions.setCloudProviderAccess(fromJS({
+          cloud_provider: cloudProviderAccess.callback
+        }))
+      ),
+      call(setNotification, fromJS({"notification": "Connected With DigitalOcean"}))
+    ];
     yield put(actions.requestCloudProviderKeys(fromJS({
       authorization: userAccess.value.get("authorization"),
       user_id: userAccess.value.get("oauth_request").get("user_id")
@@ -315,10 +320,14 @@ export function* getProjectDeployServers(data) {
 export function* getRepositoryAccess(userAccess) {
   try {
     const repositoryAccess = yield call(doRequestGetRepositoryAccess, userAccess.value.get("authorization"), userAccess.value.get("oauth_request"));
-    yield call(setNotification, fromJS({"notification": "Connected With Github"}));
-    yield put(actions.receiveRepositoryAccess(fromJS({"integration": repositoryAccess.callback
-      }))
-    );
+    yield [
+      put(actions.receiveRepositoryAccess(
+        fromJS({
+          "integration": repositoryAccess.callback
+        })
+      )),
+      call(setNotification, fromJS({"notification": "Connected With Github"}))
+    ];
   }
   catch(error) {
     yield call(setNotification, error);
@@ -387,10 +396,16 @@ export function* getUserRepositories(userAccess) {
 
 export function* postCloudProviderKey(cloudProviderKeys) {
   try {
-    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get("authorization"), cloudProviderKeys.value.get("user_id"),  cloudProviderKeys.value.get("sshKeys"));
-    yield call(setNotification, fromJS({"notification": "SSHKey Added"}));
-    yield put(actions.setCloudProviderSshKeys(fromJS({"sshKeys": cloudProviderKeys.value.get("sshKeys"),"sshKey": [cloudProviderKey.ssh_key]
-    })));
+    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value);
+    yield [
+      put(actions.setCloudProviderSshKeys(
+        fromJS({
+          "sshKeys": cloudProviderKeys.value.get("sshKeys"),
+          "sshKey": [cloudProviderKey.ssh_key]
+        })
+      )),
+      call(setNotification, fromJS({"notification": "SSHKey Added"}))
+    ];
   }
   catch(error) {
     yield call(setNotification, error);
