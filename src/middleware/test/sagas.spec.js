@@ -75,9 +75,7 @@ describe("sagas middleware", () => {
           "deploy_id": deploy.deploy.id
         })
         ),
-        call(setNotification, fromJS({
-          "notification": "Deploy Created"
-        }))
+        call(setNotification, "Deploy Created")
       ]
     );
     expect(generator.next().value).to.deep.equal(
@@ -174,9 +172,7 @@ describe("sagas middleware", () => {
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
-      call(setNotification, fromJS({
-        "notification": "Creating Server"
-      }))
+      call(setNotification, "Creating Server")
     );
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetProjectServers, fromJS({
@@ -233,7 +229,7 @@ it("handles REQUEST_CLOUD_PROVIDER_ACCESS", () => {
       put(actions.setCloudProviderAccess(fromJS({
         cloud_provider: cloudProviderAccess.callback
       }))),
-      call(setNotification, fromJS({"notification": "Connected With DigitalOcean"}))
+      call(setNotification, "Connected With DigitalOcean")
     ]
   );
   expect(generator.next(userAccess2).value).to.deep.equal(
@@ -312,7 +308,7 @@ it("handles REQUEST_GITHUB_ACCESS", () => {
       put(actions.receiveRepositoryAccess(fromJS({
         integration: repositoryAccess.callback
       }))),
-      call(setNotification, fromJS({"notification": "Connected With Github"}))
+      call(setNotification, "Connected With Github")
     ]
   );
 });
@@ -430,9 +426,7 @@ it("handles REQUEST_POST_CLOUD_PROVIDER_KEY", () => {
           "sshKey": [cloudProviderKey.ssh_key]
         })
       )),
-      call(setNotification, fromJS({
-        "notification": "SSHKey Added"
-      }))
+      call(setNotification, "SSHKey Added")
     ]
   );
 });

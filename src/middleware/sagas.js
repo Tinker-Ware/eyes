@@ -184,7 +184,11 @@ export function* doRequestPostCloudProviderKey(data) {
     {
       method:"POST",
       headers: {"authorization":"Bearer "+ data.get("authorization"),"Content-Type":"application/json"},
-      body: JSON.stringify({"ssh_key": {"user_id": user_id,"key": data.get("sshKeys").toJS().public_key,"title": data.get("sshKeys").toJS().name
+      body: JSON.stringify({
+        "ssh_key": {
+          "user_id": data.get("user_id"),
+          "key": data.get("sshKeys").toJS().public_key,
+          "title": data.get("sshKeys").toJS().name
         }
       }),
       mode:"cors"});
@@ -224,7 +228,7 @@ export function* setNotification(notification) {
 export function* deleteProjectServer(data) {
   try {
     yield call(doRequestDeleteProjectServer, data.value);
-    yield call(setNotification, fromJS({"notification": "Server Deleted"}));
+    yield call(setNotification, "Server Deleted");
   }
   catch(error) {
     yield call(setNotification, error);
@@ -241,7 +245,7 @@ export function* deployProject(data) {
         "user_id": data.value.get("user_id"),
         "deploy_id": deploy.deploy.id
       })),
-      call(setNotification, fromJS({"notification": "Deploy Created"}))
+      call(setNotification, "Deploy Created")
     ];
     yield call(getProjectDeploys, data);
     yield put(actions.setShowProjectServers(fromJS({"show_project_servers": true})));
@@ -259,7 +263,7 @@ export function* getCloudProviderAccess(userAccess) {
           cloud_provider: cloudProviderAccess.callback
         }))
       ),
-      call(setNotification, fromJS({"notification": "Connected With DigitalOcean"}))
+      call(setNotification, "Connected With DigitalOcean")
     ];
     yield put(actions.requestCloudProviderKeys(fromJS({
       authorization: userAccess.value.get("authorization"),
@@ -300,7 +304,7 @@ export function* getProjectDeploys(data) {
 export function* getProjectDeployServers(data) {
   try {
     let time = 3;
-    yield call(setNotification, fromJS({"notification": "Creating Server"}));
+    yield call(setNotification, "Creating Server");
     while (time < 15) {
       const project_servers = yield call(doRequestGetProjectServers, data.value);
       yield put(actions.setProjectServers(fromJS({
@@ -310,7 +314,7 @@ export function* getProjectDeployServers(data) {
       yield call(delay, fibonacci(time)*1000);
       time++;
     }
-    yield call(setNotification, fromJS({"notification": "Server Created"}));
+    yield call(setNotification, "Server Created");
   }
   catch(error) {
     yield call(setNotification, error);
@@ -326,7 +330,7 @@ export function* getRepositoryAccess(userAccess) {
           "integration": repositoryAccess.callback
         })
       )),
-      call(setNotification, fromJS({"notification": "Connected With Github"}))
+      call(setNotification, "Connected With Github")
     ];
   }
   catch(error) {
@@ -375,7 +379,7 @@ export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get("user_session"));
     yield call(refreshUserSesion, userSession);
-    yield call(setNotification, fromJS({"notification": "Welcome Back"}));
+    yield call(setNotification, "Welcome Back");
   }
   catch(error) {
     yield call(setNotification, error);
@@ -404,7 +408,7 @@ export function* postCloudProviderKey(cloudProviderKeys) {
           "sshKey": [cloudProviderKey.ssh_key]
         })
       )),
-      call(setNotification, fromJS({"notification": "SSHKey Added"}))
+      call(setNotification, "SSHKey Added")
     ];
   }
   catch(error) {
@@ -418,7 +422,7 @@ export function* postUser(user) {
     cookie.save("user_session", userSignup.user_session, { path:"/"});
     yield put(actions.setUser(fromJS({"user_session": userSignup.user_session,
     })));
-    yield call(setNotification, fromJS({"notification": "Welcome to MyDevop"}));
+    yield call(setNotification, "Welcome to MyDevop");
   }
   catch(error) {
     yield call(setNotification, error);
@@ -429,7 +433,7 @@ export function* postUserProject(project) {
   try {
     const userProject = yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
     browserHistory.push("/project/"+userProject.project.id);
-    yield call(setNotification, fromJS({"notification": "Project Created"}));
+    yield call(setNotification, "Project Created");
   }
   catch(error) {
     yield call(setNotification, error);
