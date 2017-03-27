@@ -239,16 +239,19 @@ export function* deployProject(data) {
   try{
     const deploy = yield call(doRequestDeployProject, data.value);
     yield[
-      call(getProjectDeployServers, fromJS({
-        "authorization": data.value.get("authorization"),
-        "project_id": data.value.get("project_id"),
-        "user_id": data.value.get("user_id"),
-        "deploy_id": deploy.deploy.id
-      })),
-      call(setNotification, "Deploy Created")
+      call(getProjectDeployServers, {
+        "value":
+          fromJS({
+            "authorization": data.value.get("authorization"),
+            "project_id": data.value.get("project_id"),
+            "user_id": data.value.get("user_id"),
+            "deploy_id": deploy.deploy.id
+          })
+      }),
+      call(setNotification, "Creating Server"),
+      put(actions.setShowProjectServers(fromJS({"show_project_servers": true})))
     ];
     yield call(getProjectDeploys, data);
-    yield put(actions.setShowProjectServers(fromJS({"show_project_servers": true})));
   }
   catch(error) {
     yield call(setNotification, error);
@@ -304,7 +307,6 @@ export function* getProjectDeploys(data) {
 export function* getProjectDeployServers(data) {
   try {
     let time = 3;
-    yield call(setNotification, "Creating Server");
     while (time < 15) {
       const project_servers = yield call(doRequestGetProjectServers, data.value);
       yield put(actions.setProjectServers(fromJS({
@@ -314,7 +316,6 @@ export function* getProjectDeployServers(data) {
       yield call(delay, fibonacci(time)*1000);
       time++;
     }
-    yield call(setNotification, "Server Created");
   }
   catch(error) {
     yield call(setNotification, error);

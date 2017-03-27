@@ -68,14 +68,19 @@ describe("sagas middleware", () => {
     );
     expect(generator.next(deploy).value).to.deep.equal(
       [
-        call(getProjectDeployServers, fromJS({
-          "authorization": data.authorization,
-          "project_id": data.project_id,
-          "user_id": data.user_id,
-          "deploy_id": deploy.deploy.id
-        })
-        ),
-        call(setNotification, "Deploy Created")
+        call(getProjectDeployServers, {
+          "value":
+            fromJS({
+              "authorization": data.authorization,
+              "project_id": data.project_id,
+              "user_id": data.user_id,
+              "deploy_id": deploy.deploy.id
+            })
+        }),
+        call(setNotification, "Creating Server"),
+        put(actions.setShowProjectServers(fromJS({
+          show_project_servers: true
+        })))
       ]
     );
     expect(generator.next().value).to.deep.equal(
@@ -86,11 +91,6 @@ describe("sagas middleware", () => {
           "user_id": data.user_id
         })
       })
-    );
-    expect(generator.next().value).to.deep.equal(
-      put(actions.setShowProjectServers(fromJS({
-        show_project_servers: true
-      })))
     );
   });
   it("handles REQUEST_PROJECT_DEPLOYS", () => {
@@ -171,9 +171,6 @@ describe("sagas middleware", () => {
     const err = new ReferenceError("404");
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
-    expect(generator.next().value).to.deep.equal(
-      call(setNotification, "Creating Server")
-    );
     expect(generator.next().value).to.deep.equal(
       call(doRequestGetProjectServers, fromJS({
         "authorization": data.authorization,
