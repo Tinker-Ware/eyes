@@ -3,14 +3,15 @@ import {browserHistory} from "react-router";
 import {connect} from "react-redux";
 import {fromJS} from "immutable";
 import * as actions from "../actions/ServiceFormActions";
+import * as applicationActions from "../actions/ApplicationActions";
 import * as projectsActions from "../actions/projectsActions";
 import cookie from "react-cookie";
 import Menu from "../components/Menu";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Notification from "../components/Notification";
 import Paper from "material-ui/Paper";
 import ProjectsList from "../components/projects/ProjectsList";
 import React, { Component, PropTypes } from "react";
-import Snackbar from 'material-ui/Snackbar';
 
 export class Projects extends Component {
   componentWillMount() {
@@ -39,11 +40,9 @@ export class Projects extends Component {
               />
             </Paper>
           </div>
-          <Snackbar
-            // onRequestClose={this.handleRequestClose}
-            autoHideDuration={3000}
-            message={"hello"}
-            open
+          <Notification
+              message={this.props.applicationAppState.get("notification")}
+              setNotification={this.props.applicationActions.setNotification}
           />
         </div>
       </MuiThemeProvider>
@@ -53,6 +52,8 @@ export class Projects extends Component {
 
 Projects.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
   projectsActions: PropTypes.object.isRequired,
   projectsAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired
@@ -69,6 +70,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
+    applicationActions: bindActionCreators(applicationActions, dispatch),
     projectsActions: bindActionCreators(projectsActions, dispatch)
   };
 }

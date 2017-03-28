@@ -1,8 +1,10 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import cookie from "react-cookie";
+import { connect } from "react-redux";
 import * as actions from "../actions/userActions";
+import * as applicationActions from "../actions/ApplicationActions";
+import cookie from "react-cookie";
+import Notification from "../components/Notification";
+import React, { Component, PropTypes } from "react";
 
 export class ServiceOAuth extends Component {
   componentWillMount() {
@@ -20,22 +22,37 @@ export class ServiceOAuth extends Component {
   }
   render() {
     return (
-      <div/>
+      <div>
+        <Notification
+            message={this.props.applicationAppState.get("notification")}
+            setNotification={this.props.applicationActions.setNotification}
+        />
+      </div>
     );
   }
 }
 
 ServiceOAuth.propTypes = {
   actions: PropTypes.object.isRequired,
+  applicationActions: PropTypes.object.isRequired,
+  applicationAppState: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired
 };
 
+function mapStateToProps(state) {
+  return {
+    applicationAppState: state.applicationAppState
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    applicationActions: bindActionCreators(applicationActions, dispatch)
   };
 }
 
 export default connect(
+  mapStateToProps,
   mapDispatchToProps
 )(ServiceOAuth);

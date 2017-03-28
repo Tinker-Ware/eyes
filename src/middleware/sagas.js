@@ -178,13 +178,17 @@ export function* doRequestGetUserProjects(authorization) {
       mode:"cors"});
 }
 
-export function* doRequestPostCloudProviderKey(authorization, user_id, key) {
+export function* doRequestPostCloudProviderKey(data) {
   return yield call(
-    doRequest, process.env.HOST +"/api/v1/users/"+user_id+"/ssh_keys",
+    doRequest, process.env.HOST +"/api/v1/users/"+data.get("user_id")+"/ssh_keys",
     {
       method:"POST",
-      headers: {"authorization":"Bearer "+ authorization,"Content-Type":"application/json"},
-      body: JSON.stringify({"ssh_key": {"user_id": user_id,"key": key.toJS().public_key,"title": key.toJS().name
+      headers: {"authorization":"Bearer "+ data.get("authorization"),"Content-Type":"application/json"},
+      body: JSON.stringify({
+        "ssh_key": {
+          "user_id": data.get("user_id"),
+          "key": data.get("sshKeys").toJS().public_key,
+          "title": data.get("sshKeys").toJS().name
         }
       }),
       mode:"cors"});
@@ -215,51 +219,62 @@ export function* doRequestPostUserProject(userProject, authorization) {
       mode:"cors"});
 }
 
+export function* setNotification(notification) {
+  yield put(actions.setNotification(fromJS({
+    notification: notification
+  })));
+}
+
 export function* deleteProjectServer(data) {
   try {
     yield call(doRequestDeleteProjectServer, data.value);
+    yield call(setNotification, "Server Deleted");
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
 export function* deployProject(data) {
-  try {
+  try{
     const deploy = yield call(doRequestDeployProject, data.value);
+    yield[
+      call(getProjectDeployServers, {
+        "value":
+          fromJS({
+            "authorization": data.value.get("authorization"),
+            "project_id": data.value.get("project_id"),
+            "user_id": data.value.get("user_id"),
+            "deploy_id": deploy.deploy.id
+          })
+      }),
+      call(setNotification, "Creating Server"),
+      put(actions.setShowProjectServers(fromJS({"show_project_servers": true})))
+    ];
     yield call(getProjectDeploys, data);
-    yield put(actions.setShowProjectServers(fromJS({
-      "show_project_servers": true
-    })));
-    yield call(getProjectDeployServers, {
-      "value": data.value.set("deploy_id",deploy.deploy.id)
-    });
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
 export function* getCloudProviderAccess(userAccess) {
   try {
     const cloudProviderAccess = yield call(doRequestGetCloudProviderAccess, userAccess.value.get("authorization"), userAccess.value.get("oauth_request"));
-    yield put(actions.setCloudProviderAccess(fromJS({
-        cloud_provider: cloudProviderAccess.callback
-      }))
-    );
+    yield [
+      put(actions.setCloudProviderAccess(fromJS({
+          cloud_provider: cloudProviderAccess.callback
+        }))
+      ),
+      call(setNotification, "Connected With DigitalOcean")
+    ];
     yield put(actions.requestCloudProviderKeys(fromJS({
       authorization: userAccess.value.get("authorization"),
       user_id: userAccess.value.get("oauth_request").get("user_id")
     })));
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -272,9 +287,7 @@ export function* getCloudProviderKeys(userAccess) {
     })));
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -287,9 +300,7 @@ export function* getProjectDeploys(data) {
     );
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -307,23 +318,24 @@ export function* getProjectDeployServers(data) {
     }
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
 export function* getRepositoryAccess(userAccess) {
   try {
     const repositoryAccess = yield call(doRequestGetRepositoryAccess, userAccess.value.get("authorization"), userAccess.value.get("oauth_request"));
-    yield put(actions.receiveRepositoryAccess(fromJS({"integration": repositoryAccess.callback
-      }))
-    );
+    yield [
+      put(actions.receiveRepositoryAccess(
+        fromJS({
+          "integration": repositoryAccess.callback
+        })
+      )),
+      call(setNotification, "Connected With Github")
+    ];
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -347,9 +359,7 @@ export function* getUserProject(userAccess) {
     ));
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -362,9 +372,7 @@ export function* getUserProjects(userAccess) {
     );
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -372,11 +380,10 @@ export function* getUserSesion(userLogin) {
   try {
     const userSession = yield call(doRequestGetUserSesion, userLogin.value.get("user_session"));
     yield call(refreshUserSesion, userSession);
+    yield call(setNotification, "Welcome Back");
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -388,22 +395,25 @@ export function* getUserRepositories(userAccess) {
     })));
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
 export function* postCloudProviderKey(cloudProviderKeys) {
   try {
-    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value.get("authorization"), cloudProviderKeys.value.get("user_id"),  cloudProviderKeys.value.get("sshKey"));
-    yield put(actions.setCloudProviderSshKeys(fromJS({"sshKeys": cloudProviderKeys.value.get("sshKeys"),"sshKey": [cloudProviderKey.ssh_key]
-    })));
+    const cloudProviderKey = yield call(doRequestPostCloudProviderKey, cloudProviderKeys.value);
+    yield [
+      put(actions.setCloudProviderSshKeys(
+        fromJS({
+          "sshKeys": cloudProviderKeys.value.get("sshKeys"),
+          "sshKey": [cloudProviderKey.ssh_key]
+        })
+      )),
+      call(setNotification, "SSHKey Added")
+    ];
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -413,11 +423,10 @@ export function* postUser(user) {
     cookie.save("user_session", userSignup.user_session, { path:"/"});
     yield put(actions.setUser(fromJS({"user_session": userSignup.user_session,
     })));
+    yield call(setNotification, "Welcome to MyDevop");
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -425,11 +434,10 @@ export function* postUserProject(project) {
   try {
     const userProject = yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
     browserHistory.push("/project/"+userProject.project.id);
+    yield call(setNotification, "Project Created");
   }
   catch(error) {
-    // yield put(actions.requestPostUserProjectError(fromJS({
-    //"error": error,
-    // })));
+    yield call(setNotification, error);
   }
 }
 
@@ -439,9 +447,7 @@ export function* refreshSession(userAccess) {
     yield call(refreshUserSesion, userSession);
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -454,9 +460,7 @@ export function* refreshUserSesion(userSession) {
     })));
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 
@@ -484,9 +488,7 @@ export function* refreshIntegrations(userSession) {
       );
   }
   catch(error) {
-    yield put(actions.setNotification(fromJS({
-      notification: error
-    })));
+    yield call(setNotification, error);
   }
 }
 

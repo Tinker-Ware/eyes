@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
 import * as actions from "../actions/MiddlewareActions";
-import { delay, deleteProjectServer, deployProject, doRequestDeleteProjectServer, doRequestDeployProject, doRequestGetCloudProviderAccess, doRequestGetCloudProviderKeys, doRequestGetProjectDeploys, doRequestGetProjectServers, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetUserSesion, doRequestPostCloudProviderKey, doRequestPostUser, doRequestPostUserProject, getCloudProviderAccess, getCloudProviderKeys, getProjectDeploys, getProjectDeployServers, getRepositoryAccess, getUserRepositories, getUserSesion, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion } from "../sagas";
+import { delay, deleteProjectServer, deployProject, doRequestDeleteProjectServer, doRequestDeployProject, doRequestGetCloudProviderAccess, doRequestGetCloudProviderKeys, doRequestGetProjectDeploys, doRequestGetProjectServers, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetUserSesion, doRequestPostCloudProviderKey, doRequestPostUser, doRequestPostUserProject, getCloudProviderAccess, getCloudProviderKeys, getProjectDeploys, getProjectDeployServers, getRepositoryAccess, getUserRepositories, getUserSesion, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion, setNotification } from "../sagas";
 
 describe("sagas middleware", () => {
   it("handles DELETE_PROJECT_SERVERS", () => {
@@ -43,6 +43,11 @@ describe("sagas middleware", () => {
       "user_id": 1,
       "project_id": 1
     };
+    const deploy = {
+      "deploy": {
+        "id": "sasdfkj3lviw12f"
+      }
+    };
     const generator = deployProject(
       {"value":
         fromJS({
@@ -61,6 +66,23 @@ describe("sagas middleware", () => {
         "user_id": data.user_id
       }))
     );
+    expect(generator.next(deploy).value).to.deep.equal(
+      [
+        call(getProjectDeployServers, {
+          "value":
+            fromJS({
+              "authorization": data.authorization,
+              "project_id": data.project_id,
+              "user_id": data.user_id,
+              "deploy_id": deploy.deploy.id
+            })
+        }),
+        call(setNotification, "Creating Server"),
+        put(actions.setShowProjectServers(fromJS({
+          show_project_servers: true
+        })))
+      ]
+    );
     expect(generator.next().value).to.deep.equal(
       call(getProjectDeploys, {"value":
         fromJS({
@@ -70,21 +92,6 @@ describe("sagas middleware", () => {
         })
       })
     );
-    expect(generator.next().value).to.deep.equal(
-      put(actions.setShowProjectServers(fromJS({
-        show_project_servers: true
-      })))
-    );
-    // expect(generator.next(deploy).value).to.deep.equal(
-    //   call(getProjectDeployServers, {"value":
-    //     fromJS({
-    //       "authorization": data.authorization,
-    //       "project_id": data.project_id,
-    //       "user_id": data.user_id,
-    //       "deploy_id": deploy.id
-    //     })
-    //   })
-    // );
   });
   it("handles REQUEST_PROJECT_DEPLOYS", () => {
     const data = {
@@ -194,23 +201,12 @@ it("handles REQUEST_CLOUD_PROVIDER_ACCESS", () => {
       "oauth_request": userAccess.oauth_request
     })
   });
-  const err = new ReferenceError("404");
-  const generatorError = function () { throw err; };
-  expect(generatorError).to.throw(err);
-  expect(generator.next().value).to.deep.equal(
-    call(doRequestGetCloudProviderAccess, authorization, fromJS(userAccess.oauth_request))
-  );
   const cloudProviderAccess = {
     callback: {
       "provider": "digitalocean",
       "username": "ileonelperea"
     }
   };
-  expect(generator.next(cloudProviderAccess).value).to.deep.equal(
-    put(actions.setCloudProviderAccess(fromJS({
-      cloud_provider: cloudProviderAccess.callback
-    })))
-  );
   const userAccess2 = {
     value: fromJS({
       "authorization": authorization,
@@ -219,6 +215,20 @@ it("handles REQUEST_CLOUD_PROVIDER_ACCESS", () => {
       }
     })
   };
+  const err = new ReferenceError("404");
+  const generatorError = function () { throw err; };
+  expect(generatorError).to.throw(err);
+  expect(generator.next().value).to.deep.equal(
+    call(doRequestGetCloudProviderAccess, authorization, fromJS(userAccess.oauth_request))
+  );
+  expect(generator.next(cloudProviderAccess).value).to.deep.equal(
+    [
+      put(actions.setCloudProviderAccess(fromJS({
+        cloud_provider: cloudProviderAccess.callback
+      }))),
+      call(setNotification, "Connected With DigitalOcean")
+    ]
+  );
   expect(generator.next(userAccess2).value).to.deep.equal(
     put(actions.requestCloudProviderKeys(fromJS({
       authorization: authorization,
@@ -270,6 +280,12 @@ it("handles REQUEST_GITHUB_ACCESS", () => {
       "code": "8d1ea094fc64181b88db"
     }
   };
+  const repositoryAccess = {
+    callback: {
+      "provider": "github",
+      "username": "ileonelperea"
+    }
+  };
   const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
   const generator = getRepositoryAccess({
     value:
@@ -284,16 +300,13 @@ it("handles REQUEST_GITHUB_ACCESS", () => {
   expect(generator.next().value).to.deep.equal(
     call(doRequestGetRepositoryAccess, authorization, fromJS(userAccess.oauth_request))
   );
-  const repositoryAccess = {
-    callback: {
-      "provider": "github",
-      "username": "ileonelperea"
-    }
-  };
   expect(generator.next(repositoryAccess).value).to.deep.equal(
-    put(actions.receiveRepositoryAccess(fromJS({
-      integration: repositoryAccess.callback
-    })))
+    [
+      put(actions.receiveRepositoryAccess(fromJS({
+        integration: repositoryAccess.callback
+      }))),
+      call(setNotification, "Connected With Github")
+    ]
   );
 });
 
@@ -385,21 +398,34 @@ it("handles REQUEST_POST_CLOUD_PROVIDER_KEY", () => {
     ]
   };
   const authorization = "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf";
-  const generator = postCloudProviderKey({"value": fromJS({"authorization": authorization,
-  "user_id": userAccess.user.id,"sshKeys": cloudProviderKeys.sshKeys,"sshKey": cloudProviderKey.ssh_key
-})
-});
-const err = new ReferenceError("404");
-const generatorError = function () { throw err; };
-expect(generatorError).to.throw(err);
-expect(generator.next().value).to.deep.equal(
-  call(doRequestPostCloudProviderKey, authorization, userAccess.user.id,  fromJS(cloudProviderKey.ssh_key))
-);
-expect(generator.next(cloudProviderKey).value).to.deep.equal(
-  put(actions.setCloudProviderSshKeys(fromJS(
-    {"sshKeys": cloudProviderKeys.sshKeys,"sshKey": [cloudProviderKey.ssh_key]
-  })))
-);
+  const generator = postCloudProviderKey({
+    "value": fromJS({
+      "authorization": authorization,
+      "user_id": userAccess.user.id,
+      "sshKeys": cloudProviderKeys.sshKeys
+    })
+  });
+  const err = new ReferenceError("404");
+  const generatorError = function () { throw err; };
+  expect(generatorError).to.throw(err);
+  expect(generator.next().value).to.deep.equal(
+    call(doRequestPostCloudProviderKey, fromJS({
+      "authorization": authorization,
+      "user_id": userAccess.user.id,
+      "sshKeys": cloudProviderKeys.sshKeys
+    }))
+  );
+  expect(generator.next(cloudProviderKey).value).to.deep.equal(
+    [
+      put(actions.setCloudProviderSshKeys(
+        fromJS({
+          "sshKeys": cloudProviderKeys.sshKeys,
+          "sshKey": [cloudProviderKey.ssh_key]
+        })
+      )),
+      call(setNotification, "SSHKey Added")
+    ]
+  );
 });
 
 it("handles REQUEST_POST_USER_PROJECT", () => {
