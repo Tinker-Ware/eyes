@@ -52,7 +52,7 @@ export default {
         minifyCSS: true,
         minifyURLs: true
       },
-      inject: true),
+      inject: true}),
 
     // Eliminate duplicate packages when generating bundle
     new webpack.optimize.DedupePlugin(),
