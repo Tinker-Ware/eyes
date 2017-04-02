@@ -293,11 +293,16 @@ export function* getCloudProviderKeys(userAccess) {
 
 export function* getProjectDeploys(data) {
   try {
-    const project_deploys = yield call(doRequestGetProjectDeploys, data.value);
-    yield put(actions.setProjectDeploys(fromJS({
-        project_deploys: project_deploys.deploys
-      }))
-    );
+    let time = 0;
+    while (time < 30) {
+      const project_deploys = yield call(doRequestGetProjectDeploys, data.value);
+      yield put(actions.setProjectDeploys(fromJS({
+          project_deploys: project_deploys.deploys
+        }))
+      );
+      yield call(delay, 20000);
+      time++;
+    }
   }
   catch(error) {
     yield call(setNotification, error);
