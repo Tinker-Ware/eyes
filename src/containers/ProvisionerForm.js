@@ -100,6 +100,7 @@ export class ServiceForm extends Component {
                 <Application
                     applicationAppState={this.props.applicationAppState}
                     applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?   provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
+                    buildbotAppState={this.props.buildbotAppState}
                     mysqlAppState={this.props.mysqlAppState}
                     rolesActions={this.props.rolesActions}
                     setActiveEnvironment={this.props.actions.setActiveEnvironment}
@@ -122,6 +123,7 @@ export class ServiceForm extends Component {
                 <CreateService
                     applicationAppState={this.props.applicationAppState}
                     baseAppState={this.props.baseAppState}
+                    buildbotAppState={this.props.buildbotAppState}
                     cloudProviderAppState={this.props.cloudProviderAppState}
                     mysqlAppState={this.props.mysqlAppState}
                     nginxAppState={this.props.nginxAppState}
@@ -160,6 +162,7 @@ ServiceForm.propTypes = {
   applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   baseAppState: PropTypes.object.isRequired,
+  buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   ghostAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
@@ -176,6 +179,7 @@ function mapStateToProps(state) {
   return {
     applicationAppState: state.applicationAppState,
     baseAppState: state.baseAppState,
+    buildbotAppState: state.buildbotAppState,
     cloudProviderAppState: state.cloudProviderAppState,
     ghostAppState: state.ghostAppState,
     mysqlAppState: state.mysqlAppState,

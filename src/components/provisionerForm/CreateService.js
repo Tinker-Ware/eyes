@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState} ) => {
+const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -90,8 +90,8 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   const configuration = () => {
     return {
       "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration()},
-      "development":{...getYiiConfiguration(0), ...getMysqlConfiguration(0)},
-      "production":{...getYiiConfiguration(1), ...getMysqlConfiguration(1)}
+      "development":{env:"development", ...getYiiConfiguration(0), ...getMysqlConfiguration(0)},
+      "production":{env:"production", ...getYiiConfiguration(1), ...getMysqlConfiguration(1)}
     };
   };
   const nginx = () => {
@@ -102,6 +102,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
   const roles = () => {
     let rolesArray = [];
     if(baseAppState.get("enable_base")) rolesArray.push(baseAppState.get("roles"));
+    if(buildbotAppState.get("enable_buildbot")) rolesArray.push(buildbotAppState.get("roles"));
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
     if(mysqlAppState.get("enable_mysql")) rolesArray.push(mysqlAppState.get("roles"));
     if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
@@ -155,6 +156,7 @@ const CreateService = ( {baseAppState,cloudProviderAppState, projectNameAppState
 
 CreateService.propTypes = {
   baseAppState: PropTypes.object.isRequired,
+  buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,

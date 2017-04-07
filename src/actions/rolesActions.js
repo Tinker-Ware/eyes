@@ -144,6 +144,10 @@ export function setEnableGhost(value) {
   return { type: types.SET_ENABLE_GHOST, value };
 }
 
+export function setEnableBuildbot(value) {
+  return { type: types.SET_ENABLE_BUILDBOT, value };
+}
+
 export function setRequestActiveGhost(value) {
   return { type: types.SET_REQUEST_ACTIVE_GHOST, value };
 }

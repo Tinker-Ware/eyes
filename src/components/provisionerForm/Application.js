@@ -1,8 +1,9 @@
+import BuildbotRole from "./roles/BuildbotRole";
+import MysqlRole from "./roles/MysqlRole";
 import React, { PropTypes } from "react";
 import YiiRole from "./roles/YiiRole";
-import MysqlRole from "./roles/MysqlRole";
 
-const Application = ( {applicationAppState, rolesActions, yiiAppState, mysqlAppState, setActiveEnvironment} ) => {
+const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiAppState, mysqlAppState, setActiveEnvironment} ) => {
   return (
     <div className="small-12 medium-12 large-12">
       <div className="row">
@@ -11,6 +12,11 @@ const Application = ( {applicationAppState, rolesActions, yiiAppState, mysqlAppS
             end
             setEnableYii={rolesActions.setEnableYii}
             yiiAppState={yiiAppState}
+        />
+        <BuildbotRole
+            buildbotAppState={buildbotAppState}
+            end
+            setEnableBuildbot={rolesActions.setEnableBuildbot}
         />
       </div>
       <div className="row">
@@ -42,9 +48,10 @@ const Application = ( {applicationAppState, rolesActions, yiiAppState, mysqlAppS
 
 Application.propTypes = {
   applicationAppState: PropTypes.object.isRequired,
-  setActiveEnvironment: PropTypes.func.isRequired,
+  buildbotAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
+  setActiveEnvironment: PropTypes.func.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };
 
