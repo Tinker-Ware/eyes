@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
 import applicationAppState from "./application";
 import baseAppState from "./roles/base";
+import buildbotAppState from "./roles/buildbot";
 import cloudProviderAppState from "./cloudProvider";
 import ghostAppState from "./roles/ghost";
 import mysqlAppState from "./roles/mysql";
@@ -16,17 +17,18 @@ import yiiAppState from "./roles/yii";
 
 const rootReducer = combineReducers({
   applicationAppState,
-  cloudProviderAppState,
-  projectNameAppState,
-  repositoryAppState,
-  userAppState,
-  userProjectAppState,
   baseAppState,
+  buildbotAppState,
+  cloudProviderAppState,
   ghostAppState,
   mysqlAppState,
   nginxAppState,
   plainHtmlAppState,
+  projectNameAppState,
   projectsAppState,
+  repositoryAppState,
+  userAppState,
+  userProjectAppState,
   yiiAppState,
   routing: routerReducer
 });
