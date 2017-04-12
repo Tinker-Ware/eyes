@@ -36,7 +36,7 @@ const styles = {
   }
 };
 
-const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setMysqlDatabases, setShowMysql, mysqlAppState, removeMysqlDatabase, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase} ) => {
+const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabases, removeMysqlPackages, removeMysqlUsers, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setEnableMariadb, setMysqlDatabases, setShowMysql, mysqlAppState, removeMysqlDatabase, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase, enable, type} ) => {
   const handleRemoveDatabase = (e, database) => {
     removeMysqlDatabase(
       fromJS({
@@ -68,11 +68,23 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
     }));
   };
   const handleEnable = () => {
-    setEnableMysql(
-      fromJS({
-        enable_mysql: !mysqlAppState.get("enable_mysql")
-      })
-    );
+    if(enable){
+      removeMysqlDatabases();
+      removeMysqlPackages();
+      removeMysqlUsers();
+    }
+    if(type=="MySQL")
+      setEnableMysql(
+        fromJS({
+          enable_mysql: !enable
+        })
+      );
+    else
+      setEnableMariadb(
+        fromJS({
+          enable_mariadb: !enable
+        })
+      );
   };
   const handleSaveConfigurations = () => {
     if(mysqlAppState.get("show_mysql")){
@@ -160,14 +172,14 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
         <CardHeader
             avatar={<FontIcon className={"icon icon-mysql"}/>}
             subtitle={"Relational Database"}
-            title={"MySQL"}
+            title={type}
         />
         <CardActions>
           <Toggle
               label="Enabled"
               labelPosition="right"
               onToggle={handleEnable}
-              toggled={mysqlAppState.get("enable_mysql")?true:false}
+              toggled={enable?true:false}
           />
           <FlatButton
               label={"Configuration"}
@@ -242,19 +254,25 @@ const MysqlRole = ( {end, environments, applicationAppState, setMysqlUser, setMy
 
 MysqlRole.propTypes = {
   applicationAppState: PropTypes.object.isRequired,
+  enable: PropTypes.bool.isRequired,
   end: PropTypes.bool.isRequired,
   environments: PropTypes.array.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   removeMysqlDatabase: PropTypes.func.isRequired,
+  removeMysqlDatabases: PropTypes.func.isRequired,
+  removeMysqlPackages: PropTypes.func.isRequired,
   removeMysqlUser: PropTypes.func.isRequired,
+  removeMysqlUsers: PropTypes.func.isRequired,
   setActiveEnvironment: PropTypes.func.isRequired,
+  setEnableMariadb: PropTypes.func.isRequired,
   setEnableMysql: PropTypes.func.isRequired,
   setMysqlDatabases: PropTypes.func.isRequired,
   setMysqlRootPassword: PropTypes.func.isRequired,
   setMysqlUser: PropTypes.func.isRequired,
   setShowMysql: PropTypes.func.isRequired,
   setShowMysqlDatabase: PropTypes.func.isRequired,
-  setShowMysqlUser: PropTypes.func.isRequired
+  setShowMysqlUser: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default MysqlRole;

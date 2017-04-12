@@ -38,8 +38,7 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
             name: cookie.load("mysql_databases-name"),
             encoding: "utf8",
             collation: "utf8_general_ci",
-            environment: activeEnvironment,
-            mariaDB: false
+            environment: activeEnvironment
           }]
         })
       );

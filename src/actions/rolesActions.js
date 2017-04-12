@@ -168,6 +168,10 @@ export function setEnableMysql(value) {
   return { type: types.SET_ENABLE_MYSQL, value };
 }
 
+export function setEnableMariadb(value) {
+  return { type: types.SET_ENABLE_MARIADB, value };
+}
+
 export function setRequestActiveMysql(value) {
   return { type: types.SET_REQUEST_ACTIVE_MYSQL, value };
 }
@@ -214,4 +218,16 @@ export function removeMysqlDatabase(value) {
 
 export function removeMysqlUser(value) {
   return { type: types.REMOVE_MYSQL_USER, value };
+}
+
+export function removeMysqlDatabases() {
+  return { type: types.REMOVE_MYSQL_DATABASES };
+}
+
+export function removeMysqlUsers() {
+  return { type: types.REMOVE_MYSQL_USERS };
+}
+
+export function removeMysqlPackages() {
+  return { type: types.REMOVE_MYSQL_PACKAGES };
 }

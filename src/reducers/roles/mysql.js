@@ -1,4 +1,4 @@
-import {REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE} from "../../constants/Roles";
+import {REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, REMOVE_MYSQL_USERS, REMOVE_MYSQL_DATABASES, REMOVE_MYSQL_PACKAGES, SET_MYSQL_ROOT_PASSWORD, SET_MYSQL_USERS, SET_MYSQL_PACKAGES, SET_MYSQL_DATABASES,SET_ENABLE_MYSQL,SET_SHOW_MYSQL, SET_REQUEST_ACTIVE_MYSQL, SET_SHOW_MYSQL_USER, SET_SHOW_MYSQL_DATABASE, SET_ENABLE_MARIADB} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -95,6 +95,10 @@ export default function mysql(state = initialState, action) {
     {
       return state.set("enable_mysql", action.value.get("enable_mysql"));
     }
+    case SET_ENABLE_MARIADB:
+    {
+      return state.set("enable_mariadb", action.value.get("enable_mariadb"));
+    }
     case SET_REQUEST_ACTIVE_MYSQL:
     {
       return state.set("request_active_mysql", action.value.get("request_active_mysql"));
@@ -112,6 +116,18 @@ export default function mysql(state = initialState, action) {
         value.get("id") !== action.value.get("mysql_database").get("id") &&
         value.get("environment") !== action.value.get("mysql_database").get("environment")
       ));
+    }
+    case REMOVE_MYSQL_USERS:
+    {
+      return state.remove("mysql_users");
+    }
+    case REMOVE_MYSQL_DATABASES:
+    {
+      return state.remove("mysql_databases");
+    }
+    case REMOVE_MYSQL_PACKAGES:
+    {
+      return state.remove("mysql_packages");
     }
     default:
       return state;

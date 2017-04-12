@@ -23,12 +23,17 @@ const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiA
         <h2>{"Choose a Database"}</h2>
         <MysqlRole
             applicationAppState={applicationAppState}
+            enable={mysqlAppState.get("enable_mysql")?true:false}
             end
             environments={applicationAppState.get("application_evironments")?applicationAppState.get("application_evironments"):[]}
             mysqlAppState={mysqlAppState}
             removeMysqlDatabase={rolesActions.removeMysqlDatabase}
+            removeMysqlDatabases={rolesActions.removeMysqlDatabases}
+            removeMysqlPackages={rolesActions.removeMysqlPackages}
             removeMysqlUser={rolesActions.removeMysqlUser}
+            removeMysqlUsers={rolesActions.removeMysqlUsers}
             setActiveEnvironment={setActiveEnvironment}
+            setEnableMariadb={rolesActions.setEnableMariadb}
             setEnableMysql={rolesActions.setEnableMysql}
             setMysqlDatabases={rolesActions.setMysqlDatabases}
             setMysqlRootPassword={rolesActions.setMysqlRootPassword}
@@ -36,6 +41,30 @@ const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiA
             setShowMysql={rolesActions.setShowMysql}
             setShowMysqlDatabase={rolesActions.setShowMysqlDatabase}
             setShowMysqlUser={rolesActions.setShowMysqlUser}
+            type={"MySQL"}
+            updateMysqlUser={rolesActions.updateMysqlUser}
+        />
+        <MysqlRole
+            applicationAppState={applicationAppState}
+            enable={mysqlAppState.get("enable_mariadb")?true:false}
+            end
+            environments={applicationAppState.get("application_evironments")?applicationAppState.get("application_evironments"):[]}
+            mysqlAppState={mysqlAppState}
+            removeMysqlDatabase={rolesActions.removeMysqlDatabase}
+            removeMysqlDatabases={rolesActions.removeMysqlDatabases}
+            removeMysqlPackages={rolesActions.removeMysqlPackages}
+            removeMysqlUser={rolesActions.removeMysqlUser}
+            removeMysqlUsers={rolesActions.removeMysqlUsers}
+            setActiveEnvironment={setActiveEnvironment}
+            setEnableMariadb={rolesActions.setEnableMariadb}
+            setEnableMysql={rolesActions.setEnableMysql}
+            setMysqlDatabases={rolesActions.setMysqlDatabases}
+            setMysqlRootPassword={rolesActions.setMysqlRootPassword}
+            setMysqlUser={rolesActions.setMysqlUser}
+            setShowMysql={rolesActions.setShowMysql}
+            setShowMysqlDatabase={rolesActions.setShowMysqlDatabase}
+            setShowMysqlUser={rolesActions.setShowMysqlUser}
+            type={"MariaDB"}
             updateMysqlUser={rolesActions.updateMysqlUser}
         />
       </div>
