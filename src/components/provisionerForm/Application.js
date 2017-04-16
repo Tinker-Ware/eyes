@@ -1,6 +1,7 @@
 import BuildbotRole from "./roles/BuildbotRole";
 import MysqlRole from "./roles/MysqlRole";
-import React, { PropTypes } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import YiiRole from "./roles/YiiRole";
 
 const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiAppState, mysqlAppState, setActiveEnvironment} ) => {

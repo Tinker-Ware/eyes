@@ -8,7 +8,8 @@ import cookie from "react-cookie";
 import Login from "../components/userAuth/Login";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Notification from "../components/Notification";
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 export class UserLogin extends Component {
   componentWillMount() {

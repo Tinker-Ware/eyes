@@ -1,5 +1,6 @@
 import { fromJS } from "immutable";
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import Snackbar from "material-ui/Snackbar";
 
 const Notification = ( {setNotification, message} ) => {

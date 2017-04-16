@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless

@@ -1,5 +1,5 @@
-import {Card} from "material-ui/Card";
-import {Toolbar, ToolbarGroup, ToolbarTitle} from "material-ui/Toolbar";
+import { Card } from "material-ui/Card";
+import { Toolbar, ToolbarGroup, ToolbarTitle } from "material-ui/Toolbar";
 import AppBar from "material-ui/AppBar";
 import FontIcon from "material-ui/FontIcon";
 import IconButton from "material-ui/IconButton";

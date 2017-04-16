@@ -1,9 +1,9 @@
 // import SSHKeys from "../components/provisionerForm/SSHKeys";
-import {bindActionCreators} from "redux";
-import {browserHistory} from "react-router";
-import {connect} from "react-redux";
-import {fromJS} from "immutable";
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+import { bindActionCreators } from "redux";
+import { browserHistory } from "react-router";
+import { connect } from "react-redux";
+import { fromJS } from "immutable";
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from "material-ui/Toolbar";
 import * as actions from "../actions/ServiceFormActions";
 import * as applicationActions from "../actions/ApplicationActions";
 import * as rolesActions from "../actions/rolesActions";
@@ -18,8 +18,9 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Notification from "../components/Notification";
 import Paper from "material-ui/Paper";
 import ProjectName from "../components/provisionerForm/ProjectName";
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 
 const style = {
   button: {

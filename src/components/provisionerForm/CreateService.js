@@ -1,7 +1,8 @@
-import React, { PropTypes } from "react";
 import { fromJS, Map } from "immutable";
-import RaisedButton from "material-ui/RaisedButton";
 import FontIcon from "material-ui/FontIcon";
+import PropTypes from "prop-types";
+import RaisedButton from "material-ui/RaisedButton";
+import React from "react";
 
 const style = {
   button: {

@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import * as actions from "../actions/userActions";
 import AccountSidebar from "../components/user/AccountSidebar";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import UserSidebar from "../components/user/UserSidebar";
 
 export class UserProfile extends Component {

@@ -1,8 +1,8 @@
-import {fromJS} from "immutable";
-import {grey400} from "material-ui/styles/colors";
-import {List, ListItem} from "material-ui/List";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+import { fromJS } from "immutable";
+import { grey400 } from "material-ui/styles/colors";
+import { List, ListItem } from "material-ui/List";
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from "material-ui/Toolbar";
 import Avatar from "material-ui/Avatar";
 import Chip from "material-ui/Chip";
 import Dialog from "material-ui/Dialog";
@@ -13,8 +13,9 @@ import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
-import React, {PropTypes} from "react";
+import React from "react";
 
 const styles = {
   body: {

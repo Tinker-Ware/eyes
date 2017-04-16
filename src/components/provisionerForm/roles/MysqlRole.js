@@ -1,17 +1,18 @@
+import { Card, CardActions, CardHeader } from "material-ui/Card";
+import { fromJS } from "immutable";
+import { Tabs, Tab } from "material-ui/Tabs";
+import AddDatabase from "./mysql/AddDatabase";
 import Avatar from "material-ui/Avatar";
-import {Card, CardActions, CardHeader} from "material-ui/Card";
-import {fromJS} from "immutable";
-import {Tabs, Tab} from "material-ui/Tabs";
 import Base from "./mysql/Base";
 import Chip from "material-ui/Chip";
 import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import SwipeableViews from "react-swipeable-views";
 import Toggle from "material-ui/Toggle";
-import AddDatabase from "./mysql/AddDatabase";
 
 const styles = {
   block: {
