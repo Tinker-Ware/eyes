@@ -80,7 +80,7 @@
     "lodash": "4.17.4",
     "material-ui": "0.17.1",
     "mocha": "3.2.0",
-    "node-sass": "4.5.0",
+    "node-sass": "6.0.2",
     "npm-run-all": "4.0.2",
     "object-assign": "4.1.1",
     "open": "0.0.5",
