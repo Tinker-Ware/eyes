@@ -1,8 +1,8 @@
 # Tinkerware Provision Webpage
 
-[![Build status: Linux](https://travis-ci.org/Tinker-Ware/eyes.svg?branch=developmet)](https://travis-ci.org/Tinker-Ware/eyes)
-[![Dependency Status](https://david-dm.org/Tinker-Ware/eyes.svg?style=flat-square)](https://david-dm.org/Tinker-Ware/eyes)
-[![Coverage Status](https://coveralls.io/repos/github/Tinker-Ware/eyes/badge.svg?branch=developmet)](https://coveralls.io/github/Tinker-Ware/eyes?branch=developmet)
+[![Build status: Linux](https://travis-ci.org/Tinker-Ware/eyes.svg)](https://travis-ci.org/Tinker-Ware/eyes)
+[![Dependency Status](https://david-dm.org/Tinker-Ware/dev-status.svg?style=flat-square)](https://david-dm.org/Tinker-Ware/eyes?type=dev)
+[![Coverage Status](https://coveralls.io/repos/github/Tinker-Ware/eyes/badge.svg)](https://coveralls.io/github/Tinker-Ware/eyes)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
 [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
