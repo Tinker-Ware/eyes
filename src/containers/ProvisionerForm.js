@@ -21,8 +21,6 @@ import ProjectName from "../components/provisionerForm/ProjectName";
 import RaisedButton from "material-ui/RaisedButton";
 import React, { Component, PropTypes } from "react";
 
-const provisionFormOptionsApi = require("../api/provisionFormOptionsApi");
-
 const style = {
   button: {
     margin: 12,
@@ -99,12 +97,10 @@ export class ServiceForm extends Component {
                 </div>
                 <Application
                     applicationAppState={this.props.applicationAppState}
-                    applicationsOptions={(provisionFormOptionsApi.getProvisionFormOptions()[0]) ?   provisionFormOptionsApi.getProvisionFormOptions()[0].application[0] :""}
                     buildbotAppState={this.props.buildbotAppState}
                     mysqlAppState={this.props.mysqlAppState}
                     rolesActions={this.props.rolesActions}
                     setActiveEnvironment={this.props.actions.setActiveEnvironment}
-                    setApplication={this.props.actions.setApplication}
                     setApplicationOneClick={this.props.actions.setApplicationOneClick}
                     yiiAppState={this.props.yiiAppState}
                 />
