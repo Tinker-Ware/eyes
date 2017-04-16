@@ -138,6 +138,9 @@ describe("sagas middleware", () => {
         project_deploys: deploys.deploys
       })))
     );
+    expect(generator.next().value).to.deep.equal(
+      call(delay, 20000)
+    );
   });
   it("handles REQUEST_PROJECT_SERVERS", () => {
     const data = {
