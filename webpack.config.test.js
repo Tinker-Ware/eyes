@@ -12,8 +12,13 @@ export default {
   debug: true,
   devtool:"eval-source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
-  entry: ["babel-polyfill","whatwg-fetch","./src/webpack-public-path","webpack-hot-middleware/client?reload=true",
-    path.resolve(__dirname,"./src/apps/development.js") // Defining path seems necessary for this to work consistently on Windows machines.
+  entry:[
+    "./src/webpack-public-path",
+    "babel-polyfill",
+    "react-hot-loader/patch",
+    "webpack-hot-middleware/client?reload=true",
+    "whatwg-fetch",
+    path.resolve(__dirname,"./src/index") // Defining path seems necessary for this to work consistently on Windows machines.
   ],
   watchOptions: {
     aggregateTimeout: 300,
