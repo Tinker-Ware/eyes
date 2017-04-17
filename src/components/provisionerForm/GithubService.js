@@ -1,12 +1,13 @@
-import {Card, CardActions, CardHeader} from "material-ui/Card";
-import {fromJS} from "immutable";
-import {List} from "material-ui/List";
-import {RadioButton, RadioButtonGroup} from "material-ui/RadioButton";
+import { Card, CardActions, CardHeader } from "material-ui/Card";
+import { fromJS } from "immutable";
+import { List } from "material-ui/List";
+import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import RefreshIndicator from "material-ui/RefreshIndicator";
 import Subheader from "material-ui/Subheader";
 

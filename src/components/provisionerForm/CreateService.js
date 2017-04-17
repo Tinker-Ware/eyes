@@ -1,7 +1,8 @@
-import React, { PropTypes } from "react";
 import { fromJS, Map } from "immutable";
-import RaisedButton from "material-ui/RaisedButton";
 import FontIcon from "material-ui/FontIcon";
+import PropTypes from "prop-types";
+import RaisedButton from "material-ui/RaisedButton";
+import React from "react";
 
 const style = {
   button: {
@@ -49,12 +50,12 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
         "nginx_vhosts": nginx()
       };
   };
-  const getMysqlConfiguration = (environment) => {
-    if(mysqlAppState.get("enable_mysql")){
+  const getMysqlConfiguration = (environment=-1) => {
+    if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb")){
       let config;
       if(environment==-1)
         config={
-          "mysql_packages": []
+          "mysql_packages": mysqlAppState.get("enable_mysql")?[]:["mariadb-client","mariadb-server","python-mysqldb"]
         };
       else{
         let databases = [];
@@ -104,7 +105,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(baseAppState.get("enable_base")) rolesArray.push(baseAppState.get("roles"));
     if(buildbotAppState.get("enable_buildbot")) rolesArray.push(buildbotAppState.get("roles"));
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
-    if(mysqlAppState.get("enable_mysql")) rolesArray.push(mysqlAppState.get("roles"));
+    if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb")) rolesArray.push(mysqlAppState.get("roles"));
     if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     return rolesArray;
   };

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import React, { Component } from "react";
 import UserSubscription from "../components/user/Subscription";
 
 export class ProjectSubscription extends Component {

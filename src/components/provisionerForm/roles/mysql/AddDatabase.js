@@ -1,13 +1,14 @@
+import { fromJS } from "immutable";
+import AddUser from "./AddUser";
 import Avatar from "material-ui/Avatar";
-import {fromJS} from "immutable";
+import Chip from "material-ui/Chip";
 import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import TextField from "material-ui/TextField";
-import Chip from "material-ui/Chip";
-import AddUser from "./AddUser";
 
 const styles = {
   button: {
@@ -38,8 +39,7 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
             name: cookie.load("mysql_databases-name"),
             encoding: "utf8",
             collation: "utf8_general_ci",
-            environment: activeEnvironment,
-            mariaDB: false
+            environment: activeEnvironment
           }]
         })
       );

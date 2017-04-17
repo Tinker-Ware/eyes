@@ -1,7 +1,7 @@
-import {bindActionCreators} from "redux";
-import {browserHistory} from "react-router";
-import {connect} from "react-redux";
-import {fromJS} from "immutable";
+import { bindActionCreators } from "redux";
+import { browserHistory } from "react-router";
+import { connect } from "react-redux";
+import { fromJS } from "immutable";
 import * as actions from "../actions/ServiceFormActions";
 import * as applicationActions from "../actions/ApplicationActions";
 import * as projectsActions from "../actions/projectsActions";
@@ -11,7 +11,8 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Notification from "../components/Notification";
 import Paper from "material-ui/Paper";
 import ProjectsList from "../components/projects/ProjectsList";
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 export class Projects extends Component {
   componentWillMount() {

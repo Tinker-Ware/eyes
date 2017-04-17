@@ -1,6 +1,6 @@
-import React, { Component } from "react";
 import EnvironmentConfig from "../components/projects/EnvironmentConfig";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import React, { Component } from "react";
 
 export class Environments extends Component {
   // componentWillMount() {

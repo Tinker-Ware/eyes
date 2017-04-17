@@ -1,13 +1,14 @@
-import React, {PropTypes} from "react";
-import {Card, CardActions, CardHeader, CardText} from "material-ui/Card";
-import FlatButton from "material-ui/FlatButton";
-import FontIcon from "material-ui/FontIcon";
-import {List} from "material-ui/List";
-import Subheader from "material-ui/Subheader";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
+import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
+import { List } from "material-ui/List";
 import Dialog from "material-ui/Dialog";
 import Divider from "material-ui/Divider";
+import FlatButton from "material-ui/FlatButton";
+import FontIcon from "material-ui/FontIcon";
+import PropTypes from "prop-types";
+import RaisedButton from "material-ui/RaisedButton";
+import React from "react";
+import Subheader from "material-ui/Subheader";
+import TextField from "material-ui/TextField";
 
 const styles = {
   block: {

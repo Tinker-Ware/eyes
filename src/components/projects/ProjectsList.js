@@ -1,10 +1,11 @@
-import {Link} from "react-router";
-import {List, ListItem} from "material-ui/List";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+import { Link } from "react-router";
+import { List, ListItem } from "material-ui/List";
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from "material-ui/Toolbar";
 import FontIcon from "material-ui/FontIcon";
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
-import React, {PropTypes} from "react";
+import React from "react";
 
 const style = {
   toolbar: {

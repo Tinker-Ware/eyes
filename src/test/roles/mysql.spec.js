@@ -246,6 +246,15 @@ describe("mysql role", () => {
     expect(nextState).to.equal(fromJS({
       enable_mysql:true}));
   });
+  it("handles SET_ENABLE_MARIADB", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_MARIADB", value: fromJS({
+      enable_mariadb:true})};
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_mariadb:true}));
+  });
   it("handles SET_SHOW_MYSQL", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_MYSQL", value: fromJS({
@@ -311,6 +320,33 @@ describe("mysql role", () => {
     expect(nextState).to.equal(fromJS({
       mysql_users: []
     }));
+  });
+  it("handles REMOVE_MYSQL_USERS", () => {
+    const initialState = Map();
+    const action = {
+      type:"REMOVE_MYSQL_USERS"
+    };
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({}));
+  });
+  it("handles REMOVE_MYSQL_DATABASES", () => {
+    const initialState = Map();
+    const action = {
+      type:"REMOVE_MYSQL_DATABASES"
+    };
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({}));
+  });
+  it("handles REMOVE_MYSQL_PACKAGES", () => {
+    const initialState = Map();
+    const action = {
+      type:"REMOVE_MYSQL_PACKAGES"
+    };
+    const nextState = mysql(initialState, action);
+
+    expect(nextState).to.equal(fromJS({}));
   });
   it("handles DEFAULT", () => {
     const initialState = Map();

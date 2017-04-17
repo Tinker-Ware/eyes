@@ -1,9 +1,10 @@
-import React, {PropTypes} from "react";
-import {fromJS} from "immutable";
+import { Card, CardActions, CardHeader } from "material-ui/Card";
+import { fromJS } from "immutable";
 import cookie from "react-cookie";
-import {Card, CardActions, CardHeader} from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
+import PropTypes from "prop-types";
+import React from "react";
 
 const CloudProvider = ( {clearCloudProviderSSHKeys, cloudProviderAppState, userAppState, requestCloudProviderAccess, setCloudProvider} ) => {
   if(userAppState.get("user_session")){

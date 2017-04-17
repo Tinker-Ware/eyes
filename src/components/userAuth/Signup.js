@@ -1,6 +1,7 @@
-import React, { PropTypes } from "react";
-import { Link } from "react-router";
 import { fromJS } from "immutable";
+import { Link } from "react-router";
+import PropTypes from "prop-types";
+import React from "react";
 
 const Signup = ( { requestPostUser, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
   const handleUserSignup = (e) => {

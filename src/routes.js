@@ -1,17 +1,17 @@
-// import UserSignup from "../containers/UserSignup";
+// import UserSignup from "./containers/UserSignup";
 import { Route, IndexRoute } from "react-router";
-import App from "../components/App";
-import Environment from "../containers/Environment";
-import Profile from "../components/user/Profile";
-import ProjectInfo from "../containers/ProjectInfo";
-import Projects from "../containers/Projects";
-import ProjectUsers from "../containers/ProjectUsers";
-import ProvisionerForm from "../containers/ProvisionerForm";
+import App from "./components/App";
+import Environment from "./containers/Environment";
+import Profile from "./components/user/Profile";
+import ProjectInfo from "./containers/ProjectInfo";
+import Projects from "./containers/Projects";
+import ProjectUsers from "./containers/ProjectUsers";
+import ProvisionerForm from "./containers/ProvisionerForm";
 import React from "react";
-import ServiceOAuth from "../containers/ServiceOAuth";
-import UserLogin from "../containers/UserLogin";
-import UserProfile from "../containers/UserProfile";
-import UserSubscription from "../containers/UserSubscription";
+import ServiceOAuth from "./containers/ServiceOAuth";
+import UserLogin from "./containers/UserLogin";
+import UserProfile from "./containers/UserProfile";
+import UserSubscription from "./containers/UserSubscription";
 
 export default (
   <Route

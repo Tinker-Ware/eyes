@@ -1,9 +1,10 @@
-import {fromJS} from "immutable";
+import { fromJS } from "immutable";
 import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
-import React, {PropTypes} from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import TextField from "material-ui/TextField";
 
 const styles = {

@@ -6,7 +6,8 @@ import * as actions from "../actions/userActions";
 import * as applicationActions from "../actions/ApplicationActions";
 import cookie from "react-cookie";
 import Notification from "../components/Notification";
-import React, { Component, PropTypes } from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import Signup from "../components/userAuth/Signup";
 
 export class UserSignup extends Component {

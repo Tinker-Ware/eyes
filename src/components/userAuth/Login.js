@@ -1,9 +1,10 @@
-import React, { PropTypes } from "react";
 // import { Link } from "react-router";
-import { fromJS } from "immutable";
 import { Card } from "material-ui/Card";
-import TextField from "material-ui/TextField";
+import { fromJS } from "immutable";
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
+import React from "react";
+import TextField from "material-ui/TextField";
 
 const Login = ( { requestGetUserSesion, setUserSesionEmail, setUserSesionPassword, userAppState } ) => {
   const handleUserSesion = (e) => {

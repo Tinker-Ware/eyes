@@ -1,5 +1,6 @@
-import React, {PropTypes} from "react";
-import {fromJS} from "immutable";
+import { fromJS } from "immutable";
+import PropTypes from "prop-types";
+import React from "react";
 import TextField from "material-ui/TextField";
 
 const ProjectName = ( {setProjectName, projectNameAppState} ) => {

@@ -12,7 +12,11 @@ export default {
    extensions: ["*",".js",".jsx", ".json", ".scss"]
   },
   devtool:"source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
-  entry: ["babel-polyfill", "whatwg-fetch", path.resolve(__dirname,"src/apps/development")],
+  entry: [
+    "babel-polyfill",
+    "whatwg-fetch",
+    path.resolve(__dirname,"src/index")
+  ],
   target:"web", // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: path.resolve(__dirname,"dist"),

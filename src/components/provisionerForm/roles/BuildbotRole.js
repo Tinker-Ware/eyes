@@ -1,7 +1,8 @@
-import { fromJS } from "immutable";
-import {Card, CardActions, CardHeader} from "material-ui/Card";
 // import FontIcon from "material-ui/FontIcon";
-import React, {PropTypes} from "react";
+import { Card, CardActions, CardHeader } from "material-ui/Card";
+import { fromJS } from "immutable";
+import PropTypes from "prop-types";
+import React from "react";
 import Toggle from "material-ui/Toggle";
 
 const BuildRole = ( {end, setEnableBuildbot, buildbotAppState} ) => {

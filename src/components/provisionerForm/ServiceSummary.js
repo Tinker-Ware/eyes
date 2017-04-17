@@ -1,5 +1,6 @@
-import React, {PropTypes} from "react";
 import CreateService from "./CreateService";
+import PropTypes from "prop-types";
+import React from "react";
 
 const ServiceSummary = ( {cloudProviderAppState, projectNameAppState, repositoryAppState, applicationAppState, userAppState, requestPostUserProject} ) => {
   return (

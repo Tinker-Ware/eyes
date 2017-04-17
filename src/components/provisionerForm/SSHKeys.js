@@ -1,9 +1,10 @@
-import { fromJS } from "immutable";
 // import Checkbox from "material-ui/Checkbox";
+import { fromJS } from "immutable";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
+import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
-import React, { PropTypes } from "react";
+import React from "react";
 import SSHKeysItem from "./SSHKeysItem";
 import TextField from "material-ui/TextField";
 
