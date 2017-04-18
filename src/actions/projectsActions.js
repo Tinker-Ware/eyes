@@ -4,6 +4,10 @@ export function deployProject(value) {
   return { type: types.REQUEST_DEPLOY_PROJECT, value };
 }
 
+export function requestRedeployProjectServer(value) {
+  return { type: types.REQUEST_PROJECT_REDEPLOY, value };
+}
+
 export function deleteProjectServer(value) {
   return { type: types.DELETE_PROJECT_SERVERS, value };
 }
@@ -32,12 +36,20 @@ export function setProjectDeploys(value) {
   return { type: types.SET_PROJECT_DEPLOYS, value };
 }
 
+export function setProjectDeployError(value) {
+  return { type: types.SET_PROJECT_DEPLOY_ERROR, value };
+}
+
 export function setProjectServers(value) {
   return { type: types.SET_PROJECT_SERVERS, value };
 }
 
 export function setShowProjectServers(value) {
   return { type: types.SET_SHOW_PROJECT_SERVERS, value };
+}
+
+export function setShowProjectDeployServerError(value) {
+  return { type: types.SET_SHOW_PROJECT_DEPLOY_ERROR, value };
 }
 
 export function setUserProjectDevEnvironment(value) {

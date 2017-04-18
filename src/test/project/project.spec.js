@@ -128,6 +128,21 @@ describe("project", () => {
       }
     ));
   });
+  it("handles SET_PROJECT_DEPLOY_ERROR", () => {
+    const initialState = Map();
+    const action = {type:"SET_PROJECT_DEPLOY_ERROR", value: fromJS(
+      {
+        "project_deploy_server_error": "framework error"
+      }
+    )};
+    const nextState = projects(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      {
+        project_deploy_server_error: "framework error"
+      }
+    ));
+  });
   it("handles SET_PROJECT_SERVERS", () => {
     const initialState = Map();
     const action = {type:"SET_PROJECT_SERVERS", value: fromJS(
@@ -181,6 +196,21 @@ describe("project", () => {
     expect(nextState).to.equal(fromJS(
       {
         show_project_servers: true
+      }
+    ));
+  });
+  it("handles SET_SHOW_PROJECT_DEPLOY_ERROR", () => {
+    const initialState = Map();
+    const action = {type:"SET_SHOW_PROJECT_DEPLOY_ERROR", value: fromJS(
+      {
+        "show_project_server_error": true
+      }
+    )};
+    const nextState = projects(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      {
+        show_project_server_error: true
       }
     ));
   });

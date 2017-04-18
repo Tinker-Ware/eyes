@@ -1,4 +1,4 @@
-import { SET_PROJECT_DEPLOYS, SET_PROJECT_SERVERS, SET_SHOW_PROJECT_SERVERS, SET_USER_PROJECT, SET_USER_PROJECTS, SET_USER_PROJECT_DEV_ENVIRONMENT } from "../../constants/Projects";
+import { SET_PROJECT_DEPLOYS, SET_PROJECT_DEPLOY_ERROR, SET_PROJECT_SERVERS, SET_SHOW_PROJECT_SERVERS, SET_USER_PROJECT, SET_USER_PROJECTS, SET_USER_PROJECT_DEV_ENVIRONMENT, SET_SHOW_PROJECT_DEPLOY_ERROR } from "../../constants/Projects";
 import { Map } from "immutable";
 
 const initialState = Map({
@@ -23,6 +23,10 @@ export default function userProject(state = initialState, action) {
     {
       return state.set("project_deploys", action.value.get("project_deploys"));
     }
+    case SET_PROJECT_DEPLOY_ERROR:
+    {
+      return state.set("project_deploy_server_error", action.value.get("project_deploy_server_error"));
+    }
     case SET_PROJECT_SERVERS:
     {
       return state.set("project_servers", action.value.get("project_servers"));
@@ -30,6 +34,10 @@ export default function userProject(state = initialState, action) {
     case SET_SHOW_PROJECT_SERVERS:
     {
       return state.set("show_project_servers", action.value.get("show_project_servers"));
+    }
+    case SET_SHOW_PROJECT_DEPLOY_ERROR:
+    {
+      return state.set("show_project_server_error", action.value.get("show_project_server_error"));
     }
     default:
       return state;
