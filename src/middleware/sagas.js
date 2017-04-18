@@ -12,7 +12,6 @@ import cookie from "react-cookie";
 export const doRequest = (url, options) => {
   return fetch(url, options)
     .then(response => {
-      // debugger;
       if (!response.ok) throw response.statusText;
       return response.json();
     })
@@ -289,7 +288,7 @@ export function* redeployProject(data) {
             "deploy_id": data.value.get("deploy_id")
           })
       }),
-      call(setNotification, "Doing Redeploy Server")
+      call(setNotification, "Appling Your New Changes")
     ];
     yield call(getProjectDeploys, data);
   }

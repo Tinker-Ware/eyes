@@ -131,7 +131,7 @@ describe("sagas middleware", () => {
               "deploy_id": data.deploy_id
             })
         }),
-        call(setNotification, "Doing Redeploy Server")
+        call(setNotification, "Appling Your New Changes")
       ]
     );
     expect(generator.next().value).to.deep.equal(
