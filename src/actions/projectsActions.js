@@ -4,7 +4,7 @@ export function deployProject(value) {
   return { type: types.REQUEST_DEPLOY_PROJECT, value };
 }
 
-export function reDeployProject(value) {
+export function requestRedeployProjectServer(value) {
   return { type: types.REQUEST_PROJECT_REDEPLOY, value };
 }
 

@@ -45,7 +45,7 @@ const styles = {
   }
 };
 
-const Project = ({deployProject, deleteProjectServer, projectsAppState, requestProjectDeployServers, setShowProjectDeployServerError, setShowProjectServers, setProjectDeployError, userAppState}) => {
+const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServer, projectsAppState, requestProjectDeployServers, setShowProjectDeployServerError, setShowProjectServers, setProjectDeployError, userAppState}) => {
   const handlOpenURL = (url) => {
     window.open(url, "_blank");
   };
@@ -101,6 +101,16 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
       })
     );
   };
+  const handleProjectRedeploy = (deployId) => {
+    requestRedeployProjectServer(
+      fromJS({
+        "authorization": userAppState.get("user_session").toJS().token,
+        "project_id": projectsAppState.getIn(["user_project","id"]),
+        "deploy_id": deployId,
+        "user_id": projectsAppState.getIn(["user_project","user_id"])
+      })
+    );
+  };
   const actions = [
     <FlatButton
         icon={<FontIcon className="icon icon-cancel" />}
@@ -137,6 +147,7 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
                 </IconButton>
               }
             >
+              <MenuItem onClick={() => handleProjectRedeploy(server.deploy_id)}>{"Redeploy server"}</MenuItem>
               <MenuItem onClick={() => handlOpenURL("http://"+server.networks.v4[0].ip_address)}>{"Show Server"}</MenuItem>
               <MenuItem onClick={() => handleDeleteDeployServers(server.deploy_id, server.id)}>{"Delete"}</MenuItem>
             </IconMenu>
@@ -161,7 +172,12 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
             {deploy.status}
           </TableRowColumn>
           <TableRowColumn>
-            {(deploy.status == "Failed")? <FontIcon onClick={(event) => handleSetProjectsDeployServerError(event, deploy.note? deploy.note:"")} className="icon icon-cancel"/>:""}
+            {(deploy.status == "Failed")?
+              <FontIcon
+                  className="icon icon-cancel"
+                  onClick={(event) => handleSetProjectsDeployServerError(event, deploy.note? deploy.note:"")}
+              />
+            :""}
           </TableRowColumn>
         </TableRow>
       ):"";
@@ -306,8 +322,10 @@ Project.propTypes = {
   deployProject: PropTypes.func.isRequired,
   projectsAppState: PropTypes.object.isRequired,
   requestProjectDeployServers: PropTypes.func.isRequired,
-  setShowProjectServers: PropTypes.func.isRequired,
+  requestRedeployProjectServer: PropTypes.func.isRequired,
+  setProjectDeployError: PropTypes.func.isRequired,
   setShowProjectDeployServerError: PropTypes.func.isRequired,
+  setShowProjectServers: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

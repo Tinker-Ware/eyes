@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { call, put } from "redux-saga/effects";
 import { fromJS } from "immutable";
 import * as actions from "../actions/MiddlewareActions";
-import { delay, deleteProjectServer, deployProject, doRequestDeleteProjectServer, doRequestDeployProject, doRequestGetCloudProviderAccess, doRequestGetCloudProviderKeys, doRequestGetProjectDeploys, doRequestGetProjectServers, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetUserSesion, doRequestPostCloudProviderKey, doRequestPostUser, doRequestPostUserProject, getCloudProviderAccess, getCloudProviderKeys, getProjectDeploys, getProjectDeployServers, getRepositoryAccess, getUserRepositories, getUserSesion, postCloudProviderKey, postUser, postUserProject, refreshSession, refreshUserSesion, setNotification } from "../sagas";
+import { delay, deleteProjectServer, deployProject, doRequestDeleteProjectServer, doRequestDeployProject, doRequestRedeployProject, doRequestGetCloudProviderAccess, doRequestGetCloudProviderKeys, doRequestGetProjectDeploys, doRequestGetProjectServers, doRequestGetRefreshSession, doRequestGetRepositories, doRequestGetRepositoryAccess, doRequestGetUserSesion, doRequestPostCloudProviderKey, doRequestPostUser, doRequestPostUserProject, getCloudProviderAccess, getCloudProviderKeys, getProjectDeploys, getProjectDeployServers, getRepositoryAccess, getUserRepositories, getUserSesion, postCloudProviderKey, postUser, postUserProject, redeployProject, refreshSession, refreshUserSesion, setNotification } from "../sagas";
 
 describe("sagas middleware", () => {
   it("handles DELETE_PROJECT_SERVERS", () => {
@@ -88,6 +88,58 @@ describe("sagas middleware", () => {
         fromJS({
           "authorization": data.authorization,
           "project_id": data.project_id,
+          "user_id": data.user_id
+        })
+      })
+    );
+  });
+  it("handles REDEPLOY_PROJECT", () => {
+    const data = {
+      "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
+      "user_id": 1,
+      "deploy_id": 1,
+      "project_id": 1
+    };
+    const generator = redeployProject(
+      {"value":
+        fromJS({
+          "authorization": data.authorization,
+          "project_id": data.project_id,
+          "deploy_id": data.deploy_id,
+          "user_id": data.user_id
+        })
+      });
+    const err = new ReferenceError("404");
+    const generatorError = function () { throw err; };
+    expect(generatorError).to.throw(err);
+    expect(generator.next().value).to.deep.equal(
+      call(doRequestRedeployProject, fromJS({
+        "authorization": data.authorization,
+        "project_id": data.project_id,
+        "deploy_id": data.deploy_id,
+        "user_id": data.user_id
+      }))
+    );
+    expect(generator.next().value).to.deep.equal(
+      [
+        call(getProjectDeployServers, {
+          "value":
+            fromJS({
+              "authorization": data.authorization,
+              "project_id": data.project_id,
+              "user_id": data.user_id,
+              "deploy_id": data.deploy_id
+            })
+        }),
+        call(setNotification, "Doing Redeploy Server")
+      ]
+    );
+    expect(generator.next().value).to.deep.equal(
+      call(getProjectDeploys, {"value":
+        fromJS({
+          "authorization": data.authorization,
+          "project_id": data.project_id,
+          "deploy_id": data.deploy_id,
           "user_id": data.user_id
         })
       })

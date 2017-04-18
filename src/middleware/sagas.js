@@ -12,6 +12,7 @@ import cookie from "react-cookie";
 export const doRequest = (url, options) => {
   return fetch(url, options)
     .then(response => {
+      // debugger;
       if (!response.ok) throw response.statusText;
       return response.json();
     })
@@ -55,6 +56,23 @@ export function* doRequestDeployProject(data) {
         "deploy": {
           "user_id": data.get("user_id"),
           "project_id": data.get("project_id")
+        }
+      }),
+      mode:"cors"});
+}
+
+export function* doRequestRedeployProject(data) {
+  return yield call(
+    doRequest, process.env.HOST +"/api/v1/project/"+data.get("project_id")+"/deploys/"+data.get("deploy_id")+"?refresh=true",
+    {
+      method:"PUT",
+      headers: {
+        "authorization":"Bearer "+ data.get("authorization"),
+        "Accept":"application/json","Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        "deploy": {
+          "status": "Redeploy"
         }
       }),
       mode:"cors"});
@@ -228,11 +246,9 @@ export function* setNotification(notification) {
 export function* deleteProjectServer(data) {
   try {
     yield call(doRequestDeleteProjectServer, data.value);
-    debugger;
     yield call(setNotification, "Server Deleted");
   }
   catch(error) {
-    debugger;
     yield call(setNotification, error);
   }
 }
@@ -252,6 +268,28 @@ export function* deployProject(data) {
       }),
       call(setNotification, "Creating Server"),
       put(actions.setShowProjectServers(fromJS({"show_project_servers": true})))
+    ];
+    yield call(getProjectDeploys, data);
+  }
+  catch(error) {
+    yield call(setNotification, error);
+  }
+}
+
+export function* redeployProject(data) {
+  try{
+    yield call(doRequestRedeployProject, data.value);
+    yield[
+      call(getProjectDeployServers, {
+        "value":
+          fromJS({
+            "authorization": data.value.get("authorization"),
+            "project_id": data.value.get("project_id"),
+            "user_id": data.value.get("user_id"),
+            "deploy_id": data.value.get("deploy_id")
+          })
+      }),
+      call(setNotification, "Doing Redeploy Server")
     ];
     yield call(getProjectDeploys, data);
   }
@@ -504,6 +542,7 @@ export default function* root() {
     takeLatest(projectsActionTypes.DELETE_PROJECT_SERVERS, deleteProjectServer),
     takeLatest(projectsActionTypes.REQUEST_DEPLOY_PROJECT, deployProject),
     takeLatest(projectsActionTypes.REQUEST_PROJECT_DEPLOYS, getProjectDeploys),
+    takeLatest(projectsActionTypes.REQUEST_PROJECT_REDEPLOY, redeployProject),
     takeLatest(projectsActionTypes.REQUEST_PROJECT_SERVERS, getProjectDeployServers),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECT, getUserProject),
     takeLatest(projectsActionTypes.REQUEST_USER_PROJECTS, getUserProjects),
