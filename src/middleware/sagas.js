@@ -228,9 +228,11 @@ export function* setNotification(notification) {
 export function* deleteProjectServer(data) {
   try {
     yield call(doRequestDeleteProjectServer, data.value);
+    debugger;
     yield call(setNotification, "Server Deleted");
   }
   catch(error) {
+    debugger;
     yield call(setNotification, error);
   }
 }

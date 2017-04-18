@@ -45,7 +45,7 @@ const styles = {
   }
 };
 
-const Project = ({deployProject, deleteProjectServer, projectsAppState, requestProjectDeployServers, setShowProjectServers, userAppState}) => {
+const Project = ({deployProject, deleteProjectServer, projectsAppState, requestProjectDeployServers, setShowProjectDeployServerError, setShowProjectServers, setProjectDeployError, userAppState}) => {
   const handlOpenURL = (url) => {
     window.open(url, "_blank");
   };
@@ -69,10 +69,26 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
       }));
     }
   };
+  const handleSetProjectsDeployServerError = (e, error) => {
+    e.stopPropagation();
+    setProjectDeployError(
+      fromJS({
+        project_deploy_server_error: error
+      })
+    );
+    handleShowProjectsDeployServerError();
+  };
   const handleShowProjectsDeployServers = () => {
     setShowProjectServers(
       fromJS({
         show_project_servers: !projectsAppState.get("show_project_servers")
+      })
+    );
+  };
+  const handleShowProjectsDeployServerError = () => {
+    setShowProjectDeployServerError(
+      fromJS({
+        show_project_server_error: !projectsAppState.get("show_project_server_error")
       })
     );
   };
@@ -91,6 +107,15 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
         key={1}
         label={"Close"}
         onTouchTap={handleShowProjectsDeployServers}
+        secondary
+    />
+  ];
+  const errorActions = [
+    <FlatButton
+        icon={<FontIcon className="icon icon-cancel" />}
+        key={1}
+        label={"Close"}
+        onTouchTap={handleShowProjectsDeployServerError}
         secondary
     />
   ];
@@ -134,6 +159,9 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
           </TableRowColumn>
           <TableRowColumn>
             {deploy.status}
+          </TableRowColumn>
+          <TableRowColumn>
+            {(deploy.status == "Failed")? <FontIcon onClick={(event) => handleSetProjectsDeployServerError(event, deploy.note? deploy.note:"")} className="icon icon-cancel"/>:""}
           </TableRowColumn>
         </TableRow>
       ):"";
@@ -193,6 +221,17 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
       >
         {servers()}
       </Dialog>
+      <Dialog
+          actions={errorActions}
+          actionsContainerStyle={styles.dialogButton}
+          autoScrollBodyContent
+          modal={false}
+          onRequestClose={handleShowProjectsDeployServerError}
+          open={projectsAppState.get("show_project_server_error")?true:false}
+          title="Deployed Server Error"
+      >
+        <p>{projectsAppState.get("project_deploy_server_error")?projectsAppState.get("project_deploy_server_error"):"No error registered!"}</p>
+      </Dialog>
       <List>
         <ListItem
             disabled
@@ -219,6 +258,7 @@ const Project = ({deployProject, deleteProjectServer, projectsAppState, requestP
                 <TableHeaderColumn>{"#"}</TableHeaderColumn>
                 <TableHeaderColumn>{"Deployed At"}</TableHeaderColumn>
                 <TableHeaderColumn>{"Status"}</TableHeaderColumn>
+                <TableHeaderColumn>{"Error"}</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
@@ -267,6 +307,7 @@ Project.propTypes = {
   projectsAppState: PropTypes.object.isRequired,
   requestProjectDeployServers: PropTypes.func.isRequired,
   setShowProjectServers: PropTypes.func.isRequired,
+  setShowProjectDeployServerError: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };
 

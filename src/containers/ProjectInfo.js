@@ -45,8 +45,10 @@ export class ProjectInfo extends Component {
               <Project
                   deleteProjectServer={this.props.projectsActions.deleteProjectServer}
                   deployProject={this.props.projectsActions.deployProject}
+                  setProjectDeployError={this.props.projectsActions.setProjectDeployError}
                   projectsAppState={this.props.projectsAppState}
                   requestProjectDeployServers={this.props.projectsActions.requestProjectDeployServers}
+                  setShowProjectDeployServerError={this.props.projectsActions.setShowProjectDeployServerError}
                   setShowProjectServers={this.props.projectsActions.setShowProjectServers}
                   userAppState={this.props.userAppState}
               />
