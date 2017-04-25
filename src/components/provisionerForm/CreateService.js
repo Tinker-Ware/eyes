@@ -36,7 +36,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       let config;
       if(environment==-1)
         config={
-          "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:"https://github.com/Tinker-Ware/yii2-crud"
+          "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:yiiAppState.get("default_repo_ssh")
         };
       else if(environment==1)
         config = {"yii_extra_flags": "--no-dev"};
@@ -109,6 +109,18 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     return rolesArray;
   };
+  const repositoryApp = () => {
+    let repository = "";
+    if(yiiAppState.get("enable_yii")) repository = yiiAppState.get("default_repo");
+    return repository;
+  };
+  const pathApp = () => {
+    let path = "";
+    if(yiiAppState.get("enable_yii")) path = repositoryAppState.get("repository")?
+      yiiAppState.get("path")+repositoryAppState.get("repository").toJS().name.split("/")[1]+".git"
+      :yiiAppState.get("path")+yiiAppState.get("default_repo_name")+".git";
+    return path;
+  };
   const handleCreateUserProject = () => {
     requestPostUserProject(fromJS({
       "authorization": userAppState.get("user_session").toJS().token,
@@ -120,9 +132,16 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
         "operating_system": "debian/contrib-jessie64",
         "configuration": configuration(),
         "repository": {
-          "provider": repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().provider:"github",
-          "name": repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().name:"Tinker-Ware/reponame",
-          "username": repositoryAppState.get("integration").toJS().username
+          "provider": repositoryAppState.get("repository")?
+            repositoryAppState.get("repository").toJS().provider
+            :"github",
+          "name": repositoryAppState.get("repository")?
+            repositoryAppState.get("repository").toJS().name
+            :repositoryApp(),
+          "path": pathApp(),
+          "username": repositoryAppState.get("repository")?
+            repositoryAppState.get("integration").toJS().username
+            :"Tinker-Ware"
         },
         "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys")?
           cloudProviderAppState.get("cloud_provider_ssh_keys").filter(value=>
