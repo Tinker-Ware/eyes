@@ -161,7 +161,6 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       <RaisedButton
           buttonStyle={style.button}
           disabled={
-            repositoryAppState.get("integration")&&
             projectNameAppState.get("project_name")?
               false:true
           }
