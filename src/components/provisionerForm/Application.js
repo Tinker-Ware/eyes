@@ -8,7 +8,7 @@ const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiA
   return (
     <div className="small-12 medium-12 large-12">
       <div className="row">
-        <h2>{"Choose an One-Click Apps"}</h2>
+        <h2>{"Choose an Add-ons"}</h2>
         <YiiRole
             end
             setEnableYii={rolesActions.setEnableYii}
