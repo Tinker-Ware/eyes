@@ -282,6 +282,13 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
             </TableBody>
           </Table>
         </List>
+        <RaisedButton
+            icon={<FontIcon className="icon icon-download" />}
+            label={"Download Linux CLI"}
+            onClick={() => handlOpenURL("https://s3-us-west-1.amazonaws.com/tw-test123/tinker/0.2.1/linux/tinker")}
+            primary
+            style={styles.button}
+        />
       </div>
       {/* <div className="align-left">
         <RaisedButton
