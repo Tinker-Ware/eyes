@@ -6,7 +6,7 @@ const initialState = Map({
     role: "yii",
     sudo: "no"
   },
-  path: "/opt/tinker/shared_files/yii_project/",
+  path: "/opt/tinker_shared_files/yii_project/",
   default_repo: "https://github.com/Tinker-Ware/yii2-crud",
   default_repo_name: "yii2-crud",
   nginx: {
