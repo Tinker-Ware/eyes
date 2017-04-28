@@ -55,7 +55,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       let config;
       if(environment==-1)
         config={
-          "mysql_packages": mysqlAppState.get("enable_mysql")?["mysql","mysql-server ","MySQL-python"]:["mariadb-client","mariadb-server","python-mysqldb"]
+          "mysql_packages": mysqlAppState.get("enable_mysql")?["mysql","mysql-server","MySQL-python"]:["mariadb-client","mariadb-server","python-mysqldb"]
         };
       else{
         let databases = [];
