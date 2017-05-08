@@ -5,11 +5,18 @@ import PropTypes from "prop-types";
 import React from "react";
 import Toggle from "material-ui/Toggle";
 
-const YiiRole = ( {end, setEnableYii, yiiAppState} ) => {
+const YiiRole = ( {end, setEnableYii, setEnableYiiAdvanced, yiiAppState} ) => {
   const handleEnable = () => {
     setEnableYii(
       fromJS({
         enable_yii: !yiiAppState.get("enable_yii")
+      })
+    );
+  };
+  const handleEnableYiiAdvanced = () => {
+    setEnableYiiAdvanced(
+      fromJS({
+        enable_yii_advanced: !yiiAppState.get("enable_yii_advanced")
       })
     );
   };
@@ -28,6 +35,12 @@ const YiiRole = ( {end, setEnableYii, yiiAppState} ) => {
               onToggle={handleEnable}
               toggled={yiiAppState.get("enable_yii")?true:false}
           />
+          <Toggle
+              label="Yii Advanced"
+              labelPosition="right"
+              onToggle={handleEnableYiiAdvanced}
+              toggled={yiiAppState.get("enable_yii_advanced")?true:false}
+          />
         </CardActions>
       </Card>
     </div>
@@ -37,6 +50,7 @@ const YiiRole = ( {end, setEnableYii, yiiAppState} ) => {
 YiiRole.propTypes = {
   end: PropTypes.bool.isRequired,
   setEnableYii: PropTypes.func.isRequired,
+  setEnableYiiAdvanced: PropTypes.func.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };
 

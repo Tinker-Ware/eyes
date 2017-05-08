@@ -49,6 +49,15 @@ describe("yii role", () => {
     expect(nextState).to.equal(fromJS({
       enable_yii:true}));
   });
+  it("handles SET_ENABLE_ADVANCED", () => {
+    const initialState = Map();
+    const action = {type:"SET_ENABLE_ADVANCED", value: fromJS({
+      enable_yii_advanced:true})};
+    const nextState = yii(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      enable_yii_advanced:true}));
+  });
   it("handles SET_SHOW_YII", () => {
     const initialState = Map();
     const action = {type:"SET_SHOW_YII", value: fromJS({

@@ -36,7 +36,8 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       let config;
       if(environment==-1)
         config={
-          "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:yiiAppState.get("default_repo")
+          "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:
+          yiiAppState.get("enable_yii_advanced")?yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo")
         };
       else if(environment==1)
         config = {"yii_extra_flags": "--no-dev"};

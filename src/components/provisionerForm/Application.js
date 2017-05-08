@@ -12,6 +12,7 @@ const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiA
         <YiiRole
             end
             setEnableYii={rolesActions.setEnableYii}
+            setEnableYiiAdvanced={rolesActions.setEnableYiiAdvanced}
             yiiAppState={yiiAppState}
         />
         <BuildbotRole

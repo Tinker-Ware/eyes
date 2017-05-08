@@ -1,4 +1,4 @@
-import {SET_COOKIE_VALIDATION_KEY, SET_YII_GIT_REPO,SET_ENABLE_YII,SET_SHOW_YII,SET_REQUEST_ACTIVE_YII} from "../../constants/Roles";
+import {SET_COOKIE_VALIDATION_KEY, SET_YII_GIT_REPO,SET_ENABLE_YII,SET_ENABLE_ADVANCED,SET_SHOW_YII,SET_REQUEST_ACTIVE_YII} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
@@ -8,6 +8,7 @@ const initialState = Map({
   },
   path: "/opt/tinker/shared_files/yii_project/",
   default_repo: "https://github.com/Tinker-Ware/yii2-crud",
+  default_advanced_repo: "https://github.com/Tinker-Ware/yii2-advanced",
   default_repo_name: "yii2-crud",
   nginx: {
     "server_name": "_",
@@ -48,6 +49,10 @@ export default function yii(state = initialState, action) {
     case SET_ENABLE_YII:
     {
       return state.set("enable_yii", action.value.get("enable_yii"));
+    }
+    case SET_ENABLE_ADVANCED:
+    {
+      return state.set("enable_yii_advanced", action.value.get("enable_yii_advanced"));
     }
     case SET_SHOW_YII:
     {

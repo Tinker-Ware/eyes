@@ -208,6 +208,10 @@ export function setEnableYii(value) {
   return { type: types.SET_ENABLE_YII, value };
 }
 
+export function setEnableYiiAdvanced(value) {
+  return { type: types.SET_ENABLE_ADVANCED, value };
+}
+
 export function setRequestActiveYii(value) {
   return { type: types.SET_REQUEST_ACTIVE_YII, value };
 }
