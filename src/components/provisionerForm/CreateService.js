@@ -32,7 +32,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       };
   };
   const getYiiConfiguration = (environment=-1) => {
-    if(yiiAppState.get("enable_yii")){
+    if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced")){
       let config;
       if(environment==-1)
         config={
@@ -98,28 +98,31 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
   };
   const nginx = () => {
     let nginxArray = [];
-    if(yiiAppState.get("enable_yii")) nginxArray.push(yiiAppState.get("nginx"));
+    if(yiiAppState.get("enable_yii"))
+      nginxArray.push(yiiAppState.get("nginx"));
     return nginxArray;
   };
   const roles = () => {
     let rolesArray = [];
+    if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     if(baseAppState.get("enable_base")) rolesArray.push(baseAppState.get("roles"));
     if(buildbotAppState.get("enable_buildbot")) rolesArray.push(buildbotAppState.get("roles"));
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
+    if(yiiAppState.get("enable_yii_advanced")) rolesArray.push(yiiAppState.get("roles_advanced"));
     if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb")) rolesArray.push(mysqlAppState.get("roles"));
-    if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
     return rolesArray;
   };
   const repositoryApp = () => {
     let repository = "";
-    if(yiiAppState.get("enable_yii")) repository = yiiAppState.get("default_repo");
+    if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced")) repository = yiiAppState.get("enable_yii_advanced")?yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo");
     return repository;
   };
   const pathApp = () => {
     let path = "";
-    if(yiiAppState.get("enable_yii")) path = repositoryAppState.get("repository")?
-      yiiAppState.get("path")+repositoryAppState.get("repository").toJS().name.split("/")[1]+".git"
-      :yiiAppState.get("path")+yiiAppState.get("default_repo_name")+".git";
+    if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced"))
+      path = repositoryAppState.get("repository")?
+        yiiAppState.get("path")+repositoryAppState.getIn(["repository","name"]).split("/")[1]
+        :yiiAppState.get("path")+yiiAppState.get("default_repo_name");
     return path;
   };
   const handleCreateUserProject = () => {

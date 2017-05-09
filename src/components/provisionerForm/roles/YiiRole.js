@@ -5,20 +5,20 @@ import PropTypes from "prop-types";
 import React from "react";
 import Toggle from "material-ui/Toggle";
 
-const YiiRole = ( {end, setEnableYii, setEnableYiiAdvanced, yiiAppState} ) => {
+const YiiRole = ( {enable, end, setEnableYii, setEnableYiiAdvanced, type} ) => {
   const handleEnable = () => {
-    setEnableYii(
-      fromJS({
-        enable_yii: !yiiAppState.get("enable_yii")
-      })
-    );
-  };
-  const handleEnableYiiAdvanced = () => {
-    setEnableYiiAdvanced(
-      fromJS({
-        enable_yii_advanced: !yiiAppState.get("enable_yii_advanced")
-      })
-    );
+    if(type=="Yii")
+      setEnableYii(
+        fromJS({
+          enable_yii: !enable
+        })
+      );
+    else
+      setEnableYiiAdvanced(
+        fromJS({
+          enable_yii_advanced: !enable
+        })
+      );
   };
   return (
     <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
@@ -26,20 +26,14 @@ const YiiRole = ( {end, setEnableYii, setEnableYiiAdvanced, yiiAppState} ) => {
         <CardHeader
             avatar={<FontIcon className={"icon icon-yii"}/>}
             subtitle={"PHP Framework"}
-            title={"Yii"}
+            title={type}
         />
         <CardActions>
           <Toggle
               label="Enabled"
               labelPosition="right"
               onToggle={handleEnable}
-              toggled={yiiAppState.get("enable_yii")?true:false}
-          />
-          <Toggle
-              label="Yii Advanced"
-              labelPosition="right"
-              onToggle={handleEnableYiiAdvanced}
-              toggled={yiiAppState.get("enable_yii_advanced")?true:false}
+              toggled={enable?true:false}
           />
         </CardActions>
       </Card>
@@ -48,10 +42,11 @@ const YiiRole = ( {end, setEnableYii, setEnableYiiAdvanced, yiiAppState} ) => {
 };
 
 YiiRole.propTypes = {
+  enable: PropTypes.bool.isRequired,
   end: PropTypes.bool.isRequired,
   setEnableYii: PropTypes.func.isRequired,
   setEnableYiiAdvanced: PropTypes.func.isRequired,
-  yiiAppState: PropTypes.object.isRequired
+  type: PropTypes.string.isRequired
 };
 
 export default YiiRole;

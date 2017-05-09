@@ -289,6 +289,13 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
             primary
             style={styles.button}
         />
+        <RaisedButton
+            icon={<FontIcon className="icon icon-download" />}
+            label={"Download macOS CLI"}
+            onClick={() => handlOpenURL("https://s3-us-west-1.amazonaws.com/tw-test123/tinker/0.2.1/darwin/tinker")}
+            primary
+            style={styles.button}
+        />
       </div>
       {/* <div className="align-left">
         <RaisedButton

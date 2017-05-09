@@ -10,10 +10,18 @@ const Application = ( {applicationAppState, buildbotAppState, rolesActions, yiiA
       <div className="row">
         <h2>{"Choose an Add-ons"}</h2>
         <YiiRole
+            enable={yiiAppState.get("enable_yii")?true:false}
             end
             setEnableYii={rolesActions.setEnableYii}
             setEnableYiiAdvanced={rolesActions.setEnableYiiAdvanced}
-            yiiAppState={yiiAppState}
+            type={"Yii"}
+        />
+        <YiiRole
+            enable={yiiAppState.get("enable_yii_advanced")?true:false}
+            end
+            setEnableYii={rolesActions.setEnableYii}
+            setEnableYiiAdvanced={rolesActions.setEnableYiiAdvanced}
+            type={"YiiAdvanced"}
         />
         <BuildbotRole
             buildbotAppState={buildbotAppState}
