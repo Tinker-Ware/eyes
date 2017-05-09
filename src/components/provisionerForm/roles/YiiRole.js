@@ -5,13 +5,20 @@ import PropTypes from "prop-types";
 import React from "react";
 import Toggle from "material-ui/Toggle";
 
-const YiiRole = ( {end, setEnableYii, yiiAppState} ) => {
+const YiiRole = ( {enable, end, setEnableYii, setEnableYiiAdvanced, type} ) => {
   const handleEnable = () => {
-    setEnableYii(
-      fromJS({
-        enable_yii: !yiiAppState.get("enable_yii")
-      })
-    );
+    if(type=="Yii")
+      setEnableYii(
+        fromJS({
+          enable_yii: !enable
+        })
+      );
+    else
+      setEnableYiiAdvanced(
+        fromJS({
+          enable_yii_advanced: !enable
+        })
+      );
   };
   return (
     <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
@@ -19,14 +26,14 @@ const YiiRole = ( {end, setEnableYii, yiiAppState} ) => {
         <CardHeader
             avatar={<FontIcon className={"icon icon-yii"}/>}
             subtitle={"PHP Framework"}
-            title={"Yii"}
+            title={type}
         />
         <CardActions>
           <Toggle
               label="Enabled"
               labelPosition="right"
               onToggle={handleEnable}
-              toggled={yiiAppState.get("enable_yii")?true:false}
+              toggled={enable?true:false}
           />
         </CardActions>
       </Card>
@@ -35,9 +42,11 @@ const YiiRole = ( {end, setEnableYii, yiiAppState} ) => {
 };
 
 YiiRole.propTypes = {
+  enable: PropTypes.bool.isRequired,
   end: PropTypes.bool.isRequired,
   setEnableYii: PropTypes.func.isRequired,
-  yiiAppState: PropTypes.object.isRequired
+  setEnableYiiAdvanced: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default YiiRole;
