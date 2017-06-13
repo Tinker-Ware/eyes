@@ -1,4 +1,4 @@
-// import FontIcon from "material-ui/FontIcon";
+import FontIcon from "material-ui/FontIcon";
 import { Card, CardActions, CardHeader } from "material-ui/Card";
 import { fromJS } from "immutable";
 import PropTypes from "prop-types";
@@ -17,8 +17,8 @@ const BuildRole = ( {end, setEnableBuildbot, buildbotAppState} ) => {
     <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
       <Card>
         <CardHeader
-            // avatar={<FontIcon className={"icon icon-buildbot"}/>}
-            subtitle={"CI System"}
+            avatar={<FontIcon className={"icon icon-buildbot"}/>}
+            subtitle={"CI Framework"}
             title={"Buildbot"}
         />
         <CardActions>
