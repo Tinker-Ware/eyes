@@ -9,7 +9,6 @@ $icon-memory-ram: '\e322';
 $icon-timer: '\e425';
 $icon-arrow-back: '\e5c4';
 $icon-check: '\e5ca';
-$icon-react: '\e601';
 $icon-nginx: '\e602';
 $icon-person: '\e7fd';
 $icon-person-add: '\e7fe';
@@ -23,22 +22,33 @@ $icon-home: '\e95f';
 $icon-cpu: '\ea1a';
 $icon-push: '\ea36';
 $icon-box: '\ea84';
-$icon-mysql: '\eb60';
-$icon-yii: '\ec02';
 $icon-project: '\ec1b';
 $icon-trigger: '\ec2b';
 $icon-cloud-download: '\ec7a';
 $icon-save: '\ec87';
 $icon-cancel: '\ed6a';
 $icon-github: '\ef0f';
-$icon-html: '\ef43';
-$icon-redis: '\e607';
-$icon-laravel: '\e852';
-$icon-mongodb: '\eb44';
-$icon-nodejs: '\eb6a';
-$icon-postgresql: '\eb7d';
-$icon-ruby: '\ebca';
+$icon-cassandra-path1: '\e907';
+$icon-cassandra-path2: '\e90c';
+$icon-cassandra-path3: '\e90d';
+$icon-cassandra-path4: '\e90e';
+$icon-elixir: '\e909';
+$icon-mariadb: '\e90a';
+$icon-react: '\e600';
+$icon-redis: '\e606';
+$icon-angularjs: '\e61c';
+$icon-django: '\e63f';
+$icon-html5: '\e7f6';
+$icon-laravel: '\e851';
+$icon-mongodb: '\eb43';
+$icon-mysql: '\eb61';
+$icon-nodejs: '\eb69';
+$icon-postgresql: '\eb7c';
+$icon-rails: '\eba2';
+$icon-ruby: '\ebc9';
 $icon-wordpress: '\ebfe';
+$icon-yii: '\ec01';
+$icon-ember: '\e90b';
 $icon-mydevop-path1: '\e925';
 $icon-mydevop-path2: '\e926';
 $icon-mydevop-path3: '\e927';
@@ -61,6 +71,16 @@ $icon-logo-path4: '\e97c';
 $icon-logo-path5: '\e97d';
 $icon-logo-path6: '\e97e';
 $icon-logo-path7: '\e97f';
+$icon-lock: '\e897';
+$icon-ci: '\e629';
+$icon-backup: '\e923';
+$icon-performance: '\ebe2';
+$primary-color: rgb(83, 106, 112);
+$secondary-color: rgb(45, 110, 148);
+$tertiary-color: rgb(226, 34, 59);
+$quaternary-color: rgb(47, 169, 182);
+$quinary-color: rgb(103, 196, 175);
+$white-color: #ffffff;
 
 @font-face {
   // sass-lint:disable-block no-duplicate-properties
@@ -148,12 +168,6 @@ input {
   }
 }
 
-.icon-react {
-  &::before {
-    content: $icon-react;
-  }
-}
-
 .icon-nginx {
   &::before {
     content: $icon-nginx;
@@ -232,18 +246,6 @@ input {
   }
 }
 
-.icon-mysql {
-  &::before {
-    content: $icon-mysql;
-  }
-}
-
-.icon-yii {
-  &::before {
-    content: $icon-yii;
-  }
-}
-
 .icon-project {
   &::before {
     content: $icon-project;
@@ -279,16 +281,68 @@ input {
     content: $icon-github;
   }
 }
-
-.icon-html {
+.icon-cassandra .path1 {
   &::before {
-    content: $icon-html;
+    content: $icon-cassandra-path1;
+  }
+}
+
+.icon-cassandra .path2 {
+  &::before {
+    content: $icon-cassandra-path2;
+  }
+}
+
+.icon-cassandra .path3 {
+  &::before {
+    content: $icon-cassandra-path3;
+  }
+}
+
+.icon-cassandra .path4 {
+  &::before {
+    content: $icon-cassandra-path4;
+  }
+}
+
+.icon-elixir {
+  &::before {
+    content: $icon-elixir;
+  }
+}
+.icon-mariadb {
+  &::before {
+    content: $icon-mariadb;
+  }
+}
+
+.icon-react {
+  &::before {
+    content: $icon-react;
   }
 }
 
 .icon-redis {
   &::before {
     content: $icon-redis;
+  }
+}
+
+.icon-angularjs {
+  &::before {
+    content: $icon-angularjs;
+  }
+}
+
+.icon-django {
+  &::before {
+    content: $icon-django;
+  }
+}
+
+.icon-html5 {
+  &::before {
+    content: $icon-html5;
   }
 }
 
@@ -304,6 +358,12 @@ input {
   }
 }
 
+.icon-mysql {
+  &::before {
+    content: $icon-mysql;
+  }
+}
+
 .icon-nodejs {
   &::before {
     content: $icon-nodejs;
@@ -316,6 +376,12 @@ input {
   }
 }
 
+.icon-rails {
+  &::before {
+    content: $icon-rails;
+  }
+}
+
 .icon-ruby {
   &::before {
     content: $icon-ruby;
@@ -325,6 +391,18 @@ input {
 .icon-wordpress {
   &::before {
     content: $icon-wordpress;
+  }
+}
+
+.icon-yii {
+  &::before {
+    content: $icon-yii;
+  }
+}
+
+.icon-ember {
+  &::before {
+    content: $icon-ember;
   }
 }
 
@@ -500,6 +578,38 @@ input {
   }
 }
 
+.icon-lock {
+  &::before {
+    content: $icon-lock;
+  }
+}
+
+.icon-ci {
+  &::before {
+    content: $icon-ci;
+  }
+}
+
+.icon-backup {
+  &::before {
+    content: $icon-backup;
+  }
+}
+
+.icon-performance {
+  &::before {
+    content: $icon-performance;
+  }
+}
+
+body {
+  background: $secondary-color;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: 'SFText-Regular';
+  transition: all 0.25s ease-in;
+}
+
 .container {
   padding: 2em 0;
 }
@@ -530,4 +640,204 @@ input {
 
 .one-click-app {
   margin-bottom: 1em;
+}
+
+.footer {
+  background-color: $primary-color;
+}
+
+.steps {
+  .title {
+    font-family: 'SFText-Bold' !important;
+    font-size: 2em;
+  }
+  .subtitle {
+    font-family: 'SFText-Regular' !important;
+    font-size: 1.66em;
+  }
+}
+
+#hexGrid {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  list-style-type: none;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 90%;
+}
+
+.hex {
+  outline: 1px solid transparent;
+  position: relative;
+  visibility: hidden;
+  /*! fix for jagged edges in FF on hover transition */
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 86.602%;
+    /*! =  100 / tan(60) * 1.5 */
+  }
+}
+
+.hexIn {
+  margin: 0 2%;
+  outline: 1px solid transparent;
+  overflow: hidden;
+  padding-bottom: 110.851%;
+  position: absolute;
+  transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+  visibility: hidden; /*! fix for jagged edges in FF on hover transition */
+  width: 96%; /*! =  width / sin(60) */
+  * {
+    outline: 1px solid transparent; /*! fix for jagged edges in FF on hover transition */
+    position: absolute;
+    visibility: visible;
+  }
+}
+
+.hexLink {
+  &.disabled {
+    background-color: $primary-color;
+    h2, p {
+      background-color: rgba($primary-color, 0.9);
+    }
+  }
+  background-color: $quaternary-color;
+  color: #fff;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+  width: 100%;
+  .icon {
+    font-size: 5em !important;
+    left: 25%;
+    position: absolute !important;
+    top: 30%;
+  }
+}
+.hex {
+  img {
+    height: 100%;
+    left: -100%;
+    margin: 0 auto;
+    right: -100%;
+    transform: rotate3d(0, 0, 0, 0deg);
+    width: auto;
+  }
+  h2, p {
+    background-color: rgba($tertiary-color, 0.9);
+    box-sizing: border-box;
+    font-weight: 300;
+    margin: 0;
+    padding: 5%;
+    transition: transform .2s ease-out, opacity .3s ease-out;
+    width: 100%;
+  }
+  h2 {
+    bottom: 50%;
+    font-family: 'SFText-Bold';
+    font-size: 1.5em;
+    padding-top: 50%;
+    transform: translate3d(0, -100%, 0);
+    z-index: 1;
+    &::after {
+      border-bottom: 1px solid #fff;
+      bottom: 0;
+      content: '';
+      left: 45%;
+      position: absolute;
+      text-align: center;
+      width: 10%;
+    }
+  }
+  p {
+    font-family: 'SFText-Light';
+    padding-bottom: 50%;
+    font-size: 1em;
+    top: 50%;
+    transform: translate3d(0, 100%, 0);
+  }
+}
+/*** ACTIVE EFFECT  *********************************************************************/
+.hexLink {
+  &.active h2, &.active p {
+    background-color: rgba($tertiary-color, 0.9);
+    transform: translate3d(0, 0, 0);
+  }
+}
+/*** HOVER EFFECT  **********************************************************************/
+.hexLink {
+  &:hover h2, &:hover p{
+    transform: translate3d(0, 0, 0);
+  }
+}
+/*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
+@media (min-width: 1201px) {
+  /*! <- 5-4  hexagons per row */
+  #hexGrid {
+    padding-bottom: 4.4%;
+  }
+  .hex {
+    width: 20%;
+    /*! = 100 / 5 */
+    &:nth-child(9n+6) {
+      /*! first hexagon of even rows */
+      margin-left: 10%;
+      /*! = width of .hex / 2  to indent even rows */
+    }
+  }
+}
+@media (max-width: 1200px) and (min-width: 901px) {
+  /*! <- 4-3  hexagons per row */
+  #hexGrid {
+    padding-bottom: 5.5%;
+  }
+  .hex {
+    width: 25%;
+    /*! = 100 / 4 */
+    &:nth-child(7n+5) {
+      /*! first hexagon of even rows */
+      margin-left: 12.5%;
+      /*! = width of .hex / 2  to indent even rows */
+    }
+  }
+}
+@media (max-width: 900px) and (min-width: 601px) {
+  /*! <- 3-2  hexagons per row */
+  #hexGrid {
+    padding-bottom: 7.4%;
+  }
+  .hex {
+    width: 33.333%;
+    /*! = 100 / 3 */
+    &:nth-child(5n+4) {
+      /*! first hexagon of even rows */
+      margin-left: 16.666%;
+      /*! = width of .hex / 2  to indent even rows */
+    }
+  }
+}
+@media (max-width: 600px) {
+  /*! <- 2-1  hexagons per row */
+  #hexGrid {
+    padding-bottom: 11.2%;
+  }
+  .hex {
+    width: 50%;
+    /*! = 100 / 3 */
+    &:nth-child(3n+3) {
+      /*! first hexagon of even rows */
+      margin-left: 25%;
+      /*! = width of .hex / 2  to indent even rows */
+    }
+  }
+}
+@media (max-width: 400px) {
+  #hexGrid {
+    font-size: 13px;
+  }
 }

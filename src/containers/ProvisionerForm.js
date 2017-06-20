@@ -3,36 +3,16 @@ import { bindActionCreators } from "redux";
 import { browserHistory } from "react-router";
 import { connect } from "react-redux";
 import { fromJS } from "immutable";
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from "material-ui/Toolbar";
-import * as actions from "../actions/ServiceFormActions";
 import * as applicationActions from "../actions/ApplicationActions";
+import * as provisionerFormActions from "../actions/ServiceFormActions";
 import * as rolesActions from "../actions/rolesActions";
-import Application from "../components/provisionerForm/Application";
-import CloudProvider from "../components/provisionerForm/CloudProvider";
 import cookie from "react-cookie";
-import CreateService from "../components/provisionerForm/CreateService";
-import FontIcon from "material-ui/FontIcon";
-import GithubService from "../components/provisionerForm/GithubService";
-import Menu from "../components/Menu";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Notification from "../components/Notification";
-import Paper from "material-ui/Paper";
-import ProjectName from "../components/provisionerForm/ProjectName";
 import PropTypes from "prop-types";
-import RaisedButton from "material-ui/RaisedButton";
 import React, { Component } from "react";
-
-const style = {
-  button: {
-    margin: 12,
-  },
-  toolbar: {
-    margin: "-1em -1em 3em -1em",
-  },
-  toolbarTitle: {
-    marginLeft: "1em"
-  }
-};
+import Steps from "../components/provisionerForm/Steps";
+import tinkerwareBaseTheme from "../theme/tinkerwareBaseTheme";
 
 export class ServiceForm extends Component {
   componentWillMount() {
@@ -41,121 +21,143 @@ export class ServiceForm extends Component {
   }
   render() {
     if(!this.props.userAppState.get("user_session") && cookie.load("user_session")){
-      this.props.actions.setUserSesion(fromJS({"user_session": cookie.load("user_session")
+      this.props.provisionerFormActions.setUserSesion(fromJS({"user_session": cookie.load("user_session")
       }));
-      this.props.actions.requestRefreshUserSession(fromJS({"authorization": cookie.load("user_session").token
+      this.props.provisionerFormActions.requestRefreshUserSession(fromJS({"authorization": cookie.load("user_session").token
       }));
     }
+    const customMuiTheme = getMuiTheme(tinkerwareBaseTheme);
     return (
-      <MuiThemeProvider>
-        <div className="small-12 medium-12 large-12 large-centered columns">
-          <div className="container">
-            <Paper zDepth={4}>
-              <Menu setUserSesion={this.props.actions.setUserSesion}/>
-              <div className="card">
-                <Toolbar style={style.toolbar}>
-                  <ToolbarGroup firstChild>
-                    <FontIcon className="icon icon-project"/>
-                    <ToolbarTitle
-                        style={style.toolbarTitle}
-                        text="Create New Project"
-                    />
-                  </ToolbarGroup>
-                  <ToolbarGroup>
-                    <ToolbarSeparator />
-                    <RaisedButton
-                        href="/projects"
-                        icon={<FontIcon className="icon icon-box" />}
-                        label={"Projects"}
-                        primary
-                    />
-                  </ToolbarGroup>
-                </Toolbar>
-                <h2>{"Choose a project name"}</h2>
-                <p>{"Give your Droplets an identifying name you will remember them by."}</p>
-                <ProjectName
-                    projectNameAppState={this.props.projectNameAppState}
-                    setProjectName={this.props.actions.setProjectName}
-                />
-                <h2>{"Connect to your Services"}</h2>
-                <div className="row">
-                  <GithubService
-                      repositoryAppState={this.props.repositoryAppState}
-                      requestRepositoryAccess={this.props.actions.requestRepositoryAccess}
-                      requestUserRepositories={this.props.actions.requestUserRepositories}
-                      setIntegracion={this.props.actions.setIntegracion}
-                      setRepository={this.props.actions.setRepository}
-                      setShowRepositories={this.props.actions.setShowRepositories}
-                      userAppState={this.props.userAppState}
-                  />
-                  <CloudProvider
-                      clearCloudProviderSSHKeys={this.props.actions.clearCloudProviderSSHKeys}
-                      cloudProviderAppState={this.props.cloudProviderAppState}
-                      requestCloudProviderAccess={this.props.actions.requestCloudProviderAccess}
-                      setCloudProvider={this.props.actions.setCloudProvider}
-                      userAppState={this.props.userAppState}
-                  />
-                </div>
-                <Application
-                    applicationAppState={this.props.applicationAppState}
-                    buildbotAppState={this.props.buildbotAppState}
-                    mysqlAppState={this.props.mysqlAppState}
-                    rolesActions={this.props.rolesActions}
-                    setActiveEnvironment={this.props.actions.setActiveEnvironment}
-                    setApplicationOneClick={this.props.actions.setApplicationOneClick}
-                    yiiAppState={this.props.yiiAppState}
-                />
-                {/* <h2>{"Add your SSH keys"}</h2>
-                <SSHKeys
-                    cloudProviderAppState={this.props.cloudProviderAppState}
-                    deleteSSHKey={this.props.actions.deleteSSHKey}
-                    enableSSHKey={this.props.actions.enableSSHKey}
-                    requestPostCloudProviderSSHKey={this.props.actions.requestPostCloudProviderSSHKey}
-                    setSSHKey={this.props.actions.setSSHKey}
-                    setSSHKeyContent={this.props.actions.setSSHKeyContent}
-                    setSSHKeyTitle={this.props.actions.setSSHKeyTitle}
-                    showSSHKey={this.props.actions.showSSHKey}
-                    userAppState={this.props.userAppState}
-                /> */}
-                <CreateService
-                    applicationAppState={this.props.applicationAppState}
-                    baseAppState={this.props.baseAppState}
-                    buildbotAppState={this.props.buildbotAppState}
-                    cloudProviderAppState={this.props.cloudProviderAppState}
-                    mysqlAppState={this.props.mysqlAppState}
-                    nginxAppState={this.props.nginxAppState}
-                    projectNameAppState={this.props.projectNameAppState}
-                    repositoryAppState={this.props.repositoryAppState}
-                    requestPostUserProject={this.props.actions.requestPostUserProject}
-                    userAppState={this.props.userAppState}
-                    yiiAppState={this.props.yiiAppState}
-                />
-              </div>
-            </Paper>
-          </div>
-          <Notification
-              message={this.props.applicationAppState.get("notification")}
-              setNotification={this.props.applicationActions.setNotification}
+      <div className="row">
+        <MuiThemeProvider muiTheme={customMuiTheme}>
+          <Steps
+              applicationActions={this.props.applicationActions}
+              applicationAppState={this.props.applicationAppState}
+              baseAppState={this.props.baseAppState}
+              buildbotAppState={this.props.buildbotAppState}
+              cloudProviderAppState={this.props.cloudProviderAppState}
+              ghostAppState={this.props.ghostAppState}
+              mysqlAppState={this.props.mysqlAppState}
+              nginxAppState={this.props.nginxAppState}
+              plainHtmlAppState={this.props.plainHtmlAppState}
+              projectNameAppState={this.props.projectNameAppState}
+              provisionerFormActions={this.props.provisionerFormActions}
+              repositoryAppState={this.props.repositoryAppState}
+              rolesActions={this.props.rolesActions}
+              userAppState={this.props.userAppState}
+              yiiAppState={this.props.yiiAppState}
           />
-            {/* <div className="row">
-              <footer>
-                <div className="row">
-                  <div className="large-12 large-centered medium-12 medium-centered small-12 small-centered columns">
-                    <p className="copyright">
-                      {"© 2015, Inc. All rights reserved."}
-                    </p>
-                  </div>
-                </div>
-              </footer>
-            </div> */}
-        </div>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
+      </div>
+      // <MuiThemeProvider>
+      //   <div className="small-12 medium-12 large-12 large-centered columns">
+      //     <div className="container">
+      //       <Paper zDepth={4}>
+      //         <Menu setUserSesion={this.props.provisionerFormActions.setUserSesion}/>
+      //         <div className="card">
+      //           <Toolbar style={style.toolbar}>
+      //             <ToolbarGroup firstChild>
+      //               <FontIcon className="icon icon-project"/>
+      //               <ToolbarTitle
+      //                   style={style.toolbarTitle}
+      //                   text="Create New Project"
+      //               />
+      //             </ToolbarGroup>
+      //             <ToolbarGroup>
+      //               <ToolbarSeparator />
+      //               <RaisedButton
+      //                   href="/projects"
+      //                   icon={<FontIcon className="icon icon-box" />}
+      //                   label={"Projects"}
+      //                   primary
+      //               />
+      //             </ToolbarGroup>
+      //           </Toolbar>
+      //           <h2>{"Choose a project name"}</h2>
+      //           <p>{"Give your Droplets an identifying name you will remember them by."}</p>
+      //           <ProjectName
+      //               projectNameAppState={this.props.projectNameAppState}
+      //               setProjectName={this.props.provisionerFormActions.setProjectName}
+      //           />
+      //           <h2>{"Connect to your Services"}</h2>
+      //           <div className="row">
+      //             <GithubService
+      //                 repositoryAppState={this.props.repositoryAppState}
+      //                 requestRepositoryAccess={this.props.provisionerFormActions.requestRepositoryAccess}
+      //                 requestUserRepositories={this.props.provisionerFormActions.requestUserRepositories}
+      //                 setIntegracion={this.props.provisionerFormActions.setIntegracion}
+      //                 setRepository={this.props.provisionerFormActions.setRepository}
+      //                 setShowRepositories={this.props.provisionerFormActions.setShowRepositories}
+      //                 userAppState={this.props.userAppState}
+      //             />
+      //             <CloudProvider
+      //                 clearCloudProviderSSHKeys={this.props.provisionerFormActions.clearCloudProviderSSHKeys}
+      //                 cloudProviderAppState={this.props.cloudProviderAppState}
+      //                 requestCloudProviderAccess={this.props.provisionerFormActions.requestCloudProviderAccess}
+      //                 setCloudProvider={this.props.provisionerFormActions.setCloudProvider}
+      //                 userAppState={this.props.userAppState}
+      //             />
+      //           </div>
+      //           <Application
+      //               applicationAppState={this.props.applicationAppState}
+      //               buildbotAppState={this.props.buildbotAppState}
+      //               mysqlAppState={this.props.mysqlAppState}
+      //               rolesActions={this.props.rolesActions}
+      //               setActiveEnvironment={this.props.provisionerFormActions.setActiveEnvironment}
+      //               setApplicationOneClick={this.props.provisionerFormActions.setApplicationOneClick}
+      //               yiiAppState={this.props.yiiAppState}
+      //           />
+      //           <h2>{"Add your SSH keys"}</h2>
+      //           <SSHKeys
+      //               cloudProviderAppState={this.props.cloudProviderAppState}
+      //               deleteSSHKey={this.props.provisionerFormActions.deleteSSHKey}
+      //               enableSSHKey={this.props.provisionerFormActions.enableSSHKey}
+      //               requestPostCloudProviderSSHKey={this.props.provisionerFormActions.requestPostCloudProviderSSHKey}
+      //               setSSHKey={this.props.provisionerFormActions.setSSHKey}
+      //               setSSHKeyContent={this.props.provisionerFormActions.setSSHKeyContent}
+      //               setSSHKeyTitle={this.props.provisionerFormActions.setSSHKeyTitle}
+      //               showSSHKey={this.props.provisionerFormActions.showSSHKey}
+      //               userAppState={this.props.userAppState}
+      //           />
+      //           <CreateService
+      //               applicationAppState={this.props.applicationAppState}
+      //               baseAppState={this.props.baseAppState}
+      //               buildbotAppState={this.props.buildbotAppState}
+      //               cloudProviderAppState={this.props.cloudProviderAppState}
+      //               mysqlAppState={this.props.mysqlAppState}
+      //               nginxAppState={this.props.nginxAppState}
+      //               projectNameAppState={this.props.projectNameAppState}
+      //               repositoryAppState={this.props.repositoryAppState}
+      //               requestPostUserProject={this.props.provisionerFormActions.requestPostUserProject}
+      //               userAppState={this.props.userAppState}
+      //               yiiAppState={this.props.yiiAppState}
+      //           />
+      //         </div>
+      //       </Paper>
+      //     </div>
+      //     <Notification
+      //         message={this.props.applicationAppState.get("notification")}
+      //         setNotification={this.props.applicationActions.setNotification}
+      //     />
+      //       <div className="row">
+      //         <footer>
+      //           <div className="row">
+      //             <div className="large-12 large-centered medium-12 medium-centered small-12 small-centered columns">
+      //               <p className="copyright">
+      //                 {"© 2015, Inc. All rights reserved."}
+      //               </p>
+      //             </div>
+      //           </div>
+      //         </footer>
+      //       </div>
+      //   </div>
+      // </MuiThemeProvider>
     );
   }
 }
 
 ServiceForm.propTypes = {
-  actions: PropTypes.object.isRequired,
+  provisionerFormActions: PropTypes.object.isRequired,
   applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   baseAppState: PropTypes.object.isRequired,
@@ -191,7 +193,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch),
+    provisionerFormActions: bindActionCreators(provisionerFormActions, dispatch),
     applicationActions: bindActionCreators(applicationActions, dispatch),
     rolesActions: bindActionCreators(rolesActions, dispatch)
   };
