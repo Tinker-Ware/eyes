@@ -10,7 +10,6 @@ const initialState = Map({
     role: "yii2-advanced",
     sudo: "no"
   },
-  path: "/opt/tinker/shared_files/",
   default_repo: "https://github.com/Tinker-Ware/yii2-crud",
   default_advanced_repo: "https://github.com/Tinker-Ware/yii2-advanced",
   default_repo_name: "yii2-crud",

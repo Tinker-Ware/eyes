@@ -36,8 +36,10 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       let config;
       if(environment==-1)
         config={
-          "yii_git_repo":repositoryAppState.get("repository")?repositoryAppState.get("repository").toJS().ssh_url:
-          yiiAppState.get("enable_yii_advanced")?yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo")
+          "repo":repositoryAppState.get("repository")?
+            repositoryAppState.get("repository").toJS().ssh_url:
+            yiiAppState.get("enable_yii_advanced")?
+              yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo")
         };
       else if(environment==1)
         config = {"yii_extra_flags": "--no-dev"};
@@ -117,14 +119,6 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced")) repository = yiiAppState.get("enable_yii_advanced")?yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo");
     return repository;
   };
-  const pathApp = () => {
-    let path = "";
-    if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced"))
-      path = repositoryAppState.get("repository")?
-        yiiAppState.get("path")+repositoryAppState.getIn(["repository","name"]).split("/")[1]
-        :yiiAppState.get("path")+yiiAppState.get("default_repo_name");
-    return path;
-  };
   const handleCreateUserProject = () => {
     requestPostUserProject(fromJS({
       "authorization": userAppState.get("user_session").toJS().token,
@@ -142,7 +136,6 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
           "name": repositoryAppState.get("repository")?
             repositoryAppState.get("repository").toJS().name
             :repositoryApp(),
-          "path": pathApp(),
           "username": repositoryAppState.get("repository")?
             repositoryAppState.get("integration").toJS().username
             :"Tinker-Ware"
