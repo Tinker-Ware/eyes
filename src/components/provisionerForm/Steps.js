@@ -3,7 +3,7 @@ import { fromJS } from "immutable";
 import { Step, Stepper, StepButton, StepLabel } from "material-ui/Stepper";
 import Addons from "./steps/Addons";
 import DataBases from "./steps/DataBases";
-import Email from "./steps/Email";
+import ProjectName from "./steps/ProjectName";
 import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
@@ -17,7 +17,7 @@ import ArrowForwardIcon from "material-ui/svg-icons/navigation/arrow-forward";
 // import ProjectName from "../components/provisionerForm/ProjectName";
 import Notification from "../Notification";
 
-const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, ghostAppState, mysqlAppState, nginxAppState, plainHtmlAppState, projectNameAppState, provisionerFormActions, repositoryAppState, rolesActions, userAppState, yiiAppState} ) => {
+const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, ghostAppState, mysqlAppState, nginxAppState, plainHtmlAppState, projectNameAppState, provisionerFormActions, repositoryAppState, rolesActions, setProjectName, userAppState, yiiAppState} ) => {
   const style = {
    margin: 12,
   };
@@ -35,30 +35,36 @@ const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbot
         >
           <Step>
             <StepButton onClick={() => handleChangeStep(0)}>
-              {"Frameworks"}
+              {"Project Name"}
             </StepButton>
           </Step>
           <Step>
             <StepButton onClick={() => handleChangeStep(1)}>
-              {"DataBases"}
+              {"Frameworks"}
             </StepButton>
           </Step>
           <Step>
             <StepButton onClick={() => handleChangeStep(2)}>
-              {"Add-ons"}
+              {"DataBases"}
             </StepButton>
           </Step>
           <Step>
             <StepButton onClick={() => handleChangeStep(3)}>
-              {"Local Environment"}
+              {"Add-ons"}
             </StepButton>
           </Step>
         </Stepper>
         <SwipeableViews
             index={applicationAppState.get("active_step")}
         >
+          <ProjectName
+              projectNameAppState={projectNameAppState}
+              setActiveStep={handleChangeStep}
+              setProjectName={setProjectName}
+          />
           <Stacks
               removeStack={provisionerFormActions.removeStack}
+              rolesActions={rolesActions}
               setActiveStep={handleChangeStep}
               setStack={provisionerFormActions.setStack}
               stacks={applicationAppState.get("stacks")?applicationAppState.get("stacks"):fromJS([])}
@@ -68,6 +74,7 @@ const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbot
               databases={applicationAppState.get("databases")?applicationAppState.get("databases"):fromJS([])}
               databasesOptions={applicationAppState.getIn(["steps","databases"])}
               removeDatabase={provisionerFormActions.removeDatabase}
+              rolesActions={rolesActions}
               setActiveStep={handleChangeStep}
               setDatabase={provisionerFormActions.setDatabase}
           />
@@ -78,19 +85,6 @@ const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbot
               setActiveStep={handleChangeStep}
               setAddons={provisionerFormActions.setAddons}
           />
-          <div className="align-center steps">
-            <p className="align-center pdt-3 title">{"Thanks"}</p>
-            <p className="align-center pdt-2 subtitle">{"We are in "}<strong>{"private beta."}</strong></p>
-            <p className="align-center subtitle">{"We will contact you soon to become more efficient!"}</p>
-            <div className="pdt-5">
-              <RaisedButton
-                  label={"Go to Home"}
-                  onTouchTap={()=>onTabClick("/", false)}
-                  primary
-                  style={style}
-              />
-            </div>
-          </div>
         </SwipeableViews>
       </div>
       <Notification
@@ -115,6 +109,7 @@ Steps.propTypes = {
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
+  setProjectName: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };

@@ -8,15 +8,29 @@ const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons}
   const style = {
    margin: 12,
   };
-  const handleChangeAddons = (value, insert) => {
-    if(insert)
+  const handleChangeAddons = (addon, insert) => {
+    if(insert){
       setAddons(fromJS({
-        addon: value
+        addon: addon
       }));
-    else
+      if(addons.size != 0)
+        handleChangeStatusAddons(addons.first(), false);
+      handleChangeStatusAddons(addon, true);
+    }
+    else{
       removeAddons(fromJS({
-        addon: value
+        addon: addon
       }));
+      handleChangeStatusAddons(addon, false);
+    }
+  };
+  const handleChangeStatusAddons = (addon, status) => {
+    switch (addon) {
+      case "security":
+        break;
+      default:
+        break;
+    }
   };
   return (
     <div className="align-center steps">
@@ -28,15 +42,14 @@ const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons}
       />
       <div className="pdt-2">
         <RaisedButton
-            label={"Previous"}
-            onTouchTap={()=>setActiveStep(1)}
+            label={"Databases"}
+            onTouchTap={()=>setActiveStep(2)}
             primary
             style={style}
         />
         <RaisedButton
-            disabled={addons.size==0?true:false}
-            label={"Next"}
-            onTouchTap={()=>setActiveStep(3)}
+            label={"Create Project"}
+            // onTouchTap={()=>setActiveStep(3)}
             primary
             style={style}
         />

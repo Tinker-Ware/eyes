@@ -4,23 +4,50 @@ import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 
-const Steps = ( {setActiveStep, setStack, removeStack, stacksOptions, stacks} ) => {
+const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptions, stacks} ) => {
   const style = {
    margin: 12,
   };
-  const handleChangeStack = (value, insert) => {
-    if(insert)
+  const handleChangeStack = (stack, insert) => {
+    if(insert){
       setStack(fromJS({
-        stack: value
+        stack: stack
       }));
-    else
+      if(stacks.size != 0)
+        handleChangeStatusStack(stacks.first(), false);
+      handleChangeStatusStack(stack, true);
+    }else{
       removeStack(fromJS({
-        stack: value
+        stack: stack
       }));
+      handleChangeStatusStack(stack, false);
+    }
+  };
+  const handleChangeStatusStack = (stack, status) => {
+    switch (stack) {
+      case "yii":
+        rolesActions.setEnableYii(
+          fromJS({
+            enable_yii: status
+          })
+        );
+        break;
+      case "yiiadvanced":
+        rolesActions.setEnableYiiAdvanced(
+          fromJS({
+            enable_yii_advanced: status
+          })
+        );
+        break;
+      case "html5":
+        break;
+      default:
+        break;
+    }
   };
   return (
     <div className="align-center steps">
-      <p className="align-center title">{"Which framework you need?"}</p>
+      <p className="align-center title">{"Which framework do you need?"}</p>
       <Options
           handleChange={handleChangeStack}
           options={stacksOptions}
@@ -28,9 +55,15 @@ const Steps = ( {setActiveStep, setStack, removeStack, stacksOptions, stacks} ) 
       />
       <div className="pdt-2">
         <RaisedButton
+            label={"Project Name"}
+            onTouchTap={()=>setActiveStep(0)}
+            primary
+            style={style}
+        />
+        <RaisedButton
             disabled={stacks.size==0?true:false}
-            label={"Next"}
-            onTouchTap={()=>setActiveStep(1)}
+            label={"Databases"}
+            onTouchTap={()=>setActiveStep(2)}
             primary
             style={style}
         />
@@ -41,6 +74,7 @@ const Steps = ( {setActiveStep, setStack, removeStack, stacksOptions, stacks} ) 
 
 Steps.propTypes = {
   removeStack: PropTypes.func.isRequired,
+  rolesActions: PropTypes.object.isRequired,
   setActiveStep: PropTypes.func.isRequired,
   setStack: PropTypes.func.isRequired,
   stacks: PropTypes.object.isRequired,

@@ -38,6 +38,7 @@ export class ServiceForm extends Component {
               cloudProviderAppState={this.props.cloudProviderAppState}
               ghostAppState={this.props.ghostAppState}
               mysqlAppState={this.props.mysqlAppState}
+              setProjectName={this.props.provisionerFormActions.setProjectName}
               nginxAppState={this.props.nginxAppState}
               plainHtmlAppState={this.props.plainHtmlAppState}
               projectNameAppState={this.props.projectNameAppState}

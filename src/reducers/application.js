@@ -36,7 +36,7 @@ const initialState = fromJS({
       },
       {
         description: "NodeJS",
-        enabled: true,
+        enabled: false,
         icon: ["icon-html5"],
         isOtro: true,
         name: "html5",
@@ -160,11 +160,11 @@ const initialState = fromJS({
     addons: [
       {
         description: "Security module",
-        enabled: false,
+        enabled: true,
         icon: ["icon-lock"],
         isOtro: false,
         name: "security",
-        title: "Security"
+        title: "Basic Security"
       },
       {
         description: "Backups module",
@@ -234,29 +234,11 @@ export default function application(state = initialState, action) {
     }
     case SET_DATABASE:
     {
-      // return state.set("databases", List.of(action.value.get("database")));
-      return state.set("databases", state.get("databases")?
-        action.value.getIn(["database", "otro"])?
-          state.get("databases").filter(stackFiltered=>
-            !stackFiltered.get("otro")
-          ).push(action.value.get("database"))
-          : state.get("databases").push(action.value.get("database"))
-        : List.of(action.value.get("database"))
-      );
+      return state.set("databases", List.of(action.value.get("database")));
     }
     case REMOVE_DATABASE:
     {
-      // return state.set("databases", List.of());
-      return state.set("databases", state.get("databases")?
-        action.value.getIn(["database", "otro"])?
-          state.get("databases").filter(stackFiltered=>
-            !stackFiltered.get("otro")
-          )
-          : state.get("databases").filter(stackFiltered=>
-            stackFiltered !== action.value.get("database")
-          )
-        : List.of()
-      );
+      return state.set("databases", List.of());
     }
     case SET_ADDONS:
     {
