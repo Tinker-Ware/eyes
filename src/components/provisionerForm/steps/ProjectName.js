@@ -22,15 +22,15 @@ const ProjectName = ( { setProjectName, projectNameAppState, setActiveStep} ) =>
             fullWidth
             name={"projectName"}
             onChange={handleSetProjectName}
+            type={"text"}
             value={projectNameAppState.get("project_name")}
-            type="text"
         />
       </div>
       <div className="pdt-5">
         <RaisedButton
             disabled={projectNameAppState.get("project_name")?false:true}
             label={"Framework"}
-            onTouchTap={()=>{setActiveStep(1)}}
+            onTouchTap={()=>{setActiveStep(1);}}
             primary
             style={style}
         />

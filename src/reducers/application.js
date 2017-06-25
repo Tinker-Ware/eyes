@@ -1,6 +1,6 @@
-import { ADD_ENVIRONMENT, SET_ACTIVE_ENVIRONMENT, SET_APPLICATION, SET_ACTIVE_STEP, SET_APPLICATION_ONE_CLICK_APP, REMOVE_ADDONS, REMOVE_DATABASE, REMOVE_STACK, SET_ADDONS, SET_DATABASE, SET_STACK } from "../constants/ActionTypes";
-import { SET_NOTIFICATION } from "../constants/ApplicationActionTypes";
+import { ADD_ENVIRONMENT, SET_ACTIVE_ENVIRONMENT, SET_APPLICATION, SET_ACTIVE_STEP, SET_ACTIVE_CONFIGURATION_STEP, SET_APPLICATION_ONE_CLICK_APP, REMOVE_ADDONS, REMOVE_DATABASE, REMOVE_STACK, SET_ADDONS, SET_DATABASE, SET_STACK } from "../constants/ActionTypes";
 import { fromJS, List } from "immutable";
+import { SET_NOTIFICATION } from "../constants/ApplicationActionTypes";
 
 const initialState = fromJS({
   application_name: "",
@@ -15,10 +15,11 @@ const initialState = fromJS({
     }
   ],
   active_environment: 0,
-  active_step: 0,
+  active_step: 2,
   steps: {
     stacks: [
       {
+        config: "",
         description: "PHP",
         enabled: true,
         icon: ["icon-yii"],
@@ -27,6 +28,7 @@ const initialState = fromJS({
         title: "Yii"
       },
       {
+        config: "",
         description: "PHP",
         enabled: true,
         icon: ["icon-yii"],
@@ -35,6 +37,7 @@ const initialState = fromJS({
         title: "Yii Advanced"
       },
       {
+        config: "",
         description: "NodeJS",
         enabled: false,
         icon: ["icon-html5"],
@@ -43,6 +46,7 @@ const initialState = fromJS({
         title: "Pure HTML5"
       },
       {
+        config: "",
         description: "NodeJS",
         enabled: false,
         icon: ["icon-react"],
@@ -51,6 +55,7 @@ const initialState = fromJS({
         title: "ReactJS"
       },
       {
+        config: "",
         description: "NodeJS",
         enabled: false,
         icon: ["icon-angularjs"],
@@ -59,6 +64,7 @@ const initialState = fromJS({
         title: "AngularJS"
       },
       {
+        config: "",
         description: "Python",
         enabled: false,
         icon: ["icon-django"],
@@ -67,6 +73,7 @@ const initialState = fromJS({
         title: "Djago"
       },
       {
+        config: "",
         description: "Ruby",
         enabled: false,
         icon: ["icon-rails"],
@@ -75,6 +82,7 @@ const initialState = fromJS({
         title: "Rails"
       },
       {
+        config: "",
         description: "JavaScript environment",
         enabled: false,
         icon: ["icon-nodejs"],
@@ -83,6 +91,7 @@ const initialState = fromJS({
         title: "NodeJS"
       },
       {
+        config: "",
         description: "Functional language",
         enabled: false,
         icon: ["icon-elixir"],
@@ -91,6 +100,7 @@ const initialState = fromJS({
         title: "Elixir"
       },
       {
+        config: "",
         description: "NodeJS",
         enabled: false,
         icon: ["icon-ember"],
@@ -99,6 +109,7 @@ const initialState = fromJS({
         title: "Ember"
       },
       {
+        config: "",
         description: "PHP",
         enabled: false,
         icon: ["icon-laravel"],
@@ -109,6 +120,7 @@ const initialState = fromJS({
     ],
     databases: [
       {
+        config: "",
         description: "Relational Database",
         enabled: true,
         icon: ["icon-mysql"],
@@ -117,6 +129,7 @@ const initialState = fromJS({
         title: "MySql"
       },
       {
+        config: "",
         description: "Relational Database",
         enabled: true,
         icon: ["icon-mariadb"],
@@ -125,6 +138,7 @@ const initialState = fromJS({
         title: "MariaDb"
       },
       {
+        config: "",
         description: "In-memory data structure store",
         enabled: false,
         icon: ["icon-redis"],
@@ -133,6 +147,7 @@ const initialState = fromJS({
         title: "Redis"
       },
       {
+        config: "",
         description: "Document Database",
         enabled: false,
         icon: ["icon-mongodb"],
@@ -141,6 +156,7 @@ const initialState = fromJS({
         title: "MongoDB"
       },
       {
+        config: "",
         description: "Document Database",
         enabled: false,
         icon: ["icon-postgresql"],
@@ -149,6 +165,7 @@ const initialState = fromJS({
         title: "Postgresql"
       },
       {
+        config: "",
         description: "Key value Database",
         enabled: false,
         icon: ["icon-cassandra","path1","path2","path3","path1"],
@@ -159,6 +176,7 @@ const initialState = fromJS({
     ],
     addons: [
       {
+        config: "",
         description: "Security module",
         enabled: true,
         icon: ["icon-lock"],
@@ -167,6 +185,7 @@ const initialState = fromJS({
         title: "Basic Security"
       },
       {
+        config: "",
         description: "Backups module",
         enabled: false,
         icon: ["icon-backup"],
@@ -175,6 +194,7 @@ const initialState = fromJS({
         title: "Backup"
       },
       {
+        config: "",
         description: "CI module",
         enabled: false,
         icon: ["icon-ci"],
@@ -183,6 +203,7 @@ const initialState = fromJS({
         title: "CI"
       },
       {
+        config: "",
         description: "Performance module",
         enabled: false,
         icon: ["icon-performance"],
@@ -223,6 +244,10 @@ export default function application(state = initialState, action) {
     case SET_ACTIVE_STEP:
     {
       return state.set("active_step", action.value.get("active_step"));
+    }
+    case SET_ACTIVE_CONFIGURATION_STEP:
+    {
+      return state.set("active_configuration_step", action.value.get("active_configuration_step"));
     }
     case SET_STACK:
     {

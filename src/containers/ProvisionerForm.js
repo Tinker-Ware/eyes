@@ -36,15 +36,16 @@ export class ServiceForm extends Component {
               baseAppState={this.props.baseAppState}
               buildbotAppState={this.props.buildbotAppState}
               cloudProviderAppState={this.props.cloudProviderAppState}
+              environments={this.props.applicationAppState.get("application_evironments")?this.props.applicationAppState.get("application_evironments").toJS():[]}
               ghostAppState={this.props.ghostAppState}
               mysqlAppState={this.props.mysqlAppState}
-              setProjectName={this.props.provisionerFormActions.setProjectName}
               nginxAppState={this.props.nginxAppState}
               plainHtmlAppState={this.props.plainHtmlAppState}
               projectNameAppState={this.props.projectNameAppState}
               provisionerFormActions={this.props.provisionerFormActions}
               repositoryAppState={this.props.repositoryAppState}
               rolesActions={this.props.rolesActions}
+              setProjectName={this.props.provisionerFormActions.setProjectName}
               userAppState={this.props.userAppState}
               yiiAppState={this.props.yiiAppState}
           />

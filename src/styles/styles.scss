@@ -755,6 +755,9 @@ body {
     }
   }
   p {
+    .icon {
+      font-size: 2em !important;
+    }
     font-family: 'SFText-Light';
     padding-bottom: 50%;
     font-size: 1em;

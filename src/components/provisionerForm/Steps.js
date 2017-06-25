@@ -1,11 +1,10 @@
 import { browserHistory } from "react-router";
 import { fromJS } from "immutable";
-import { Step, Stepper, StepButton, StepLabel } from "material-ui/Stepper";
+import { Step, Stepper, StepButton } from "material-ui/Stepper";
 import Addons from "./steps/Addons";
 import DataBases from "./steps/DataBases";
 import ProjectName from "./steps/ProjectName";
 import PropTypes from "prop-types";
-import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import Stacks from "./steps/Stacks";
 import SwipeableViews from "react-swipeable-views";
@@ -17,7 +16,7 @@ import ArrowForwardIcon from "material-ui/svg-icons/navigation/arrow-forward";
 // import ProjectName from "../components/provisionerForm/ProjectName";
 import Notification from "../Notification";
 
-const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, ghostAppState, mysqlAppState, nginxAppState, plainHtmlAppState, projectNameAppState, provisionerFormActions, repositoryAppState, rolesActions, setProjectName, userAppState, yiiAppState} ) => {
+const Steps = ( {applicationActions, applicationAppState, environments, baseAppState, buildbotAppState, cloudProviderAppState, ghostAppState, mysqlAppState, nginxAppState, plainHtmlAppState, projectNameAppState, provisionerFormActions, repositoryAppState, rolesActions, setProjectName, userAppState, yiiAppState} ) => {
   const style = {
    margin: 12,
   };
@@ -71,12 +70,18 @@ const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbot
               stacksOptions={applicationAppState.getIn(["steps","stacks"])}
           />
           <DataBases
+              activeEnvironment={environments[applicationAppState.get("active_environment")].id}
+              activeStepConfiguration={applicationAppState.get("active_configuration_step")}
               databases={applicationAppState.get("databases")?applicationAppState.get("databases"):fromJS([])}
               databasesOptions={applicationAppState.getIn(["steps","databases"])}
+              applicationAppState={applicationAppState}
+              environments={environments}
+              mysqlAppState={mysqlAppState}
               removeDatabase={provisionerFormActions.removeDatabase}
               rolesActions={rolesActions}
               setActiveStep={handleChangeStep}
               setDatabase={provisionerFormActions.setDatabase}
+              setActiveConfigurationStep={provisionerFormActions.setActiveConfigurationStep}
           />
           <Addons
               addons={applicationAppState.get("addons")?applicationAppState.get("addons"):fromJS([])}
@@ -98,6 +103,7 @@ const Steps = ( {applicationActions, applicationAppState, baseAppState, buildbot
 Steps.propTypes = {
   applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
+  environments: PropTypes.array.isRequired,
   baseAppState: PropTypes.object.isRequired,
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,

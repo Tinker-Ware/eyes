@@ -24,6 +24,17 @@ describe("application", () => {
         "active_step": 2}))
     ).to.be.true;
   });
+  it("handles SET_ACTIVE_CONFIGURATION_STEP", () => {
+    const initialState = Map();
+    const action = {type:"SET_ACTIVE_CONFIGURATION_STEP", value: fromJS({
+        active_configuration_step: "mysql"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "active_configuration_step": "mysql"}))
+    ).to.be.true;
+  });
   it("handles SET_STACK", () => {
     const initialState = Map();
     const action = {type:"SET_STACK", value: fromJS({
