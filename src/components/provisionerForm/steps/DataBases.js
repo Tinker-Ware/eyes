@@ -5,7 +5,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import MysqlRole from "../roles/MysqlRole";
 
-const DataBases = ( {activeEnvironment, activeStepConfiguration, environments,  applicationAppState, mysqlAppState, rolesActions, setActiveConfigurationStep, setActiveStep, setDatabase, removeDatabase, databasesOptions, databases} ) => {
+const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysqlAppState, rolesActions, setActiveConfigurationStep, setActiveEnvironment, setActiveStep, setDatabase, removeDatabase, databasesOptions, databases} ) => {
   const style = {
    margin: 12,
   };
@@ -45,45 +45,45 @@ const DataBases = ( {activeEnvironment, activeStepConfiguration, environments,  
         break;
     }
   };
-  const handleShowConfiguraton = () => {
-    setActiveConfigurationStep(fromJS({
-      "active_configuration_step": "mysql"}));
+  const handleShowConfiguration = (e, remove) => {
+    if(e)
+      e.stopPropagation();
+    if(remove)
+      setActiveConfigurationStep(fromJS({
+        "active_configuration_step": ""}));
+    else
+      setActiveConfigurationStep(fromJS({
+        "active_configuration_step": "mysql"}));
   }
   const DatabaseConfiguration = () => {
-    let configuration;
-    switch (configuration) {
+    switch (applicationAppState.get("active_configuration_step")) {
       case "mysql":
         rolesActions.removeMysqlDatabases();
         rolesActions.removeMysqlPackages();
         rolesActions.removeMysqlUsers();
-        // configuration=(<MysqlRole
-        //     applicationAppState={applicationAppState}
-        //     environments={applicationAppState.get("application_evironments")?applicationAppState.get("application_evironments"):[]}
-        //     mysqlAppState={mysqlAppState}
-        //     rolesActions={rolesActions}
-        //     type={"MySQL"}
-        // />);
+        return <MysqlRole
+            activeEnvironment={activeEnvironment}
+            applicationAppState={applicationAppState}
+            enable={applicationAppState.get("active_configuration_step")?true:false}
+            environments={environments}
+            handleClose={handleShowConfiguration}
+            mysqlAppState={mysqlAppState}
+            rolesActions={rolesActions}
+            setActiveEnvironment={setActiveEnvironment}
+            type={"MySQL"}
+        />
         break;
       default:
         break;
     }
-    return configuration?configuration:"";
   };
   return (
     <div className="align-center steps">
-      {/* {DatabaseConfiguration} */}
-      <MysqlRole
-          activeEnvironment={activeEnvironment}
-          applicationAppState={applicationAppState}
-          enable
-          environments={environments}
-          mysqlAppState={mysqlAppState}
-          rolesActions={rolesActions}
-          type={"MySQL"}
-      />
+      {DatabaseConfiguration()}
       <p className="align-center title">{"Select your Database"}</p>
       <Options
           handleChange={handleChangeDatabase}
+          handleConfigure={handleShowConfiguration}
           options={databasesOptions}
           optionsActives={databases}
       />
@@ -108,7 +108,6 @@ const DataBases = ( {activeEnvironment, activeStepConfiguration, environments,  
 
 DataBases.propTypes = {
   activeEnvironment: PropTypes.number.isRequired,
-  activeStepConfiguration: PropTypes.object,
   applicationAppState: PropTypes.object.isRequired,
   databases: PropTypes.object.isRequired,
   databasesOptions: PropTypes.object.isRequired,
@@ -117,6 +116,7 @@ DataBases.propTypes = {
   removeDatabase: PropTypes.func.isRequired,
   rolesActions: PropTypes.object.isRequired,
   setActiveConfigurationStep: PropTypes.func.isRequired,
+  setActiveEnvironment: PropTypes.func.isRequired,
   setActiveStep: PropTypes.func.isRequired,
   setDatabase: PropTypes.func.isRequired
 };

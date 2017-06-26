@@ -37,7 +37,7 @@ const styles = {
   }
 };
 
-const MysqlRole = ( {activeEnvironment, applicationAppState, environments, mysqlAppState, rolesActions, type} ) => {
+const MysqlRole = ( {activeEnvironment, applicationAppState, handleClose, enable, environments, mysqlAppState, rolesActions, setActiveEnvironment, type} ) => {
   const handleRemoveDatabase = (e, database) => {
     rolesActions.removeMysqlDatabase(
       fromJS({
@@ -64,8 +64,8 @@ const MysqlRole = ( {activeEnvironment, applicationAppState, environments, mysql
     );
   };
   const handleChangeEnvironment = (value) => {
-    rolesActions.setActiveEnvironment(fromJS({
-      active_environment:value
+    setActiveEnvironment(fromJS({
+      active_environment: value
     }));
   };
   const handleSaveConfigurations = () => {
@@ -103,6 +103,7 @@ const MysqlRole = ( {activeEnvironment, applicationAppState, environments, mysql
         show_mysql: !mysqlAppState.get("show_mysql")
       })
     );
+    handleClose(null, true);
   };
   const handleCancelSaveConfigurations = () => {
     environments.map((value,index)=>{
@@ -116,6 +117,7 @@ const MysqlRole = ( {activeEnvironment, applicationAppState, environments, mysql
         show_mysql: !mysqlAppState.get("show_mysql")
       })
     );
+    handleClose(null, true);
   };
   const actions = [
       <FlatButton
@@ -156,7 +158,7 @@ const MysqlRole = ( {activeEnvironment, applicationAppState, environments, mysql
         bodyStyle={styles.body}
         modal
         onRequestClose={handleCancelSaveConfigurations}
-        open={false}
+        open={enable}
         title="Configurations"
     >
       <AddDatabase
@@ -216,8 +218,11 @@ const MysqlRole = ( {activeEnvironment, applicationAppState, environments, mysql
 MysqlRole.propTypes = {
   activeEnvironment: PropTypes.number.isRequired,
   applicationAppState: PropTypes.object.isRequired,
+  enable: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
   mysqlAppState:PropTypes.object.isRequired,
   rolesActions:PropTypes.object.isRequired,
+  setActiveEnvironment: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired
 };
 

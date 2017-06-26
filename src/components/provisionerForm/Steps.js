@@ -71,17 +71,17 @@ const Steps = ( {applicationActions, applicationAppState, environments, baseAppS
           />
           <DataBases
               activeEnvironment={environments[applicationAppState.get("active_environment")].id}
-              activeStepConfiguration={applicationAppState.get("active_configuration_step")}
+              applicationAppState={applicationAppState}
               databases={applicationAppState.get("databases")?applicationAppState.get("databases"):fromJS([])}
               databasesOptions={applicationAppState.getIn(["steps","databases"])}
-              applicationAppState={applicationAppState}
               environments={environments}
               mysqlAppState={mysqlAppState}
               removeDatabase={provisionerFormActions.removeDatabase}
               rolesActions={rolesActions}
+              setActiveConfigurationStep={provisionerFormActions.setActiveConfigurationStep}
+              setActiveEnvironment={provisionerFormActions.setActiveEnvironment}
               setActiveStep={handleChangeStep}
               setDatabase={provisionerFormActions.setDatabase}
-              setActiveConfigurationStep={provisionerFormActions.setActiveConfigurationStep}
           />
           <Addons
               addons={applicationAppState.get("addons")?applicationAppState.get("addons"):fromJS([])}

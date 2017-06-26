@@ -3,6 +3,7 @@ import { fromJS, List } from "immutable";
 import { SET_NOTIFICATION } from "../constants/ApplicationActionTypes";
 
 const initialState = fromJS({
+  active_configuration_step: "",
   application_name: "",
   application_evironments:[
     {

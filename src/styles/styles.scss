@@ -756,10 +756,12 @@ body {
   }
   p {
     .icon {
-      font-size: 2em !important;
+      font-size: 1.5em !important;
+      top: 10%;
+      left: 13%;
     }
     font-family: 'SFText-Light';
-    padding-bottom: 50%;
+    padding-bottom: 60%;
     font-size: 1em;
     top: 50%;
     transform: translate3d(0, 100%, 0);
