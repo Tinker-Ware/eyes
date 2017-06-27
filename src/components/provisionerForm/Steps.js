@@ -1,25 +1,17 @@
-import { browserHistory } from "react-router";
 import { fromJS } from "immutable";
 import { Step, Stepper, StepButton } from "material-ui/Stepper";
 import Addons from "./steps/Addons";
+import ArrowForwardIcon from "material-ui/svg-icons/navigation/arrow-forward";
 import DataBases from "./steps/DataBases";
+import Notification from "../Notification";
 import ProjectName from "./steps/ProjectName";
 import PropTypes from "prop-types";
 import React from "react";
 import Stacks from "./steps/Stacks";
+import Repositories from "./steps/Repositories";
 import SwipeableViews from "react-swipeable-views";
-import ArrowForwardIcon from "material-ui/svg-icons/navigation/arrow-forward";
-// import Application from "../components/provisionerForm/Application";
-// import CloudProvider from "../components/provisionerForm/CloudProvider";
-// import CreateService from "../components/provisionerForm/CreateService";
-// import GithubService from "../components/provisionerForm/GithubService";
-// import ProjectName from "../components/provisionerForm/ProjectName";
-import Notification from "../Notification";
 
-const Steps = ( {applicationActions, applicationAppState, environments, baseAppState, buildbotAppState, cloudProviderAppState, ghostAppState, mysqlAppState, nginxAppState, plainHtmlAppState, projectNameAppState, provisionerFormActions, repositoryAppState, rolesActions, setProjectName, userAppState, yiiAppState} ) => {
-  const style = {
-   margin: 12,
-  };
+const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -39,16 +31,21 @@ const Steps = ( {applicationActions, applicationAppState, environments, baseAppS
           </Step>
           <Step>
             <StepButton onClick={() => handleChangeStep(1)}>
-              {"Frameworks"}
+              {"Repository"}
             </StepButton>
           </Step>
           <Step>
             <StepButton onClick={() => handleChangeStep(2)}>
-              {"DataBases"}
+              {"Frameworks"}
             </StepButton>
           </Step>
           <Step>
             <StepButton onClick={() => handleChangeStep(3)}>
+              {"DataBases"}
+            </StepButton>
+          </Step>
+          <Step>
+            <StepButton onClick={() => handleChangeStep(4)}>
               {"Add-ons"}
             </StepButton>
           </Step>
@@ -60,6 +57,14 @@ const Steps = ( {applicationActions, applicationAppState, environments, baseAppS
               projectNameAppState={projectNameAppState}
               setActiveStep={handleChangeStep}
               setProjectName={setProjectName}
+          />
+          <Repositories
+              removeRepo={provisionerFormActions.removeRepo}
+              repositories={applicationAppState.get("repositories")?applicationAppState.get("repositories"):fromJS([])}
+              repositoriesOptions={applicationAppState.getIn(["steps","repositories"])}
+              rolesActions={rolesActions}
+              setActiveStep={handleChangeStep}
+              setRepo={provisionerFormActions.setRepo}
           />
           <Stacks
               removeStack={provisionerFormActions.removeStack}
@@ -104,20 +109,11 @@ Steps.propTypes = {
   applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   environments: PropTypes.array.isRequired,
-  baseAppState: PropTypes.object.isRequired,
-  buildbotAppState: PropTypes.object.isRequired,
-  cloudProviderAppState: PropTypes.object.isRequired,
-  ghostAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
-  nginxAppState: PropTypes.object.isRequired,
-  plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
-  repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
-  setProjectName: PropTypes.func.isRequired,
-  userAppState: PropTypes.object.isRequired,
-  yiiAppState: PropTypes.object.isRequired
+  setProjectName: PropTypes.func.isRequired
 };
 
 export default Steps;

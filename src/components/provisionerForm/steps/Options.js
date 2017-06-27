@@ -1,7 +1,6 @@
 import FontIcon from "material-ui/FontIcon";
 import PropTypes from "prop-types";
 import React from "react";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 
 const Options = ( {handleChange, handleConfigure, options, optionsActives} ) => {
   return (
@@ -56,12 +55,14 @@ const Options = ( {handleChange, handleConfigure, options, optionsActives} ) => 
                   optionsActives.findIndex(stack =>
                     stack===stackOptions.get("name")
                   )==-1?stackOptions.get("description"):
-                    <FontIcon
-                        className={"icon icon-edit"}
-                        onTouchTap={(e)=>handleConfigure(e)}
-                    >
-                      {"Configure"}
-                    </FontIcon>
+                    stackOptions.get("config")?
+                      <FontIcon
+                          className={"icon icon-edit"}
+                          onTouchTap={(e)=>handleConfigure(e)}
+                      >
+                        {"Configure"}
+                      </FontIcon>
+                    :stackOptions.get("description")
                   :stackOptions.get("description")
                 :"Coming soon"
               }

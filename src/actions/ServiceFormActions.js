@@ -60,6 +60,14 @@ export function setApplicationOneClick(value) {
   return { type: types.SET_APPLICATION_ONE_CLICK_APP, value };
 }
 
+export function setRepo(value) {
+  return { type: types.SET_REPO, value };
+}
+
+export function removeRepo(value) {
+  return { type: types.REMOVE_REPO, value };
+}
+
 export function setRepositories(value) {
   return { type: types.SET_REPOSITORIES, value };
 }

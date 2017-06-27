@@ -15,10 +15,17 @@ const styles = {
     padding: 12
   },
   body: {
-    padding: "1em"
+    padding: "1em",
+    color: "#536a70"
+  },
+  title: {
+    color: "#536a70"
   },
   chip: {
     margin: 4,
+  },
+  textField: {
+    color: "#536a70"
   },
   wrapper: {
     display: "flex",
@@ -111,7 +118,6 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
       value.get("environment") === environments[applicationAppState.get("active_environment")].id &&   value.get("priv") === cookie.load("mysql_databases-name")+".*:ALL/*.*:SUPER"
     ).toJS().map((value,index)=>
       <Chip
-          // onTouchTap={handleClick}
           key={index}
           onRequestDelete={(event)=>handleRemoveUser(event, value)}
           style={styles.chip}
@@ -131,6 +137,7 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
         onRequestClose={handleCancelAddDatabase}
         open={mysqlAppState.get("show_mysql_database")?true:false}
         title="Create Database"
+        titleStyle={styles.title}
     >
       <AddUser
           activeEnvironment={environments[applicationAppState.get("active_environment")].id}
@@ -144,6 +151,7 @@ const AddDatabase = ( {activeEnvironment, applicationAppState, environments, set
           errorText="This field is required."
           floatingLabelText={"Database Name"}
           fullWidth
+          inputStyle={styles.textField}
           name={"name"}
           onChange={handleSetMysqlDatabases}
           type={"text"}

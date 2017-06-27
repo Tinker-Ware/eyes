@@ -54,14 +54,14 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
     else
       setActiveConfigurationStep(fromJS({
         "active_configuration_step": "mysql"}));
-  }
+  };
   const DatabaseConfiguration = () => {
     switch (applicationAppState.get("active_configuration_step")) {
       case "mysql":
         rolesActions.removeMysqlDatabases();
         rolesActions.removeMysqlPackages();
         rolesActions.removeMysqlUsers();
-        return <MysqlRole
+        return (<MysqlRole
             activeEnvironment={activeEnvironment}
             applicationAppState={applicationAppState}
             enable={applicationAppState.get("active_configuration_step")?true:false}
@@ -71,8 +71,7 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             rolesActions={rolesActions}
             setActiveEnvironment={setActiveEnvironment}
             type={"MySQL"}
-        />
-        break;
+                />);
       default:
         break;
     }
@@ -89,15 +88,15 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
       />
       <div className="pdt-2">
         <RaisedButton
-            label={"Framework"}
-            onTouchTap={()=>setActiveStep(1)}
+            label={"Previous Step"}
+            onTouchTap={()=>setActiveStep(2)}
             primary
             style={style}
         />
         <RaisedButton
             disabled={databases.size==0?true:false}
-            label={"AddOns"}
-            onTouchTap={()=>setActiveStep(3)}
+            label={"Next Step"}
+            onTouchTap={()=>setActiveStep(4)}
             primary
             style={style}
         />

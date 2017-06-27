@@ -20,7 +20,7 @@ const ProjectName = ( { setProjectName, projectNameAppState, setActiveStep} ) =>
         <TextField
             floatingLabelText={"Project Name"}
             fullWidth
-            name={"projectName"}
+            name={"Previous Step"}
             onChange={handleSetProjectName}
             type={"text"}
             value={projectNameAppState.get("project_name")}
@@ -29,7 +29,7 @@ const ProjectName = ( { setProjectName, projectNameAppState, setActiveStep} ) =>
       <div className="pdt-5">
         <RaisedButton
             disabled={projectNameAppState.get("project_name")?false:true}
-            label={"Framework"}
+            label={"Next Step"}
             onTouchTap={()=>{setActiveStep(1);}}
             primary
             style={style}

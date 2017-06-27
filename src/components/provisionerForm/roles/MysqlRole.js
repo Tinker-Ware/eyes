@@ -1,4 +1,3 @@
-import { Card, CardActions, CardHeader } from "material-ui/Card";
 import { fromJS } from "immutable";
 import { Tabs, Tab } from "material-ui/Tabs";
 import AddDatabase from "./mysql/AddDatabase";
@@ -12,7 +11,6 @@ import FontIcon from "material-ui/FontIcon";
 import PropTypes from "prop-types";
 import React from "react";
 import SwipeableViews from "react-swipeable-views";
-import Toggle from "material-ui/Toggle";
 
 const styles = {
   block: {
@@ -25,7 +23,11 @@ const styles = {
     margin: 4,
   },
   body: {
-    padding: 0
+    padding: 0,
+    color: "#536a70"
+  },
+  title: {
+    color: "#536a70"
   },
   radioButton: {
     marginBottom: 16,
@@ -37,7 +39,7 @@ const styles = {
   }
 };
 
-const MysqlRole = ( {activeEnvironment, applicationAppState, handleClose, enable, environments, mysqlAppState, rolesActions, setActiveEnvironment, type} ) => {
+const MysqlRole = ( {activeEnvironment, applicationAppState, handleClose, enable, environments, mysqlAppState, rolesActions, setActiveEnvironment} ) => {
   const handleRemoveDatabase = (e, database) => {
     rolesActions.removeMysqlDatabase(
       fromJS({
@@ -160,6 +162,7 @@ const MysqlRole = ( {activeEnvironment, applicationAppState, handleClose, enable
         onRequestClose={handleCancelSaveConfigurations}
         open={enable}
         title="Configurations"
+        titleStyle={styles.title}
     >
       <AddDatabase
           activeEnvironment={environments[activeEnvironment].id}
@@ -219,11 +222,11 @@ MysqlRole.propTypes = {
   activeEnvironment: PropTypes.number.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   enable: PropTypes.bool.isRequired,
+  environments: PropTypes.array.isRequired,
   handleClose: PropTypes.func.isRequired,
   mysqlAppState:PropTypes.object.isRequired,
   rolesActions:PropTypes.object.isRequired,
-  setActiveEnvironment: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  setActiveEnvironment: PropTypes.func.isRequired
 };
 
 export default MysqlRole;
