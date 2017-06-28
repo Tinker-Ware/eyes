@@ -7,7 +7,6 @@ import React from "react";
 const style = {
   button: {
     margin: 0,
-    padding: ".5em",
     height: "auto"
   }
 };
@@ -156,23 +155,12 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
   };
     return (
       <RaisedButton
-          disabled={addons.size==0?true:false}
-          label={"Create Project"}
-          onTouchTap={()=>setActiveStep(3)}
-          primary
-          style={style}
-      />
-      <RaisedButton
           buttonStyle={style.button}
-          disabled={
-            projectNameAppState.get("project_name")?
-              false:true
-          }
-          fullWidth
           icon={<FontIcon className="icon icon-project" />}
           label={"Create Project"}
-          onClick={handleCreateUserProject}
+          onTouchTap={handleCreateUserProject}
           primary
+          style={style}
       />
     );
 };

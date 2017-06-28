@@ -33,6 +33,11 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             enable_mysql: status
           })
         );
+        if(!status){
+          rolesActions.removeMysqlDatabases();
+          rolesActions.removeMysqlPackages();
+          rolesActions.removeMysqlUsers();
+        }
         break;
       case "mariadb":
         rolesActions.setEnableMariadb(
@@ -40,6 +45,11 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             enable_mariadb: status
           })
         );
+        if(!status){
+          rolesActions.removeMysqlDatabases();
+          rolesActions.removeMysqlPackages();
+          rolesActions.removeMysqlUsers();
+        }
         break;
       default:
         break;
@@ -55,13 +65,10 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
       setActiveConfigurationStep(fromJS({
         "active_configuration_step": "mysql"}));
   };
-  const DatabaseConfiguration = () => {
-    switch (applicationAppState.get("active_configuration_step")) {
-      case "mysql":
-        rolesActions.removeMysqlDatabases();
-        rolesActions.removeMysqlPackages();
-        rolesActions.removeMysqlUsers();
-        return (<MysqlRole
+  return (
+    <div className="align-center steps">
+      {applicationAppState.get("active_configuration_step")=="mysql"?
+        <MysqlRole
             activeEnvironment={activeEnvironment}
             applicationAppState={applicationAppState}
             enable={applicationAppState.get("active_configuration_step")?true:false}
@@ -71,14 +78,8 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             rolesActions={rolesActions}
             setActiveEnvironment={setActiveEnvironment}
             type={"MySQL"}
-                />);
-      default:
-        break;
-    }
-  };
-  return (
-    <div className="align-center steps">
-      {DatabaseConfiguration()}
+        />:""
+      }
       <p className="align-center title">{"Select your Database"}</p>
       <Options
           handleChange={handleChangeDatabase}

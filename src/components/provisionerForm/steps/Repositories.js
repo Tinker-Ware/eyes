@@ -76,7 +76,7 @@ const Repositories = ( {applicationAppState, setActiveStep, setRepo, removeRepo,
   };
   return (
     <div className="align-center steps">
-      <p className="align-center title">{"Which framework do you need?"}</p>
+      <p className="align-center title">{"Select your project repository (Optional)"}</p>
       {RepositoryConfiguration()}
       <Options
           handleChange={handleChangeRepository}
@@ -92,7 +92,6 @@ const Repositories = ( {applicationAppState, setActiveStep, setRepo, removeRepo,
             style={style}
         />
         <RaisedButton
-            disabled={repositories.size==0?true:false}
             label={"Next Step"}
             onTouchTap={()=>setActiveStep(2)}
             primary

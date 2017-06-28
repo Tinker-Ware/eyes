@@ -27,19 +27,23 @@ $icon-trigger: '\ec2b';
 $icon-cloud-download: '\ec7a';
 $icon-save: '\ec87';
 $icon-cancel: '\ed6a';
-$icon-github: '\ef0f';
+$icon-github: '\e90c';
 $icon-cassandra-path1: '\e907';
 $icon-cassandra-path2: '\e90c';
 $icon-cassandra-path3: '\e90d';
 $icon-cassandra-path4: '\e90e';
 $icon-elixir: '\e909';
 $icon-mariadb: '\e90a';
+$icon-spring: '\e907';
 $icon-react: '\e600';
 $icon-redis: '\e606';
 $icon-angularjs: '\e61c';
 $icon-django: '\e63f';
 $icon-html5: '\e7f6';
 $icon-laravel: '\e851';
+$icon-gitlab: '\e90d';
+$icon-github: '\e90c';
+$icon-bitbucket: '\e910';
 $icon-mongodb: '\eb43';
 $icon-mysql: '\eb61';
 $icon-nodejs: '\eb69';
@@ -310,9 +314,16 @@ input {
     content: $icon-elixir;
   }
 }
+
 .icon-mariadb {
   &::before {
     content: $icon-mariadb;
+  }
+}
+
+.icon-spring {
+  &::before {
+    content: $icon-spring;
   }
 }
 
@@ -349,6 +360,24 @@ input {
 .icon-laravel {
   &::before {
     content: $icon-laravel;
+  }
+}
+
+.icon-gitlab {
+  &::before {
+    content: $icon-gitlab;
+  }
+}
+
+.icon-github {
+  &::before {
+    content: $icon-github;
+  }
+}
+
+.icon-bitbucket {
+  &::before {
+    content: $icon-bitbucket;
   }
 }
 

@@ -16,14 +16,14 @@ const initialState = fromJS({
     }
   ],
   active_environment: 0,
-  active_step: 3,
+  active_step: 0,
   steps: {
     repositories: [
       {
         config: true,
         description: "Repository",
         enabled: true,
-        icon: ["icon-yii"],
+        icon: ["icon-github"],
         isOtro: false,
         name: "github",
         title: "Github"
@@ -32,7 +32,7 @@ const initialState = fromJS({
         config: false,
         description: "Repository",
         enabled: false,
-        icon: ["icon-yii"],
+        icon: ["icon-gitlab"],
         isOtro: false,
         name: "gitlab",
         title: "GitLab"
@@ -41,7 +41,7 @@ const initialState = fromJS({
         config: false,
         description: "Repository",
         enabled: false,
-        icon: ["icon-yii"],
+        icon: ["icon-bitbucket"],
         isOtro: false,
         name: "bitbucket",
         title: "BitBucket"
@@ -68,10 +68,19 @@ const initialState = fromJS({
       },
       {
         config: false,
-        description: "NodeJS",
-        enabled: false,
+        description: "JVM-based systems",
+        enabled: true,
+        icon: ["icon-spring"],
+        isOtro: false,
+        name: "spring",
+        title: "Spring"
+      },
+      {
+        config: false,
+        description: "HTML, CSS & JavaScript",
+        enabled: true,
         icon: ["icon-html5"],
-        isOtro: true,
+        isOtro: false,
         name: "html5",
         title: "Pure HTML5"
       },

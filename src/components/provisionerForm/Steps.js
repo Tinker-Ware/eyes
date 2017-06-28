@@ -7,11 +7,11 @@ import Notification from "../Notification";
 import ProjectName from "./steps/ProjectName";
 import PropTypes from "prop-types";
 import React from "react";
-import Stacks from "./steps/Stacks";
 import Repositories from "./steps/Repositories";
+import Stacks from "./steps/Stacks";
 import SwipeableViews from "react-swipeable-views";
 
-const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState} ) => {
+const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, nginxAppState, yiiAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -29,22 +29,22 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
               {"Project Name"}
             </StepButton>
           </Step>
-          <Step>
+          <Step disabled={projectNameAppState.get("project_name")?false:true}>
             <StepButton onClick={() => handleChangeStep(1)}>
               {"Repository"}
             </StepButton>
           </Step>
-          <Step>
+          <Step disabled={projectNameAppState.get("project_name")?false:true}>
             <StepButton onClick={() => handleChangeStep(2)}>
               {"Frameworks"}
             </StepButton>
           </Step>
-          <Step>
+          <Step disabled={applicationAppState.get("stacks")?applicationAppState.get("stacks").size==0?true:false:true}>
             <StepButton onClick={() => handleChangeStep(3)}>
               {"DataBases"}
             </StepButton>
           </Step>
-          <Step>
+          <Step disabled={applicationAppState.get("databases")?applicationAppState.get("databases").size==0?true:false:true}>
             <StepButton onClick={() => handleChangeStep(4)}>
               {"Add-ons"}
             </StepButton>
@@ -99,9 +99,20 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
           <Addons
               addons={applicationAppState.get("addons")?applicationAppState.get("addons"):fromJS([])}
               addonsOptions={applicationAppState.getIn(["steps","addons"])}
+              applicationAppState={applicationAppState}
+              baseAppState={baseAppState}
+              buildbotAppState={buildbotAppState}
+              cloudProviderAppState={cloudProviderAppState}
+              mysqlAppState={mysqlAppState}
+              nginxAppState={nginxAppState}
+              projectNameAppState={projectNameAppState}
               removeAddons={provisionerFormActions.removeAddons}
+              repositoryAppState={repositoryAppState}
+              requestPostUserProject={provisionerFormActions.requestPostUserProject}
               setActiveStep={handleChangeStep}
               setAddons={provisionerFormActions.setAddons}
+              userAppState={userAppState}
+              yiiAppState={yiiAppState}
           />
         </SwipeableViews>
       </div>
@@ -116,14 +127,19 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
 Steps.propTypes = {
   applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
+  baseAppState: PropTypes.object.isRequired,
+  buildbotAppState: PropTypes.object.isRequired,
+  cloudProviderAppState: PropTypes.object.isRequired,
   environments: PropTypes.array.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
+  nginxAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
   setProjectName: PropTypes.func.isRequired,
-  userAppState: PropTypes.object.isRequired
+  userAppState: PropTypes.object.isRequired,
+  yiiAppState: PropTypes.object.isRequired
 };
 
 export default Steps;
