@@ -39,6 +39,13 @@ const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptio
           })
         );
         break;
+      case "spring":
+        rolesActions.setEnableSpring(
+          fromJS({
+            enable_spring: status
+          })
+        );
+        break;
       case "html5":
         break;
       default:

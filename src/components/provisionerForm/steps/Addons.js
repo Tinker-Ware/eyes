@@ -5,7 +5,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import CreateService from "../CreateService";
 
-const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, mysqlAppState, nginxAppState, projectNameAppState, repositoryAppState, requestPostUserProject, userAppState, yiiAppState} ) => {
+const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, mysqlAppState, nginxAppState, projectNameAppState, springAppState, repositoryAppState, requestPostUserProject, userAppState, yiiAppState} ) => {
   const style = {
    margin: 12,
   };
@@ -44,6 +44,7 @@ const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons,
             projectNameAppState={projectNameAppState}
             repositoryAppState={repositoryAppState}
             requestPostUserProject={requestPostUserProject}
+            springAppState={springAppState}
             userAppState={userAppState}
             yiiAppState={yiiAppState}
         />
@@ -67,6 +68,7 @@ Addons.propTypes = {
   requestPostUserProject: PropTypes.func.isRequired,
   setActiveStep: PropTypes.func.isRequired,
   setAddons: PropTypes.func.isRequired,
+  springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };

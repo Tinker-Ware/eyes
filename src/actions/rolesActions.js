@@ -196,6 +196,10 @@ export function setEnablePlainhtml(value) {
   return { type: types.SET_ENABLE_PLAINHTML, value };
 }
 
+export function setEnableSpring(value) {
+  return { type: types.SET_ENABLE_SPRING, value };
+}
+
 export function setRequestActivePlainhtml(value) {
   return { type: types.SET_REQUEST_ACTIVE_PLAINHTML, value };
 }

@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState} ) => {
+const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -43,6 +43,15 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       else if(environment==1)
         config = {"yii_extra_flags": "--no-dev"};
       return config;
+    }
+  };
+  const getSpringConfiguration = () => {
+    if(springAppState.get("enable_spring")){
+      return {
+        "repo":repositoryAppState.get("repository")?
+          repositoryAppState.get("repository").toJS().ssh_url:
+          springAppState.get("default_repo")
+      };
     }
   };
   const getNginxConfiguration = () => {
@@ -92,7 +101,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
   };
   const configuration = () => {
     return {
-      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration()},
+      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration(), ...getSpringConfiguration()},
       "development":{env:"development", ...getYiiConfiguration(0), ...getMysqlConfiguration(0)},
       "production":{env:"production", ...getYiiConfiguration(1), ...getMysqlConfiguration(1)}
     };
@@ -111,6 +120,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
     if(yiiAppState.get("enable_yii_advanced")) rolesArray.push(yiiAppState.get("roles_advanced"));
     if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb")) rolesArray.push(mysqlAppState.get("roles"));
+    if(springAppState.get("enable_spring")) rolesArray.push(springAppState.get("roles"));
     return rolesArray;
   };
   const repositoryApp = () => {
@@ -174,6 +184,7 @@ CreateService.propTypes = {
   projectNameAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   requestPostUserProject: PropTypes.func.isRequired,
+  springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };

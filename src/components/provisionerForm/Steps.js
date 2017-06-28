@@ -11,7 +11,7 @@ import Repositories from "./steps/Repositories";
 import Stacks from "./steps/Stacks";
 import SwipeableViews from "react-swipeable-views";
 
-const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, nginxAppState, yiiAppState} ) => {
+const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nginxAppState, yiiAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -111,6 +111,7 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
               requestPostUserProject={provisionerFormActions.requestPostUserProject}
               setActiveStep={handleChangeStep}
               setAddons={provisionerFormActions.setAddons}
+              springAppState={springAppState}
               userAppState={userAppState}
               yiiAppState={yiiAppState}
           />
@@ -138,6 +139,7 @@ Steps.propTypes = {
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
   setProjectName: PropTypes.func.isRequired,
+  springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };
