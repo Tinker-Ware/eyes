@@ -16,11 +16,11 @@ const initialState = fromJS({
     }
   ],
   active_environment: 0,
-  active_step: 0,
+  active_step: 3,
   steps: {
     repositories: [
       {
-        config: false,
+        config: true,
         description: "Repository",
         enabled: true,
         icon: ["icon-yii"],

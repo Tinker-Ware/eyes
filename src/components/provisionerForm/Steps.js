@@ -11,7 +11,7 @@ import Stacks from "./steps/Stacks";
 import Repositories from "./steps/Repositories";
 import SwipeableViews from "react-swipeable-views";
 
-const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName} ) => {
+const Steps = ( {applicationActions, applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -59,12 +59,20 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
               setProjectName={setProjectName}
           />
           <Repositories
+              applicationAppState={applicationAppState}
               removeRepo={provisionerFormActions.removeRepo}
               repositories={applicationAppState.get("repositories")?applicationAppState.get("repositories"):fromJS([])}
               repositoriesOptions={applicationAppState.getIn(["steps","repositories"])}
+              repositoryAppState={repositoryAppState}
+              requestRepositoryAccess={provisionerFormActions.requestRepositoryAccess}
+              requestUserRepositories={provisionerFormActions.requestUserRepositories}
               rolesActions={rolesActions}
+              setActiveConfigurationStep={provisionerFormActions.setActiveConfigurationStep}
               setActiveStep={handleChangeStep}
               setRepo={provisionerFormActions.setRepo}
+              setRepository={provisionerFormActions.setRepository}
+              setShowRepositories={provisionerFormActions.setShowRepositories}
+              userAppState={userAppState}
           />
           <Stacks
               removeStack={provisionerFormActions.removeStack}
@@ -112,8 +120,10 @@ Steps.propTypes = {
   mysqlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
+  repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
-  setProjectName: PropTypes.func.isRequired
+  setProjectName: PropTypes.func.isRequired,
+  userAppState: PropTypes.object.isRequired
 };
 
 export default Steps;
