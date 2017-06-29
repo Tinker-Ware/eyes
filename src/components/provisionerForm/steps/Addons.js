@@ -5,7 +5,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import CreateService from "../CreateService";
 
-const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, mysqlAppState, nginxAppState, projectNameAppState, springAppState, repositoryAppState, requestPostUserProject, userAppState, yiiAppState} ) => {
+const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, mysqlAppState, nginxAppState, projectNameAppState, springAppState, repositoryAppState, requestPostUserProject, userAppState, yiiAppState, plainHtmlAppState} ) => {
   const style = {
    margin: 12,
   };
@@ -41,6 +41,7 @@ const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons,
             cloudProviderAppState={cloudProviderAppState}
             mysqlAppState={mysqlAppState}
             nginxAppState={nginxAppState}
+            plainHtmlAppState={plainHtmlAppState}
             projectNameAppState={projectNameAppState}
             repositoryAppState={repositoryAppState}
             requestPostUserProject={requestPostUserProject}
@@ -62,6 +63,7 @@ Addons.propTypes = {
   cloudProviderAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   removeAddons: PropTypes.func.isRequired,
   repositoryAppState: PropTypes.object.isRequired,

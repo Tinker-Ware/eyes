@@ -47,6 +47,11 @@ const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptio
         );
         break;
       case "html5":
+        rolesActions.setEnablePlainhtml(
+          fromJS({
+            enable_plainhtml: status
+          })
+        );
         break;
       default:
         break;
