@@ -44,7 +44,7 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
               {"DataBases"}
             </StepButton>
           </Step>
-          <Step disabled={applicationAppState.get("databases")?applicationAppState.get("databases").size==0?true:false:true}>
+          <Step disabled={applicationAppState.get("stacks")?applicationAppState.get("stacks").size==0?true:false:true}>
             <StepButton onClick={() => handleChangeStep(4)}>
               {"Add-ons"}
             </StepButton>
@@ -71,7 +71,6 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
               setActiveStep={handleChangeStep}
               setRepo={provisionerFormActions.setRepo}
               setRepository={provisionerFormActions.setRepository}
-              setShowRepositories={provisionerFormActions.setShowRepositories}
               userAppState={userAppState}
           />
           <Stacks
@@ -117,10 +116,10 @@ const Steps = ( {applicationActions, applicationAppState, environments, mysqlApp
           />
         </SwipeableViews>
       </div>
-      <Notification
+      {/* <Notification
           message={applicationAppState.get("notification")}
           setNotification={applicationActions.setNotification}
-      />
+      /> */}
     </div>
   );
 };

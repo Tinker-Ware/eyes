@@ -3,7 +3,6 @@ import { List } from "material-ui/List";
 import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
 import ActionStarts from "material-ui/svg-icons/action/stars";
 import UnCheckedIcon from "material-ui/svg-icons/toggle/check-box-outline-blank";
-import cookie from "react-cookie";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import FontIcon from "material-ui/FontIcon";
@@ -35,23 +34,12 @@ const styles = {
   },
 };
 
-const GithubService = ( {enable, handleClose, repositoryAppState, requestRepositoryAccess, setRepository, userAppState} ) => {
-  if(userAppState.get("user_session")){
-    let timer;
-    timer = setInterval(function(){
-      if(cookie.load("github_oauth")){
-        requestRepositoryAccess(fromJS({
-          "authorization": userAppState.get("user_session").toJS().token,
-          "oauth_request": {
-            "user_id": userAppState.get("user_session").toJS().id,
-            "code": cookie.load("github_oauth").code,
-            "state": cookie.load("github_oauth").state
-          }
-        }));
-        cookie.remove("github_oauth", { path: "/" });
-        clearInterval(timer);
-      }
-    }, 1000);
+const GithubService = ( {enable, handleClose, repositoryAppState, setRepository, requestUserRepositories, userAppState} ) => {
+  if(repositoryAppState.get("integration")){
+    repositoryAppState.get("integration") && !repositoryAppState.get("repositories") ?
+      requestUserRepositories(fromJS({
+        "userName": repositoryAppState.get("integration").toJS().username,
+        "authorization": userAppState.get("user_session").toJS().token})):"";
   }
   const handleGithubRepos = (repository) => {
     setRepository(fromJS({
@@ -125,7 +113,7 @@ GithubService.propTypes = {
   enable: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
-  requestRepositoryAccess: PropTypes.func.isRequired,
+  requestUserRepositories: PropTypes.func.isRequired,
   setRepository: PropTypes.func.isRequired,
   userAppState: PropTypes.object.isRequired
 };

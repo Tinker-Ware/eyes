@@ -207,7 +207,7 @@ const initialState = fromJS({
         config: false,
         description: "Key value Database",
         enabled: false,
-        icon: ["icon-cassandra","path1","path2","path3","path1"],
+        icon: ["icon-cassandra","path1","path2","path3","path4"],
         isOtro: false,
         name: "cassandra",
         title: "Cassandra"

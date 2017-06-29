@@ -6,7 +6,7 @@ const initialState = Map({
     role: "spring",
     sudo: "no"
   },
-  default_repo: "https://github.com/Tinker-Ware/gs-maven",
+  default_repo: "https://github.com/Tinker-Ware/spring-maven-basic",
   nginx: {}
 });
 

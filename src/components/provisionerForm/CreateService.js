@@ -146,7 +146,9 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
             repositoryAppState.get("repository").toJS().name
             :repositoryApp(),
           "username": repositoryAppState.get("repository")?
-            repositoryAppState.get("integration").toJS().username
+            repositoryAppState.get("integration")?
+              repositoryAppState.get("integration").toJS().username:
+              "Tinker-Ware"
             :"Tinker-Ware"
         },
         "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys")?

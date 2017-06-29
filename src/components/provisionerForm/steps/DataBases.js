@@ -80,7 +80,7 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             type={"MySQL"}
         />:""
       }
-      <p className="align-center title">{"Select your Database"}</p>
+      <p className="align-center title">{"Select your Database (Optional)"}</p>
       <Options
           handleChange={handleChangeDatabase}
           handleConfigure={handleShowConfiguration}
@@ -95,7 +95,7 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             style={style}
         />
         <RaisedButton
-            disabled={databases.size==0?true:false}
+            disabled={applicationAppState.get("stacks")?applicationAppState.get("stacks").size==0?true:false:true}
             label={"Next Step"}
             onTouchTap={()=>setActiveStep(4)}
             primary

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as actions from "../actions/userActions";
 import * as applicationActions from "../actions/ApplicationActions";
 import cookie from "react-cookie";
-import Notification from "../components/Notification";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
@@ -23,12 +22,7 @@ export class ServiceOAuth extends Component {
   }
   render() {
     return (
-      <div>
-        <Notification
-            message={this.props.applicationAppState.get("notification")}
-            setNotification={this.props.applicationActions.setNotification}
-        />
-      </div>
+      <div />
     );
   }
 }
