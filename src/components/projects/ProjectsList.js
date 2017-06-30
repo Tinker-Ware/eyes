@@ -19,7 +19,7 @@ const style = {
 const ProjectsList = ({projectsAppState}) => {
   const TableRows =
     projectsAppState.get("user_projects")?
-      projectsAppState.get("user_projects").toJS().map((value, index) =>
+      projectsAppState.get("user_projects").reverse().toJS().map((value, index) =>
         <TableRow key={index}>
           <TableRowColumn>
             {value.roles.map((value2, index) =>

@@ -12,7 +12,14 @@ const styles = {
     padding: 12
   },
   body: {
-    padding: "1em"
+    padding: "1em",
+    color: "#536a70"
+  },
+  textField: {
+    color: "#536a70"
+  },
+  title: {
+    color: "#536a70"
   },
 };
 
@@ -84,11 +91,13 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
         onRequestClose={handleCancelAddUser}
         open={mysqlAppState.get("show_mysql_user")?true:false}
         title="Add Authorized User"
+        titleStyle={styles.title}
     >
       <TextField
           errorText="This field is required."
           floatingLabelText={"User Name"}
           fullWidth
+          inputStyle={styles.textField}
           name={"mysql_user_name"}
           onChange={(event)=> handleSetMysqlUsers(event, "name")}
           type={"text"}
@@ -97,6 +106,7 @@ const AddUser = ( {activeEnvironment, setMysqlUser, setShowMysqlUser, mysqlAppSt
           errorText="This field is required."
           floatingLabelText={"User Password"}
           fullWidth
+          inputStyle={styles.textField}
           name={"mysql_user_password"}
           onChange={(event)=> handleSetMysqlUsers(event, "password")}
           type={"password"}

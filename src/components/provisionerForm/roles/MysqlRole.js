@@ -1,4 +1,3 @@
-import { Card, CardActions, CardHeader } from "material-ui/Card";
 import { fromJS } from "immutable";
 import { Tabs, Tab } from "material-ui/Tabs";
 import AddDatabase from "./mysql/AddDatabase";
@@ -12,7 +11,6 @@ import FontIcon from "material-ui/FontIcon";
 import PropTypes from "prop-types";
 import React from "react";
 import SwipeableViews from "react-swipeable-views";
-import Toggle from "material-ui/Toggle";
 
 const styles = {
   block: {
@@ -25,7 +23,11 @@ const styles = {
     margin: 4,
   },
   body: {
-    padding: 0
+    padding: 0,
+    color: "#536a70"
+  },
+  title: {
+    color: "#536a70"
   },
   radioButton: {
     marginBottom: 16,
@@ -37,18 +39,18 @@ const styles = {
   }
 };
 
-const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabases, removeMysqlPackages, removeMysqlUsers, setMysqlUser, setMysqlRootPassword, setActiveEnvironment, setEnableMysql, setEnableMariadb, setMysqlDatabases, setShowMysql, mysqlAppState, removeMysqlDatabase, removeMysqlUser, setShowMysqlUser, setShowMysqlDatabase, enable, type} ) => {
+const MysqlRole = ( {activeEnvironment, applicationAppState, handleClose, enable, environments, mysqlAppState, rolesActions, setActiveEnvironment} ) => {
   const handleRemoveDatabase = (e, database) => {
-    removeMysqlDatabase(
+    rolesActions.removeMysqlDatabase(
       fromJS({
         mysql_databases: mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS():[],
         mysql_database: database
       })
     );
     mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").filter(user=>
-      user.get("environment") === environments[applicationAppState.get("active_environment")].id &&   user.get("priv") === database.name+".*:ALL"
+      user.get("environment") === environments[activeEnvironment].id &&   user.get("priv") === database.name+".*:ALL"
     ).toJS().map((user)=>{
-      removeMysqlUser(
+      rolesActions.removeMysqlUser(
         fromJS({
           mysql_users: mysqlAppState.get("mysql_users")?mysqlAppState.get("mysql_users").toJS():[],
           mysql_user: user
@@ -57,7 +59,7 @@ const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabase
     }):"";
   };
   const handleShowDatabase = () => {
-    setShowMysqlDatabase(
+    rolesActions.setShowMysqlDatabase(
       fromJS({
         show_mysql_database: !mysqlAppState.get("show_mysql_database")
       })
@@ -65,27 +67,8 @@ const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabase
   };
   const handleChangeEnvironment = (value) => {
     setActiveEnvironment(fromJS({
-      active_environment:value
+      active_environment: value
     }));
-  };
-  const handleEnable = () => {
-    if(enable){
-      removeMysqlDatabases();
-      removeMysqlPackages();
-      removeMysqlUsers();
-    }
-    if(type=="MySQL")
-      setEnableMysql(
-        fromJS({
-          enable_mysql: !enable
-        })
-      );
-    else
-      setEnableMariadb(
-        fromJS({
-          enable_mariadb: !enable
-        })
-      );
   };
   const handleSaveConfigurations = () => {
     if(mysqlAppState.get("show_mysql")){
@@ -107,21 +90,22 @@ const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabase
         }
       });
       if(mysqlRootPasswordArray.length>0)
-      setMysqlRootPassword(
-        fromJS({
-          mysql_root_passwords: mysqlAppState.get("mysql_root_password")?mysqlAppState.get("mysql_root_password").toJS():[],
-          mysql_root_password: mysqlRootPasswordArray
-        })
-      );
+        rolesActions.setMysqlRootPassword(
+          fromJS({
+            mysql_root_passwords: mysqlAppState.get("mysql_root_password")?mysqlAppState.get("mysql_root_password").toJS():[],
+            mysql_root_password: mysqlRootPasswordArray
+          })
+        );
       cookie.remove("mysql_users-host", { path: "/" });
       cookie.remove("mysql_users-name", { path: "/" });
       cookie.remove("mysql_users-password", { path: "/" });
     }
-    setShowMysql(
+    rolesActions.setShowMysql(
       fromJS({
         show_mysql: !mysqlAppState.get("show_mysql")
       })
     );
+    handleClose(null, true);
   };
   const handleCancelSaveConfigurations = () => {
     environments.map((value,index)=>{
@@ -130,11 +114,12 @@ const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabase
     cookie.remove("mysql_users-host", { path: "/" });
     cookie.remove("mysql_users-name", { path: "/" });
     cookie.remove("mysql_users-password", { path: "/" });
-    setShowMysql(
+    rolesActions.setShowMysql(
       fromJS({
         show_mysql: !mysqlAppState.get("show_mysql")
       })
     );
+    handleClose(null, true);
   };
   const actions = [
       <FlatButton
@@ -154,7 +139,7 @@ const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabase
     ];
   const databases = () => {
     return mysqlAppState.get("mysql_databases")?mysqlAppState.get("mysql_databases").filter(value=>
-      value.get("environment") === environments[applicationAppState.get("active_environment")].id
+      value.get("environment") === environments[activeEnvironment].id
     ).toJS().map((value,index)=>
       <Chip
           // onTouchTap={handleClick}
@@ -168,112 +153,80 @@ const MysqlRole = ( {end, environments, applicationAppState, removeMysqlDatabase
     ):"";
   };
   return (
-    <div className={"small-6 medium-3 large-3 columns one-click-app "+(end ? "end":"")}>
-      <Card>
-        <CardHeader
-            avatar={<FontIcon className={"icon icon-mysql"}/>}
-            subtitle={"Relational Database"}
-            title={type}
-        />
-        <CardActions>
-          <Toggle
-              label="Enabled"
-              labelPosition="right"
-              onToggle={handleEnable}
-              toggled={enable?true:false}
+    <Dialog
+        actions={actions}
+        actionsContainerStyle={styles.button}
+        autoScrollBodyContent
+        bodyStyle={styles.body}
+        modal
+        onRequestClose={handleCancelSaveConfigurations}
+        open={enable}
+        title="Configurations"
+        titleStyle={styles.title}
+    >
+      <AddDatabase
+          activeEnvironment={environments[activeEnvironment].id}
+          applicationAppState={applicationAppState}
+          environments={environments}
+          mysqlAppState={mysqlAppState}
+          removeMysqlUser={rolesActions.removeMysqlUser}
+          setMysqlDatabases={rolesActions.setMysqlDatabases}
+          setMysqlUser={rolesActions.setMysqlUser}
+          setShowMysqlDatabase={rolesActions.setShowMysqlDatabase}
+          setShowMysqlUser={rolesActions.setShowMysqlUser}
+      />
+      <Tabs
+          onChange={handleChangeEnvironment}
+          value={activeEnvironment}
+      >
+        {environments.map((value, index)=>
+          <Tab
+              key={index}
+              label={value.name}
+              value={index}
           />
-          <FlatButton
-              label={"Configuration"}
-              onTouchTap={handleSaveConfigurations}
-          />
-        </CardActions>
-        <Dialog
-            actions={actions}
-            actionsContainerStyle={styles.button}
-            autoScrollBodyContent
-            bodyStyle={styles.body}
-            modal={false}
-            onRequestClose={handleCancelSaveConfigurations}
-            open={mysqlAppState.get("show_mysql")?true:false}
-            title="Configurations"
-        >
-          <AddDatabase
-              activeEnvironment={environments[applicationAppState.get("active_environment")].id}
-              applicationAppState={applicationAppState}
-              environments={environments}
-              mysqlAppState={mysqlAppState}
-              removeMysqlUser={removeMysqlUser}
-              setMysqlDatabases={setMysqlDatabases}
-              setMysqlUser={setMysqlUser}
-              setShowMysqlDatabase={setShowMysqlDatabase}
-              setShowMysqlUser={setShowMysqlUser}
-          />
-          <Tabs
-              onChange={handleChangeEnvironment}
-              value={applicationAppState.get("active_environment")}
+        )}
+      </Tabs>
+      <SwipeableViews
+          index={activeEnvironment}
+          onChangeIndex={handleChangeEnvironment}
+      >
+        {environments.map((value, index)=>
+          <div
+              className={"small-12 medium-12 large-12 columns"}
+              key={index}
           >
-            {environments.map((value, index)=>
-              <Tab
-                  key={index}
-                  label={value.name}
-                  value={index}
-              />
-            )}
-          </Tabs>
-          <SwipeableViews
-              index={applicationAppState.get("active_environment")}
-              onChangeIndex={handleChangeEnvironment}
-          >
-            {environments.map((value, index)=>
-              <div
-                  className={"small-12 medium-12 large-12 columns"}
-                  key={index}
+            <Base
+                activeEnvironment={environments[activeEnvironment].id}
+                mysqlAppState={mysqlAppState}
+            />
+            <h2>{"DataBases"}</h2>
+            <div style={styles.wrapper}>
+              {databases()}
+              <Chip
+                  onTouchTap={handleShowDatabase}
+                  style={styles.chip}
               >
-                <Base
-                    activeEnvironment={environments[applicationAppState.get("active_environment")].id}
-                    mysqlAppState={mysqlAppState}
-                />
-                <h2>{"DataBases"}</h2>
-                <div style={styles.wrapper}>
-                  {databases()}
-                  <Chip
-                      onTouchTap={handleShowDatabase}
-                      style={styles.chip}
-                  >
-                    <Avatar icon={<FontIcon className="icon icon-person" />} />
-                    {"Add Database"}
-                  </Chip>
-                </div>
-              </div>
-            )}
-          </SwipeableViews>
-        </Dialog>
-      </Card>
-    </div>
+                <Avatar icon={<FontIcon className="icon icon-person" />} />
+                {"Add Database"}
+              </Chip>
+            </div>
+          </div>
+        )}
+      </SwipeableViews>
+    </Dialog>
   );
 };
 
 MysqlRole.propTypes = {
+  activeEnvironment: PropTypes.number.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   enable: PropTypes.bool.isRequired,
-  end: PropTypes.bool.isRequired,
   environments: PropTypes.array.isRequired,
-  mysqlAppState: PropTypes.object.isRequired,
-  removeMysqlDatabase: PropTypes.func.isRequired,
-  removeMysqlDatabases: PropTypes.func.isRequired,
-  removeMysqlPackages: PropTypes.func.isRequired,
-  removeMysqlUser: PropTypes.func.isRequired,
-  removeMysqlUsers: PropTypes.func.isRequired,
-  setActiveEnvironment: PropTypes.func.isRequired,
-  setEnableMariadb: PropTypes.func.isRequired,
-  setEnableMysql: PropTypes.func.isRequired,
-  setMysqlDatabases: PropTypes.func.isRequired,
-  setMysqlRootPassword: PropTypes.func.isRequired,
-  setMysqlUser: PropTypes.func.isRequired,
-  setShowMysql: PropTypes.func.isRequired,
-  setShowMysqlDatabase: PropTypes.func.isRequired,
-  setShowMysqlUser: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  handleClose: PropTypes.func.isRequired,
+  mysqlAppState:PropTypes.object.isRequired,
+  rolesActions:PropTypes.object.isRequired,
+  setActiveEnvironment: PropTypes.func.isRequired
 };
 
 export default MysqlRole;

@@ -6,6 +6,7 @@ const initialState = Map({
     role: "web",
     sudo: "no"
   },
+  default_repo: "https://github.com/Tinker-Ware/plainHtml",
   nginx: {
     "server_name": "tinkerware.io",
     "listen": "80",

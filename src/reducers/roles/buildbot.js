@@ -9,7 +9,7 @@ const initialState = Map({
   nginx: {}
 });
 
-export default function plainHtml(state = initialState, action) {
+export default function buildbot(state = initialState, action) {
   switch (action.type) {
     case SET_ENABLE_BUILDBOT:
     {

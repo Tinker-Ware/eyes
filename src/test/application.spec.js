@@ -1,4 +1,4 @@
-import { Map, fromJS } from "immutable";
+import Immutable, { Map, fromJS } from "immutable";
 import { expect } from "chai";
 import application from "../reducers/application";
 
@@ -12,6 +12,124 @@ describe("application", () => {
 
     expect(nextState).to.equal(fromJS({
       application_name:"ghost"}));
+  });
+  it("handles SET_ACTIVE_STEP", () => {
+    const initialState = Map();
+    const action = {type:"SET_ACTIVE_STEP", value: fromJS({
+        active_step: 2})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "active_step": 2}))
+    ).to.be.true;
+  });
+  it("handles SET_ACTIVE_CONFIGURATION_STEP", () => {
+    const initialState = Map();
+    const action = {type:"SET_ACTIVE_CONFIGURATION_STEP", value: fromJS({
+        active_configuration_step: "mysql"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "active_configuration_step": "mysql"}))
+    ).to.be.true;
+  });
+  it("handles SET_REPO", () => {
+    const initialState = Map();
+    const action = {type:"SET_REPO", value: fromJS({
+        repository: "Github"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "repositories": ["Github"]}))
+    ).to.be.true;
+  });
+  it("handles REMOVE_REPO", () => {
+    const initialState = fromJS({
+      repositories: ["Github"]
+    });
+    const action = {type:"REMOVE_REPO", value: fromJS({
+        repository: "Github"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "repositories": []}))
+    ).to.be.true;
+  });
+  it("handles SET_STACK", () => {
+    const initialState = Map();
+    const action = {type:"SET_STACK", value: fromJS({
+        stack: "Rails"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "stacks": ["Rails"]}))
+    ).to.be.true;
+  });
+  it("handles REMOVE_STACK", () => {
+    const initialState = fromJS({
+      stacks: ["Rails"]
+    });
+    const action = {type:"REMOVE_STACK", value: fromJS({
+        stack: "Rails"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "stacks": []}))
+    ).to.be.true;
+  });
+  it("handles SET_DATABASE", () => {
+    const initialState = Map();
+    const action = {type:"SET_DATABASE", value: fromJS({
+        database: "MariaDB"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "databases": ["MariaDB"]}))
+    ).to.be.true;
+  });
+  it("handles REMOVE_DATABASE", () => {
+    const initialState = fromJS({
+      databases: ["MariaDB"]
+    });
+    const action = {type:"REMOVE_DATABASE", value: fromJS({
+        database: "MariaDB"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "databases": []}))
+    ).to.be.true;
+  });
+  it("handles SET_ADDONS", () => {
+    const initialState = Map();
+    const action = {type:"SET_ADDONS", value: fromJS({
+        addon: "CI"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "addons": ["CI"]}))
+    ).to.be.true;
+  });
+  it("handles REMOVE_ADDONS", () => {
+    const initialState = fromJS({
+      addons: ["CI"]
+    });
+    const action = {type:"REMOVE_ADDONS", value: fromJS({
+        addon: "CI"})};
+    const nextState = application(initialState, action);
+
+    expect(
+      Immutable.is(nextState, fromJS({
+        "addons": []}))
+    ).to.be.true;
   });
   it("handles SET_ACTIVE_ENVIRONMENT", () => {
     const initialState = Map();

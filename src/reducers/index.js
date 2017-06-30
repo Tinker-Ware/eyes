@@ -14,6 +14,7 @@ import repositoryAppState from "./repository";
 import userAppState from "./user";
 import userProjectAppState from "./userProject";
 import yiiAppState from "./roles/yii";
+import springAppState from "./roles/spring";
 
 const rootReducer = combineReducers({
   applicationAppState,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   projectNameAppState,
   projectsAppState,
   repositoryAppState,
+  springAppState,
   userAppState,
   userProjectAppState,
   yiiAppState,

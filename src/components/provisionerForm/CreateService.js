@@ -7,12 +7,11 @@ import React from "react";
 const style = {
   button: {
     margin: 0,
-    padding: ".5em",
     height: "auto"
   }
 };
 
-const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState} ) => {
+const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -44,6 +43,24 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       else if(environment==1)
         config = {"yii_extra_flags": "--no-dev"};
       return config;
+    }
+  };
+  const getSpringConfiguration = () => {
+    if(springAppState.get("enable_spring")){
+      return {
+        "repo":repositoryAppState.get("repository")?
+          repositoryAppState.get("repository").toJS().ssh_url:
+          springAppState.get("default_repo")
+      };
+    }
+  };
+  const getPureHtmlConfiguration = () => {
+    if(plainHtmlAppState.get("enable_plainhtml")){
+      return {
+        "repo":repositoryAppState.get("repository")?
+          repositoryAppState.get("repository").toJS().ssh_url:
+          plainHtmlAppState.get("default_repo")
+      };
     }
   };
   const getNginxConfiguration = () => {
@@ -93,7 +110,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
   };
   const configuration = () => {
     return {
-      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration()},
+      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getPureHtmlConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration(), ...getSpringConfiguration()},
       "development":{env:"development", ...getYiiConfiguration(0), ...getMysqlConfiguration(0)},
       "production":{env:"production", ...getYiiConfiguration(1), ...getMysqlConfiguration(1)}
     };
@@ -112,11 +129,15 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
     if(yiiAppState.get("enable_yii_advanced")) rolesArray.push(yiiAppState.get("roles_advanced"));
     if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb")) rolesArray.push(mysqlAppState.get("roles"));
+    if(springAppState.get("enable_spring")) rolesArray.push(springAppState.get("roles"));
+    if(plainHtmlAppState.get("enable_plainhtml")) rolesArray.push(plainHtmlAppState.get("roles"));
     return rolesArray;
   };
   const repositoryApp = () => {
     let repository = "";
     if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced")) repository = yiiAppState.get("enable_yii_advanced")?yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo");
+    if(plainHtmlAppState.get("enable_plainhtml")) repository = plainHtmlAppState.get("default_repo");
+    if(springAppState.get("enable_spring")) repository = springAppState.get("default_repo");
     return repository;
   };
   const handleCreateUserProject = () => {
@@ -137,7 +158,9 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
             repositoryAppState.get("repository").toJS().name
             :repositoryApp(),
           "username": repositoryAppState.get("repository")?
-            repositoryAppState.get("integration").toJS().username
+            repositoryAppState.get("integration")?
+              repositoryAppState.get("integration").toJS().username:
+              "Tinker-Ware"
             :"Tinker-Ware"
         },
         "ssh_keys": cloudProviderAppState.get("cloud_provider_ssh_keys")?
@@ -157,15 +180,11 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     return (
       <RaisedButton
           buttonStyle={style.button}
-          disabled={
-            projectNameAppState.get("project_name")?
-              false:true
-          }
-          fullWidth
           icon={<FontIcon className="icon icon-project" />}
           label={"Create Project"}
-          onClick={handleCreateUserProject}
+          onTouchTap={handleCreateUserProject}
           primary
+          style={style}
       />
     );
 };
@@ -176,9 +195,11 @@ CreateService.propTypes = {
   cloudProviderAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   requestPostUserProject: PropTypes.func.isRequired,
+  springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired
 };
