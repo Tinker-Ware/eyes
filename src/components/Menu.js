@@ -20,16 +20,19 @@ const Menu = ( {setUserSesion} ) => {
         }
       )
     );
-    browserHistory.push("/login");
+    HandleGoToSomePath("/login");
   };
-  const showProjects = () => {
-    browserHistory.push("/projects");
+  const HandleGoToSomePath = (path) => {
+    browserHistory.push(path);
   };
   return (
     <AppBar
         iconElementLeft={
           <IconButton>
-            <FontIcon className="icon icon-home"/>
+            <FontIcon
+                onClick={()=>HandleGoToSomePath("/projects")}
+                className="icon icon-home"
+            />
           </IconButton>
         }
         iconElementRight={
@@ -48,7 +51,7 @@ const Menu = ( {setUserSesion} ) => {
           >
             <MenuItem
                 href="/projects"
-                onClick={showProjects}
+                onClick={()=>HandleGoToSomePath("/projects")}
                 primaryText="Projects"
             />
             {/* <MenuItem

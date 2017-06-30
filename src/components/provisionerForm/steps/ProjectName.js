@@ -13,6 +13,11 @@ const ProjectName = ( { setProjectName, projectNameAppState, setActiveStep} ) =>
       name: e.target.value
     }));
   };
+  const handleKeyPress = (e) => {
+    if(e.key == "Enter" && projectNameAppState.get("project_name")){
+      setActiveStep(1);
+    }
+  };
   return (
     <div className="align-center steps">
       <p className="align-center pdt-2 title">{"Whats is your project name?"}</p>
@@ -22,6 +27,7 @@ const ProjectName = ( { setProjectName, projectNameAppState, setActiveStep} ) =>
             fullWidth
             name={"Previous Step"}
             onChange={handleSetProjectName}
+            onKeyPress={handleKeyPress}
             type={"text"}
             value={projectNameAppState.get("project_name")}
         />

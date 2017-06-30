@@ -216,13 +216,15 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
               primary
               style={styles.button}
           />
-          <RaisedButton
-              href={projectsAppState.get("user_project_dev_environment")?projectsAppState.get("user_project_dev_environment").toJS()[0].path:"#"}
-              icon={<FontIcon className="icon icon-cloud-download" />}
-              label={"Download"}
-              primary
-              style={styles.button}
-          />
+          {projectsAppState.get("user_project_dev_environment")?
+            <RaisedButton
+                href={projectsAppState.get("user_project_dev_environment").toJS()[0].path}
+                icon={<FontIcon className="icon icon-cloud-download" />}
+                label={"Download VM"}
+                primary
+                style={styles.button}
+            />:""
+          }
         </ToolbarGroup>
       </Toolbar>
       <Dialog
@@ -236,6 +238,20 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
           title="Your Deployed Servers"
       >
         {servers()}
+        <div className="align-right">
+          {/* <Chip
+              style={styles.chip}
+          >
+            <Avatar icon={<FontIcon className="icon icon-cpu" />} />
+            {"CPU: 60 %"}
+          </Chip> */}
+          <Chip
+              style={styles.chip}
+          >
+            <Avatar icon={<FontIcon className="icon icon-memory-ram" />} />
+            {"RAM: 1024 MB"}
+          </Chip>
+        </div>
       </Dialog>
       <Dialog
           actions={errorActions}
@@ -282,6 +298,8 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
             </TableBody>
           </Table>
         </List>
+      </div>
+      <div className="small-12 medium-12 large-12">
         <RaisedButton
             icon={<FontIcon className="icon icon-download" />}
             label={"Download Linux CLI"}
@@ -313,20 +331,6 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
             style={styles.button}
         />
       </div> */}
-      <div className="align-right">
-        <Chip
-            style={styles.chip}
-        >
-          <Avatar icon={<FontIcon className="icon icon-cpu" />} />
-          {"CPU: 60 %"}
-        </Chip>
-        <Chip
-            style={styles.chip}
-        >
-          <Avatar icon={<FontIcon className="icon icon-memory-ram" />} />
-          {"RAM: 1024 MB"}
-        </Chip>
-      </div>
     </div>
   );
 };

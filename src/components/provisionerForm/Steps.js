@@ -1,8 +1,11 @@
+import { browserHistory } from "react-router";
 import { fromJS } from "immutable";
 import { Step, Stepper, StepButton } from "material-ui/Stepper";
 import Addons from "./steps/Addons";
 import ArrowForwardIcon from "material-ui/svg-icons/navigation/arrow-forward";
+import ContentClear from "material-ui/svg-icons/content/clear";
 import DataBases from "./steps/DataBases";
+import FloatingActionButton from "material-ui/FloatingActionButton";
 import Notification from "../Notification";
 import ProjectName from "./steps/ProjectName";
 import PropTypes from "prop-types";
@@ -11,14 +14,30 @@ import Repositories from "./steps/Repositories";
 import Stacks from "./steps/Stacks";
 import SwipeableViews from "react-swipeable-views";
 
+const style = {
+  marginTop: ".5em",
+  float: "right"
+};
+
 const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
     }));
   };
+  const HandleGoToProjects = () => {
+    browserHistory.push("/projects");
+  };
   return (
     <div className="small-12 medium-12 large-12 large-centered columns">
+      <FloatingActionButton
+          mini
+          onTouchTap={HandleGoToProjects}
+          secondary
+          style={style}
+      >
+        <ContentClear />
+      </FloatingActionButton>
       <div className="container">
         <Stepper
             activeStep={applicationAppState.get("active_step")}

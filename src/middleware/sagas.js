@@ -397,6 +397,7 @@ export function* getUserProject(userAccess) {
       userProjectDevEnvironment = yield call(doRequestGetUserProjectDevEnvironment, userAccess.value.get("authorization"), userAccess.value.get("projectId"));
       time++;
     }
+    userProjectDevEnvironment.development_environments[0].path=location.protocol+userProjectDevEnvironment.development_environments[0].path.replace("https:", "");
     yield put(actions.setUserProjectDevEnvironment(fromJS({
         user_project_dev_environment: userProjectDevEnvironment.development_environments
       })
