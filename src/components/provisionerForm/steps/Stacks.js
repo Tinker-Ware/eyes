@@ -68,14 +68,14 @@ const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptio
       <div className="pdt-2">
         <RaisedButton
             label={"Previous Step"}
-            onTouchTap={()=>setActiveStep(1)}
+            onTouchTap={()=>setActiveStep(0)}
             primary
             style={style}
         />
         <RaisedButton
             disabled={stacks.size==0?true:false}
             label={"Next Step"}
-            onTouchTap={()=>setActiveStep(3)}
+            onTouchTap={()=>setActiveStep(2)}
             primary
             style={style}
         />

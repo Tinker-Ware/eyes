@@ -83,13 +83,13 @@ const Repositories = ( {applicationAppState, setActiveStep, setRepo, removeRepo,
       <div className="pdt-2">
         <RaisedButton
             label={"Previous Step"}
-            onTouchTap={()=>setActiveStep(0)}
+            onTouchTap={()=>setActiveStep(1)}
             primary
             style={style}
         />
         <RaisedButton
             label={"Next Step"}
-            onTouchTap={()=>setActiveStep(2)}
+            onTouchTap={()=>setActiveStep(3)}
             primary
             style={style}
         />

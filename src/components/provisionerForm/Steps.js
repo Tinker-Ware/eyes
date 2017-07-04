@@ -50,12 +50,12 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
           </Step>
           <Step disabled={projectNameAppState.get("project_name")?false:true}>
             <StepButton onClick={() => handleChangeStep(1)}>
-              {"Repository"}
+              {"Frameworks"}
             </StepButton>
           </Step>
-          <Step disabled={projectNameAppState.get("project_name")?false:true}>
+          <Step disabled={applicationAppState.get("stacks")?applicationAppState.get("stacks").size==0?true:false:true}>
             <StepButton onClick={() => handleChangeStep(2)}>
-              {"Frameworks"}
+              {"Repository"}
             </StepButton>
           </Step>
           <Step disabled={applicationAppState.get("stacks")?applicationAppState.get("stacks").size==0?true:false:true}>
@@ -77,6 +77,14 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               setActiveStep={handleChangeStep}
               setProjectName={setProjectName}
           />
+          <Stacks
+              removeStack={provisionerFormActions.removeStack}
+              rolesActions={rolesActions}
+              setActiveStep={handleChangeStep}
+              setStack={provisionerFormActions.setStack}
+              stacks={applicationAppState.get("stacks")?applicationAppState.get("stacks"):fromJS([])}
+              stacksOptions={applicationAppState.getIn(["steps","stacks"])}
+          />
           <Repositories
               applicationAppState={applicationAppState}
               removeRepo={provisionerFormActions.removeRepo}
@@ -91,14 +99,6 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               setRepo={provisionerFormActions.setRepo}
               setRepository={provisionerFormActions.setRepository}
               userAppState={userAppState}
-          />
-          <Stacks
-              removeStack={provisionerFormActions.removeStack}
-              rolesActions={rolesActions}
-              setActiveStep={handleChangeStep}
-              setStack={provisionerFormActions.setStack}
-              stacks={applicationAppState.get("stacks")?applicationAppState.get("stacks"):fromJS([])}
-              stacksOptions={applicationAppState.getIn(["steps","stacks"])}
           />
           <DataBases
               activeEnvironment={environments[applicationAppState.get("active_environment")].id}
