@@ -60,6 +60,11 @@ describe("sagas middleware", () => {
     const generatorError = function () { throw err; };
     expect(generatorError).to.throw(err);
     expect(generator.next().value).to.deep.equal(
+      put(actions.setDeployingProject(fromJS(
+        {"isDeployingProject": true
+      })))
+    );
+    expect(generator.next().value).to.deep.equal(
       call(doRequestDeployProject, fromJS({
         "authorization": data.authorization,
         "project_id": data.project_id,
@@ -77,6 +82,9 @@ describe("sagas middleware", () => {
               "deploy_id": deploy.deploy.id
             })
         }),
+        put(actions.setDeployingProject(fromJS({
+          "isDeployingProject": false
+        }))),
         call(setNotification, "Creating Server"),
         put(actions.setShowProjectServers(fromJS({
           show_project_servers: true
@@ -506,36 +514,47 @@ it("handles REQUEST_POST_USER_PROJECT", () => {
     }
   };
   const userAuthorization = {"user_sesion": {"token":"qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf"}
-};
-const generator = postUserProject({"value": fromJS({
-  "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
-  "user_project": {
-    "user_id": 1,
-    "project_name": "tinkerware.com",
-    "application_name": "Ghost",
-    "server_provider": "digital_ocean",
-    "configuration": {
-      "server_name": "tinkerware.com",
-      "nginx_remove_default_vhost": "true"
-    },
-    "repository": {
-      "provider": "github",
-      "username": "tinkerware",
-      "name": "ghost-blog-site"
-    },
-    "keys": [{
-      "id": 1,
-      "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff"
-    }]
-  }
-})
-});
-const err = new ReferenceError("404");
-const generatorError = function () { throw err; };
-expect(generatorError).to.throw(err);
-expect(generator.next().value).to.deep.equal(
-  call(doRequestPostUserProject, fromJS(userProject.project), fromJS(userAuthorization.user_sesion.token))
-);
+  };
+  const generator = postUserProject({"value": fromJS({
+    "authorization": "qphYSqjEFk1RcFxYqqIIFk4vaBJvDoBr3t9aHTp1JFEAO0NS7ECyLJJyUPybOUNf",
+    "user_project": {
+      "user_id": 1,
+      "project_name": "tinkerware.com",
+      "application_name": "Ghost",
+      "server_provider": "digital_ocean",
+      "configuration": {
+        "server_name": "tinkerware.com",
+        "nginx_remove_default_vhost": "true"
+      },
+      "repository": {
+        "provider": "github",
+        "username": "tinkerware",
+        "name": "ghost-blog-site"
+      },
+      "keys": [{
+        "id": 1,
+        "fingerprint": "00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff"
+      }]
+    }
+  })
+  });
+  const err = new ReferenceError("404");
+  const generatorError = function () { throw err; };
+  expect(generatorError).to.throw(err);
+
+  expect(generator.next().value).to.deep.equal(
+    put(actions.setPostingProject(fromJS(
+      {"isPostingProject": true
+    })))
+  );
+  expect(generator.next().value).to.deep.equal(
+    call(doRequestPostUserProject, fromJS(userProject.project), fromJS(userAuthorization.user_sesion.token))
+  );
+  // expect(generator.next().value).to.deep.equal(
+  //   put(actions.setPostingProject(fromJS(
+  //     {"isPostingProject": false
+  //   })))
+  // );
 });
 
 it("handles REQUEST_POST_USER", () => {

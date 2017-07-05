@@ -214,6 +214,36 @@ describe("project", () => {
       }
     ));
   });
+  it("handles SET_IS_POSTING_PROJECT", () => {
+    const initialState = Map();
+    const action = {type:"SET_IS_POSTING_PROJECT", value: fromJS(
+      {
+        "isPostingProject": true
+      }
+    )};
+    const nextState = projects(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      {
+        isPostingProject: true
+      }
+    ));
+  });
+  it("handles SET_IS_DEPLOYING_PROJECT", () => {
+    const initialState = Map();
+    const action = {type:"SET_IS_DEPLOYING_PROJECT", value: fromJS(
+      {
+        "isDeployingProject": true
+      }
+    )};
+    const nextState = projects(initialState, action);
+
+    expect(nextState).to.equal(fromJS(
+      {
+        isDeployingProject: true
+      }
+    ));
+  });
   it("handles SET_USER_PROJECTS", () => {
     const initialState = Map();
     const action = {type:"SET_USER_PROJECTS", value: fromJS(

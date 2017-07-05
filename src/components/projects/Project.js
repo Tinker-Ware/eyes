@@ -16,6 +16,7 @@ import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
+import RefreshIndicator from "material-ui/RefreshIndicator";
 
 const styles = {
   body: {
@@ -130,31 +131,47 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
     />
   ];
   const servers = () => {
-    return projectsAppState.get("project_servers")?projectsAppState.get("project_servers").toJS().map((server,index)=>
-      <ListItem
-          key={index}
-          leftIcon={
-            <FontIcon className="icon icon-check"/>
-          }
-          primaryText={"IP: "+server.networks.v4[0].ip_address}
-          rightIconButton={
-            <IconMenu iconButtonElement={
-                <IconButton
-                    tooltipPosition="bottom-left"
-                    touch
-                >
-                  <MoreVertIcon color={grey400} />
-                </IconButton>
+    return projectsAppState.get("project_servers")?
+      projectsAppState.get("project_servers").size>0?
+        projectsAppState.get("project_servers").toJS().map((server,index)=>
+          <ListItem
+              key={index}
+              leftIcon={
+                <FontIcon className="icon icon-check"/>
               }
-            >
-              <MenuItem onClick={() => handleProjectRedeploy(server.deploy_id)}>{"Redeploy server"}</MenuItem>
-              <MenuItem onClick={() => handlOpenURL("http://"+server.networks.v4[0].ip_address)}>{"Show Server"}</MenuItem>
-              <MenuItem onClick={() => handleDeleteDeployServers(server.deploy_id, server.id)}>{"Delete"}</MenuItem>
-            </IconMenu>
-          }
-          secondaryText={"Provider: "+server.provider}
+              primaryText={"IP: "+server.networks.v4[0].ip_address}
+              rightIconButton={
+                <IconMenu iconButtonElement={
+                    <IconButton
+                        tooltipPosition="bottom-left"
+                        touch
+                    >
+                      <MoreVertIcon color={grey400} />
+                    </IconButton>
+                  }
+                >
+                  <MenuItem onClick={() => handleProjectRedeploy(server.deploy_id)}>{"Redeploy server"}</MenuItem>
+                  <MenuItem onClick={() => handlOpenURL("http://"+server.networks.v4[0].ip_address)}>{"Show Server"}</MenuItem>
+                  <MenuItem onClick={() => handleDeleteDeployServers(server.deploy_id, server.id)}>{"Delete"}</MenuItem>
+                </IconMenu>
+              }
+              secondaryText={"Provider: "+server.provider}
+          />
+        )
+      :<RefreshIndicator
+          left={10}
+          size={40}
+          status="loading"
+          style={styles.refresh}
+          top={0}
       />
-    ):"";
+    :<RefreshIndicator
+        left={10}
+        size={40}
+        status="loading"
+        style={styles.refresh}
+        top={0}
+    />;
   };
   const deploys = () => {
     return projectsAppState.get("project_deploys")?projectsAppState.get("project_deploys").toJS().map((deploy,index)=>
@@ -209,6 +226,7 @@ const Project = ({deployProject, requestRedeployProjectServer, deleteProjectServ
               style={styles.button}
           /> */}
           <RaisedButton
+              disabled={projectsAppState.get("isDeployingProject")}
               href={"#"}
               icon={<FontIcon className="icon icon-deploy" />}
               label={"Deploy"}

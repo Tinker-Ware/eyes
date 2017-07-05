@@ -19,7 +19,7 @@ const style = {
   float: "right"
 };
 
-const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
+const Steps = ( {applicationAppState, environments, mysqlAppState, projectsAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -125,6 +125,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               nginxAppState={nginxAppState}
               plainHtmlAppState={plainHtmlAppState}
               projectNameAppState={projectNameAppState}
+              projectsAppState={projectsAppState}
               removeAddons={provisionerFormActions.removeAddons}
               repositoryAppState={repositoryAppState}
               requestPostUserProject={provisionerFormActions.requestPostUserProject}
@@ -145,7 +146,6 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
 };
 
 Steps.propTypes = {
-  // applicationActions: PropTypes.object.isRequired,
   applicationAppState: PropTypes.object.isRequired,
   baseAppState: PropTypes.object.isRequired,
   buildbotAppState: PropTypes.object.isRequired,
@@ -155,6 +155,7 @@ Steps.propTypes = {
   nginxAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
+  projectsAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,

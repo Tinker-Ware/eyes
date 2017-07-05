@@ -62,7 +62,7 @@ const Repositories = ( {applicationAppState, setActiveStep, setRepo, removeRepo,
   };
   return (
     <div className="align-center steps">
-      <p className="align-center title">{"Select your project repository (Optional)"}</p>
+      <p className="align-center title">{"(Optional) Select your project repository"}</p>
       {applicationAppState.get("active_configuration_step")=="github"?
         <GithubService
             enable={applicationAppState.get("active_configuration_step")?true:false}

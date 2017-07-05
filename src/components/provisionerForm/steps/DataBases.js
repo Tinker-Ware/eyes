@@ -80,7 +80,7 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
             type={"MySQL"}
         />:""
       }
-      <p className="align-center title">{"Select your Database (Optional)"}</p>
+      <p className="align-center title">{"(Optional) Select your Database"}</p>
       <Options
           handleChange={handleChangeDatabase}
           handleConfigure={handleShowConfiguration}

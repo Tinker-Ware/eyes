@@ -1,7 +1,9 @@
-import { SET_PROJECT_DEPLOYS, SET_PROJECT_DEPLOY_ERROR, SET_PROJECT_SERVERS, SET_SHOW_PROJECT_SERVERS, SET_USER_PROJECT, SET_USER_PROJECTS, SET_USER_PROJECT_DEV_ENVIRONMENT, SET_SHOW_PROJECT_DEPLOY_ERROR } from "../../constants/Projects";
+import { SET_PROJECT_DEPLOYS, SET_PROJECT_DEPLOY_ERROR, SET_PROJECT_SERVERS, SET_SHOW_PROJECT_SERVERS, SET_USER_PROJECT, SET_USER_PROJECTS, SET_USER_PROJECT_DEV_ENVIRONMENT, SET_SHOW_PROJECT_DEPLOY_ERROR, SET_IS_POSTING_PROJECT, SET_IS_DEPLOYING_PROJECT } from "../../constants/Projects";
 import { Map } from "immutable";
 
 const initialState = Map({
+  isDeployingProject: false,
+  isPostingProject: false,
   show_project_servers: false
 });
 
@@ -30,6 +32,14 @@ export default function userProject(state = initialState, action) {
     case SET_PROJECT_SERVERS:
     {
       return state.set("project_servers", action.value.get("project_servers"));
+    }
+    case SET_IS_POSTING_PROJECT:
+    {
+      return state.set("isPostingProject", action.value.get("isPostingProject"));
+    }
+    case SET_IS_DEPLOYING_PROJECT:
+    {
+      return state.set("isDeployingProject", action.value.get("isDeployingProject"));
     }
     case SET_SHOW_PROJECT_SERVERS:
     {

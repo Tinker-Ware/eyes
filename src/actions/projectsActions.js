@@ -40,6 +40,14 @@ export function setProjectDeployError(value) {
   return { type: types.SET_PROJECT_DEPLOY_ERROR, value };
 }
 
+export function setIsPostingProject(value) {
+  return { type: types.SET_IS_POSTING_PROJECT, value };
+}
+
+export function setIsDeployingProject(value) {
+  return { type: types.SET_IS_DEPLOYING_PROJECT, value };
+}
+
 export function setProjectServers(value) {
   return { type: types.SET_PROJECT_SERVERS, value };
 }

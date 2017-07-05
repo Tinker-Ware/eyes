@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
+const CreateService = ( {disabled, baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -180,6 +180,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     return (
       <RaisedButton
           buttonStyle={style.button}
+          disabled={disabled}
           icon={<FontIcon className="icon icon-project" />}
           label={"Create Project"}
           onTouchTap={handleCreateUserProject}
@@ -193,6 +194,7 @@ CreateService.propTypes = {
   baseAppState: PropTypes.object.isRequired,
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,

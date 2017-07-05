@@ -65,6 +65,20 @@ export function setUserProject(userProject){
   };
 }
 
+export function setPostingProject(bool){
+  return{
+    type: projectsActionTypes.SET_IS_POSTING_PROJECT,
+    value: bool
+  };
+}
+
+export function setDeployingProject(bool){
+  return{
+    type: projectsActionTypes.SET_IS_DEPLOYING_PROJECT,
+    value: bool
+  };
+}
+
 export function setUserProjects(userProjects){
   return{
     type: projectsActionTypes.SET_USER_PROJECTS,

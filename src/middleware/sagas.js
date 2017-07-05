@@ -254,6 +254,7 @@ export function* deleteProjectServer(data) {
 
 export function* deployProject(data) {
   try{
+    yield put(actions.setDeployingProject(fromJS({"isDeployingProject": true})));
     const deploy = yield call(doRequestDeployProject, data.value);
     yield[
       call(getProjectDeployServers, {
@@ -265,6 +266,7 @@ export function* deployProject(data) {
             "deploy_id": deploy.deploy.id
           })
       }),
+      put(actions.setDeployingProject(fromJS({"isDeployingProject": false}))),
       call(setNotification, "Creating Server"),
       put(actions.setShowProjectServers(fromJS({"show_project_servers": true})))
     ];
@@ -477,8 +479,10 @@ export function* postUser(user) {
 
 export function* postUserProject(project) {
   try {
+    yield put(actions.setPostingProject(fromJS({"isPostingProject": true})));
     const userProject = yield call(doRequestPostUserProject, project.value.get("user_project"), project.value.get("authorization"));
     browserHistory.push("/project/"+userProject.project.id);
+    yield put(actions.setPostingProject(fromJS({"isPostingProject": false})));
     yield call(setNotification, "Project Created");
   }
   catch(error) {

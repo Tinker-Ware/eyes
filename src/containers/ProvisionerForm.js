@@ -42,6 +42,7 @@ export class ServiceForm extends Component {
               nginxAppState={this.props.nginxAppState}
               plainHtmlAppState={this.props.plainHtmlAppState}
               projectNameAppState={this.props.projectNameAppState}
+              projectsAppState={this.props.projectsAppState}
               provisionerFormActions={this.props.provisionerFormActions}
               repositoryAppState={this.props.repositoryAppState}
               rolesActions={this.props.rolesActions}
@@ -67,6 +68,7 @@ ServiceForm.propTypes = {
   nginxAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
+  projectsAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
@@ -86,6 +88,7 @@ function mapStateToProps(state) {
     nginxAppState: state.nginxAppState,
     plainHtmlAppState: state.plainHtmlAppState,
     projectNameAppState: state.projectNameAppState,
+    projectsAppState: state.projectsAppState,
     repositoryAppState: state.repositoryAppState,
     springAppState: state.springAppState,
     userAppState: state.userAppState,
