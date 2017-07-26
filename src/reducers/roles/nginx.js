@@ -3,12 +3,12 @@ import {Map} from "immutable";
 
 const initialState = Map({
   cookie_validation_key: "",
-  enable_nginx: true,
-  roles: {
+  enable_nginx: false,
+  roles: [{
     role: "nginx",
     sudo: "yes",
     tags: "nginx"
-  },
+  }],
   nginx: {
     "nginx_remove_default_vhost": true
   }

@@ -2,10 +2,10 @@ import {SET_SERVER_NAME,SET_REPO_PATH,SET_GITHUB_REPO,SET_ENABLE_PLAINHTML,SET_S
 import {Map} from "immutable";
 
 const initialState = Map({
-  roles: {
+  roles: [{
     role: "web",
     sudo: "no"
-  },
+  }],
   default_repo: "https://github.com/Tinker-Ware/plainHtml",
   nginx: {
     "server_name": "tinkerware.io",

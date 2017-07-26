@@ -2,14 +2,14 @@ import {SET_COOKIE_VALIDATION_KEY, SET_YII_GIT_REPO,SET_ENABLE_YII,SET_ENABLE_AD
 import {Map} from "immutable";
 
 const initialState = Map({
-  roles: {
+  roles: [{
     role: "yii",
     sudo: "no"
-  },
-  roles_advanced: {
+  }],
+  roles_advanced: [{
     role: "yii2-advanced",
     sudo: "no"
-  },
+  }],
   default_repo: "https://github.com/Tinker-Ware/yii2-crud",
   default_advanced_repo: "https://github.com/Tinker-Ware/yii2-advanced",
   default_repo_name: "yii2-crud",

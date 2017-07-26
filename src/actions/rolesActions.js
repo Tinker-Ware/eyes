@@ -132,6 +132,14 @@ export function setEnableBase(value) {
   return { type: types.SET_ENABLE_BASE, value };
 }
 
+export function setEnableNodejs(value) {
+  return { type: types.SET_ENABLE_NODEJS, value };
+}
+
+export function setEnableSpark(value) {
+  return { type: types.SET_ENABLE_SPARK, value };
+}
+
 export function setRequestActiveBase(value) {
   return { type: types.SET_REQUEST_ACTIVE_BASE, value };
 }

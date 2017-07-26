@@ -3,10 +3,10 @@ import {Map} from "immutable";
 
 const initialState = Map({
   enable_base:true,
-  roles: {
+  roles: [{
       role: "base",
       sudo: "yes"
-  }
+  }]
 });
 
 export default function git(state = initialState, action) {

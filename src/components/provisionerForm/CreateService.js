@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
+const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState, nodejsAppState, sparkAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -51,6 +51,24 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
         "repo":repositoryAppState.get("repository")?
           repositoryAppState.get("repository").toJS().ssh_url:
           springAppState.get("default_repo")
+      };
+    }
+  };
+  const getNodejsConfiguration = () => {
+    if(nodejsAppState.get("enable_nodejs")){
+      return {
+        "repo":repositoryAppState.get("repository")?
+          repositoryAppState.get("repository").toJS().ssh_url:
+          nodejsAppState.get("default_repo")
+      };
+    }
+  };
+  const getSparkConfiguration = () => {
+    if(sparkAppState.get("enable_spark")){
+      return {
+        "repo":repositoryAppState.get("repository")?
+          repositoryAppState.get("repository").toJS().ssh_url:
+          sparkAppState.get("default_repo")
       };
     }
   };
@@ -110,7 +128,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
   };
   const configuration = () => {
     return {
-      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getPureHtmlConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration(), ...getSpringConfiguration()},
+      "general":{...getBaseConfiguration(), ...getNginxConfiguration(), ...getPureHtmlConfiguration(), ...getYiiConfiguration(), ...getMysqlConfiguration(), ...getSpringConfiguration(), ...getNodejsConfiguration(), ...getSparkConfiguration()},
       "development":{env:"development", ...getYiiConfiguration(0), ...getMysqlConfiguration(0)},
       "production":{env:"production", ...getYiiConfiguration(1), ...getMysqlConfiguration(1)}
     };
@@ -123,14 +141,46 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
   };
   const roles = () => {
     let rolesArray = [];
-    if(nginxAppState.get("enable_nginx")) rolesArray.push(nginxAppState.get("roles"));
-    if(baseAppState.get("enable_base")) rolesArray.push(baseAppState.get("roles"));
-    if(buildbotAppState.get("enable_buildbot")) rolesArray.push(buildbotAppState.get("roles"));
-    if(yiiAppState.get("enable_yii")) rolesArray.push(yiiAppState.get("roles"));
-    if(yiiAppState.get("enable_yii_advanced")) rolesArray.push(yiiAppState.get("roles_advanced"));
-    if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb")) rolesArray.push(mysqlAppState.get("roles"));
-    if(springAppState.get("enable_spring")) rolesArray.push(springAppState.get("roles"));
-    if(plainHtmlAppState.get("enable_plainhtml")) rolesArray.push(plainHtmlAppState.get("roles"));
+    if(nginxAppState.get("enable_nginx"))
+      nginxAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(baseAppState.get("enable_base"))
+      baseAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(buildbotAppState.get("enable_buildbot"))
+      buildbotAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(yiiAppState.get("enable_yii"))
+      yiiAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(nodejsAppState.get("enable_nodejs"))
+      nodejsAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(sparkAppState.get("enable_spark"))
+      sparkAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(yiiAppState.get("enable_yii_advanced"))
+      yiiAppState.get("roles_advanced").map((role)=>
+        rolesArray.push(role)
+      );
+    if(mysqlAppState.get("enable_mysql")||mysqlAppState.get("enable_mariadb"))
+      mysqlAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(springAppState.get("enable_spring"))
+      springAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
+    if(plainHtmlAppState.get("enable_plainhtml"))
+      plainHtmlAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
     return rolesArray;
   };
   const repositoryApp = () => {
@@ -138,6 +188,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(yiiAppState.get("enable_yii")||yiiAppState.get("enable_yii_advanced")) repository = yiiAppState.get("enable_yii_advanced")?yiiAppState.get("default_advanced_repo"):yiiAppState.get("default_repo");
     if(plainHtmlAppState.get("enable_plainhtml")) repository = plainHtmlAppState.get("default_repo");
     if(springAppState.get("enable_spring")) repository = springAppState.get("default_repo");
+    if(nodejsAppState.get("enable_nodejs")) repository = nodejsAppState.get("default_repo");
     return repository;
   };
   const handleCreateUserProject = () => {
@@ -195,10 +246,12 @@ CreateService.propTypes = {
   cloudProviderAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  nodejsAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   requestPostUserProject: PropTypes.func.isRequired,
+  sparkAppState: PropTypes.object.isRequired,
   springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired

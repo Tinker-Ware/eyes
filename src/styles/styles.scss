@@ -53,6 +53,13 @@ $icon-ruby: '\ebc9';
 $icon-wordpress: '\ebfe';
 $icon-yii: '\ec01';
 $icon-ember: '\e90b';
+$icon-spark-path1: '\e90e';
+$icon-spark-path2: '\e90f';
+$icon-spark-path3: '\e911';
+$icon-spark-path4: '\e912';
+$icon-spark-path5: '\e913';
+$icon-spark-path6: '\e914';
+$icon-spark-path7: '\e915';
 $icon-mydevop-path1: '\e925';
 $icon-mydevop-path2: '\e926';
 $icon-mydevop-path3: '\e927';
@@ -432,6 +439,41 @@ input {
 .icon-ember {
   &::before {
     content: $icon-ember;
+  }
+}
+
+.icon-spark .path1 {
+  &::before {
+    content: $icon-spark-path1;
+  }
+}
+
+.icon-spark .path2 {
+  &::before {
+    content: $icon-spark-path2;
+  }
+}
+
+.icon-spark .path3 {
+  &::before {
+    content: $icon-spark-path3;
+  }
+}
+
+.icon-spark .path4 {
+  &::before {
+    content: $icon-spark-path4;
+  }
+}
+
+.icon-spark .path5 {
+  &:before {
+    content: $icon-spark-path5;
+  }
+}
+.icon-spark .path6 {
+  &:before {
+    content: $icon-spark-path6;
   }
 }
 

@@ -40,12 +40,14 @@ export class ServiceForm extends Component {
               ghostAppState={this.props.ghostAppState}
               mysqlAppState={this.props.mysqlAppState}
               nginxAppState={this.props.nginxAppState}
+              nodejsAppState={this.props.nodejsAppState}
               plainHtmlAppState={this.props.plainHtmlAppState}
               projectNameAppState={this.props.projectNameAppState}
               provisionerFormActions={this.props.provisionerFormActions}
               repositoryAppState={this.props.repositoryAppState}
               rolesActions={this.props.rolesActions}
               setProjectName={this.props.provisionerFormActions.setProjectName}
+              sparkAppState={this.props.sparkAppState}
               springAppState={this.props.springAppState}
               userAppState={this.props.userAppState}
               yiiAppState={this.props.yiiAppState}
@@ -65,11 +67,13 @@ ServiceForm.propTypes = {
   ghostAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  nodejsAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
+  sparkAppState: PropTypes.object.isRequired,
   springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired
@@ -84,9 +88,11 @@ function mapStateToProps(state) {
     ghostAppState: state.ghostAppState,
     mysqlAppState: state.mysqlAppState,
     nginxAppState: state.nginxAppState,
+    nodejsAppState: state.nodejsAppState,
     plainHtmlAppState: state.plainHtmlAppState,
     projectNameAppState: state.projectNameAppState,
     repositoryAppState: state.repositoryAppState,
+    sparkAppState: state.sparkAppState,
     springAppState: state.springAppState,
     userAppState: state.userAppState,
     yiiAppState: state.yiiAppState

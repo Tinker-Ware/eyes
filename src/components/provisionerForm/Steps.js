@@ -19,7 +19,7 @@ const style = {
   float: "right"
 };
 
-const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
+const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nodejsAppState, sparkAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -123,6 +123,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               cloudProviderAppState={cloudProviderAppState}
               mysqlAppState={mysqlAppState}
               nginxAppState={nginxAppState}
+              nodejsAppState={nodejsAppState}
               plainHtmlAppState={plainHtmlAppState}
               projectNameAppState={projectNameAppState}
               removeAddons={provisionerFormActions.removeAddons}
@@ -130,6 +131,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               requestPostUserProject={provisionerFormActions.requestPostUserProject}
               setActiveStep={handleChangeStep}
               setAddons={provisionerFormActions.setAddons}
+              sparkAppState={sparkAppState}
               springAppState={springAppState}
               userAppState={userAppState}
               yiiAppState={yiiAppState}
@@ -153,12 +155,14 @@ Steps.propTypes = {
   environments: PropTypes.array.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  nodejsAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
   setProjectName: PropTypes.func.isRequired,
+  sparkAppState: PropTypes.object.isRequired,
   springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired

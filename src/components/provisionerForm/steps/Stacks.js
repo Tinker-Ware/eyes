@@ -26,6 +26,11 @@ const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptio
   const handleChangeStatusStack = (stack, status) => {
     switch (stack) {
       case "yii":
+        rolesActions.setEnableNginx(
+          fromJS({
+            enable_nginx: status
+          })
+        );
         rolesActions.setEnableYii(
           fromJS({
             enable_yii: status
@@ -33,6 +38,11 @@ const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptio
         );
         break;
       case "yiiadvanced":
+        rolesActions.setEnableNginx(
+          fromJS({
+            enable_nginx: status
+          })
+        );
         rolesActions.setEnableYiiAdvanced(
           fromJS({
             enable_yii_advanced: status
@@ -47,9 +57,33 @@ const Steps = ( {rolesActions, setActiveStep, setStack, removeStack, stacksOptio
         );
         break;
       case "html5":
+        rolesActions.setEnableNginx(
+          fromJS({
+            enable_nginx: status
+          })
+        );
         rolesActions.setEnablePlainhtml(
           fromJS({
             enable_plainhtml: status
+          })
+        );
+        break;
+      case "nodejs":
+        rolesActions.setEnableNginx(
+          fromJS({
+            enable_nginx: status
+          })
+        );
+        rolesActions.setEnableNodejs(
+          fromJS({
+            enable_nodejs: status
+          })
+        );
+        break;
+      case "spark":
+        rolesActions.setEnableSpark(
+          fromJS({
+            enable_spark: status
           })
         );
         break;

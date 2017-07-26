@@ -85,7 +85,10 @@ const ProjectsList = ({projectsAppState}) => {
             {TableRows}
           </TableBody>
         </Table>
-        <Drawer open swipeAreaWidth={100}>
+        <Drawer
+            open
+            swipeAreaWidth={100}
+        >
           <MenuItem>{"Menu Item"}</MenuItem>
           <MenuItem>{"Menu Item 2"}</MenuItem>
         </Drawer>

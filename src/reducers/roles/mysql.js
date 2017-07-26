@@ -2,10 +2,10 @@ import {REMOVE_MYSQL_DATABASE, REMOVE_MYSQL_USER, REMOVE_MYSQL_USERS, REMOVE_MYS
 import {Map} from "immutable";
 
 const initialState = Map({
-  roles: {
+  roles: [{
     role: "mysql",
     sudo: "yes"
-  },
+  }],
   show_mysql: false,
   show_mysql_user: false,
   show_mysql_database: false,

@@ -2,10 +2,10 @@ import {SET_ENABLE_BUILDBOT} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
-  roles: {
+  roles: [{
     role: "buildbot",
     sudo: "no"
-  },
+  }],
   nginx: {}
 });
 

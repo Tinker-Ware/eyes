@@ -2,10 +2,10 @@ import {SET_ENABLE_SPRING} from "../../constants/Roles";
 import {Map} from "immutable";
 
 const initialState = Map({
-  roles: {
+  roles: [{
     role: "spring",
     sudo: "no"
-  },
+  }],
   default_repo: "https://github.com/Tinker-Ware/spring-maven-basic",
   nginx: {}
 });

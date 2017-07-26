@@ -77,6 +77,24 @@ const initialState = fromJS({
       },
       {
         config: false,
+        description: "JavaScript environment",
+        enabled: true,
+        icon: ["icon-nodejs"],
+        isOtro: false,
+        name: "nodejs",
+        title: "NodeJS"
+      },
+      {
+        config: false,
+        description: "Machine learning library",
+        enabled: true,
+        icon: ["icon-spark","path1","path2","path3","path4","path5","path6","path7"],
+        isOtro: false,
+        name: "spark",
+        title: "Spark"
+      },
+      {
+        config: false,
         description: "HTML, CSS & JavaScript",
         enabled: true,
         icon: ["icon-html5"],
@@ -119,15 +137,6 @@ const initialState = fromJS({
         isOtro: false,
         name: "rails",
         title: "Rails"
-      },
-      {
-        config: false,
-        description: "JavaScript environment",
-        enabled: false,
-        icon: ["icon-nodejs"],
-        isOtro: false,
-        name: "nodejs",
-        title: "NodeJS"
       },
       {
         config: false,
