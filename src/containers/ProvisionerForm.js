@@ -38,6 +38,7 @@ export class ServiceForm extends Component {
               cloudProviderAppState={this.props.cloudProviderAppState}
               environments={this.props.applicationAppState.get("application_evironments")?this.props.applicationAppState.get("application_evironments").toJS():[]}
               ghostAppState={this.props.ghostAppState}
+              mongodbAppState={this.props.mongodbAppState}
               mysqlAppState={this.props.mysqlAppState}
               nginxAppState={this.props.nginxAppState}
               nodejsAppState={this.props.nodejsAppState}
@@ -65,6 +66,7 @@ ServiceForm.propTypes = {
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   ghostAppState: PropTypes.object.isRequired,
+  mongodbAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
   nodejsAppState: PropTypes.object.isRequired,
@@ -86,6 +88,7 @@ function mapStateToProps(state) {
     buildbotAppState: state.buildbotAppState,
     cloudProviderAppState: state.cloudProviderAppState,
     ghostAppState: state.ghostAppState,
+    mongodbAppState: state.mongodbAppState,
     mysqlAppState: state.mysqlAppState,
     nginxAppState: state.nginxAppState,
     nodejsAppState: state.nodejsAppState,

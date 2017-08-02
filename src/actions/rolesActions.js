@@ -152,6 +152,10 @@ export function setEnableGhost(value) {
   return { type: types.SET_ENABLE_GHOST, value };
 }
 
+export function setEnableMongodb(value) {
+  return { type: types.SET_ENABLE_MONGODB, value };
+}
+
 export function setEnableBuildbot(value) {
   return { type: types.SET_ENABLE_BUILDBOT, value };
 }

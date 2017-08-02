@@ -17,6 +17,7 @@ import springAppState from "./roles/spring";
 import userAppState from "./user";
 import userProjectAppState from "./userProject";
 import yiiAppState from "./roles/yii";
+import mongodbAppState from "./roles/mongodb";
 
 const rootReducer = combineReducers({
   applicationAppState,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   buildbotAppState,
   cloudProviderAppState,
   ghostAppState,
+  mongodbAppState,
   mysqlAppState,
   nginxAppState,
   nodejsAppState,

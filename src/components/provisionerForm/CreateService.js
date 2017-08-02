@@ -11,7 +11,7 @@ const style = {
   }
 };
 
-const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState, nodejsAppState, sparkAppState} ) => {
+const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, projectNameAppState, repositoryAppState, springAppState, userAppState, requestPostUserProject, mysqlAppState, nginxAppState, yiiAppState, plainHtmlAppState, mongodbAppState, nodejsAppState, sparkAppState} ) => {
   const getBaseConfiguration = () => {
     return {
         "server_user": "tinkerware",
@@ -173,6 +173,10 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
       mysqlAppState.get("roles").map((role)=>
         rolesArray.push(role)
       );
+    if(mongodbAppState.get("enable_mongodb"))
+      mongodbAppState.get("roles").map((role)=>
+        rolesArray.push(role)
+      );
     if(springAppState.get("enable_spring"))
       springAppState.get("roles").map((role)=>
         rolesArray.push(role)
@@ -244,6 +248,7 @@ CreateService.propTypes = {
   baseAppState: PropTypes.object.isRequired,
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  mongodbAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
   nodejsAppState: PropTypes.object.isRequired,

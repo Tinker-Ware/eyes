@@ -187,21 +187,21 @@ const initialState = fromJS({
       },
       {
         config: false,
+        description: "Document Database",
+        enabled: true,
+        icon: ["icon-mongodb"],
+        isOtro: false,
+        name: "mongodb",
+        title: "MongoDB"
+      },
+      {
+        config: false,
         description: "In-memory data structure store",
         enabled: false,
         icon: ["icon-redis"],
         isOtro: false,
         name: "redis",
         title: "Redis"
-      },
-      {
-        config: false,
-        description: "Document Database",
-        enabled: false,
-        icon: ["icon-mongodb"],
-        isOtro: false,
-        name: "mongodb",
-        title: "MongoDB"
       },
       {
         config: false,

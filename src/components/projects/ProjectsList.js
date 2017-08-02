@@ -6,7 +6,6 @@ import FontIcon from "material-ui/FontIcon";
 import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
-import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 
 const style = {
@@ -85,13 +84,6 @@ const ProjectsList = ({projectsAppState}) => {
             {TableRows}
           </TableBody>
         </Table>
-        <Drawer
-            open
-            swipeAreaWidth={100}
-        >
-          <MenuItem>{"Menu Item"}</MenuItem>
-          <MenuItem>{"Menu Item 2"}</MenuItem>
-        </Drawer>
       </div>
   );
 };

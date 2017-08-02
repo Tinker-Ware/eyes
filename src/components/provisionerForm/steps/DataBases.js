@@ -51,6 +51,13 @@ const DataBases = ( {activeEnvironment, environments,  applicationAppState, mysq
           rolesActions.removeMysqlUsers();
         }
         break;
+      case "mongodb":
+        rolesActions.setEnableMongodb(
+          fromJS({
+            enable_mongodb: status
+          })
+        );
+        break;
       default:
         break;
     }

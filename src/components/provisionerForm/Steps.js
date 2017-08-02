@@ -19,7 +19,7 @@ const style = {
   float: "right"
 };
 
-const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nodejsAppState, sparkAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
+const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, mongodbAppState, nodejsAppState, sparkAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -106,6 +106,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               databases={applicationAppState.get("databases")?applicationAppState.get("databases"):fromJS([])}
               databasesOptions={applicationAppState.getIn(["steps","databases"])}
               environments={environments}
+              mongodbAppState={mongodbAppState}
               mysqlAppState={mysqlAppState}
               removeDatabase={provisionerFormActions.removeDatabase}
               rolesActions={rolesActions}
@@ -121,6 +122,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               baseAppState={baseAppState}
               buildbotAppState={buildbotAppState}
               cloudProviderAppState={cloudProviderAppState}
+              mongodbAppState={mongodbAppState}
               mysqlAppState={mysqlAppState}
               nginxAppState={nginxAppState}
               nodejsAppState={nodejsAppState}
@@ -153,6 +155,7 @@ Steps.propTypes = {
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   environments: PropTypes.array.isRequired,
+  mongodbAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
   nodejsAppState: PropTypes.object.isRequired,
