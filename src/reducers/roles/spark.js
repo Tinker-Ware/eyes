@@ -4,7 +4,7 @@ import {Map} from "immutable";
 const initialState = Map({
   roles: [{
     role: "spark",
-    sudo: "noe"
+    sudo: "no"
   }],
   nginx: {}
 });
