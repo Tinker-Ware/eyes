@@ -6,6 +6,7 @@ const initialState = Map({
     role: "spark",
     sudo: "no"
   }],
+  default_repo: "https://github.com/Tinker-Ware/plainHtml",
   nginx: {}
 });
 

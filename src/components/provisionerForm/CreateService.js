@@ -193,6 +193,7 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     if(plainHtmlAppState.get("enable_plainhtml")) repository = plainHtmlAppState.get("default_repo");
     if(springAppState.get("enable_spring")) repository = springAppState.get("default_repo");
     if(nodejsAppState.get("enable_nodejs")) repository = nodejsAppState.get("default_repo");
+    if(sparkAppState.get("enable_spark")) repository = sparkAppState.get("default_repo");
     return repository;
   };
   const handleCreateUserProject = () => {
