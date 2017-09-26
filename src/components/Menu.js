@@ -30,8 +30,8 @@ const Menu = ( {setUserSesion} ) => {
         iconElementLeft={
           <IconButton>
             <FontIcon
-                onClick={()=>HandleGoToSomePath("/projects")}
                 className="icon icon-home"
+                onClick={()=>HandleGoToSomePath("/projects")}
             />
           </IconButton>
         }

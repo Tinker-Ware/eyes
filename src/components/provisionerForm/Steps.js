@@ -19,7 +19,7 @@ const style = {
   float: "right"
 };
 
-const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
+const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAppState, provisionerFormActions, rolesActions, setProjectName, userAppState, repositoryAppState, baseAppState, buildbotAppState, cloudProviderAppState, springAppState, mongodbAppState, nodejsAppState, sparkAppState, nginxAppState, yiiAppState, plainHtmlAppState} ) => {
   const handleChangeStep = (value) => {
     provisionerFormActions.setActiveStep(fromJS({
       active_step: value
@@ -106,6 +106,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               databases={applicationAppState.get("databases")?applicationAppState.get("databases"):fromJS([])}
               databasesOptions={applicationAppState.getIn(["steps","databases"])}
               environments={environments}
+              mongodbAppState={mongodbAppState}
               mysqlAppState={mysqlAppState}
               removeDatabase={provisionerFormActions.removeDatabase}
               rolesActions={rolesActions}
@@ -121,8 +122,10 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               baseAppState={baseAppState}
               buildbotAppState={buildbotAppState}
               cloudProviderAppState={cloudProviderAppState}
+              mongodbAppState={mongodbAppState}
               mysqlAppState={mysqlAppState}
               nginxAppState={nginxAppState}
+              nodejsAppState={nodejsAppState}
               plainHtmlAppState={plainHtmlAppState}
               projectNameAppState={projectNameAppState}
               removeAddons={provisionerFormActions.removeAddons}
@@ -130,6 +133,7 @@ const Steps = ( {applicationAppState, environments, mysqlAppState, projectNameAp
               requestPostUserProject={provisionerFormActions.requestPostUserProject}
               setActiveStep={handleChangeStep}
               setAddons={provisionerFormActions.setAddons}
+              sparkAppState={sparkAppState}
               springAppState={springAppState}
               userAppState={userAppState}
               yiiAppState={yiiAppState}
@@ -151,14 +155,17 @@ Steps.propTypes = {
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
   environments: PropTypes.array.isRequired,
+  mongodbAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  nodejsAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   provisionerFormActions: PropTypes.object.isRequired,
   repositoryAppState: PropTypes.object.isRequired,
   rolesActions: PropTypes.object.isRequired,
   setProjectName: PropTypes.func.isRequired,
+  sparkAppState: PropTypes.object.isRequired,
   springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired

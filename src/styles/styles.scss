@@ -53,6 +53,13 @@ $icon-ruby: '\ebc9';
 $icon-wordpress: '\ebfe';
 $icon-yii: '\ec01';
 $icon-ember: '\e90b';
+$icon-spark-path1: '\e90e';
+$icon-spark-path2: '\e90f';
+$icon-spark-path3: '\e911';
+$icon-spark-path4: '\e912';
+$icon-spark-path5: '\e913';
+$icon-spark-path6: '\e914';
+$icon-spark-path7: '\e915';
 $icon-mydevop-path1: '\e925';
 $icon-mydevop-path2: '\e926';
 $icon-mydevop-path3: '\e927';
@@ -435,6 +442,41 @@ input {
   }
 }
 
+.icon-spark .path1 {
+  &::before {
+    content: $icon-spark-path1;
+  }
+}
+
+.icon-spark .path2 {
+  &::before {
+    content: $icon-spark-path2;
+  }
+}
+
+.icon-spark .path3 {
+  &::before {
+    content: $icon-spark-path3;
+  }
+}
+
+.icon-spark .path4 {
+  &::before {
+    content: $icon-spark-path4;
+  }
+}
+
+.icon-spark .path5 {
+  &:before {
+    content: $icon-spark-path5;
+  }
+}
+.icon-spark .path6 {
+  &:before {
+    content: $icon-spark-path6;
+  }
+}
+
 .icon-mydevop .path1 {
   &::before {
     content: $icon-mydevop-path1;
@@ -659,12 +701,30 @@ body {
   }
 }
 
+.logo-login {
+  font-size: 4em;
+}
+
 .align-center {
   text-align: center;
 }
 
 .align-right {
   text-align: right;
+}
+
+.color-primary {
+  color: $primary-color;
+}
+
+// $primary-color: rgb(83, 106, 112);
+// $secondary-color: rgb(45, 110, 148);
+// $tertiary-color: rgb(226, 34, 59);
+// $quaternary-color: rgb(47, 169, 182);
+// $quinary-color: rgb(103, 196, 175);
+
+.padding-2 {
+  padding: 2em;
 }
 
 .one-click-app {
@@ -684,6 +744,23 @@ body {
     font-family: 'SFText-Regular' !important;
     font-size: 1.66em;
   }
+}
+
+.video-container{
+  video{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    transition: 1s opacity;
+  }
+  min-height: 880px;
+  position: absolute;
 }
 
 #hexGrid {

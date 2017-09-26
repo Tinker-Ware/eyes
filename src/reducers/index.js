@@ -7,14 +7,17 @@ import cloudProviderAppState from "./cloudProvider";
 import ghostAppState from "./roles/ghost";
 import mysqlAppState from "./roles/mysql";
 import nginxAppState from "./roles/nginx";
+import nodejsAppState from "./roles/nodejs";
 import plainHtmlAppState from "./roles/plainHtml";
 import projectNameAppState from "./projectName";
 import projectsAppState from "./project/projects";
 import repositoryAppState from "./repository";
+import sparkAppState from "./roles/spark";
+import springAppState from "./roles/spring";
 import userAppState from "./user";
 import userProjectAppState from "./userProject";
 import yiiAppState from "./roles/yii";
-import springAppState from "./roles/spring";
+import mongodbAppState from "./roles/mongodb";
 
 const rootReducer = combineReducers({
   applicationAppState,
@@ -22,12 +25,15 @@ const rootReducer = combineReducers({
   buildbotAppState,
   cloudProviderAppState,
   ghostAppState,
+  mongodbAppState,
   mysqlAppState,
   nginxAppState,
+  nodejsAppState,
   plainHtmlAppState,
   projectNameAppState,
   projectsAppState,
   repositoryAppState,
+  sparkAppState,
   springAppState,
   userAppState,
   userProjectAppState,

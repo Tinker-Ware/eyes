@@ -5,7 +5,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import CreateService from "../CreateService";
 
-const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, mysqlAppState, nginxAppState, projectNameAppState, springAppState, repositoryAppState, requestPostUserProject, userAppState, yiiAppState, plainHtmlAppState} ) => {
+const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons, applicationAppState, baseAppState, buildbotAppState, cloudProviderAppState, mysqlAppState, nginxAppState, projectNameAppState, springAppState, repositoryAppState, requestPostUserProject, mongodbAppState, userAppState, yiiAppState, plainHtmlAppState, nodejsAppState, sparkAppState} ) => {
   const style = {
    margin: 12,
   };
@@ -39,12 +39,15 @@ const Addons = ( {setActiveStep, setAddons, removeAddons, addonsOptions, addons,
             baseAppState={baseAppState}
             buildbotAppState={buildbotAppState}
             cloudProviderAppState={cloudProviderAppState}
+            mongodbAppState={mongodbAppState}
             mysqlAppState={mysqlAppState}
             nginxAppState={nginxAppState}
+            nodejsAppState={nodejsAppState}
             plainHtmlAppState={plainHtmlAppState}
             projectNameAppState={projectNameAppState}
             repositoryAppState={repositoryAppState}
             requestPostUserProject={requestPostUserProject}
+            sparkAppState={sparkAppState}
             springAppState={springAppState}
             userAppState={userAppState}
             yiiAppState={yiiAppState}
@@ -61,8 +64,10 @@ Addons.propTypes = {
   baseAppState: PropTypes.object.isRequired,
   buildbotAppState: PropTypes.object.isRequired,
   cloudProviderAppState: PropTypes.object.isRequired,
+  mongodbAppState: PropTypes.object.isRequired,
   mysqlAppState: PropTypes.object.isRequired,
   nginxAppState: PropTypes.object.isRequired,
+  nodejsAppState: PropTypes.object.isRequired,
   plainHtmlAppState: PropTypes.object.isRequired,
   projectNameAppState: PropTypes.object.isRequired,
   removeAddons: PropTypes.func.isRequired,
@@ -70,6 +75,7 @@ Addons.propTypes = {
   requestPostUserProject: PropTypes.func.isRequired,
   setActiveStep: PropTypes.func.isRequired,
   setAddons: PropTypes.func.isRequired,
+  sparkAppState: PropTypes.object.isRequired,
   springAppState: PropTypes.object.isRequired,
   userAppState: PropTypes.object.isRequired,
   yiiAppState: PropTypes.object.isRequired

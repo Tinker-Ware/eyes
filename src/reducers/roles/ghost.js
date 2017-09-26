@@ -2,10 +2,10 @@ import {SET_NODEJS_VERSION, SET_GHOST_NODEJS_ENABLED, SET_GHOST_NGINX_ENABLED, S
 import {Map} from "immutable";
 
 const initialState = Map({
-  roles: {
+  roles: [{
     role: "ghost",
     sudo: "no"
-  },
+  }],
   nginx: {
     "server_name": "blog.tinkerware.io",
     "listen": "80",

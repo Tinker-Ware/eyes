@@ -6,6 +6,7 @@ import FontIcon from "material-ui/FontIcon";
 import PropTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
+import MenuItem from "material-ui/MenuItem";
 
 const style = {
   toolbar: {
@@ -66,7 +67,7 @@ const ProjectsList = ({projectsAppState}) => {
         <List>
           <ListItem
               disabled
-              primaryText={"Projects Created"}
+              primaryText={"Projects Createds"}
               secondaryText={"Modify each project as you need"}
           />
         </List>
