@@ -137,6 +137,10 @@ const CreateService = ( {baseAppState, buildbotAppState, cloudProviderAppState, 
     let nginxArray = [];
     if(yiiAppState.get("enable_yii"))
       nginxArray.push(yiiAppState.get("nginx"));
+    if(plainHtmlAppState.get("enable_plainhtml"))
+      nginxArray.push(plainHtmlAppState.get("nginx"));
+    if(nodejsAppState.get("enable_nodejs"))
+      nginxArray.push(nodejsAppState.get("nginx"));
     return nginxArray;
   };
   const roles = () => {
