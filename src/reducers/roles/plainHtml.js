@@ -8,7 +8,7 @@ const initialState = Map({
   }],
   default_repo: "https://github.com/Tinker-Ware/plainHtml",
   nginx: {
-    "server_name": "tinkerware.io",
+    "server_name": "_",
     "listen": "80",
     "root": "{{ repo_path }}/{{ server_name }}"
   }

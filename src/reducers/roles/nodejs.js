@@ -11,7 +11,12 @@ const initialState = Map({
     sudo: "yes"
   }],
   default_repo: "https://github.com/Tinker-Ware/react-repo-example",
-  nginx: {}
+  nginx: {
+    "server_name": "_",
+    "listen": "80",
+    "extra_parameters": "location / {  proxy_set_header Host $http_host; proxy_set_header X-Real-IP $remote_addr; proxy_pass http://127.0.0.1:3000; }",
+    "root": "_"
+  }
 });
 
 export default function nodejs(state = initialState, action) {
