@@ -28,24 +28,24 @@ const initialState = fromJS({
         name: "github",
         title: "Github"
       },
-      {
-        config: false,
-        description: "Repository",
-        enabled: false,
-        icon: ["icon-gitlab"],
-        isOtro: false,
-        name: "gitlab",
-        title: "GitLab"
-      },
-      {
-        config: false,
-        description: "Repository",
-        enabled: false,
-        icon: ["icon-bitbucket"],
-        isOtro: false,
-        name: "bitbucket",
-        title: "BitBucket"
-      }
+      // {
+      //   config: false,
+      //   description: "Repository",
+      //   enabled: false,
+      //   icon: ["icon-gitlab"],
+      //   isOtro: false,
+      //   name: "gitlab",
+      //   title: "GitLab"
+      // },
+      // {
+      //   config: false,
+      //   description: "Repository",
+      //   enabled: false,
+      //   icon: ["icon-bitbucket"],
+      //   isOtro: false,
+      //   name: "bitbucket",
+      //   title: "BitBucket"
+      // }
     ],
     stacks: [
       {
@@ -102,69 +102,69 @@ const initialState = fromJS({
         name: "html5",
         title: "Pure HTML5"
       },
-      {
-        config: false,
-        description: "NodeJS",
-        enabled: false,
-        icon: ["icon-react"],
-        isOtro: false,
-        name: "react",
-        title: "ReactJS"
-      },
-      {
-        config: false,
-        description: "NodeJS",
-        enabled: false,
-        icon: ["icon-angularjs"],
-        isOtro: false,
-        name: "angularjs",
-        title: "AngularJS"
-      },
-      {
-        config: false,
-        description: "Python",
-        enabled: false,
-        icon: ["icon-django"],
-        isOtro: false,
-        name: "django",
-        title: "Djago"
-      },
-      {
-        config: false,
-        description: "Ruby",
-        enabled: false,
-        icon: ["icon-rails"],
-        isOtro: false,
-        name: "rails",
-        title: "Rails"
-      },
-      {
-        config: false,
-        description: "Functional language",
-        enabled: false,
-        icon: ["icon-elixir"],
-        isOtro: false,
-        name: "elixir",
-        title: "Elixir"
-      },
-      {
-        config: false,
-        description: "NodeJS",
-        enabled: false,
-        icon: ["icon-ember"],
-        isOtro: false,
-        name: "ember",
-        title: "Ember"
-      },
-      {
-        config: false,
-        description: "PHP",
-        enabled: false,
-        icon: ["icon-laravel"],
-        isOtro: false,
-        name: "laravel",
-        title: "Laravel"
-      }
+      // {
+      //   config: false,
+      //   description: "NodeJS",
+      //   enabled: false,
+      //   icon: ["icon-react"],
+      //   isOtro: false,
+      //   name: "react",
+      //   title: "ReactJS"
+      // },
+      // {
+      //   config: false,
+      //   description: "NodeJS",
+      //   enabled: false,
+      //   icon: ["icon-angularjs"],
+      //   isOtro: false,
+      //   name: "angularjs",
+      //   title: "AngularJS"
+      // },
+      // {
+      //   config: false,
+      //   description: "Python",
+      //   enabled: false,
+      //   icon: ["icon-django"],
+      //   isOtro: false,
+      //   name: "django",
+      //   title: "Djago"
+      // },
+      // {
+      //   config: false,
+      //   description: "Ruby",
+      //   enabled: false,
+      //   icon: ["icon-rails"],
+      //   isOtro: false,
+      //   name: "rails",
+      //   title: "Rails"
+      // },
+      // {
+      //   config: false,
+      //   description: "Functional language",
+      //   enabled: false,
+      //   icon: ["icon-elixir"],
+      //   isOtro: false,
+      //   name: "elixir",
+      //   title: "Elixir"
+      // },
+      // {
+      //   config: false,
+      //   description: "NodeJS",
+      //   enabled: false,
+      //   icon: ["icon-ember"],
+      //   isOtro: false,
+      //   name: "ember",
+      //   title: "Ember"
+      // },
+      // {
+      //   config: false,
+      //   description: "PHP",
+      //   enabled: false,
+      //   icon: ["icon-laravel"],
+      //   isOtro: false,
+      //   name: "laravel",
+      //   title: "Laravel"
+      // }
     ],
     databases: [
       {
@@ -194,33 +194,33 @@ const initialState = fromJS({
         name: "mongodb",
         title: "MongoDB"
       },
-      {
-        config: false,
-        description: "In-memory data structure store",
-        enabled: false,
-        icon: ["icon-redis"],
-        isOtro: false,
-        name: "redis",
-        title: "Redis"
-      },
-      {
-        config: false,
-        description: "Document Database",
-        enabled: false,
-        icon: ["icon-postgresql"],
-        isOtro: false,
-        name: "postgresql",
-        title: "Postgresql"
-      },
-      {
-        config: false,
-        description: "Key value Database",
-        enabled: false,
-        icon: ["icon-cassandra","path1","path2","path3","path4"],
-        isOtro: false,
-        name: "cassandra",
-        title: "Cassandra"
-      }
+      // {
+      //   config: false,
+      //   description: "In-memory data structure store",
+      //   enabled: false,
+      //   icon: ["icon-redis"],
+      //   isOtro: false,
+      //   name: "redis",
+      //   title: "Redis"
+      // },
+      // {
+      //   config: false,
+      //   description: "Document Database",
+      //   enabled: false,
+      //   icon: ["icon-postgresql"],
+      //   isOtro: false,
+      //   name: "postgresql",
+      //   title: "Postgresql"
+      // },
+      // {
+      //   config: false,
+      //   description: "Key value Database",
+      //   enabled: false,
+      //   icon: ["icon-cassandra","path1","path2","path3","path4"],
+      //   isOtro: false,
+      //   name: "cassandra",
+      //   title: "Cassandra"
+      // }
     ],
     addons: [
       {
