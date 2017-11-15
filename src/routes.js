@@ -1,4 +1,4 @@
-// import UserSignup from "./containers/UserSignup";
+import UserSignup from "./containers/UserSignup";
 import { Route, IndexRoute } from "react-router";
 import App from "./components/App";
 import Environment from "./containers/Environment";
@@ -28,6 +28,10 @@ export default (
     <Route
         component={UserSubscription}
         path="/user/subscription"
+    />
+    <Route
+        component={UserSignup}
+        path="registrations/new"
     />
     <Route
         component={UserLogin}
@@ -62,9 +66,5 @@ export default (
         path="*"
         status={404}
     />
-    {/* <Route
-        component={UserSignup}
-        path="/registrations/new"
-    /> */}
   </Route>
 );
