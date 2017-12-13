@@ -220,6 +220,7 @@ export function* doRequestPostUser(userSignup) {
       body: JSON.stringify({"user": {
           "email": userSignup.toJS().email,
           "password": userSignup.toJS().password,
+          "type_id": userSignup.toJS().typeId
         }
       }),
       mode:"cors"});

@@ -539,23 +539,33 @@ expect(generator.next().value).to.deep.equal(
 });
 
 it("handles REQUEST_POST_USER", () => {
-  const user = {"user_signup": {"email":"some@email.com","password":"somepassword"}
-};
-const generator = postUser({"value": fromJS({"user_signup": {"email": user.user_signup.email,"password": user.user_signup.password
-}
-})
-});
-const err = new ReferenceError("404");
-const generatorError = function () { throw err; };
-expect(generatorError).to.throw(err);
-expect(generator.next().value).to.deep.equal(
-  call(doRequestPostUser, fromJS(user.user_signup))
-);
-expect(generator.next(user).value).to.deep.equal(
-  put(actions.setUser(fromJS(
-    {"user_session": user.user_sesion
-  })))
-);
+  const user = {
+    "user_signup": {
+      "email":"some@email.com",
+      "password":"somepassword",
+      "typeId":1
+    }
+  };
+  const generator = postUser({
+    "value": fromJS({
+      "user_signup": {
+        "email": user.user_signup.email,
+        "password": user.user_signup.password,
+        "typeId": user.user_signup.typeId
+      }
+    })
+  });
+  const err = new ReferenceError("404");
+  const generatorError = function () { throw err; };
+  expect(generatorError).to.throw(err);
+  expect(generator.next().value).to.deep.equal(
+    call(doRequestPostUser, fromJS(user.user_signup))
+  );
+  expect(generator.next(user).value).to.deep.equal(
+    put(actions.setUser(fromJS(
+      {"user_session": user.user_sesion
+    })))
+  );
 });
 
 it("handles REQUEST_REFRESH_USER_SESSION", () => {

@@ -9,6 +9,7 @@ import Notification from "../components/Notification";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Signup from "../components/userAuth/Signup";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 export class UserSignup extends Component {
   componentWillMount() {
@@ -26,18 +27,20 @@ export class UserSignup extends Component {
   }
   render() {
     return (
-      <div className="row">
-        <Signup
-            requestPostUser={this.props.actions.requestPostUser}
-            setUserSesionEmail={this.props.actions.setUserSesionEmail}
-            setUserSesionPassword={this.props.actions.setUserSesionPassword}
-            userAppState={this.props.userAppState}
-        />
-        <Notification
-            message={this.props.applicationAppState.get("notification")}
-            setNotification={this.props.applicationActions.setNotification}
-        />
-      </div>
+      <MuiThemeProvider>
+        <div className="small-12 medium-12 large-6 large-centered columns">
+          <Signup
+              requestPostUser={this.props.actions.requestPostUser}
+              setUserSesionEmail={this.props.actions.setUserSesionEmail}
+              setUserSesionPassword={this.props.actions.setUserSesionPassword}
+              userAppState={this.props.userAppState}
+          />
+          <Notification
+              message={this.props.applicationAppState.get("notification")}
+              setNotification={this.props.applicationActions.setNotification}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
