@@ -9,7 +9,7 @@ var app = express();
 
 /* eslint-disable no-console */
 
-app.set("port", 3000);
+app.set("port", 3002);
 
 app.use(compression());
 
